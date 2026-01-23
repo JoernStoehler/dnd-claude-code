@@ -5,7 +5,7 @@
 **Phase:** Initial Setup
 **Last Updated:** 2026-01-23
 
-Repository structure established. No campaigns created yet.
+Repository structure and meta-tooling established. No campaigns created yet.
 
 ## Backlog
 
@@ -13,21 +13,20 @@ Repository structure established. No campaigns created yet.
 
 - [ ] Create first campaign directory with full structure
 - [ ] Write initial campaign concept/pitch
-- [ ] Establish session logging template
-- [ ] Create character sheet template for NPCs
+- [ ] Establish template files (session log, NPC, location, encounter)
 
 ### Medium Priority
 
-- [ ] Design encounter template/checklist
+- [ ] Build `session-prep` skill (workflow for preparing sessions)
+- [ ] Build `post-session` skill (workflow for after-session tasks)
+- [ ] Build `rules-lookup` agent (verify game mechanics from reference material)
 - [ ] Set up image generation workflow documentation
-- [ ] Create agent prompts for common tasks (`.claude/agents/`)
-- [ ] Build location/faction template
 
 ### Low Priority / Future
 
 - [ ] Scripts for bulk operations (e.g., index generation)
 - [ ] Integration with external tools (calendars, VTT exports)
-- [ ] Style guide for consistent prose voice
+- [ ] Style guide for consistent prose voice (if needed)
 
 ## Completed Work
 
@@ -43,6 +42,17 @@ Repository structure established. No campaigns created yet.
 - Documented agent capabilities and limitations
 - Created `PROJECT.md` (this file) for tracking
 
+### 2026-01-23: Skills and Agents Foundation
+
+- Created meta-skills:
+  - `/create-skill` - how to create new skills (with official docs links)
+  - `/create-agent` - how to create new agents (with official docs links)
+- Created starter agents:
+  - `lore-checker` - verify consistency across campaign materials
+  - `create-npc` - generate NPCs with personality, motivation, stats
+- Documented when to use skills vs template files vs agents
+- Refined approach: templates for standard formats, skills for workflows, agents for context-heavy tasks
+
 ## Notes
 
 ### Design Decisions
@@ -52,6 +62,11 @@ Repository structure established. No campaigns created yet.
 **Why explicit over implicit:** Agents start each session with no project knowledge beyond what's in files. Implicit information gets lost. If a character trait matters, state it directly.
 
 **Why aggressive deletion:** Outdated documentation causes agent mistakes. Better to have less documentation that's accurate than more documentation that misleads.
+
+**Skills vs Templates vs Agents:**
+- **Skills**: Procedural knowledge, workflows that evolve, progressive disclosure needed
+- **Templates**: Standard formats in known locations, agents find by filename
+- **Agents**: Tasks requiring multi-file context gathering and judgment calls
 
 ### Open Questions
 

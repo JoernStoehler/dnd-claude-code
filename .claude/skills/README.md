@@ -14,6 +14,18 @@ Skills provide progressive disclosure of knowledge:
 2. **Body** (markdown content) - Loaded when skill is invoked
 3. **References** (separate files) - Loaded on demand when Claude needs details
 
+## When to Use Skills vs Templates
+
+**Skills** are for procedural knowledge that agents need to discover and follow:
+- Workflows with multiple steps and decision points
+- Best practices that evolve over time
+- Knowledge that applies across different contexts
+
+**Template files** (in campaign directories) are for standard formats:
+- NPC sheets, location docs, session logs
+- Agents find these by filename/location, no progressive disclosure needed
+- Just artifacts in standard locations
+
 ## Current Skills
 
 | Skill | Purpose |
@@ -21,27 +33,15 @@ Skills provide progressive disclosure of knowledge:
 | `create-skill` | Meta-skill: how to create new skills |
 | `create-agent` | Meta-skill: how to create new agents |
 
-## Proposed Skills for This Project
+## Planned Skills
 
-### Meta / Repository Management
-- [x] `create-skill` - How to add new skills
-- [x] `create-agent` - How to add new agents
-- [ ] `campaign-setup` - How to create a new campaign directory structure
-
-### Content Templates
-- [ ] `npc-template` - Standard NPC documentation format
-- [ ] `location-template` - Standard location documentation format
-- [ ] `session-log-template` - Standard session log format
-- [ ] `encounter-template` - Standard encounter documentation format
-
-### Workflows
+### Workflows (to be built as we learn best practices)
 - [ ] `session-prep` - Checklist for preparing a game session
-- [ ] `post-session` - Checklist for after-session tasks (logging, updates)
-- [ ] `image-generation` - How to generate images using external AI tools
+- [ ] `post-session` - Checklist for after-session tasks (logging, updates, lore verification)
 
-### Reference Knowledge
-- [ ] `writing-style` - Prose conventions for this project
-- [ ] `campaign-conventions` - Project-wide conventions beyond CLAUDE.md
+### Reference (add when needed)
+- [ ] `image-generation` - How to generate images using external AI tools
+- [ ] `writing-style` - Prose conventions for this project (if we settle on conventions)
 
 ## Creating New Skills
 

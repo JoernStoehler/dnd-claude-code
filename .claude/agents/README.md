@@ -43,29 +43,38 @@ Before creating a custom agent, check if a built-in type works:
 | `Bash` | Running commands in isolated context |
 | `general-purpose` | Complex multi-step tasks needing all tools |
 
-## Proposed Agents for This Project
+## Current Agents
 
-### Content Creation
-- `create-npc` - Generate NPCs with personality, motivation, appearance, stats
-- `create-location` - Design locations with description, inhabitants, secrets
-- `create-encounter` - Build balanced encounters (combat, social, exploration)
-- `create-faction` - Develop factions with goals, resources, relationships
+| Agent | Purpose |
+|-------|---------|
+| `lore-checker` | Verify consistency across campaign materials |
+| `create-npc` | Generate NPCs (may generalize to other entities) |
 
-### Quality Assurance
-- `lore-checker` - Verify consistency across campaign materials
-- `session-reviewer` - Check session logs for completeness and clarity
-- `rules-lookup` - Find and verify game rules from reference materials
+## When to Create Agents vs Use Templates
 
-### Utilities
-- `image-prompter` - Generate prompts for text-to-image AI tools
-- `summarizer` - Create concise summaries of lengthy materials
-- `index-builder` - Generate indices and cross-references
+**Agents** are for tasks requiring:
+- Multi-step workflows with judgment calls
+- Searching/reading multiple files for context
+- Producing output that varies significantly based on context
+
+**Template files** (in campaign directories) work better for:
+- Standard formats where the structure is fixed
+- Checklists that agents fill in
+- Entity types that are similar enough to share a template
+
+The `create-npc` agent exists because NPC creation benefits from gathering campaign context, checking existing characters, and making design decisions. Simpler entity types (factions, locations) may just need template files + checklists.
+
+## Planned Agents
+
+- [ ] `rules-lookup` - Find and verify game rules from reference materials (read-only, useful for mechanical questions)
+
+Add others as genuine needs arise rather than preemptively.
 
 ## Creating New Agents
 
-1. Identify a recurring delegatable task
+1. Identify a recurring task that benefits from isolated context
 2. Run `/create-agent` or manually create `<name>.md`
 3. Write focused description with trigger conditions
 4. Specify minimal required tools
 5. Define clear workflow steps
-6. Test via natural delegation or explicit Task() call
+6. Test via natural delegation
