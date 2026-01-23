@@ -19,8 +19,9 @@ Repository structure and meta-tooling established. No campaigns created yet.
 
 - [ ] Build `session-prep` skill (workflow for preparing sessions)
 - [ ] Build `post-session` skill (workflow for after-session tasks)
-- [ ] Build `rules-lookup` agent (verify game mechanics from reference material)
-- [ ] Set up image generation workflow documentation
+- [ ] Download SRD markdown files to `references/` for agent access
+- [ ] Test AI image generation workflow (Midjourney or DALL-E for NPC portraits)
+- [ ] Create NPC card template for physical handouts
 
 ### Low Priority / Future
 
@@ -53,6 +54,24 @@ Repository structure and meta-tooling established. No campaigns created yet.
 - Documented when to use skills vs template files vs agents
 - Refined approach: templates for standard formats, skills for workflows, agents for context-heavy tasks
 
+### 2026-01-23: D&D Resources and GM Reference Materials
+
+- Created `resources/` directory with curated external resources:
+  - `tools-and-generators.md` - Index of online tools (VTTs, map makers, NPC generators, etc.)
+  - `gm-checklists.md` - Session Zero, session prep, post-session, and campaign health checklists
+  - `game-enhancement-ideas.md` - Brainstormed ideas for props, AI art, audio, battlemaps
+  - `ambience-and-audio.md` - Curated audio sources and implementation guidance
+- Created D&D 5e rules skill (`.claude/skills/dnd-5e-rules/`):
+  - Documents SRD sources (5.1 and 5.2) with links to markdown repositories
+  - Guidance on when to look up rules vs trust training data
+  - Philosophy for "right enough" rules in content creation
+- Researched and documented:
+  - Paper miniatures (Printable Heroes, MonsterForge)
+  - NPC/item cards and handout tools
+  - Virtual tabletop comparison (Roll20 vs Foundry vs Owlbear Rodeo)
+  - AI image generation approaches for portraits
+  - Safety tools (X-Card, Lines & Veils)
+
 ## Notes
 
 ### Design Decisions
@@ -72,4 +91,6 @@ Repository structure and meta-tooling established. No campaigns created yet.
 
 - What campaign system(s) to use? (D&D 5e, Pathfinder 2e, other?)
 - How detailed should session logs be?
-- What image generation tools/APIs to integrate?
+- Which AI image generation tool to use? (Midjourney for quality, DALL-E for convenience, Stable Diffusion for control)
+- Physical vs digital play setup? (Affects which enhancements to pursue)
+- Should we download SRD locally or just link to online sources?
