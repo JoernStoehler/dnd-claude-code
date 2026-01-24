@@ -285,9 +285,28 @@ These are areas that would increase readiness if developed. No order implied.
 
 ---
 
+## Handoff Notes for Next Agents
+
+**Recommended Task Order:**
+
+1. **First: Document format polish** — Add "At a Glance" boxes to location files, create "During Play" quick-ref sections. This establishes patterns for other agents to follow.
+
+2. **Then parallel:**
+   - Flesh out Missing Tax Collector (Percival's trail, scene beats)
+   - Flesh out Wrongly Accused (the crime, culprit, wrong suspects)
+   - Weathervane Manor floor plans (3 floors + basement ASCII/descriptions)
+
+**Key files to read:**
+- `campaigns/fun-heroes/CLAUDE.md` — Tone, philosophy, NPC design principles
+- `campaigns/fun-heroes/sessions/hook-sentient-cargo.md` — **Format model** (copy this structure)
+- This file (PROGRESS.md) — What's done, what's needed
+
+**Workflow convention:** Brainstorm in conversation → validate concept → write to file. Don't end a session with important decisions only in conversation.
+
+---
+
 ## Notes
 
 - Percentages are conservative estimates
 - "Ready to run" assumes improvisation-friendly GM
-- Item plotlines exist (brainstormed in conversation) but not yet added to file
 - Route NPCs can recur in other hooks if players met them
