@@ -3,148 +3,182 @@
 **Status:** Hook developed, not yet run
 **Estimated Runtime:** 3-4 hours
 **Location:** Weathervane Manor (see `lore/locations/weathervane-manor.md`)
-**Prerequisite:** Works best after "The Estate Sale" but can stand alone
 
 ## The Situation
 
-The players now own Weathervane Manor. Whether they bought it, inherited it, won it in a bet, or woke up with the deed in their pocket, the estate is theirs.
+The players suddenly own Weathervane Manor. Doesn't matter how—inheritance, winning a bet, paperwork snafu, or waking up with the deed in their pocket. The estate is theirs.
 
-The problem: the estate comes with obligations. **The Ledger of Debts** records everything Aldric owed—and now those debts belong to them. Some are mundane (money to the Consortium). Some are not (favors owed to entities unknown).
+The problem: they have about 24 hours before **The Ledger of Debts** activates for the new owner. Once it does, Erasmus's twenty-year-old debts—including the ones to *entities*—become theirs.
 
-This is a "keeping house" horror comedy. They'll try to make the manor work, discover why no one keeps it for long, and ultimately have to give it up.
+This is a hot-potato comedy. The goal isn't to keep the house. The goal is to find someone else to dump it on before the deadline.
 
-**If players do nothing:** The debts come due. Creditors arrive. Things escalate.
+**If players do nothing:** The debts become theirs. Creditors arrive. Very bad things follow.
 
-## Opening: Welcome Home
+## The Hook
 
-The players take possession. The house acknowledges them (doors unlock, the speaking portraits greet them, beds make themselves threateningly).
+However they acquired it, players learn two things fast:
 
-**Initial discoveries:**
-- The house is functional but weird (all the quirks from the location doc)
-- Cressida Mopp (former housekeeper) can be hired to explain things—for a price
-- The Ledger of Debts is in the study, waiting
+1. **The Ledger of Debts:** A magical book in the study that records all obligations tied to the estate. It's currently "dormant" for new owners—a grace period. At midnight, it activates.
+
+2. **The Grace Period:** Previous owners discovered you have about a day after acquiring the deed before the Ledger recognizes you. If you transfer ownership before then, the debts stay with the property, not with you.
+
+The race is on.
 
 ## The Ledger of Debts
 
-A magical book that records all obligations connected to the estate. It updates in real-time.
+When they find it (and they should find it fast):
 
-**Mundane debts (annoying but manageable):**
-- 500gp to the Merchant Consortium (back taxes)
-- 200gp to a carpenter (repairs never paid for)
-- 80gp to the College of Wizardry (library fines)
+**Mundane debts (manageable):**
+- 500gp to the Merchant Consortium
+- Various small amounts to local businesses
+- Library fines to the College of Wizardry
 
 **Unusual debts (concerning):**
-- "One favor, owed to the Lord of Crossroads" - no details
-- "The completion of the Great Work" - no explanation
-- "Safe passage for [illegible] until the door opens" - what door?
+- "One favor, owed to the Lord of Crossroads"
+- "Completion of the Great Work, or equivalent service"
+- "Safe passage for [illegible] until the door opens"
 
-**The catch:** The debts transfer with ownership. To stop owing, you must either pay... or stop owning.
+**The fine print:** These debts have accumulated interest. Not monetary interest—*other* kinds.
 
-## The Escalation
+## The Problem
 
-Structure the session as mounting pressure:
+They can't just throw the deed away. The manor's enchantments require a willing transfer to a person who accepts ownership. That means:
 
-### Phase 1: Small Problems
-- The mundane creditors come calling
-- The house's quirks cause inconveniences
-- Neighbors are wary of new owners
+1. Finding someone willing to take it
+2. Convincing them to accept (knowing or unknowing)
+3. Completing the transfer before midnight
 
-### Phase 2: Bigger Problems
-- A faction from the estate sale wants something (didn't get it at auction)
-- One of the unusual debts stirs—a messenger arrives
-- Something in the house activates that shouldn't
+## Potential "Heirs"
 
-### Phase 3: The Crisis
-- The "Lord of Crossroads" (or equivalent) sends a representative
-- The debt is called in: they want something the players don't want to give
-- A choice must be made
+The party must choose who gets stuck with the estate. Each option has different requirements and consequences.
 
-## The Factions Return
+### Cousin Morgana Weathervane
+**The Claim:** She's been trying to get the estate for years. She'll take it.
 
-### Cousin Morgana
-Still believes the estate is rightfully hers. Might offer to "take it off their hands" (at a terrible price), or might try to make ownership so unpleasant they leave.
+- **Convince her:** Easy. She wants it. Just sign.
+- **The catch:** She knows about the debts. She has a plan. Her plan probably isn't good for anyone else.
+- **Consequence:** Morgana becomes a recurring problem. She might succeed where others failed—and what she does with that success won't be pleasant.
+
+### Clerk Fenwick
+**The Claim:** He could file it as "abandoned property recovered by the Adventurer's Guild."
+
+- **Convince him:** Difficult. He knows it's irregular. Appeals to bureaucratic pride ("think of the filing fees"), bribery, or finding a legal loophole might work.
+- **The catch:** He has no idea what he's getting into.
+- **Consequence:** Fenwick becomes entangled in manor problems. He might ask for help later. Players might feel guilty.
+
+### A Young Adventurer
+**The Claim:** "I'll take on any challenge!" Some fresh-faced hero who thinks they can handle a haunted manor.
+
+- **Convince them:** Easy. They're eager. Just paint it as an opportunity.
+- **The catch:** They're going to die or flee within the week.
+- **Consequence:** Players definitely feel guilty if they learn what happened. The manor becomes someone else's problem—until the next adventurer shows up at the estate sale.
+
+### The Merchant Consortium
+**The Claim:** They'd take it, demolish it, sell the land. Business.
+
+- **Convince them:** Moderate. They know it's trouble. Might need to sweeten the deal or hide the worst debts.
+- **The catch:** They'll destroy everything—including secrets, artifacts, and the Locked Room.
+- **Consequence:** The manor's mysteries are lost forever. Whatever's in the Locked Room either escapes or is buried. Either way, it won't stay quiet.
+
+### Elder Cornelius Marsh
+**The Claim:** "Brackenvale shall expand its holdings!" He'll see it as prestige.
+
+- **Convince him:** Moderate. Appeal to his ego. "The village that owns Weathervane Manor—imagine the history books!"
+- **The catch:** He's completely out of his depth. The village can't handle manor-level problems.
+- **Consequence:** Brackenvale gets entangled. The elder is in over his head. Players might need to rescue him later.
 
 ### The College of Wizardry
-Proctor Velmira wants access to the workshop. Might negotiate, might make demands, might try to buy the estate.
+**The Claim:** "For research purposes." They've wanted it for decades.
 
-### The Unknown Collector
-Revealed: they want access to the Locked Room. Who they are depends on what the DM wants:
-- A fey lord (Aldric's creditor)
-- A rival wizard (seeking forbidden knowledge)
-- An heir of someone Aldric wronged
+- **Convince them:** Easy if you contact the right people. They'll accept enthusiastically.
+- **The catch:** They will absolutely open the Locked Room.
+- **Consequence:** Whatever Erasmus was hiding gets studied. Depending on what it is, this could be very good or very bad.
 
-### Aldric (If Involved)
-If players have the crystal or he's manifesting, he might:
-- Try to reclaim his home
-- Offer to help (his help is... complicated)
-- Reveal what's actually in the Locked Room
+### Leave It to No One (The Nuclear Option)
+**The Claim:** Destroy the deed, burn the manor, deny ownership.
 
-## The Locked Room
+- **Convince:** No one to convince, just commitment.
+- **The catch:** The Ledger doesn't care. If no one else owns it by midnight, the last holder is still responsible.
+- **Consequence:** Only works if combined with destroying the Ledger itself—which requires entering the manor, finding the Ledger, and dealing with whatever protects it.
 
-Whatever's in there, it's central to why no one keeps the estate.
+## Session Structure
 
-**Options:**
-- A portal to somewhere else (debts owed across planar boundaries)
-- A trapped entity (Aldric promised to keep it contained)
-- Aldric's greatest/worst creation (The Great Work?)
-- The source of the estate's magic (and the source of its problems)
+### Act 1: Discovery (30 min)
+- Players learn they own the manor
+- Quick tour reveals the quirks (self-making beds, speaking portraits, the Wandering Door)
+- They find the Ledger
+- Someone explains the deadline (Cressida Mopp, a portrait, or a letter from a previous owner)
 
-**Discovery:** Players can find the key (it's in the room with the thing that requires the key—classic Aldric), or break in, or negotiate with whatever's inside.
+### Act 2: The Search (90 min)
+- Players identify potential heirs
+- Complications arise (someone they approach has conditions, someone else wants the estate, time pressure)
+- They learn more about the debts (each potential heir might reveal different information)
 
-## How Players Lose the House
+**Complications:**
+- Cousin Morgana tries to delay them (she wants the deadline to pass)
+- The Merchant Consortium wants to negotiate rather than accept
+- The College wants to inspect first (takes time they don't have)
+- Someone (the creditors?) notices activity at the manor
 
-The hook is designed to end with loss—but not *unfair* loss. Options:
+### Act 3: The Transfer (45 min)
+- Players make their choice
+- The transfer has requirements (legal documents, physical presence, magical ritual, or just a handshake depending on their approach)
+- Something goes wrong or gets complicated (optional)
+- Midnight approaches
 
-### Trade It Away
-The creditor accepts the estate itself as payment. Players walk away clean but with nothing.
+### Resolution
+- Did they make the deadline?
+- Who owns the manor now?
+- What are the immediate consequences?
+- What threads remain?
 
-### Sacrifice It
-To stop something bad (the Locked Room entity, a spreading curse), the estate must be destroyed or sealed.
+## Complications
 
-### Outmaneuvered
-Cousin Morgana or another faction produces a better legal claim. Players can fight it (expensive, time-consuming) or accept the loss.
+Pick 2-3:
 
-### Willing Departure
-Players realize the estate is more trouble than it's worth and *choose* to leave. They negotiate the best exit they can.
+### The Other Claimant
+Someone else shows up with a deed. Morgana, an unknown relative, or a faction with forged documents. Now there's a race.
 
-### It Wasn't Real
-The "inheritance" was a test, a trick, or a dream. They wake up with knowledge but not ownership.
+### The Curious Portrait
+One of Lady Ashworth's speaking portraits knows something about the debts. It'll trade information for... something. Time spent negotiating is time not finding an heir.
+
+### The Premature Activation
+The Ledger stirs earlier than expected. A minor debt comes due—something small but threatening, as a preview of midnight.
+
+### The Moral Test
+The easiest heir option is also the worst (the naive adventurer who'll die). Do players take the easy path?
+
+### The Locked Room Speaks
+Something inside notices the new ownership. It makes contact. It has an offer. Listening takes time.
+
+## The Midnight Deadline
+
+If players fail to transfer ownership:
+
+**Immediate:** The Ledger activates. Their names appear. They feel it—a weight, a connection.
+
+**Short-term:** The mundane creditors arrive within days.
+
+**Long-term:** The unusual debts stir. The Lord of Crossroads sends a messenger. The Great Work demands attention.
+
+This isn't a game over—it's a complication. They can still try to transfer ownership, but now they're doing it while creditors are actively pursuing them.
 
 ## What Players Keep
 
-Even after losing the house, they might retain:
+Even after dumping the property:
 
-- Knowledge of the estate's secrets (useful for the Heist)
-- Relationships with factions (positive or negative)
-- A portable item they smuggled out
-- A debt still owed (complicating future)
-- Aldric himself (if he's in crystal form)
-
-## NPCs
-
-### The Creditor's Representative
-(Depends on who the Lord of Crossroads is)
-- **Appearance:** Unnerving, too polite, something slightly wrong
-- **Want:** What they're owed, nothing more
-- **Fear:** Nothing; they hold all the cards
-- **Quirk:** Extremely specific about contract terms
-
-### Cressida Mopp (Former Housekeeper)
-- **Appearance:** Elderly, practical, permanent expression of "I warned you"
-- **Want:** Money to explain things; also, for people to stop dying here
-- **Fear:** Being drawn back into the manor's problems
-- **Quirk:** Refers to objects by affectionate nicknames, then describes how they maimed someone
-
-## The "Oh Shit" Moment
-
-If energy flags: The Locked Room opens. Whatever's inside acknowledges the new owners. It's grateful to be noticed. It has expectations.
+- Knowledge of the manor's layout and secrets (useful for the Heist if they ever need to return)
+- Relationships with whoever they gave it to (good or bad)
+- Anything they grabbed during the tour
+- Guilt or satisfaction, depending on their choice
 
 ## Tone Notes
 
-- This is a comedy of ownership—they got what they wanted and now they're stuck with it
-- The house should feel alive and opinionated, not just haunted
-- The loss should feel earned, not arbitrary—player choices determine *how* they lose it
-- Losing can still be winning if they get something valuable out
+- This is a comedy of frantic property transfer
+- The house should be entertainingly weird, not just threatening
+- The choice of heir matters—let players weigh the options
+- "Winning" is successfully dumping the property; the quality of win depends on who they choose
+- The consequences of their choice can echo into other hooks
 
 ---
 
@@ -154,17 +188,21 @@ If energy flags: The Locked Room opens. Whatever's inside acknowledges the new o
 
 [Fill after running]
 
-### How They Lost the House
+### Who Got the Estate?
 
-[The specific outcome]
+[The chosen heir]
 
-### Now Nailed Down
+### How Did They Convince Them?
 
-[Facts established]
+[The approach that worked]
 
-### What They Kept
+### Did They Make the Deadline?
 
-[Items, knowledge, relationships carried forward]
+[Yes/No/Barely]
+
+### Consequences Established
+
+[What follows from their choice]
 
 ### What Worked / What Didn't
 

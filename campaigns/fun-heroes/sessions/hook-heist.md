@@ -3,15 +3,14 @@
 **Status:** Hook developed, not yet run
 **Estimated Runtime:** 3-4 hours
 **Location:** Weathervane Manor (see `lore/locations/weathervane-manor.md`)
-**Prerequisite:** Works best after "The Inheritance" but can stand alone
 
 ## The Situation
 
-Weathervane Manor has a new owner—and they're not nice. Maybe it's the mysterious collector who wanted the Locked Room, maybe Cousin Morgana cut a deal with something dark, or maybe Aldric's creditor has moved in directly.
+Weathervane Manor has a new owner—and they're not nice. Maybe it's the mysterious collector who wanted the Locked Room, maybe Cousin Morgana cut a deal with something dark, or maybe one of Erasmus's old creditors has finally claimed the estate.
 
-The players need something from inside. Could be an item they left behind, evidence to expose the new owner, a person trapped inside, or Aldric himself (if he's still a crystal and they didn't take him).
+The players need something from inside. Could be an item of value, evidence to expose the new owner, a person trapped inside, or Aldric himself (if he's still in crystal form somewhere in there).
 
-Time to break into a wizard's house that remembers them.
+Time to break into a wizard's house. If they've been here before, the house might remember them—for better or worse.
 
 **If players do nothing:** Whatever they needed is lost. The new owner consolidates power. Future problems become harder.
 
@@ -19,7 +18,7 @@ Time to break into a wizard's house that remembers them.
 
 Pick or let players choose:
 
-1. **Left something behind:** During the Inheritance crisis, they couldn't grab everything. Now they need it.
+1. **Something valuable is inside:** They know (or heard) about an artifact, document, or treasure. The new owner has it.
 2. **Rescue mission:** Someone is trapped inside—Cressida Mopp, an NPC they care about, or something from the Locked Room that's now a prisoner
 3. **Evidence:** The new owner is doing something terrible and the proof is inside
 4. **Unfinished business:** Aldric (or his ghost) needs one last thing from his workshop

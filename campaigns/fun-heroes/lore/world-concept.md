@@ -90,16 +90,18 @@ Sincerely devoted to a cause, organization, or person. Their faith is touching a
 | The Wrongly Accused | `sessions/hook-wrongly-accused.md` | Competent authorities need outside investigators. Everyone has a wrong suspect. |
 | The Sentient Cargo | `sessions/hook-sentient-cargo.md` | Escort mission with opinionated cargo. Five options including Aldric Weathervane. |
 
-### The Weathervane Arc (connected series)
+### The Weathervane Arc (connected hooks)
 
-A four-part story centered on a dead wizard's estate. Can run as standalone one-shots or as a linked campaign. See `lore/locations/weathervane-manor.md` for the shared location.
+Four hooks centered on a wizard's estate that changes hands constantly. Can run in any order—the manor's ownership is always in flux, with current owners rarely even present. See `lore/locations/weathervane-manor.md` for the shared location.
 
-| Order | Hook | File | Summary |
-|-------|------|------|---------|
-| 1 | The Estate Sale | `sessions/hook-estate-sale.md` | Auction chaos. Factions compete. Players might acquire the estate—or Aldric himself. |
-| 1.5 | The Sentient Cargo | `sessions/hook-sentient-cargo.md` | (Optional bridge) Transport Aldric's crystal. Reveals his creditors are hunting him. |
-| 2 | The Inheritance | `sessions/hook-inheritance.md` | Players own the manor. Debts come due. They will lose the house—the question is how. |
-| 3 | The Heist | `sessions/hook-heist.md` | Someone else owns the manor now. Players need something from inside. |
+| Hook | File | Summary |
+|------|------|---------|
+| The Estate Sale | `sessions/hook-estate-sale.md` | Auction chaos. Factions compete. Players might acquire something dangerous. |
+| The Sentient Cargo | `sessions/hook-sentient-cargo.md` | Transport Aldric's crystal. He knows recent secrets, not Erasmus's. |
+| The Inheritance | `sessions/hook-inheritance.md` | Players own the manor—briefly. Race to dump it on someone before debts activate. |
+| The Heist | `sessions/hook-heist.md` | Someone else owns the manor. Players need something from inside. |
+
+**Note:** The manor changes hands so often that the "current owner" is usually just a name on paper—someone who hasn't moved in yet, has already fled, or is dealing with their own problems elsewhere.
 
 ### Ideas (not yet developed)
 
