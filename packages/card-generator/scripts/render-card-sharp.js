@@ -27,9 +27,7 @@ const STYLES = {
     textColor: '#e0e0e0',
     headerTextColor: 'white',
     footerBgColor: '#111111',
-    footerTextColor: '#666666',
-    textured: true,
-    portraitInset: 0
+    footerTextColor: '#666666'
   },
   parchment: {
     portraitHeight: 620,
@@ -39,9 +37,7 @@ const STYLES = {
     textColor: '#2a2016',
     headerTextColor: '#f4e4c1',
     footerBgColor: '#e8d4a8',
-    footerTextColor: '#5a4a36',
-    textured: true,
-    portraitInset: 0
+    footerTextColor: '#5a4a36'
   },
 };
 
@@ -55,22 +51,8 @@ const CATEGORY_COLORS = {
   mystery: { accent: '#4A4A4A', light: '#6A6A6A', dark: '#2A2A2A' }
 };
 
-function generateNoisePattern(width, height, density, color = 'white') {
-  const dots = [];
-  const count = Math.floor(width * height * density / 100);
-  for (let i = 0; i < count; i++) {
-    const x = Math.random() * width;
-    const y = Math.random() * height;
-    const r = Math.random() * 1.5 + 0.5;
-    const opacity = Math.random() * 0.08;
-    dots.push(`<circle cx="${x}" cy="${y}" r="${r}" fill="${color}" opacity="${opacity}"/>`);
-  }
-  return dots.join('\n');
-}
-
 async function createBackground(width, height, colors, style) {
   const s = STYLES[style];
-  const noiseColor = style === 'parchment' ? '#8B4513' : 'white';
 
   const svg = `
     <svg width="${width}" height="${height}">
@@ -82,18 +64,28 @@ async function createBackground(width, height, colors, style) {
         </linearGradient>
       </defs>
       <rect width="${width}" height="${height}" fill="url(#bg)"/>
-      ${s.textured ? generateNoisePattern(width, height, 0.02, noiseColor) : ''}
     </svg>
   `;
   return sharp(Buffer.from(svg)).png().toBuffer();
 }
 
+// Category icons (simple SVG paths, 24x24 viewBox)
+const CATEGORY_ICONS = {
+  npc: '<circle cx="12" cy="8" r="5"/><path d="M4 22c0-6 4-9 8-9s8 3 8 9"/>', // person
+  location: '<path d="M4 22V10l8-8 8 8v12H4zm6-8h4v8h-4z"/>', // house
+  item: '<path d="M12 2l10 10-10 10L2 12z"/>', // diamond
+  faction: '<path d="M12 2l8 6v8l-8 6-8-6V8z"/>', // hexagon
+  quest: '<path d="M12 2l3 6 6 1-4 4 1 6-6-3-6 3 1-6-4-4 6-1z"/>', // star
+  mystery: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4" fill="white"/>' // eye
+};
+
 async function createHeader(width, height, category, name, colors, style) {
   const s = STYLES[style];
   const safeName = escapeXml(name);
-  const safeCategory = escapeXml(category.toUpperCase());
-  const fontSize = 40;
-  const catSize = 22;
+  const fontSize = 48;
+  const iconSize = 28;
+  const iconMargin = 20;
+  const icon = CATEGORY_ICONS[category] || CATEGORY_ICONS.npc;
 
   const svg = `
     <svg width="${width}" height="${height}">
@@ -104,11 +96,11 @@ async function createHeader(width, height, category, name, colors, style) {
         </linearGradient>
       </defs>
       <rect width="${width}" height="${height}" fill="url(#headerGrad)"/>
-      <text x="${width/2}" y="${catSize + 8}"
-            font-family="serif" font-size="${catSize}" font-weight="400"
-            fill="rgba(255,255,255,0.8)" text-anchor="middle"
-            letter-spacing="4">${safeCategory}</text>
-      <text x="${width/2}" y="${height - 20}"
+      <g transform="translate(${iconMargin}, ${(height - iconSize) / 2}) scale(${iconSize / 24})"
+         fill="rgba(255,255,255,0.7)" stroke="none">${icon}</g>
+      <g transform="translate(${width - iconMargin - iconSize}, ${(height - iconSize) / 2}) scale(${iconSize / 24})"
+         fill="rgba(255,255,255,0.7)" stroke="none">${icon}</g>
+      <text x="${width/2}" y="${height/2 + fontSize/3}"
             font-family="serif" font-size="${fontSize}" font-weight="bold"
             fill="${s.headerTextColor}" text-anchor="middle">${safeName}</text>
     </svg>
@@ -188,10 +180,9 @@ async function renderCard(cardPath, outputPath, style = 'dark') {
   const colors = CATEGORY_COLORS[card.category] || CATEGORY_COLORS.npc;
   const s = STYLES[style];
 
-  // Calculate portrait dimensions with inset
-  const inset = s.portraitInset || 0;
-  const portraitWidth = CARD_WIDTH - (inset * 2);
-  const portraitInnerHeight = s.portraitHeight - (inset * 2);
+  // Portrait dimensions
+  const portraitWidth = CARD_WIDTH;
+  const portraitHeight = s.portraitHeight;
 
   // Load or create portrait
   let portraitBuffer = null;
@@ -199,16 +190,16 @@ async function renderCard(cardPath, outputPath, style = 'dark') {
     const portraitPath = path.resolve(cardDir, card.portrait);
     if (fs.existsSync(portraitPath)) {
       portraitBuffer = await sharp(portraitPath)
-        .resize(portraitWidth, portraitInnerHeight, { fit: 'cover' })
+        .resize(portraitWidth, portraitHeight, { fit: 'cover' })
         .toBuffer();
     }
   }
 
   if (!portraitBuffer) {
     const placeholderSvg = `
-      <svg width="${portraitWidth}" height="${portraitInnerHeight}">
-        <rect width="${portraitWidth}" height="${portraitInnerHeight}" fill="${colors.accent}" opacity="0.3"/>
-        <text x="${portraitWidth/2}" y="${portraitInnerHeight/2}"
+      <svg width="${portraitWidth}" height="${portraitHeight}">
+        <rect width="${portraitWidth}" height="${portraitHeight}" fill="${colors.accent}" opacity="0.3"/>
+        <text x="${portraitWidth/2}" y="${portraitHeight/2}"
               font-family="serif" font-size="32" fill="${style === 'parchment' ? '#5a4a36' : '#666666'}"
               text-anchor="middle">[Portrait]</text>
       </svg>
@@ -225,9 +216,9 @@ async function renderCard(cardPath, outputPath, style = 'dark') {
     createFooter(CARD_WIDTH, s.footerHeight, card.footer, style)
   ]);
 
-  // Calculate portrait position (centered if inset)
-  const portraitLeft = inset - (s.portraitBorder || 0);
-  const portraitTop = s.headerHeight + inset - (s.portraitBorder || 0);
+  // Portrait position
+  const portraitLeft = 0;
+  const portraitTop = s.headerHeight;
 
   await sharp(background)
     .composite([
