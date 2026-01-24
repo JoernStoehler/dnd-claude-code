@@ -28,7 +28,8 @@ const STYLES = {
     headerTextColor: 'white',
     footerBgColor: '#111111',
     footerTextColor: '#666666',
-    textured: true
+    textured: true,
+    portraitInset: 0
   },
   parchment: {
     portraitHeight: 480,
@@ -39,7 +40,8 @@ const STYLES = {
     headerTextColor: '#f4e4c1',
     footerBgColor: '#e8d4a8',
     footerTextColor: '#5a4a36',
-    textured: true
+    textured: true,
+    portraitInset: 0
   },
   minimal: {
     portraitHeight: 450,
@@ -50,7 +52,8 @@ const STYLES = {
     headerTextColor: 'white',
     footerBgColor: '#f5f5f5',
     footerTextColor: '#999999',
-    textured: false
+    textured: false,
+    portraitInset: 0
   },
   compact: {
     portraitHeight: 320,
@@ -61,7 +64,21 @@ const STYLES = {
     headerTextColor: 'white',
     footerBgColor: '#111111',
     footerTextColor: '#666666',
-    textured: true
+    textured: true,
+    portraitInset: 0
+  },
+  framed: {
+    portraitHeight: 420,
+    headerHeight: 120,
+    footerHeight: 45,
+    bgColor: '#1a1a1a',
+    textColor: '#e0e0e0',
+    headerTextColor: 'white',
+    footerBgColor: '#111111',
+    footerTextColor: '#666666',
+    textured: true,
+    portraitInset: 24,  // Margin around portrait
+    portraitBorder: 3   // Border width
   }
 };
 
@@ -208,27 +225,49 @@ async function renderCard(cardPath, outputPath, style = 'dark') {
   const colors = CATEGORY_COLORS[card.category] || CATEGORY_COLORS.npc;
   const s = STYLES[style];
 
+  // Calculate portrait dimensions with inset
+  const inset = s.portraitInset || 0;
+  const portraitWidth = CARD_WIDTH - (inset * 2);
+  const portraitInnerHeight = s.portraitHeight - (inset * 2);
+
   // Load or create portrait
   let portraitBuffer = null;
   if (card.portrait) {
     const portraitPath = path.resolve(cardDir, card.portrait);
     if (fs.existsSync(portraitPath)) {
       portraitBuffer = await sharp(portraitPath)
-        .resize(CARD_WIDTH, s.portraitHeight, { fit: 'cover' })
+        .resize(portraitWidth, portraitInnerHeight, { fit: 'cover' })
         .toBuffer();
     }
   }
 
   if (!portraitBuffer) {
     const placeholderSvg = `
-      <svg width="${CARD_WIDTH}" height="${s.portraitHeight}">
-        <rect width="${CARD_WIDTH}" height="${s.portraitHeight}" fill="${colors.accent}" opacity="0.3"/>
-        <text x="${CARD_WIDTH/2}" y="${s.portraitHeight/2}"
+      <svg width="${portraitWidth}" height="${portraitInnerHeight}">
+        <rect width="${portraitWidth}" height="${portraitInnerHeight}" fill="${colors.accent}" opacity="0.3"/>
+        <text x="${portraitWidth/2}" y="${portraitInnerHeight/2}"
               font-family="serif" font-size="32" fill="${style === 'parchment' ? '#5a4a36' : '#666666'}"
               text-anchor="middle">[Portrait]</text>
       </svg>
     `;
     portraitBuffer = await sharp(Buffer.from(placeholderSvg)).png().toBuffer();
+  }
+
+  // Add border for framed style
+  if (s.portraitBorder) {
+    const borderWidth = s.portraitBorder;
+    const borderedWidth = portraitWidth + (borderWidth * 2);
+    const borderedHeight = portraitInnerHeight + (borderWidth * 2);
+    const borderSvg = `
+      <svg width="${borderedWidth}" height="${borderedHeight}">
+        <rect width="${borderedWidth}" height="${borderedHeight}" fill="${colors.light}"/>
+      </svg>
+    `;
+    const borderBuffer = await sharp(Buffer.from(borderSvg)).png().toBuffer();
+    portraitBuffer = await sharp(borderBuffer)
+      .composite([{ input: portraitBuffer, top: borderWidth, left: borderWidth }])
+      .png()
+      .toBuffer();
   }
 
   const bodyHeight = CARD_HEIGHT - s.headerHeight - s.portraitHeight - s.footerHeight;
@@ -240,10 +279,14 @@ async function renderCard(cardPath, outputPath, style = 'dark') {
     createFooter(CARD_WIDTH, s.footerHeight, card.footer, style)
   ]);
 
+  // Calculate portrait position (centered if inset)
+  const portraitLeft = inset - (s.portraitBorder || 0);
+  const portraitTop = s.headerHeight + inset - (s.portraitBorder || 0);
+
   await sharp(background)
     .composite([
       { input: header, top: 0, left: 0 },
-      { input: portraitBuffer, top: s.headerHeight, left: 0 },
+      { input: portraitBuffer, top: portraitTop, left: portraitLeft },
       { input: body, top: s.headerHeight + s.portraitHeight, left: 0 },
       { input: footer, top: CARD_HEIGHT - s.footerHeight, left: 0 }
     ])
@@ -274,6 +317,7 @@ Styles:
   parchment - Aged paper look, dark text
   minimal   - Clean white background
   compact   - Smaller portrait, more room for text
+  framed    - Portrait with decorative border/margin
 
 Example:
   node render-card-sharp.js card.json card.png --style=parchment
