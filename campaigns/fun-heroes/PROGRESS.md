@@ -1,7 +1,7 @@
 # Fun Heroes Campaign - Progress Tracker
 
 **Last Updated:** 2026-01-24
-**Overall Readiness:** ~60% (conservative estimate)
+**Overall Readiness:** ~50% (conservative estimate, accounting for maps/visuals)
 
 ## Quick Reference
 
@@ -10,11 +10,14 @@
 | Campaign framework | ✓ Complete | Yes |
 | Hub location (Millhaven) | ✓ Functional | Yes, with improv |
 | Adventure location (Brackenvale) | ✓ Functional | Yes, with improv |
-| Weathervane Manor | ✓ Detailed | Yes |
+| Weathervane Manor (text) | ✓ Detailed | Yes, with improv |
+| Weathervane Manor (full design) | Partial | Needs maps, item placement |
 | Sentient Cargo hook | ✓ Detailed | Yes |
+| Sentient Cargo route map | Missing | Text only, no visual |
 | Other standalone hooks | Partial | Need 15-30 min prep |
 | Weathervane arc hooks | Partial | Need 15-30 min prep |
 | Core NPCs | Partial | Voices need practice |
+| Maps (all) | Missing | 0-15% across all maps |
 
 ---
 
@@ -128,6 +131,43 @@ Each item is rated on: Personality, Usefulness, Annoyingness, Voice/Lines, Dynam
 | Monster ecology | 5% | Not addressed |
 | Economy/Trade | 20% | Implied, not detailed |
 
+### Maps & Visual Aids — 5%
+
+| Map | % | What Exists | What's Needed |
+|-----|---|-------------|---------------|
+| **Millhaven city map** | 5% | Key locations listed | Street layout, districts, scale, notable buildings marked |
+| **Brackenvale village map** | 5% | Key locations listed | Building positions, paths, surrounding terrain |
+| **Greendale Reach local area map** | 10% | ASCII sketch in file | Proper map with scale, terrain, travel times, landmarks |
+| **Escort route overlay** | 15% | Route described in text | Visual route with encounter locations, day markers, distances |
+| **Weathervane Manor floor plan** | 5% | Rooms listed by floor | Actual floor plans (3 floors + basement), room positions, doors, the Wandering Door location |
+
+### Weathervane Manor Full Design — 35%
+
+The manor needs significant work to be fully "explorable" rather than just "described."
+
+| Component | % | What Exists | What's Needed |
+|-----------|---|-------------|---------------|
+| **Room descriptions** | 70% | All rooms listed with quirks | Dimensions, furniture placement, what players see on entry |
+| **Item placement** | 20% | Notable items listed | Where specifically each item is, what's in drawers/shelves |
+| **Hidden secrets** | 25% | Locked Room, some hints | Secret compartments, hidden notes, things previous owners left |
+| **Discoverable lore** | 30% | Owner history table | Letters, journals, clues about Erasmus, the Ledger contents |
+| **Level-adjustable encounters** | 5% | None | Scaled threats for different party levels |
+| **Quest-dependent state: Estate Sale** | 10% | Auction concept | What's being sold, where items are displayed, crowd positions |
+| **Quest-dependent state: Inheritance** | 20% | Hot-potato structure | What players find on arrival, what changes as time passes |
+| **Quest-dependent state: Heist** | 15% | Entry points listed | Security by owner type, patrol routes, alarm triggers |
+| **Post-quest changes** | 5% | None | How the manor looks after each hook (empty shelves, damage, new occupants) |
+
+### Sentient Cargo Route — 70%
+
+| Component | % | What Exists | What's Needed |
+|-----------|---|-------------|---------------|
+| **Route description** | 90% | Full text with all segments | — |
+| **Encounters per segment** | 85% | Multiple options each | Level scaling suggestions |
+| **NPCs along route** | 80% | Detailed with reactions | — |
+| **Route map/visual** | 0% | None | Visual showing path, encounter points, day breaks |
+| **Encounter distances/timing** | 40% | "Day 1 morning" etc. | Specific travel times, flexibility notes |
+| **Random encounter table** | 0% | None | For improvised events between planned encounters |
+
 ---
 
 ## What's Ready to Run Right Now
@@ -160,16 +200,26 @@ Each item is rated on: Personality, Usefulness, Annoyingness, Voice/Lines, Dynam
 
 These are areas that would increase readiness if developed. No order implied.
 
-**High Impact:**
+**High Impact (Gameplay):**
 - [ ] Develop NPC voices (practice speaking as them)
 - [ ] Add plotlines section to Sentient Cargo file
 - [ ] Flesh out Missing Tax Collector (Percival's trail)
 - [ ] Flesh out Wrongly Accused (the actual crime and suspects)
 
+**High Impact (Visual/Structural):**
+- [ ] Weathervane Manor floor plans (3 floors + basement)
+- [ ] Manor item placement (where is everything specifically?)
+- [ ] Manor hidden secrets (what can players discover?)
+- [ ] Escort route visual/map with encounter markers
+
 **Medium Impact:**
-- [ ] Create simple maps (Millhaven, Brackenvale, Manor floor plan)
+- [ ] Millhaven city map (districts, streets, key buildings)
+- [ ] Brackenvale village map (buildings, paths)
+- [ ] Greendale Reach area map (terrain, scale, landmarks)
 - [ ] Write auction mechanics for Estate Sale
-- [ ] Detail Heist security options
+- [ ] Detail Heist security options per owner type
+- [ ] Level-adjustable encounters for Manor
+- [ ] Quest-dependent state changes for Manor (during + after each hook)
 - [ ] Develop one undeveloped hook (Festival? Monster Mediation?)
 
 **Low Priority:**
@@ -177,6 +227,7 @@ These are areas that would increase readiness if developed. No order implied.
 - [ ] Monster ecology (only if relevant)
 - [ ] Detailed history (only if plot requires)
 - [ ] Beyond-sandbox geography (only if players go there)
+- [ ] Random encounter tables for routes
 
 ---
 
