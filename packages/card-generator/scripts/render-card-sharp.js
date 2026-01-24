@@ -3,24 +3,67 @@
  * render-card-sharp.js - Render card PNG directly using sharp (no browser)
  *
  * Usage:
- *   node render-card-sharp.js <card.json> <output.png>
- *   node render-card-sharp.js card.json card.png
+ *   node render-card-sharp.js <card.json> <output.png> [--style=STYLE]
  *
- * Dependencies: sharp (npm install sharp)
+ * Styles: dark (default), parchment, minimal, compact
  */
 
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-// Card dimensions (poker size at ~3x for 300dpi)
-const CARD_WIDTH = 750;   // 2.5" * 300dpi
-const CARD_HEIGHT = 1050; // 3.5" * 300dpi
-const PORTRAIT_HEIGHT = 480;
-const HEADER_HEIGHT = 120;
-const FOOTER_HEIGHT = 45;
+// Card dimensions (poker size at 300dpi)
+const CARD_WIDTH = 750;
+const CARD_HEIGHT = 1050;
 const PADDING = 36;
-const CORNER_RADIUS = 36;
+
+// Style configurations
+const STYLES = {
+  dark: {
+    portraitHeight: 480,
+    headerHeight: 120,
+    footerHeight: 45,
+    bgColor: '#1a1a1a',
+    textColor: '#e0e0e0',
+    headerTextColor: 'white',
+    footerBgColor: '#111111',
+    footerTextColor: '#666666',
+    textured: true
+  },
+  parchment: {
+    portraitHeight: 480,
+    headerHeight: 120,
+    footerHeight: 45,
+    bgColor: '#f4e4c1',
+    textColor: '#2a2016',
+    headerTextColor: '#f4e4c1',
+    footerBgColor: '#e8d4a8',
+    footerTextColor: '#5a4a36',
+    textured: true
+  },
+  minimal: {
+    portraitHeight: 450,
+    headerHeight: 100,
+    footerHeight: 40,
+    bgColor: '#ffffff',
+    textColor: '#333333',
+    headerTextColor: 'white',
+    footerBgColor: '#f5f5f5',
+    footerTextColor: '#999999',
+    textured: false
+  },
+  compact: {
+    portraitHeight: 320,
+    headerHeight: 100,
+    footerHeight: 40,
+    bgColor: '#1a1a1a',
+    textColor: '#e0e0e0',
+    headerTextColor: 'white',
+    footerBgColor: '#111111',
+    footerTextColor: '#666666',
+    textured: true
+  }
+};
 
 // Category colors
 const CATEGORY_COLORS = {
@@ -32,38 +75,7 @@ const CATEGORY_COLORS = {
   mystery: { accent: '#4A4A4A', light: '#6A6A6A', dark: '#2A2A2A' }
 };
 
-/**
- * Create a textured background gradient
- */
-async function createBackground(width, height, colors) {
-  // Create base gradient
-  const gradientSvg = `
-    <svg width="${width}" height="${height}">
-      <defs>
-        <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:${colors.dark}"/>
-          <stop offset="50%" style="stop-color:#1a1a1a"/>
-          <stop offset="100%" style="stop-color:#0d0d0d"/>
-        </linearGradient>
-        <filter id="noise">
-          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
-          <feColorMatrix type="saturate" values="0"/>
-          <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
-        </filter>
-      </defs>
-      <rect width="${width}" height="${height}" fill="url(#bg)"/>
-      <!-- Add subtle noise texture via semi-random dots -->
-      ${generateNoisePattern(width, height, 0.02)}
-    </svg>
-  `;
-
-  return sharp(Buffer.from(gradientSvg)).png().toBuffer();
-}
-
-/**
- * Generate subtle noise pattern as SVG circles
- */
-function generateNoisePattern(width, height, density) {
+function generateNoisePattern(width, height, density, color = 'white') {
   const dots = [];
   const count = Math.floor(width * height * density / 100);
   for (let i = 0; i < count; i++) {
@@ -71,18 +83,37 @@ function generateNoisePattern(width, height, density) {
     const y = Math.random() * height;
     const r = Math.random() * 1.5 + 0.5;
     const opacity = Math.random() * 0.08;
-    dots.push(`<circle cx="${x}" cy="${y}" r="${r}" fill="white" opacity="${opacity}"/>`);
+    dots.push(`<circle cx="${x}" cy="${y}" r="${r}" fill="${color}" opacity="${opacity}"/>`);
   }
   return dots.join('\n');
 }
 
-/**
- * Create the header with category and name
- */
-async function createHeader(width, height, category, name, colors) {
-  // Escape XML entities
+async function createBackground(width, height, colors, style) {
+  const s = STYLES[style];
+  const noiseColor = style === 'parchment' ? '#8B4513' : 'white';
+
+  const svg = `
+    <svg width="${width}" height="${height}">
+      <defs>
+        <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:${style === 'parchment' ? '#f4e4c1' : colors.dark}"/>
+          <stop offset="50%" style="stop-color:${s.bgColor}"/>
+          <stop offset="100%" style="stop-color:${style === 'parchment' ? '#e8d4a8' : '#0d0d0d'}"/>
+        </linearGradient>
+      </defs>
+      <rect width="${width}" height="${height}" fill="${style === 'minimal' ? s.bgColor : 'url(#bg)'}"/>
+      ${s.textured ? generateNoisePattern(width, height, 0.02, noiseColor) : ''}
+    </svg>
+  `;
+  return sharp(Buffer.from(svg)).png().toBuffer();
+}
+
+async function createHeader(width, height, category, name, colors, style) {
+  const s = STYLES[style];
   const safeName = escapeXml(name);
   const safeCategory = escapeXml(category.toUpperCase());
+  const fontSize = style === 'compact' || style === 'minimal' ? 36 : 42;
+  const catSize = style === 'compact' || style === 'minimal' ? 20 : 24;
 
   const svg = `
     <svg width="${width}" height="${height}">
@@ -93,34 +124,31 @@ async function createHeader(width, height, category, name, colors) {
         </linearGradient>
       </defs>
       <rect width="${width}" height="${height}" fill="url(#headerGrad)"/>
-      <text x="${width/2}" y="35"
-            font-family="serif" font-size="24" font-weight="400"
+      <text x="${width/2}" y="${catSize + 8}"
+            font-family="serif" font-size="${catSize}" font-weight="400"
             fill="rgba(255,255,255,0.8)" text-anchor="middle"
             letter-spacing="4">${safeCategory}</text>
-      <text x="${width/2}" y="${height - 25}"
-            font-family="serif" font-size="42" font-weight="bold"
-            fill="white" text-anchor="middle"
-            style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3)">${safeName}</text>
+      <text x="${width/2}" y="${height - 20}"
+            font-family="serif" font-size="${fontSize}" font-weight="bold"
+            fill="${s.headerTextColor}" text-anchor="middle">${safeName}</text>
     </svg>
   `;
-
   return sharp(Buffer.from(svg)).png().toBuffer();
 }
 
-/**
- * Create the body text area (unstructured description only)
- */
-async function createBody(width, height, description, colors) {
+async function createBody(width, height, description, colors, style) {
+  const s = STYLES[style];
   const safeDesc = escapeXml(description || '');
+  const fontSize = style === 'compact' ? 26 : 28;
+  const lineHeight = style === 'compact' ? 30 : 34;
+  const maxChars = style === 'compact' ? 44 : 42;
 
-  // Word wrap description
-  const descLines = wordWrap(safeDesc, 42);
-  const descY = 45;
-  const lineHeight = 34;
+  const descLines = wordWrap(safeDesc, maxChars);
+  const descY = 40;
 
   const descText = descLines.map((line, i) =>
     `<text x="${PADDING}" y="${descY + i * lineHeight}"
-           font-family="serif" font-size="28" fill="#e0e0e0">${line}</text>`
+           font-family="serif" font-size="${fontSize}" fill="${s.textColor}">${line}</text>`
   ).join('\n');
 
   const svg = `
@@ -129,35 +157,29 @@ async function createBody(width, height, description, colors) {
       ${descText}
     </svg>
   `;
-
   return sharp(Buffer.from(svg)).png().toBuffer();
 }
 
-/**
- * Create footer
- */
-async function createFooter(width, height, text) {
+async function createFooter(width, height, text, style) {
+  const s = STYLES[style];
+  const borderColor = style === 'parchment' ? '#c4a882' : (style === 'minimal' ? '#e0e0e0' : '#333333');
+
   const svg = `
     <svg width="${width}" height="${height}">
-      <rect width="${width}" height="${height}" fill="#111111"/>
-      <line x1="0" y1="0" x2="${width}" y2="0" stroke="#333333" stroke-width="2"/>
-      <text x="${width/2}" y="${height/2 + 8}"
-            font-family="serif" font-size="22" fill="#666666"
+      <rect width="${width}" height="${height}" fill="${s.footerBgColor}"/>
+      <line x1="0" y1="0" x2="${width}" y2="0" stroke="${borderColor}" stroke-width="2"/>
+      <text x="${width/2}" y="${height/2 + 6}"
+            font-family="serif" font-size="20" fill="${s.footerTextColor}"
             text-anchor="middle">${escapeXml(text || '')}</text>
     </svg>
   `;
-
   return sharp(Buffer.from(svg)).png().toBuffer();
 }
 
-/**
- * Simple word wrap
- */
 function wordWrap(text, maxChars) {
   const words = text.split(' ');
   const lines = [];
   let currentLine = '';
-
   for (const word of words) {
     if ((currentLine + ' ' + word).trim().length <= maxChars) {
       currentLine = (currentLine + ' ' + word).trim();
@@ -170,9 +192,6 @@ function wordWrap(text, maxChars) {
   return lines;
 }
 
-/**
- * Escape XML special characters
- */
 function escapeXml(str) {
   if (!str) return '';
   return String(str)
@@ -183,80 +202,92 @@ function escapeXml(str) {
     .replace(/'/g, '&apos;');
 }
 
-/**
- * Main render function
- */
-async function renderCard(cardPath, outputPath) {
-  // Load card definition
+async function renderCard(cardPath, outputPath, style = 'dark') {
   const card = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
   const cardDir = path.dirname(cardPath);
   const colors = CATEGORY_COLORS[card.category] || CATEGORY_COLORS.npc;
+  const s = STYLES[style];
 
-  // Load portrait if exists
+  // Load or create portrait
   let portraitBuffer = null;
   if (card.portrait) {
     const portraitPath = path.resolve(cardDir, card.portrait);
     if (fs.existsSync(portraitPath)) {
       portraitBuffer = await sharp(portraitPath)
-        .resize(CARD_WIDTH, PORTRAIT_HEIGHT, { fit: 'cover' })
+        .resize(CARD_WIDTH, s.portraitHeight, { fit: 'cover' })
         .toBuffer();
     }
   }
 
-  // Create placeholder if no portrait
   if (!portraitBuffer) {
     const placeholderSvg = `
-      <svg width="${CARD_WIDTH}" height="${PORTRAIT_HEIGHT}">
-        <rect width="${CARD_WIDTH}" height="${PORTRAIT_HEIGHT}" fill="${colors.accent}" opacity="0.3"/>
-        <text x="${CARD_WIDTH/2}" y="${PORTRAIT_HEIGHT/2}"
-              font-family="serif" font-size="32" fill="#666666"
+      <svg width="${CARD_WIDTH}" height="${s.portraitHeight}">
+        <rect width="${CARD_WIDTH}" height="${s.portraitHeight}" fill="${colors.accent}" opacity="0.3"/>
+        <text x="${CARD_WIDTH/2}" y="${s.portraitHeight/2}"
+              font-family="serif" font-size="32" fill="${style === 'parchment' ? '#5a4a36' : '#666666'}"
               text-anchor="middle">[Portrait]</text>
       </svg>
     `;
     portraitBuffer = await sharp(Buffer.from(placeholderSvg)).png().toBuffer();
   }
 
-  // Calculate body height
-  const bodyHeight = CARD_HEIGHT - HEADER_HEIGHT - PORTRAIT_HEIGHT - FOOTER_HEIGHT;
+  const bodyHeight = CARD_HEIGHT - s.headerHeight - s.portraitHeight - s.footerHeight;
 
-  // Create all components
   const [background, header, body, footer] = await Promise.all([
-    createBackground(CARD_WIDTH, CARD_HEIGHT, colors),
-    createHeader(CARD_WIDTH, HEADER_HEIGHT, card.category, card.name, colors),
-    createBody(CARD_WIDTH, bodyHeight, card.description, colors),
-    createFooter(CARD_WIDTH, FOOTER_HEIGHT, card.footer)
+    createBackground(CARD_WIDTH, CARD_HEIGHT, colors, style),
+    createHeader(CARD_WIDTH, s.headerHeight, card.category, card.name, colors, style),
+    createBody(CARD_WIDTH, bodyHeight, card.description, colors, style),
+    createFooter(CARD_WIDTH, s.footerHeight, card.footer, style)
   ]);
 
-  // Composite all layers
-  const result = await sharp(background)
+  await sharp(background)
     .composite([
       { input: header, top: 0, left: 0 },
-      { input: portraitBuffer, top: HEADER_HEIGHT, left: 0 },
-      { input: body, top: HEADER_HEIGHT + PORTRAIT_HEIGHT, left: 0 },
-      { input: footer, top: CARD_HEIGHT - FOOTER_HEIGHT, left: 0 }
+      { input: portraitBuffer, top: s.headerHeight, left: 0 },
+      { input: body, top: s.headerHeight + s.portraitHeight, left: 0 },
+      { input: footer, top: CARD_HEIGHT - s.footerHeight, left: 0 }
     ])
     .png()
     .toFile(outputPath);
 
-  console.log(`Rendered: ${outputPath} (${CARD_WIDTH}x${CARD_HEIGHT})`);
+  console.log(`Rendered: ${outputPath} (${style})`);
 }
 
 // CLI
 const args = process.argv.slice(2);
-if (args.length < 2) {
+const positional = args.filter(a => !a.startsWith('--'));
+const flags = Object.fromEntries(
+  args.filter(a => a.startsWith('--'))
+    .map(a => a.slice(2).split('='))
+    .map(([k, v]) => [k, v ?? true])
+);
+
+if (positional.length < 2) {
   console.log(`
-render-card-sharp.js - Render card PNG using sharp (no browser needed)
+render-card-sharp.js - Render card PNG using sharp
 
 Usage:
-  node render-card-sharp.js <card.json> <output.png>
+  node render-card-sharp.js <card.json> <output.png> [--style=STYLE]
+
+Styles:
+  dark      - Dark textured background, light text (default)
+  parchment - Aged paper look, dark text
+  minimal   - Clean white background
+  compact   - Smaller portrait, more room for text
 
 Example:
-  node render-card-sharp.js card.json card.png
+  node render-card-sharp.js card.json card.png --style=parchment
 `);
   process.exit(0);
 }
 
-renderCard(args[0], args[1]).catch(err => {
+const style = flags.style || 'dark';
+if (!STYLES[style]) {
+  console.error(`Unknown style: ${style}. Available: ${Object.keys(STYLES).join(', ')}`);
+  process.exit(1);
+}
+
+renderCard(positional[0], positional[1], style).catch(err => {
   console.error('Render failed:', err);
   process.exit(1);
 });
