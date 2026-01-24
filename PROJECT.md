@@ -11,9 +11,9 @@ Repository structure and meta-tooling established. Card generator prototype comp
 
 ### High Priority
 
-- [ ] Create first campaign directory with full structure
-- [ ] Write initial campaign concept/pitch
-- [ ] Establish template files (session log, NPC, location, encounter)
+- [x] Create first campaign directory with full structure
+- [x] Write initial campaign concept/pitch
+- [x] Establish template files (session log, NPC, location, encounter)
 
 ### Medium Priority
 
@@ -64,6 +64,15 @@ Repository structure and meta-tooling established. Card generator prototype comp
 - Example cards in `campaigns/example/cards/`
 - Added env var setup to root README.md
 
+### 2026-01-24: Fun Heroes Campaign Setup
+
+- Created `campaigns/fun-heroes/` - first real campaign for one-shot meetups
+- Campaign focus: chaotic comedy with heart, "Fun Heroes" whose choices have aligned consequences
+- Secondary goal: psychological exploration of non-analytical thinking styles via NPC design
+- World concept: "The Middling Realms" - a world that's basically fine
+- Templates: one-shot prep, NPC quick-ref
+- 10 brainstormed one-shot hooks ready for development
+
 ### 2026-01-23: D&D Resources and GM Reference Materials
 
 - Created `resources/` directory with curated external resources:
@@ -99,11 +108,11 @@ Repository structure and meta-tooling established. Card generator prototype comp
 
 ### Open Questions
 
-- What campaign system(s) to use? (D&D 5e, Pathfinder 2e, other?)
 - How detailed should session logs be?
 - Physical vs digital play setup? (Affects which enhancements to pursue)
 - Should we download SRD locally or just link to online sources?
 
 ### Resolved Questions
 
+- **Campaign system:** D&D 5e (rules-light approach, focus on improvisation over mechanical precision)
 - **AI image generation:** Flux via fal.ai (good quality, API access, standard sizes)
