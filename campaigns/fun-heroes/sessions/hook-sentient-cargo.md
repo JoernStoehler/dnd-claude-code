@@ -17,18 +17,18 @@ The items are useful. They're also insufferable. The party will quickly understa
 
 Five sentient items that must travel together. They have history. They have grievances. They will share both.
 
-### Vesper (The Sword)
+### Bastion (The Shield)
 
-A longsword that belonged to a hero who died mid-quest. The sword absorbed some of the hero's personality—specifically, the self-righteousness.
+A kite shield that belonged to a legendary defender. Bastion absorbed the hero's love of glory—but not their courage.
 
-- **Useful:** Detects danger (30ft), glows near enemies, gives genuinely good tactical advice
-- **Annoying:** Constant judgment about "heroic conduct," backseat adventuring, tells long stories about Sir Aldwin (the dead hero), disappointed sighs
-- **Voice:** Formal, slightly pompous, delivers criticism as "observations"
+- **Useful:** Warns of incoming attacks, can magically brace against one big hit per day, intimidating presence when displayed
+- **Annoying:** Desperately wants to be carried in public ("I am a BULWARK! A symbol of PROTECTION!") but panics during actual combat ("Not the face! Clubs give the WORST headaches!")
+- **Voice:** Booming and heroic when showing off, high-pitched and panicked when threatened
 
 **Sample lines:**
-- "Sir Aldwin would have checked for traps first. Just an observation."
-- "I sense danger ahead. Also, that was a suboptimal formation choice."
-- "In my experience—which spans three heroic quests—"
+- "Behold! I am BASTION, shield of the legendary Sir Aldwin! Tremble before—wait, is that an axe? I don't like axes."
+- "Carry me with pride! Let all see your magnificent defender! ...But maybe walk around the tavern brawl."
+- "I have blocked HUNDREDS of blows! I simply choose not to today. Strategic rest."
 
 ### Madame Clarity (The Mirror)
 
@@ -41,7 +41,7 @@ A hand mirror that shows true reflections—but mostly comments on what it sees.
 **Sample lines:**
 - "Oh, that's a *choice*. No no, it suits you. Really."
 - "I've seen the inside of seventeen noble houses. The things I could tell you..."
-- "Vesper, darling, do shut up. No one cares about Sir Aldwin."
+- "Bastion, darling, do shut up. No one cares about Sir Aldwin."
 
 ### Professor Tomes (The Book)
 
@@ -88,17 +88,18 @@ The items have been together for years. They know exactly how to annoy each othe
 
 | Item | Ally | Rival | Wildcard |
 |------|------|-------|----------|
-| Vesper | Meridian (respects vigilance) | Clarity (mutual disdain) | Tomes (tolerates lectures) |
-| Clarity | Pip (finds them amusing) | Vesper (old grudge) | Tomes (intellectual sparring) |
+| Bastion | Meridian (fellow coward) | Clarity (exposes cowardice) | Pip (too cheerful about danger) |
+| Clarity | Pip (finds them amusing) | Bastion (saw him flee) | Tomes (intellectual sparring) |
 | Tomes | None (above such things) | Clarity (lowbrow rival) | Everyone (lectures all) |
 | Pip | Everyone (oblivious) | None (too cheerful) | Meridian (accidentally stresses them out) |
-| Meridian | Vesper (fellow worrier) | Pip (too calm!) | Clarity (distrusts reflections) |
+| Meridian | Bastion (fellow worrier) | Pip (too calm!) | Clarity (distrusts reflections) |
 
 **Running conflicts:**
-- Vesper and Clarity have a years-long feud about "Sir Aldwin's true character" (Clarity saw things)
+- Bastion talks big about glory; Clarity saw Sir Aldwin (and Bastion) flee from a fight and won't let him forget it
+- Bastion and Meridian bond over shared anxiety, then spiral each other into panic
 - Tomes corrects everyone; everyone hates it
-- Pip's cheerfulness drives Meridian to distraction
-- They all talk over each other during crises
+- Pip's cheerfulness drives both Meridian AND Bastion to distraction
+- They all talk over each other during crises (especially Bastion announcing danger he refuses to face)
 
 ## The Route
 
@@ -119,16 +120,16 @@ Millhaven → Greendale Road → Waymarker Stone → Haverston Farm → Three Oa
 Pick 2-3 to populate the journey:
 
 ### The Ambush
-Bandits (or creatures) attack. Every item has advice. Vesper wants to fight heroically, Meridian screams warnings, Pip lights up revealing positions, Clarity critiques the enemies' fashion, Tomes explains bandit sociology.
+Bandits (or creatures) attack. Every item has advice. Bastion wants to fight heroically, Meridian screams warnings, Pip lights up revealing positions, Clarity critiques the enemies' fashion, Tomes explains bandit sociology.
 
 ### The Shortcut
-Meridian senses a faster route. Tomes says it's historically dangerous. Vesper wants to prove heroism. Clarity doesn't want to get dirty. Pip is excited either way.
+Meridian senses a faster route. Tomes says it's historically dangerous. Bastion wants to prove heroism. Clarity doesn't want to get dirty. Pip is excited either way.
 
 ### The Argument Escalation
 The bickering reaches a peak. The items refuse to cooperate until their grievances are addressed. Players must mediate a dispute between magical objects.
 
 ### The Stealth Section
-Players need to be quiet. Pip doesn't understand "quiet." Meridian panics silently (but not silently enough). Vesper cannot resist commenting on technique.
+Players need to be quiet. Pip doesn't understand "quiet." Meridian panics silently (but not silently enough). Bastion cannot resist commenting on technique.
 
 ### The Moral Dilemma
 Someone on the road needs help. Stopping delays the mission. Every item has a different opinion about what heroes should do—and they share it loudly.
@@ -137,7 +138,7 @@ Someone on the road needs help. Stopping delays the mission. Every item has a di
 An actual crisis where the items' abilities genuinely save the day—but in the most annoying way possible. They will not let the party forget this.
 
 ### The Rebellion
-One item (probably Vesper or Clarity) decides the party isn't worthy of their guidance and goes "silent" in protest. This lasts about four minutes.
+One item (probably Bastion or Clarity) decides the party isn't worthy of their guidance and goes "silent" in protest. This lasts about four minutes.
 
 ### The Bonding Moment
 Despite everything, the items reveal why they actually care about each other. It's touching. Then they immediately go back to bickering.
@@ -210,7 +211,7 @@ If energy flags: The items reveal they know something important about the destin
 
 | Item | Delivered? | Final Status |
 |------|-----------|--------------|
-| Vesper | | |
+| Bastion | | |
 | Clarity | | |
 | Tomes | | |
 | Pip | | |
