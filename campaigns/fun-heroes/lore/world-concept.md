@@ -119,7 +119,7 @@ Three hooks centered on a wizard's estate that changes hands constantly. Can run
 - **Locations:** Millhaven, Brackenvale, Greendale Reach, Weathervane Manor
 - **NPCs:** Marta Greaves (innkeeper), Clerk Fenwick (guild), Elder Cornelius Marsh (elder), Aldric Weathervane (maybe-dead wizard)
 - **Standalone one-shots:** Missing Tax Collector, Wrongly Accused, Sentient Cargo
-- **Connected arc:** Estate Sale → Cargo → Inheritance → Heist (4-part Weathervane Manor story)
+- **Connected arc:** Estate Sale, Inheritance, Heist (Weathervane Manor hooks, any order)
 
 ## What's Not Here (Yet)
 

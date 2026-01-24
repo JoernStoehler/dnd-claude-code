@@ -64,14 +64,45 @@ Repository structure and meta-tooling established. Card generator prototype comp
 - Example cards in `campaigns/example/cards/`
 - Added env var setup to root README.md
 
-### 2026-01-24: Fun Heroes Campaign Setup
+### 2026-01-24: Fun Heroes Campaign - Full Development Session
 
+**Campaign Foundation:**
 - Created `campaigns/fun-heroes/` - first real campaign for one-shot meetups
-- Campaign focus: chaotic comedy with heart, "Fun Heroes" whose choices have aligned consequences
-- Secondary goal: psychological exploration of non-analytical thinking styles via NPC design
+- Campaign focus: chaotic comedy with heart, "Fun Heroes" philosophy
 - World concept: "The Middling Realms" - a world that's basically fine
-- Templates: one-shot prep, NPC quick-ref
-- 10 brainstormed one-shot hooks ready for development
+
+**Locations (Greendale Reach sandbox):**
+- Millhaven (market town hub) - Adventurer's Guild, Grinding Gear tavern
+- Brackenvale (village between forest and mountains)
+- Greendale Reach region overview with ASCII map
+- Weathervane Manor (wizard's estate, 20-year mystery, Wandering Door)
+
+**Weathervane Manor Deep Design:**
+- Erasmus Weathervane vanished 20 years ago (mystery unsolved)
+- Multiple owners since, each left marks (Lady Ashworth's portraits, etc.)
+- The Wandering Door (speak room name → connects to that room)
+- The Locked Room (unopened since Erasmus vanished)
+- Hooks work in any order, ownership always in flux
+
+**One-Shot Hooks (6 developed):**
+- Missing Tax Collector, Wrongly Accused (standalone)
+- Sentient Cargo (most detailed - full route with NPCs)
+- Estate Sale, Inheritance (hot-potato), Heist (Weathervane arc)
+
+**Sentient Cargo (flagship hook):**
+- Five bickering items: Bastion (cowardly shield), Clarity (catty mirror), Tomes (pedantic book), Pip (cheerful lantern), Meridian (anxious compass)
+- Full route Millhaven→Brackenvale with encounters per segment
+- NPCs along route: Sir Aldric (paladin), Sister Merrith (pilgrim), Borras (merchant), Haverstons (farm family)
+- Potential buyers for offloading items mid-journey
+
+**Core NPCs:**
+- Marta Greaves (innkeeper), Clerk Fenwick (guild), Elder Cornelius Marsh
+- Route NPCs with item-specific reactions
+
+**Progress Tracking:**
+- Created `PROGRESS.md` with conservative % estimates
+- Tracks: locations, hooks, NPCs, items, maps, manor design, document format quality
+- Overall: ~45% ready (accounting for missing maps and format polish)
 
 ### 2026-01-23: D&D Resources and GM Reference Materials
 
