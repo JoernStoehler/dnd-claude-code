@@ -20,9 +20,9 @@ const PADDING = 36;
 // Style configurations
 const STYLES = {
   dark: {
-    portraitHeight: 620,
-    headerHeight: 95,
-    footerHeight: 40,
+    portraitHeight: 750,
+    headerHeight: 80,
+    footerHeight: 36,
     bgColor: '#1a1a1a',
     textColor: '#e0e0e0',
     headerTextColor: 'white',
@@ -30,9 +30,9 @@ const STYLES = {
     footerTextColor: '#666666'
   },
   parchment: {
-    portraitHeight: 620,
-    headerHeight: 95,
-    footerHeight: 40,
+    portraitHeight: 750,
+    headerHeight: 80,
+    footerHeight: 36,
     bgColor: '#f4e4c1',
     textColor: '#2a2016',
     headerTextColor: '#f4e4c1',
