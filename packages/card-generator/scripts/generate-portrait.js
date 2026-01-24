@@ -99,16 +99,58 @@ async function generateApiPortrait(outputPath, prompt, options = {}) {
     return generateDummyPortrait(outputPath, options);
   }
 
-  // TODO: Implement actual fal.ai API call
-  // const fal = require('@fal-ai/client');
-  // fal.config({ credentials: apiKey });
-  // const result = await fal.subscribe("fal-ai/flux/dev", {
-  //   input: { prompt, image_size: options.size || DEFAULT_SIZE }
-  // });
+  if (!prompt) {
+    console.error('Error: --prompt required for API mode.');
+    process.exit(1);
+  }
 
-  console.error('API portrait generation not yet implemented.');
-  console.error('Falling back to dummy portrait.');
-  await generateDummyPortrait(outputPath, options);
+  const { execSync } = require('child_process');
+
+  const sizePreset = options.size || DEFAULT_SIZE;
+  console.log(`Generating portrait via fal.ai Flux...`);
+  console.log(`  Prompt: "${prompt}"`);
+  console.log(`  Size: ${sizePreset}`);
+
+  try {
+    // Use curl for HTTP requests (more reliable DNS in some environments)
+    const payload = JSON.stringify({
+      prompt: prompt,
+      image_size: sizePreset,
+      num_images: 1
+    });
+
+    const curlCmd = `curl -s -X POST "https://fal.run/fal-ai/flux/dev" \
+      -H "Authorization: Key ${apiKey}" \
+      -H "Content-Type: application/json" \
+      -d '${payload.replace(/'/g, "'\\''")}'`;
+
+    console.log('  Calling fal.ai API...');
+    const resultStr = execSync(curlCmd, { encoding: 'utf-8', timeout: 120000 });
+    const result = JSON.parse(resultStr);
+
+    if (!result.images?.[0]?.url) {
+      console.error('Error: No image URL in API response.');
+      console.error('Response:', JSON.stringify(result, null, 2));
+      process.exit(1);
+    }
+
+    const imageUrl = result.images[0].url;
+    console.log(`  Downloading from: ${imageUrl.slice(0, 60)}...`);
+
+    // Download the image using curl
+    execSync(`curl -s -o "${outputPath}" "${imageUrl}"`, { timeout: 60000 });
+
+    console.log(`Generated: ${outputPath}`);
+  } catch (error) {
+    console.error('Error calling fal.ai API:', error.message);
+    if (error.stdout) {
+      console.error('stdout:', error.stdout.toString());
+    }
+    if (error.stderr) {
+      console.error('stderr:', error.stderr.toString());
+    }
+    process.exit(1);
+  }
 }
 
 // CLI
