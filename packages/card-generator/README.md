@@ -26,9 +26,39 @@ scripts/
   - Poker vs Tarot size comparison
   - Dark theme with category color-coding
 
+## Decisions Made
+
+- **Card size**: Poker (2.5" × 3.5" / 750×1050px @300dpi)
+- **Output format**: PNG
+- **Backside**: Not needed (front only)
+- **Image generation**: Flux via fal.ai
+
+## Image Generation Setup (fal.ai)
+
+**Quickstart**: https://docs.fal.ai/model-apis/quickstart
+
+1. Create account at https://fal.ai
+2. Get API key from dashboard: https://fal.ai/dashboard/keys
+3. Set environment variable: `export FAL_KEY="your-api-key"`
+
+**Models to use:**
+- `fal-ai/flux/schnell` - Fast, cheap (~$0.003/megapixel)
+- `fal-ai/flux/dev` - Better quality, slightly slower
+
+**Example call:**
+```javascript
+import { fal } from "@fal-ai/client";
+
+const result = await fal.subscribe("fal-ai/flux/dev", {
+  input: {
+    prompt: "Portrait of a gnome knight in ornate armor, fantasy art style",
+    image_size: { width: 512, height: 716 }  // ~5:7 ratio for cards
+  }
+});
+```
+
 ## To Be Determined
 
-- Final output format (PNG vs SVG)
-- Image generation workflow and API
-- A4 PDF composition for printing
+- A4 PDF composition workflow (manual Inkscape for now)
 - Variant management and selection UX
+- Agent workflow details
