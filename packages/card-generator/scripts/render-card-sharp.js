@@ -5,7 +5,7 @@
  * Usage:
  *   node render-card-sharp.js <card.json> <output.png> [--style=STYLE]
  *
- * Styles: dark (default), parchment, minimal, compact
+ * Styles: dark (default), parchment, minimal, compact, framed
  */
 
 const fs = require('fs');
