@@ -1,11 +1,7 @@
 {
   "category": "npc",
   "name": "Sir Tinkelstein of Gnomewood",
-  "description": "A fastidious gnome knight who speaks in overly formal declarations. Wears immaculately polished armor three sizes too large, inherited from a human paladin he once squired for.",
-  "details": {
-    "Location": "The Gilded Gear tavern",
-    "Wants": "To prove gnomes can be proper knights"
-  },
+  "description": "A fastidious gnome knight who speaks in overly formal declarations. Wears immaculately polished armor three sizes too large. You met him at the Gilded Gear, where he offered to help investigate the missing shipments.",
   "footer": "Sundale Campaign",
   "portrait": "portrait.png",
   "image_prompt": "Portrait of a gnome knight, dignified expression, wearing oversized polished plate armor, small stature but proud bearing, fantasy art style, warm tavern lighting",

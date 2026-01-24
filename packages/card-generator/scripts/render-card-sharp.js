@@ -28,7 +28,8 @@ const CATEGORY_COLORS = {
   location: { accent: '#2E8B57', light: '#3CB371', dark: '#1D5A38' },
   item: { accent: '#4169E1', light: '#6495ED', dark: '#2B4594' },
   faction: { accent: '#8B008B', light: '#BA55D3', dark: '#5C005C' },
-  quest: { accent: '#B8860B', light: '#DAA520', dark: '#7A5907' }
+  quest: { accent: '#B8860B', light: '#DAA520', dark: '#7A5907' },
+  mystery: { accent: '#4A4A4A', light: '#6A6A6A', dark: '#2A2A2A' }
 };
 
 /**
@@ -107,45 +108,25 @@ async function createHeader(width, height, category, name, colors) {
 }
 
 /**
- * Create the body text area
+ * Create the body text area (unstructured description only)
  */
-async function createBody(width, height, description, details, colors) {
-  const safeDesc = escapeXml(description);
+async function createBody(width, height, description, colors) {
+  const safeDesc = escapeXml(description || '');
 
   // Word wrap description
-  const descLines = wordWrap(safeDesc, 45);
-  const descY = 40;
-  const lineHeight = 32;
+  const descLines = wordWrap(safeDesc, 42);
+  const descY = 45;
+  const lineHeight = 34;
 
   const descText = descLines.map((line, i) =>
     `<text x="${PADDING}" y="${descY + i * lineHeight}"
            font-family="serif" font-size="28" fill="#e0e0e0">${line}</text>`
   ).join('\n');
 
-  // Details section
-  let detailsText = '';
-  if (details && Object.keys(details).length > 0) {
-    const detailY = descY + descLines.length * lineHeight + 40;
-    let dy = 0;
-    for (const [key, value] of Object.entries(details)) {
-      detailsText += `
-        <text x="${PADDING}" y="${detailY + dy}" font-family="serif" font-size="26">
-          <tspan fill="${colors.light}" font-weight="bold">${escapeXml(key)}:</tspan>
-          <tspan fill="#aaaaaa"> ${escapeXml(value)}</tspan>
-        </text>
-      `;
-      dy += 34;
-    }
-  }
-
   const svg = `
     <svg width="${width}" height="${height}">
       <rect width="${width}" height="${height}" fill="transparent"/>
       ${descText}
-      <line x1="${PADDING}" y1="${descY + descLines.length * lineHeight + 10}"
-            x2="${width - PADDING}" y2="${descY + descLines.length * lineHeight + 10}"
-            stroke="#444444" stroke-width="2"/>
-      ${detailsText}
     </svg>
   `;
 
@@ -242,7 +223,7 @@ async function renderCard(cardPath, outputPath) {
   const [background, header, body, footer] = await Promise.all([
     createBackground(CARD_WIDTH, CARD_HEIGHT, colors),
     createHeader(CARD_WIDTH, HEADER_HEIGHT, card.category, card.name, colors),
-    createBody(CARD_WIDTH, bodyHeight, card.description, card.details, colors),
+    createBody(CARD_WIDTH, bodyHeight, card.description, colors),
     createFooter(CARD_WIDTH, FOOTER_HEIGHT, card.footer)
   ]);
 

@@ -1,8 +1,9 @@
 # Sir Tinkelstein of Gnomewood - Card Variants
 
 **Category**: NPC
-**Source**: (example - no source entity)
 **Status**: Pending review
+
+> **Note**: Cards are player-facing. Text describes only what players observed—appearance, demeanor, context of encounter. No secrets, hooks, or GM info.
 
 ---
 
@@ -10,18 +11,7 @@
 
 ![v1](v1.png)
 
-**Description**: A fastidious gnome knight who speaks in overly formal declarations. Wears immaculately polished armor three sizes too large, inherited from a human paladin he once squired for.
-
-| Detail | Value |
-|--------|-------|
-| Location | The Gilded Gear tavern |
-| Wants | To prove gnomes can be proper knights |
-
-<details>
-<summary>Image prompt</summary>
-
-Portrait of a dignified gnome knight, proud expression, wearing oversized polished plate armor, small stature but noble bearing, fantasy art style, warm tavern lighting, detailed metalwork
-</details>
+> A fastidious gnome knight in immaculately polished armor three sizes too large. Speaks in overly formal declarations and insists on proper introductions. You met him at the Gilded Gear tavern.
 
 ---
 
@@ -29,18 +19,7 @@ Portrait of a dignified gnome knight, proud expression, wearing oversized polish
 
 ![v2](v2.png)
 
-**Description**: Tiny knight, enormous dignity. This gnome insists on full heraldic protocol for every introduction. His armor clanks comically as he walks, but his blade-work is no joke.
-
-| Detail | Value |
-|--------|-------|
-| Role | Knight-errant, information broker |
-| Secret | Exiled from Gnomewood court |
-
-<details>
-<summary>Image prompt</summary>
-
-Gnome knight in comically oversized armor, formal pose, heraldic surcoat over plate mail, serious expression contrasting with absurd proportions, fantasy portrait, painterly style
-</details>
+> Tiny knight, enormous dignity. His oversized armor clanks comically as he walks, but his swordsmanship is clearly practiced. Met at the Gilded Gear where he was loudly debating the finer points of chivalric conduct.
 
 ---
 
@@ -48,18 +27,7 @@ Gnome knight in comically oversized armor, formal pose, heraldic surcoat over pl
 
 ![v3](v3.png)
 
-**Description**: Sir Tinkelstein carries himself like a man twice his height. Former squire to the legendary Sir Aldric, he now seeks to honor his mentor's memory through deeds of valor.
-
-| Detail | Value |
-|--------|-------|
-| Background | Squire to Sir Aldric the Tall |
-| Weakness | Quick to perceive insults |
-
-<details>
-<summary>Image prompt</summary>
-
-Noble gnome warrior, determined expression, ornate inherited armor with human-sized proportions modified for small frame, sword at hip, fantasy character portrait, heroic lighting
-</details>
+> A gnome who carries himself like a man twice his height. His armor bears the heraldry of a human knight—perhaps inherited? Seemed touchy when someone laughed at his formal manner.
 
 ---
 
@@ -67,26 +35,21 @@ Noble gnome warrior, determined expression, ornate inherited armor with human-si
 
 ![v4](v4.png)
 
-**Description**: "I am Sir Tinkelstein, Knight of the Emerald Cog, Defender of the Small, Champion of—" He'll list all twelve titles if you let him. Beneath the bluster is genuine skill and a debt he'd rather not discuss.
+> "I am Sir Tinkelstein, Knight of the Emerald Cog, Defender of the Small, Champion of—" He listed all twelve titles before you could interrupt. Wears elaborate but well-worn armor covered in medals and decorations.
 
-| Detail | Value |
-|--------|-------|
-| Quirk | Insists on full formal introductions |
-| Hook | Owes a dangerous debt |
+---
 
-<details>
-<summary>Image prompt</summary>
+## Mystery Card (for unknown NPCs)
 
-Gnome knight mid-proclamation, one hand raised dramatically, wearing elaborate but worn armor with many decorations and medals, tavern background, fantasy art, expressive face
-</details>
+![mystery](mystery.png)
+
+Blank cards for NPCs the party hasn't properly met yet. Players can scribble notes on the printed card, then swap it for the real card once they learn more.
 
 ---
 
 ## Feedback
 
-Comment on this PR with your choice:
-
-- **"Use v2"** → Make variant 2 the canonical version
-- **"v1 text + v3 image"** → Combine text from v1 with image style from v3
-- **"Make the image more comedic; best of 3"** → Generate 3 new portrait variants
-- Any other feedback → I'll adjust accordingly
+Comment on this PR:
+- **"Use v2"** → Make variant 2 canonical
+- **"v1 text + v3 image style"** → Combine elements
+- **"Make description shorter"** → Adjust text
