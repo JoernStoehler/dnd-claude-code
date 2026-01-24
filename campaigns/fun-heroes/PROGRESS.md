@@ -1,7 +1,7 @@
 # Fun Heroes Campaign - Progress Tracker
 
 **Last Updated:** 2026-01-24
-**Overall Readiness:** ~50% (conservative estimate, accounting for maps/visuals)
+**Overall Readiness:** ~45% (conservative, accounting for maps + format quality)
 
 ## Quick Reference
 
@@ -168,6 +168,43 @@ The manor needs significant work to be fully "explorable" rather than just "desc
 | **Encounter distances/timing** | 40% | "Day 1 morning" etc. | Specific travel times, flexibility notes |
 | **Random encounter table** | 0% | None | For improvised events between planned encounters |
 
+### Meta: Document Format Quality — 50%
+
+Documents need to be formatted for actual GM use, not just contain information.
+
+**Format Goals:**
+- **Skimmable during play:** Quick-reference boxes, bold key info, bullet points
+- **Top-down readable before play:** Overview → Details → Edge cases
+- **Information transfer focus:** State facts plainly, GM can improvise gaps
+
+| Document | Info Complete | Skimmable | Top-Down | Quick-Ref Boxes | Overall |
+|----------|---------------|-----------|----------|-----------------|---------|
+| Campaign CLAUDE.md | 90% | 80% | 85% | Few | 80% |
+| Millhaven | 70% | 60% | 70% | None | 55% |
+| Brackenvale | 70% | 60% | 70% | None | 55% |
+| Greendale Reach | 60% | 50% | 60% | ASCII map only | 50% |
+| Weathervane Manor | 85% | 60% | 70% | Tables | 65% |
+| **Sentient Cargo** | **90%** | **80%** | **85%** | **Tables, item boxes** | **85%** |
+| Estate Sale | 65% | 50% | 60% | Some tables | 50% |
+| Inheritance | 80% | 70% | 75% | Heir table | 70% |
+| Heist | 65% | 55% | 60% | Entry table | 55% |
+| Missing Tax Collector | 60% | 40% | 50% | Few | 45% |
+| Wrongly Accused | 60% | 40% | 50% | Few | 45% |
+| NPC files | 75% | 70% | 75% | Template format | 70% |
+
+**What "good format" looks like (Sentient Cargo as model):**
+- Item stat blocks with Useful/Annoying/Voice clearly separated
+- Sample lines ready to read aloud
+- Route broken into time segments with encounters per segment
+- NPC reactions listed per item
+- Tables for dynamics, potential buyers, item fates
+
+**What needs reformatting:**
+- Location files need "At a Glance" boxes
+- Manor needs room-by-room quick reference
+- Hooks need "During Play" quick-ref sections separate from "Prep Reading"
+- Consider separating "read before session" from "reference during session"
+
 ---
 
 ## What's Ready to Run Right Now
@@ -221,6 +258,13 @@ These are areas that would increase readiness if developed. No order implied.
 - [ ] Level-adjustable encounters for Manor
 - [ ] Quest-dependent state changes for Manor (during + after each hook)
 - [ ] Develop one undeveloped hook (Festival? Monster Mediation?)
+
+**Meta (Document Quality):**
+- [ ] Add "At a Glance" boxes to location files
+- [ ] Add "During Play Quick-Ref" sections to hooks (separate from prep reading)
+- [ ] Manor room-by-room quick reference card
+- [ ] Review all files for skimmability (bold key facts, reduce prose)
+- [ ] Consider GM cheat sheets (1-page summaries for each hook)
 
 **Low Priority:**
 - [ ] Cosmology/gods (only if a hook needs it)
