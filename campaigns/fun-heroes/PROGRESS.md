@@ -1,7 +1,7 @@
 # Fun Heroes Campaign - Progress Tracker
 
 **Last Updated:** 2026-01-24
-**Overall Readiness:** ~45% (conservative, accounting for maps + format quality)
+**Overall Readiness:** ~50% (manor now explorable, format improving)
 
 ## Quick Reference
 
@@ -11,13 +11,13 @@
 | Hub location (Millhaven) | ✓ Functional | Yes, with improv |
 | Adventure location (Brackenvale) | ✓ Functional | Yes, with improv |
 | Weathervane Manor (text) | ✓ Detailed | Yes, with improv |
-| Weathervane Manor (full design) | Partial | Needs maps, item placement |
+| Weathervane Manor (full design) | ✓ Functional | Yes — see `weathervane-manor-reference.md` |
 | Sentient Cargo hook | ✓ Detailed | Yes |
 | Sentient Cargo route map | Missing | Text only, no visual |
 | Other standalone hooks | Partial | Need 15-30 min prep |
 | Weathervane arc hooks | Partial | Need 15-30 min prep |
 | Core NPCs | Partial | Voices need practice |
-| Maps (all) | Missing | 0-15% across all maps |
+| Maps (all) | Partial | Manor 80%, others 0-15% |
 
 ---
 
@@ -39,7 +39,7 @@
 | Millhaven | 70% | Key places, vibe, connections | NPC voices, map, street details |
 | Brackenvale | 70% | Key places, NPCs, vibe | Map, more villager details |
 | Greendale Reach | 60% | Overview, travel times, ASCII map | Encounter tables, more landmarks |
-| Weathervane Manor | 85% | Detailed rooms, history, Wandering Door, Locked Room | Map, item placement specifics |
+| Weathervane Manor | 90% | Detailed rooms, history, Wandering Door, Locked Room, **floor plans**, **item placement**, **trap DCs**, **Crucible puzzle** | Quest-dependent states |
 | Thornwood Forest | 10% | Mentioned, vibe established | No detail |
 | Greypeak Foothills | 10% | Mentioned | No detail |
 | Beyond (capital, coast, etc.) | 5% | Names only | Everything |
@@ -139,23 +139,24 @@ Each item is rated on: Personality, Usefulness, Annoyingness, Voice/Lines, Dynam
 | **Brackenvale village map** | 5% | Key locations listed | Building positions, paths, surrounding terrain |
 | **Greendale Reach local area map** | 10% | ASCII sketch in file | Proper map with scale, terrain, travel times, landmarks |
 | **Escort route overlay** | 15% | Route described in text | Visual route with encounter locations, day markers, distances |
-| **Weathervane Manor floor plan** | 5% | Rooms listed by floor | Actual floor plans (3 floors + basement), room positions, doors, the Wandering Door location |
+| **Weathervane Manor floor plan** | 80% | **ASCII floor plans (4 levels), room positions, doors, Wandering Door, critical paths** | Could add visual map version |
 
-### Weathervane Manor Full Design — 35%
+### Weathervane Manor Full Design — 65%
 
-The manor needs significant work to be fully "explorable" rather than just "described."
+The manor is now "explorable" with floor plans and room references. Still needs quest-dependent polish.
 
 | Component | % | What Exists | What's Needed |
 |-----------|---|-------------|---------------|
-| **Room descriptions** | 70% | All rooms listed with quirks | Dimensions, furniture placement, what players see on entry |
-| **Item placement** | 20% | Notable items listed | Where specifically each item is, what's in drawers/shelves |
-| **Hidden secrets** | 25% | Locked Room, some hints | Secret compartments, hidden notes, things previous owners left |
-| **Discoverable lore** | 30% | Owner history table | Letters, journals, clues about Erasmus, the Ledger contents |
+| **Room descriptions** | 85% | **All rooms with entry text, furniture, quirks** | — |
+| **Item placement** | 75% | **Items placed with search DCs, trap DCs, loot values** | Minor gaps |
+| **Hidden secrets** | 65% | **"The Crucible" puzzle (5 clues scattered), secret compartments, hidden passages** | More red herrings |
+| **Discoverable lore** | 50% | **Crucible clues, diary fragments, Aldric's notes, correspondence** | Full Erasmus backstory |
 | **Level-adjustable encounters** | 5% | None | Scaled threats for different party levels |
-| **Quest-dependent state: Estate Sale** | 10% | Auction concept | What's being sold, where items are displayed, crowd positions |
-| **Quest-dependent state: Inheritance** | 20% | Hot-potato structure | What players find on arrival, what changes as time passes |
-| **Quest-dependent state: Heist** | 15% | Entry points listed | Security by owner type, patrol routes, alarm triggers |
-| **Post-quest changes** | 5% | None | How the manor looks after each hook (empty shelves, damage, new occupants) |
+| **Quest-dependent state: Estate Sale** | 10% | Auction concept, critical path | What's being sold, crowd positions |
+| **Quest-dependent state: Inheritance** | 30% | Hot-potato structure, critical path | What changes as time passes |
+| **Quest-dependent state: Heist** | 30% | Entry points with DCs, critical path | Security by owner type, patrol routes |
+| **Post-quest changes** | 5% | None | How the manor looks after each hook |
+| **Access methods for Locked Room** | 80% | **5 access methods, clue table, fallback hints** | — |
 
 ### Sentient Cargo Route — 70%
 
@@ -244,9 +245,9 @@ These are areas that would increase readiness if developed. No order implied.
 - [ ] Flesh out Wrongly Accused (the actual crime and suspects)
 
 **High Impact (Visual/Structural):**
-- [ ] Weathervane Manor floor plans (3 floors + basement)
-- [ ] Manor item placement (where is everything specifically?)
-- [ ] Manor hidden secrets (what can players discover?)
+- [x] Weathervane Manor floor plans (3 floors + basement) ✓
+- [x] Manor item placement (where is everything specifically?) ✓
+- [x] Manor hidden secrets (what can players discover?) ✓ — "The Crucible" puzzle added
 - [ ] Escort route visual/map with encounter markers
 
 **Medium Impact:**
@@ -262,7 +263,7 @@ These are areas that would increase readiness if developed. No order implied.
 **Meta (Document Quality):**
 - [ ] Add "At a Glance" boxes to location files
 - [ ] Add "During Play Quick-Ref" sections to hooks (separate from prep reading)
-- [ ] Manor room-by-room quick reference card
+- [x] Manor room-by-room quick reference card ✓ — `weathervane-manor-reference.md`
 - [ ] Review all files for skimmability (bold key facts, reduce prose)
 - [ ] Consider GM cheat sheets (1-page summaries for each hook)
 
