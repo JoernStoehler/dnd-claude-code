@@ -16,11 +16,8 @@ Single-purpose tools, run manually in sequence:
 # 1. Generate portrait (dummy solid color for testing)
 node scripts/generate-portrait.js portrait.png --category=npc
 
-# 2. Create card HTML from JSON definition
-node scripts/render-card-html.js card.json card.html --portrait=portrait.png
-
-# 3. Render HTML to PNG (requires Chrome/Playwright environment)
-node scripts/render-card.js card.html card.png
+# 2. Render card PNG from JSON definition (recommended - no browser needed)
+node scripts/render-card-sharp.js card.json card.png
 ```
 
 ### generate-portrait.js
@@ -32,15 +29,21 @@ node scripts/generate-portrait.js output.png --category=npc    # brown
 node scripts/generate-portrait.js output.png --color=#ff0000   # red
 ```
 
-### render-card-html.js
-Generates standalone HTML from a card JSON definition.
+### render-card-sharp.js (recommended)
+Renders card PNG directly using sharp. No browser needed - works in any Node environment.
+Includes textured backgrounds, serif fonts, and category color schemes.
 
 ```bash
-node scripts/render-card-html.js schemas/card.example.json card.html
+node scripts/render-card-sharp.js card.json card.png
 ```
 
-### render-card.js
-Renders HTML to PNG via Playwright. **Requires Chrome environment** (fails in restricted sandboxes).
+### render-card-html.js + render-card.js (alternative)
+HTML-based rendering via Playwright. More flexible styling but requires Chrome.
+
+```bash
+node scripts/render-card-html.js card.json card.html
+node scripts/render-card.js card.html card.png   # needs Chrome
+```
 
 ## Card JSON Schema
 
@@ -61,31 +64,35 @@ See `schemas/card.schema.json` for the full schema. Example:
 }
 ```
 
+## Example Output
+
+See `campaigns/example/cards/npc/sir-tinkelstein/` for a complete example with 4 variants and a REVIEW.md for GitHub review workflow.
+
 ## Decisions Made
 
 - **Card size**: Poker (2.5" × 3.5" / 750×1050px @300dpi)
 - **Output format**: PNG
 - **Backside**: Not needed (front only)
 - **Image generation**: Flux via fal.ai
+- **Renderer**: sharp-based (no browser dependency)
 
-## Folder Structure (proposed)
+## Folder Structure
 
 ```
 campaigns/<campaign>/cards/
 ├── npc/
 │   └── sir-tinkelstein/
-│       ├── card.json          # Definition
-│       ├── portrait.png       # Generated portrait
-│       ├── card.html          # Rendered HTML (intermediate)
-│       ├── card.png           # Final card image
-│       └── REVIEW.md          # For PR review with variants
+│       ├── v1.json, v2.json, ...   # Variant definitions
+│       ├── v1-portrait.png, ...    # Portrait images
+│       ├── v1.png, v2.png, ...     # Rendered cards
+│       └── REVIEW.md               # For PR review
 ├── location/
 └── item/
 ```
 
 ## PR Review Workflow
 
-See `prototypes/example-review.md` for the markdown format used in PRs.
+See `campaigns/example/cards/npc/sir-tinkelstein/REVIEW.md` for the markdown format.
 
 ## fal.ai Setup
 
@@ -94,8 +101,3 @@ See `prototypes/example-review.md` for the markdown format used in PRs.
 3. `export FAL_KEY="your-api-key"`
 
 **Quickstart**: https://docs.fal.ai/model-apis/quickstart
-
-## Known Limitations
-
-- `render-card.js` needs proper Chrome/Playwright environment (crashes in restricted sandboxes)
-- Portrait API integration not yet implemented (uses dummy colors)

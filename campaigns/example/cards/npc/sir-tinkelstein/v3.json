@@ -1,0 +1,12 @@
+{
+  "category": "npc",
+  "name": "Sir Tinkelstein of Gnomewood",
+  "description": "Sir Tinkelstein carries himself like a man twice his height. Former squire to the legendary Sir Aldric, he now seeks to honor his mentor's memory through deeds of valor.",
+  "details": {
+    "Background": "Squire to Sir Aldric the Tall",
+    "Weakness": "Quick to perceive insults"
+  },
+  "footer": "Example Campaign",
+  "portrait": "v3-portrait.png",
+  "image_prompt": "Noble gnome warrior, determined expression, ornate inherited armor with human-sized proportions modified for small frame, sword at hip, fantasy character portrait, heroic lighting"
+}

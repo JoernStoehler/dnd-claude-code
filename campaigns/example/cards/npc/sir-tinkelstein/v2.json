@@ -1,0 +1,12 @@
+{
+  "category": "npc",
+  "name": "Sir Tinkelstein of Gnomewood",
+  "description": "Tiny knight, enormous dignity. This gnome insists on full heraldic protocol for every introduction. His armor clanks comically as he walks, but his blade-work is no joke.",
+  "details": {
+    "Role": "Knight-errant, information broker",
+    "Secret": "Exiled from Gnomewood court"
+  },
+  "footer": "Example Campaign",
+  "portrait": "v2-portrait.png",
+  "image_prompt": "Gnome knight in comically oversized armor, formal pose, heraldic surcoat over plate mail, serious expression contrasting with absurd proportions, fantasy portrait, painterly style"
+}

@@ -1,0 +1,12 @@
+{
+  "category": "npc",
+  "name": "Sir Tinkelstein of Gnomewood",
+  "description": "\"I am Sir Tinkelstein, Knight of the Emerald Cog, Defender of the Small, Champion of—\" He'll list all twelve titles if you let him. Beneath the bluster is genuine skill and a debt he'd rather not discuss.",
+  "details": {
+    "Quirk": "Insists on full formal introductions",
+    "Hook": "Owes a dangerous debt"
+  },
+  "footer": "Example Campaign",
+  "portrait": "v4-portrait.png",
+  "image_prompt": "Gnome knight mid-proclamation, one hand raised dramatically, wearing elaborate but worn armor with many decorations and medals, tavern background, fantasy art, expressive face"
+}

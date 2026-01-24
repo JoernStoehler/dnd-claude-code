@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sir Tinkelstein of Gnomewood</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: transparent;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    .card {
+      width: 250px;
+      height: 350px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1a1a1a;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    .card-category {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 2px;
+    }
+
+    .card-name {
+      font-size: 15px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .card-portrait {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      background: #8B4513;
+    }
+
+    .card-portrait-placeholder {
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(135deg, #8B451344 0%, #D2691E44 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 11px;
+    }
+
+    .card-body {
+      padding: 10px 12px;
+      color: #e0e0e0;
+      font-size: 11px;
+      line-height: 1.4;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-description {
+      margin: 0 0 8px 0;
+    }
+
+    .card-details {
+      font-size: 10px;
+      color: #aaa;
+      border-top: 1px solid #444;
+      padding-top: 8px;
+      margin-top: auto;
+    }
+
+    .card-details dt {
+      font-weight: bold;
+      color: #D2691E;
+      display: inline;
+    }
+
+    .card-details dd {
+      display: inline;
+      margin: 0;
+    }
+
+    .card-details dd::after {
+      content: "";
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .card-footer {
+      background: #111;
+      padding: 6px 12px;
+      font-size: 9px;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-category">npc</div>
+      <h2 class="card-name">Sir Tinkelstein of Gnomewood</h2>
+    </div>
+    <img class="card-portrait" src="v3-portrait.png" alt="Portrait">
+    <div class="card-body">
+      <p class="card-description">Sir Tinkelstein carries himself like a man twice his height. Former squire to the legendary Sir Aldric, he now seeks to honor his mentor's memory through deeds of valor.</p>
+      
+      <dl class="card-details">
+        <dt>Background:</dt> <dd>Squire to Sir Aldric the Tall</dd>
+          <dt>Weakness:</dt> <dd>Quick to perceive insults</dd>
+      </dl>
+    </div>
+    <div class="card-footer">Example Campaign</div>
+  </div>
+</body>
+</html>
