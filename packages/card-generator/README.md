@@ -57,8 +57,25 @@ const result = await fal.subscribe("fal-ai/flux/dev", {
 });
 ```
 
+## PR Review Workflow
+
+Each card set gets a markdown file for GitHub review. See `prototypes/example-review.md` for the format.
+
+Structure:
+```
+cards/npc/sir-tinkelstein/
+├── REVIEW.md              # Markdown with embedded images for GitHub preview
+├── v1.png, v2.png, ...    # Individual card variants
+├── canonical.png          # Copy of chosen variant
+└── metadata.yaml          # Prompts, status, source entity
+```
+
+Feedback via PR comments:
+- "Use v2" → Switch canonical to v2
+- "v1 text + v3 image" → Combine components
+- "Make image funnier; best of 3" → Generate new variants
+
 ## To Be Determined
 
 - A4 PDF composition workflow (manual Inkscape for now)
-- Variant management and selection UX
-- Agent workflow details
+- Agent prompt details
