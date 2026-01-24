@@ -105,15 +105,207 @@ The items have been together for years. They know exactly how to annoy each othe
 
 Millhaven → Greendale Road → Waymarker Stone → Haverston Farm → Three Oaks → Brackenvale
 
-**Day 1 Morning:** Departure from Millhaven. The items reveal their personalities. Argument begins within minutes.
+### Leaving Millhaven (Day 1 Morning)
 
-**Day 1 Afternoon:** Travel and complications. The items are "helpful."
+The items have been quiet in storage. The moment they're loaded onto a cart or carried openly, they wake up. Argument begins within minutes.
 
-**Day 1 Evening:** Camp. The items don't sleep. They keep talking.
+**Potential encounters:**
 
-**Day 2 Morning:** Forest edge. Heightened danger. The items are even more "helpful."
+**The Other Delivery**
+A rival courier, **Pip Greenhollow** (yes, same name as the lantern—coincidence or fate?), is also leaving town with a delivery. He's smug, his cargo is quiet, and he'll race the party to Brackenvale if challenged. The items have opinions about racing.
+- Pip (lantern) is DELIGHTED to meet a namesake
+- Bastion wants to defend the party's honor
+- Meridian worries the other courier knows something they don't
 
-**Day 2 Afternoon:** Arrival at Brackenvale—if everyone survives each other.
+**The City Guard**
+Gate guard **Sergeant Thornsby** is bored and chatty. Asks what's in the cargo. If the items are visible, he's fascinated—might delay the party asking questions, might warn them about road conditions.
+- Clarity flirts with him (he has a nice helmet)
+- Tomes lectures him on city defense history
+- He knows about the paladin on the road ahead (see below)
+
+---
+
+### Greendale Road (Day 1 Late Morning)
+
+The main road through farmland. Well-traveled, mostly safe. Farmers wave, merchants pass, life is normal. The items comment on everything.
+
+**Potential encounters:**
+
+**Sir Aldric Vane, Paladin of the Silver Dawn** ⭐
+A young, earnest paladin rides past on a gleaming horse. He's heading to the mountains to "vanquish evil" (he's vague on specifics). Polite, idealistic, and desperately in need of equipment.
+
+- **Appearance:** Early twenties, shining armor (slightly too big), genuine smile
+- **Want:** To be a hero. Would love a legendary shield.
+- **Personality:** Sincere, brave, not very experienced
+
+**Why he matters:** If the party is tired of Bastion's cowardice, Sir Aldric is a perfect mark. He'd be THRILLED to carry a legendary shield. Bastion would be THRILLED to be carried by a real hero. Everyone wins.
+
+*Except:* Aldric is going somewhere dangerous. If Bastion goes with him, one of two things happens:
+1. Bastion's warnings actually save Aldric's life (Bastion becomes a real hero, finally)
+2. Aldric gets hurt because Bastion panicked at a crucial moment (guilt forever)
+
+**Item reactions:**
+- Bastion: "A PALADIN! A true warrior! Perhaps... perhaps I should—wait, where is he going? Mountains? There are THINGS in mountains!"
+- Clarity: "Oh, he's adorable. Terrible posture, but adorable."
+- Tomes: "The Silver Dawn order was founded in the Third Age after the—" (Aldric doesn't care)
+
+**The Farmer's Problem**
+**Old Maren Tillbrook** flags down travelers. Something's been getting into her chicken coop. Not eating chickens—just... moving things around. Rearranging them. It's unsettling.
+
+- **Reality:** A minor fey creature playing pranks
+- **Time cost:** 30-60 minutes if they help
+- **Reward:** Fresh food, Maren's gratitude, local knowledge
+
+**Item opinions:**
+- Meridian: "I sense significance in that direction. The chickens are IMPORTANT."
+- Pip: "We should help! Friends help friends!"
+- Tomes: "Fey activity follows predictable patterns. Chapter 7..."
+- Bastion: "A hero would help! From here. At a safe distance."
+
+---
+
+### Waymarker Stone (Day 1 Afternoon)
+
+A carved stone at the journey's midpoint. Traditional rest stop, meeting place. Often has other travelers.
+
+**The scene:** A flat area with the ancient stone, a well, and fire pits. Good camping spot. Usually 1d4 other groups are here.
+
+**Potential encounters:**
+
+**The Merchant Caravan**
+**Borras Quickfingers** runs a small trading caravan. He deals in curiosities—and he's heard about sentient items. Very interested. Too interested.
+
+- **Want:** To buy one or more items for resale at a profit
+- **Offers:** 50-150gp per item, negotiable
+- **The catch:** He won't keep them. He'll resell them. They might end up anywhere.
+
+**Which items he wants:**
+- Clarity: "A scrying mirror! Do you know what nobles pay for those?"
+- Tomes: "A book of knowledge? I know three wizards who'd bid against each other."
+- Pip: "Everburning lantern? Practical. Marketable."
+- Meridian: "A compass that finds 'important things'? Vague, but I can sell vague."
+- Bastion: "...Is it always like that? I'll pass."
+
+**Item reactions to Borras:**
+- Clarity is intrigued (she likes being valued)
+- Tomes is offended (sold like common merchandise?)
+- Pip doesn't understand what "selling" means
+- Meridian senses "something wrong" about Borras (paranoia or accurate?)
+
+**The Pilgrim**
+**Sister Merrith**, an older priestess, is traveling to a shrine near Brackenvale. Kind, patient, quietly wise. She's genuinely interested in the items as beings, not objects.
+
+- **Want:** Nothing. Just curious.
+- **Offers:** Spiritual advice, healing if needed, good conversation
+
+**Why she matters:** If players are genuinely kind to her, she might take one item as a companion—especially Pip, who she finds "refreshingly sincere." This is the "good ending" for that item.
+
+**Item reactions:**
+- Pip LOVES her immediately
+- Tomes respects her scholarship (she knows scripture)
+- Clarity finds her unfashionable but "surprisingly perceptive"
+- Bastion calms down around her (she's not threatening)
+- Meridian trusts her (rare)
+
+---
+
+### Haverston Farm (Day 1 Evening)
+
+The last farm before the forest. The Haverstons know everything about the road ahead. Can offer barn sleeping, hot food, and warnings.
+
+**The Haverstons:**
+
+**Colm Haverston** (50s, weather-beaten, practical)
+- Knows the road to Brackenvale cold
+- Warns about recent wolf sightings near Three Oaks
+- Will trade supplies, offer shelter
+- Doesn't like "magic nonsense" but tolerates it
+
+**Bess Haverston** (50s, warm, curious)
+- Fascinated by the talking items
+- Will absolutely try to have conversations with all of them
+- Feeds everyone too much food
+- Might ask if any items want to "stay and keep her company"
+
+**Young Tam Haverston** (16, eager)
+- Wants to BE an adventurer
+- Thinks the items are the coolest things ever
+- Might try to buy/steal one (probably Bastion—he wants to be a hero)
+- Not actually going to succeed, but adds tension
+
+**The Side Quest:** The Haverstons' scarecrow has been moving between fields on its own. It's probably nothing. (It's a minor golem left by a passing wizard—harmless but unsettling.)
+
+**Item reactions to the farm:**
+- Bastion: "Fine people! The backbone of the realm! ...Is that scarecrow looking at us?"
+- Pip: "A FAMILY! They're so WARM! Can we stay forever?"
+- Tomes: "Agricultural communities form the economic foundation—" (no one cares)
+- Clarity: "Rustic. Charming, I suppose. If you like that."
+- Meridian: "The scarecrow is significant. THE SCARECROW IS SIGNIFICANT."
+
+---
+
+### Three Oaks to Brackenvale (Day 2)
+
+The road enters forest edge. Darker, quieter, more dangerous. The items are more alert—or more panicked, depending.
+
+**Landmarks:**
+
+**The Three Oaks:** Massive ancient trees marking the forest boundary. Good last chance to rest before the final stretch.
+
+**The Shaded Mile:** A stretch where forest canopy blocks most light. Pip is useful here (whether they want to be stealthy or not).
+
+**The Old Logging Camp:** Abandoned. Good ambush spot. Something might live here now.
+
+**Potential encounters:**
+
+**The Wolf Pack**
+A pack of wolves (or worgs, if you want more danger) has been hunting the road. They're hungry but not suicidal—will test the party's strength before committing.
+
+**Item reactions:**
+- Bastion: "WOLVES! W-WOLVES! Someone face them! NOT ME BUT SOMEONE!"
+- Meridian: "I KNEW something was wrong! I SAID there was danger!"
+- Clarity: "Ugh. Wet dog smell. The worst."
+- Pip: *lights up brightly* "Hello, wolves! Are you friendly?"
+- Tomes: "Wolves hunt in coordinated patterns. If we position—" (actually useful)
+
+**The Stranded Traveler**
+**Hendrick Moss** (no relation to Delara Moss, or... is there?) claims his horse threw a shoe and he's been stuck here overnight. He needs a ride to Brackenvale.
+
+- **Reality Option A:** He's telling the truth. Harmless. Grateful for help.
+- **Reality Option B:** He's a scout for bandits ahead. If helped, he signals them.
+- **Reality Option C:** He's fleeing something worse than bandits. Whatever he's fleeing catches up.
+
+**Item readings:**
+- Meridian: "Something's WRONG. I don't know what but SOMETHING."
+- Clarity: "His boots are too clean for someone who spent a night in the forest."
+- Tomes: "His accent suggests southern origin, inconsistent with local—"
+- Bastion: "A traveler in need! We must—from a safe distance—assess the situation."
+
+**The Final Stretch**
+Last hour before Brackenvale. If something hasn't gone wrong yet, this is the last chance.
+
+**The Bandit Ambush (if using)**
+Three to five bandits, poorly organized, looking for easy marks. They see adventurers with a cart and think "payday."
+
+*The twist:* The items are INCREDIBLY annoying during combat.
+- Bastion screams warnings but refuses to block anything
+- Meridian points at every bandit individually: "THAT ONE! NO, THAT ONE!"
+- Pip lights up the whole clearing (goodbye stealth)
+- Clarity critiques the bandits' equipment ("Those boots are a crime against fashion")
+- Tomes provides historical context on regional banditry
+
+---
+
+### Arrival at Brackenvale
+
+The destination. Whatever happens here depends on Option A/B/C/D from "The Destination" section.
+
+**The items' reactions to arrival:**
+- Bastion: Relief at surviving, immediately starts bragging about the journey
+- Clarity: Judging the village aesthetics ("Quaint. Very... quaint.")
+- Tomes: Looking for the local library (there isn't one)
+- Pip: Sad the journey is over, wants to know if they'll all stay together
+- Meridian: Anxious about what happens next
 
 ## Complications
 
