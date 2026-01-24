@@ -82,35 +82,41 @@ Sincerely devoted to a cause, organization, or person. Their faith is touching a
 
 ## One-Shot Hooks
 
-### Developed (ready to run)
+### Standalone (ready to run)
 
 | Hook | File | Summary |
 |------|------|---------|
 | The Missing Tax Collector | `sessions/hook-missing-tax-collector.md` | Percival Quill ran off to be a bard. Initial theory: murdered by rebels. |
 | The Wrongly Accused | `sessions/hook-wrongly-accused.md` | Competent authorities need outside investigators. Everyone has a wrong suspect. |
-| The Sentient Cargo | `sessions/hook-sentient-cargo.md` | Escort mission where the cargo is opinionated. Four cargo options. |
+| The Sentient Cargo | `sessions/hook-sentient-cargo.md` | Escort mission with opinionated cargo. Five options including Aldric Weathervane. |
+
+### The Weathervane Arc (connected series)
+
+A four-part story centered on a dead wizard's estate. Can run as standalone one-shots or as a linked campaign. See `lore/locations/weathervane-manor.md` for the shared location.
+
+| Order | Hook | File | Summary |
+|-------|------|------|---------|
+| 1 | The Estate Sale | `sessions/hook-estate-sale.md` | Auction chaos. Factions compete. Players might acquire the estate—or Aldric himself. |
+| 1.5 | The Sentient Cargo | `sessions/hook-sentient-cargo.md` | (Optional bridge) Transport Aldric's crystal. Reveals his creditors are hunting him. |
+| 2 | The Inheritance | `sessions/hook-inheritance.md` | Players own the manor. Debts come due. They will lose the house—the question is how. |
+| 3 | The Heist | `sessions/hook-heist.md` | Someone else owns the manor now. Players need something from inside. |
 
 ### Ideas (not yet developed)
 
-1. **The Wizard's Estate Sale** - Dead wizard's possessions auctioned. Everything slightly cursed.
+1. **The Festival Disaster** - Annual celebration threatened. Must save it without ruining festivities.
 
-2. **The Festival Disaster** - Annual celebration threatened. Must save it without ruining festivities.
+2. **Monster Mediation** - The "monster" has legitimate grievances. Both sides partly right.
 
-3. **The Inheritance** - Party inherits something strange from unknown relative.
+3. **The Tournament** - Winning matters less than what happens during it.
 
-4. **Monster Mediation** - The "monster" has legitimate grievances. Both sides partly right.
-
-5. **The Heist** - Steal from someone who deserves it. Elaborate security with blind spots.
-
-6. **The Tournament** - Winning matters less than what happens during it.
-
-7. **The Inspection** - Important official coming. Everything is not fine.
+4. **The Inspection** - Important official coming. Everything is not fine.
 
 ## What's Established
 
-- **Locations:** Millhaven (town), Brackenvale (village), Greendale Reach (region)
-- **NPCs:** Marta Greaves (innkeeper), Clerk Fenwick (guild), Elder Cornelius Marsh (village elder)
-- **Three developed one-shots** ready to run
+- **Locations:** Millhaven, Brackenvale, Greendale Reach, Weathervane Manor
+- **NPCs:** Marta Greaves (innkeeper), Clerk Fenwick (guild), Elder Cornelius Marsh (elder), Aldric Weathervane (maybe-dead wizard)
+- **Standalone one-shots:** Missing Tax Collector, Wrongly Accused, Sentient Cargo
+- **Connected arc:** Estate Sale → Cargo → Inheritance → Heist (4-part Weathervane Manor story)
 
 ## What's Not Here (Yet)
 

@@ -41,6 +41,21 @@ Pick one based on desired tone and player group:
 - **Annoying:** Demands, complaints, superiority complex, total inexperience with real world
 - **Personality:** Sheltered, scared (covers with arrogance), potential to grow
 
+### Option E: The Wizard Who Isn't Dead
+**Aldric Weathervane**, the "deceased" transmutation wizard from Weathervane Manor. He didn't die—he transferred his consciousness into a crystal to escape debts he couldn't pay. The armchair corpse was a decoy. Now he needs transport to a shrine (or secretly back to his own workshop) to complete the process and get a new body.
+
+- **Useful:** Brilliant wizard, knows local history, can cast one spell per day through the crystal, knows everything about the estate and its secrets
+- **Annoying:** Got himself into this mess, still hasn't learned, makes excuses, wants "quick" detours, vastly overestimates his own cleverness, treats this as a minor inconvenience rather than a crisis
+- **Personality:** Distracted academic, chronically avoids responsibility, genuinely likeable despite being the architect of his own problems
+
+**Special connection:** This cargo option ties into the Weathervane Manor story arc (Estate Sale → Inheritance → Heist). Using Aldric here plants seeds for those adventures.
+
+**The followers:** Whoever Aldric owes. Could be:
+- The College of Wizardry (he "borrowed" research materials)
+- A fey entity he made a bargain with
+- The Merchant Consortium (mundane debts)
+- Something from the Locked Room
+
 ## The Route
 
 Millhaven → Greendale Road → Waymarker Stone → Haverston Farm → Three Oaks → Brackenvale (→ possibly beyond)
@@ -65,6 +80,7 @@ Someone is trailing the group. Their intent depends on which cargo:
 - Cat: Rival fey faction who opposes the diplomatic mission
 - Vessel: Family members who think the sage should just die peacefully
 - Heir: Kidnappers (or worse: his overbearing mother)
+- Aldric: His creditors, who've realized the "death" was faked (sets up future hooks)
 
 ### The Breakdown
 A wheel breaks, a horse goes lame, a bridge is out. The cargo handles adversity poorly (or surprises by handling it well). Time pressure increases.
