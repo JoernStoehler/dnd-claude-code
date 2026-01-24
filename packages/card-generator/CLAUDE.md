@@ -34,9 +34,6 @@ Categories: `npc`, `location`, `item`, `faction`, `quest`, `mystery`
 |-------|-------------|
 | `dark` | Dark textured background, light text (default) |
 | `parchment` | Aged paper look, dark text |
-| `minimal` | Clean white, no texture |
-| `compact` | Smaller portrait, more text room |
-| `framed` | Portrait with border/margin |
 
 ## Flux Size Presets
 
