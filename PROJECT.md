@@ -3,9 +3,9 @@
 ## Current Status
 
 **Phase:** Initial Setup
-**Last Updated:** 2026-01-23
+**Last Updated:** 2026-01-24
 
-Repository structure and meta-tooling established. No campaigns created yet.
+Repository structure and meta-tooling established. Card generator prototype complete.
 
 ## Backlog
 
@@ -20,8 +20,8 @@ Repository structure and meta-tooling established. No campaigns created yet.
 - [ ] Build `session-prep` skill (workflow for preparing sessions)
 - [ ] Build `post-session` skill (workflow for after-session tasks)
 - [ ] Download SRD markdown files to `references/` for agent access
-- [ ] Test AI image generation workflow (Midjourney or DALL-E for NPC portraits)
-- [ ] Create NPC card template for physical handouts
+- [x] Test AI image generation workflow → using Flux via fal.ai
+- [x] Create NPC card template for physical handouts → `packages/card-generator/`
 
 ### Low Priority / Future
 
@@ -53,6 +53,16 @@ Repository structure and meta-tooling established. No campaigns created yet.
   - `create-npc` - generate NPCs with personality, motivation, stats
 - Documented when to use skills vs template files vs agents
 - Refined approach: templates for standard formats, skills for workflows, agents for context-heavy tasks
+
+### 2026-01-24: Card Generator Package
+
+- Created `packages/card-generator/` for player-facing cards (NPCs, locations, items)
+- Scripts: `generate-portrait.js` (Flux via fal.ai), `render-card-sharp.js` (no browser deps)
+- 5 layout styles: dark, parchment, minimal, compact, framed
+- Cards are player-facing only (appearance, demeanor, context - no secrets)
+- Flux standard sizes for portraits (portrait_4_3 = 768x1024 recommended)
+- Example cards in `campaigns/example/cards/`
+- Added env var setup to root README.md
 
 ### 2026-01-23: D&D Resources and GM Reference Materials
 
@@ -91,6 +101,9 @@ Repository structure and meta-tooling established. No campaigns created yet.
 
 - What campaign system(s) to use? (D&D 5e, Pathfinder 2e, other?)
 - How detailed should session logs be?
-- Which AI image generation tool to use? (Midjourney for quality, DALL-E for convenience, Stable Diffusion for control)
 - Physical vs digital play setup? (Affects which enhancements to pursue)
 - Should we download SRD locally or just link to online sources?
+
+### Resolved Questions
+
+- **AI image generation:** Flux via fal.ai (good quality, API access, standard sizes)
