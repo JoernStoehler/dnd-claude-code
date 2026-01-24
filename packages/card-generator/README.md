@@ -29,8 +29,8 @@ export GITHUB_TOKEN="your-github-pat"
 Single-purpose tools, run manually in sequence:
 
 ```bash
-# 1. Generate portrait (dummy solid color for testing)
-node scripts/generate-portrait.js portrait.png --category=npc
+# 1. Generate portrait (Flux standard size)
+node scripts/generate-portrait.js portrait.png --size=portrait_4_3 --category=npc
 
 # 2. Render card PNG from JSON definition
 node scripts/render-card-sharp.js card.json card.png --style=dark
@@ -38,13 +38,21 @@ node scripts/render-card-sharp.js card.json card.png --style=dark
 
 ### generate-portrait.js
 
-Creates portrait images. Currently generates solid-color dummies for testing.
-Future: `--api` flag to call fal.ai Flux.
+Creates portrait images using [Flux standard sizes](https://fal.ai/models/fal-ai/flux/dev/api).
 
 ```bash
-node scripts/generate-portrait.js output.png --category=npc    # brown
-node scripts/generate-portrait.js output.png --color=#ff0000   # red
+node scripts/generate-portrait.js output.png --size=portrait_4_3 --category=npc
+node scripts/generate-portrait.js output.png --prompt="gnome knight" --api  # requires FAL_KEY
 ```
+
+**Size presets (Flux standard):**
+| Preset | Dimensions | Use case |
+|--------|------------|----------|
+| `portrait_4_3` | 768x1024 | **Recommended for cards** |
+| `portrait_16_9` | 576x1024 | Taller/narrower |
+| `square` | 1024x1024 | Square images |
+| `landscape_4_3` | 1024x768 | Location cards? |
+| `landscape_16_9` | 1024x576 | Wide scenes |
 
 ### render-card-sharp.js
 
@@ -54,11 +62,14 @@ Renders card PNG directly using sharp. No browser needed.
 node scripts/render-card-sharp.js card.json card.png --style=dark
 ```
 
-**Styles:**
-- `dark` - Dark textured background, light text (default)
-- `parchment` - Aged paper look, dark text
-- `minimal` - Clean white background
-- `compact` - Smaller portrait, more room for text
+**Layout styles:**
+| Style | Description |
+|-------|-------------|
+| `dark` | Dark textured background, light text (default) |
+| `parchment` | Aged paper look, dark text |
+| `minimal` | Clean white background, no texture |
+| `compact` | Smaller portrait (320px), more room for text |
+| `framed` | Portrait with decorative border/margin (not full-width) |
 
 ## Card JSON Schema
 
@@ -82,8 +93,8 @@ campaigns/<campaign>/cards/
 ├── npc/
 │   └── sir-tinkelstein/
 │       ├── card.json             # Definition (or v1.json, v2.json for variants)
-│       ├── portrait.png          # AI-generated portrait
-│       ├── card.png              # Final rendered card
+│       ├── portrait.png          # AI-generated portrait (768x1024)
+│       ├── card.png              # Final rendered card (750x1050)
 │       └── REVIEW.md             # For PR review
 ├── location/
 └── item/
