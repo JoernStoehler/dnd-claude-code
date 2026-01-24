@@ -4,24 +4,9 @@
 
 ## Environment Variables
 
-| Variable | Required | Description | Setup Guide |
-|----------|----------|-------------|-------------|
-| `FAL_KEY` | For AI portraits | fal.ai API key for Flux image generation | [Get key](https://fal.ai/dashboard/keys) \| [Quickstart](https://docs.fal.ai/model-apis/quickstart) |
-| `GITHUB_TOKEN` | Optional | GitHub PAT for PR automation | [Create token](https://github.com/settings/tokens) \| [Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) |
-
-### Setup
-
 ```bash
-# fal.ai for Flux image generation
-# 1. Create account at https://fal.ai
-# 2. Go to https://fal.ai/dashboard/keys
-# 3. Create new key, copy it
-export FAL_KEY="your-fal-api-key"
-
-# GitHub (optional, for PR automation)
-# 1. Go to https://github.com/settings/tokens
-# 2. Generate new token (classic) with 'repo' scope
-export GITHUB_TOKEN="your-github-pat"
+export FAL_KEY="..."       # fal.ai API key for Flux portraits: https://fal.ai/dashboard/keys
+export GITHUB_TOKEN="..."  # (optional) GitHub PAT for PR automation: https://github.com/settings/tokens
 ```
 
 ## Scripts
