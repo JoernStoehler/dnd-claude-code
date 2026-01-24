@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Card Definition",
+  "description": "Definition for a single card variant",
+  "type": "object",
+  "required": ["category", "name", "description"],
+  "properties": {
+    "category": {
+      "type": "string",
+      "enum": ["npc", "location", "item", "faction", "quest"],
+      "description": "Card type, determines color scheme"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name on card",
+      "maxLength": 40
+    },
+    "description": {
+      "type": "string",
+      "description": "Main card text, 2-4 sentences",
+      "maxLength": 300
+    },
+    "details": {
+      "type": "object",
+      "description": "Key-value pairs shown below description",
+      "additionalProperties": { "type": "string" },
+      "maxProperties": 4
+    },
+    "footer": {
+      "type": "string",
+      "description": "Small text at bottom (e.g. campaign name)",
+      "maxLength": 30
+    },
+    "portrait": {
+      "type": "string",
+      "description": "Path to portrait image (relative to card.json)"
+    },
+    "image_prompt": {
+      "type": "string",
+      "description": "Prompt for generating portrait image"
+    },
+    "source_entity": {
+      "type": "string",
+      "description": "Path to source entity file (e.g. NPC markdown)"
+    }
+  }
+}
