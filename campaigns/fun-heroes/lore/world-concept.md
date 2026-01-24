@@ -30,17 +30,28 @@ The world generates comedy through:
 - Enchanted household items (self-stirring pots, argumentative furniture)
 - Spell-powered industry (and the union disputes that follow)
 
-## Geography (Sketch)
+## Geography
 
-Keep it loose. Add details only when one-shots need them.
+### Our Sandbox: Greendale Reach
 
-**Known Areas:**
-- A capital city (name TBD) - big, messy, bureaucratic
-- Surrounding farmland - pastoral, occasionally monster-adjacent
-- A forest that's probably magical - standard mysterious woods
-- Mountains with the usual dwarves/dragons/danger
-- A coast with ports - trade, pirates, sea monsters
-- Neighboring kingdoms that might be rivals
+See `locations/greendale-reach.md` for full details. Quick reference:
+
+| Location | Type | File |
+|----------|------|------|
+| Millhaven | Market town (starting hub) | `locations/millhaven.md` |
+| Brackenvale | Village (adventure-adjacent) | `locations/brackenvale.md` |
+| Greendale Road | Connecting route | `locations/greendale-reach.md` |
+| Thornwood Forest | Wild (east) | — |
+| Greypeak Foothills | Wild (north) | — |
+
+### Beyond the Sandbox
+
+Still loosely defined. Add when one-shots need them:
+
+- A capital city (west) - big, messy, bureaucratic
+- Coastal ports (south) - trade, pirates, sea monsters
+- The Greypeak Mountains proper (north) - dragons, dwarves, dungeons
+- Deep Thornwood (east) - fey courts, ancient ruins, unknown
 
 **The Rule:** If a one-shot needs a location type, it exists. Nail down specifics only when revealed to players.
 
@@ -69,36 +80,44 @@ Master of one thing, clueless about everything else. Will help gladly if asked a
 **The True Believer**
 Sincerely devoted to a cause, organization, or person. Their faith is touching and also the source of their blind spots.
 
-## One-Shot Hooks (Brainstorm)
+## One-Shot Hooks
 
-These are starting points, not finished adventures:
+### Developed (ready to run)
 
-1. **The Missing Tax Collector** - Everyone's relieved he's gone, but someone important wants him found. Turns out he ran off to become a bard.
+| Hook | File | Summary |
+|------|------|---------|
+| The Missing Tax Collector | `sessions/hook-missing-tax-collector.md` | Percival Quill ran off to be a bard. Initial theory: murdered by rebels. |
+| The Wrongly Accused | `sessions/hook-wrongly-accused.md` | Competent authorities need outside investigators. Everyone has a wrong suspect. |
+| The Sentient Cargo | `sessions/hook-sentient-cargo.md` | Escort mission where the cargo is opinionated. Four cargo options. |
 
-2. **The Wizard's Estate Sale** - A dead wizard's possessions are being auctioned. Everything is slightly cursed. Multiple parties want specific items.
+### Ideas (not yet developed)
 
-3. **The Festival Disaster** - Annual celebration threatened by [monster/weather/political intrigue]. Must be saved without ruining the festivities.
+1. **The Wizard's Estate Sale** - Dead wizard's possessions auctioned. Everything slightly cursed.
 
-4. **The Wrongly Accused** - Someone's clearly innocent of the crime they're accused of. The real criminal is obvious to everyone except the authorities.
+2. **The Festival Disaster** - Annual celebration threatened. Must save it without ruining festivities.
 
-5. **The Inheritance** - Party inherits something from a relative they didn't know. Could be property, a title, a debt, a vendetta, or something stranger.
+3. **The Inheritance** - Party inherits something strange from unknown relative.
 
-6. **The Escort Mission** - Transport someone/something from A to B. The cargo has opinions about the route.
+4. **Monster Mediation** - The "monster" has legitimate grievances. Both sides partly right.
 
-7. **Monster Mediation** - The "monster" terrorizing the village has legitimate grievances. Both sides are a little bit right.
+5. **The Heist** - Steal from someone who deserves it. Elaborate security with blind spots.
 
-8. **The Heist** - Something needs stealing from someone who probably deserves it. Security is elaborate but has blind spots.
+6. **The Tournament** - Winning matters less than what happens during it.
 
-9. **The Tournament** - Competition where winning matters less than what happens during it. Sabotage, romance, old rivalries.
+7. **The Inspection** - Important official coming. Everything is not fine.
 
-10. **The Inspection** - Important official is coming to inspect [location/organization]. Everything's fine. Everything is not fine.
+## What's Established
+
+- **Locations:** Millhaven (town), Brackenvale (village), Greendale Reach (region)
+- **NPCs:** Marta Greaves (innkeeper), Clerk Fenwick (guild), Elder Cornelius Marsh (village elder)
+- **Three developed one-shots** ready to run
 
 ## What's Not Here (Yet)
 
-- Specific city maps
-- Named NPCs
+- City maps
 - Detailed history
 - Cosmology/gods
 - Monster ecology
+- The capital, coast, or deep wilds
 
 Add these when one-shots require them. Don't pre-build what might never be used.
