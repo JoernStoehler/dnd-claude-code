@@ -88,20 +88,21 @@ Sincerely devoted to a cause, organization, or person. Their faith is touching a
 |------|------|---------|
 | The Missing Tax Collector | `sessions/hook-missing-tax-collector.md` | Percival Quill ran off to be a bard. Initial theory: murdered by rebels. |
 | The Wrongly Accused | `sessions/hook-wrongly-accused.md` | Competent authorities need outside investigators. Everyone has a wrong suspect. |
-| The Sentient Cargo | `sessions/hook-sentient-cargo.md` | Escort mission with opinionated cargo. Five options including Aldric Weathervane. |
+| The Sentient Cargo | `sessions/hook-sentient-cargo.md` | Transport five bickering sentient items. Obvious why owner sold them. |
 
 ### The Weathervane Arc (connected hooks)
 
-Four hooks centered on a wizard's estate that changes hands constantly. Can run in any order—the manor's ownership is always in flux, with current owners rarely even present. See `lore/locations/weathervane-manor.md` for the shared location.
+Three hooks centered on a wizard's estate that changes hands constantly. Can run in any order—the manor's ownership is always in flux, with current owners rarely even present. See `lore/locations/weathervane-manor.md` for the shared location.
 
 | Hook | File | Summary |
 |------|------|---------|
 | The Estate Sale | `sessions/hook-estate-sale.md` | Auction chaos. Factions compete. Players might acquire something dangerous. |
-| The Sentient Cargo | `sessions/hook-sentient-cargo.md` | Transport Aldric's crystal. He knows recent secrets, not Erasmus's. |
 | The Inheritance | `sessions/hook-inheritance.md` | Players own the manor—briefly. Race to dump it on someone before debts activate. |
 | The Heist | `sessions/hook-heist.md` | Someone else owns the manor. Players need something from inside. |
 
 **Note:** The manor changes hands so often that the "current owner" is usually just a name on paper—someone who hasn't moved in yet, has already fled, or is dealing with their own problems elsewhere.
+
+**Connection:** The Sentient Cargo items may have come from Weathervane Manor (see Option D in that hook).
 
 ### Ideas (not yet developed)
 

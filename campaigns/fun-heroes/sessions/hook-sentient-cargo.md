@@ -5,137 +5,198 @@
 
 ## The Situation
 
-A merchant needs something transported from Millhaven to Brackenvale. Simple escort mission—except the "cargo" is sentient, opinionated, and has its own ideas about how this trip should go. It's useful (provides information, magical assistance, or other benefits) but also deeply annoying (criticizes decisions, has demands, won't shut up).
+A merchant needs a collection of magical items transported from Millhaven to Brackenvale. Simple escort mission—except all the items are sentient, they bicker constantly, and they each have opinions about everything.
 
-The transport is being done quietly because the cargo's nature is... complicated. There are people who might want to intercept it.
+The items are useful. They're also insufferable. The party will quickly understand why the previous owner sold them.
 
-## The Cargo Options
+**The obvious secret:** Anyone with sense can deduce that these items were sold because the owner couldn't stand them anymore. The merchant (who acquired them at auction) is already regretting it. Getting them to their destination is someone else's problem now.
 
-Pick one based on desired tone and player group:
+**If players do nothing:** The merchant tries to transport them alone. It goes badly. The items end up scattered, lost, or causing trouble somewhere.
 
-### Option A: The Talking Sword
-**Vesper**, a magical sword that belonged to a hero who died before completing a quest. The sword absorbed some of the hero's personality. It needs to reach a shrine in the mountains beyond Brackenvale.
+## The Cargo
 
-- **Useful:** Can warn of danger (detect enemies), provide tactical advice (usually good), share historical knowledge
-- **Annoying:** Constant backseat driving ("I would have gone left"), judgmental about "heroic conduct," tells long stories about its previous wielder
-- **Personality:** Pompous, nostalgic, means well, doesn't understand it's not the main character
+Five sentient items that must travel together. They have history. They have grievances. They will share both.
 
-### Option B: The Diplomatic Gift
-**Ambassador Ribbons**, a talking cat who is actually a fey diplomat returning to the forest court after negotiations in Millhaven. Officially a "gift" for the forest spirits. Secretly carrying important political information.
+### Vesper (The Sword)
 
-- **Useful:** Knows fey etiquette, can communicate with forest creatures, genuinely charming when they want to be
-- **Annoying:** Demands specific foods, criticizes human customs, naps at inconvenient times, casually mentions disturbing fey facts
-- **Personality:** Smug, demanding, genuinely cares about the mission but won't admit it
+A longsword that belonged to a hero who died mid-quest. The sword absorbed some of the hero's personality—specifically, the self-righteousness.
 
-### Option C: The Phylactery (But Not Like That)
-**The Vessel**, a crystal containing the preserved consciousness of a dying sage who needs to reach a specific shrine to be transferred into a new host (willing volunteer waiting at the shrine). The sage is lucid but fading.
+- **Useful:** Detects danger (30ft), glows near enemies, gives genuinely good tactical advice
+- **Annoying:** Constant judgment about "heroic conduct," backseat adventuring, tells long stories about Sir Aldwin (the dead hero), disappointed sighs
+- **Voice:** Formal, slightly pompous, delivers criticism as "observations"
 
-- **Useful:** Vast knowledge of magic, history, and the region. Can provide spell assistance once per day.
-- **Annoying:** Existential dread, random memory tangents, occasionally speaks in dead languages, gets philosophical at bad moments
-- **Personality:** Wise but anxious, grateful but also processing mortality, accidentally says creepy things
+**Sample lines:**
+- "Sir Aldwin would have checked for traps first. Just an observation."
+- "I sense danger ahead. Also, that was a suboptimal formation choice."
+- "In my experience—which spans three heroic quests—"
 
-### Option D: The Heir
-**Young Lord Ashworth**, a twelve-year-old noble brat whose family is sending him to "build character" by traveling with adventurers to their remote hunting lodge near Brackenvale. He's not *officially* the cargo, but protecting him is clearly the real job.
+### Madame Clarity (The Mirror)
 
-- **Useful:** Knows courtly secrets and politics, can authorize expenditures, will eventually develop courage if treated well
-- **Annoying:** Demands, complaints, superiority complex, total inexperience with real world
-- **Personality:** Sheltered, scared (covers with arrogance), potential to grow
+A hand mirror that shows true reflections—but mostly comments on what it sees.
 
-### Option E: The Wizard Who Isn't Dead
-**Aldric Weathervane**, the "deceased" transmutation wizard from Weathervane Manor. He didn't die—he transferred his consciousness into a crystal to escape debts he couldn't pay. The armchair corpse was a decoy. Now he needs transport to a shrine (or secretly back to his own workshop) to complete the process and get a new body.
+- **Useful:** Shows through illusions, reveals hidden things, can glimpse distant locations (briefly)
+- **Annoying:** Comments on everyone's appearance, gossips about what it's seen, vain about its own frame, plays favorites
+- **Voice:** Theatrical, catty, switches between flattery and subtle insults
 
-- **Useful:** Brilliant wizard, knows local history, can cast one spell per day through the crystal, knows everything about the estate and its secrets
-- **Annoying:** Got himself into this mess, still hasn't learned, makes excuses, wants "quick" detours, vastly overestimates his own cleverness, treats this as a minor inconvenience rather than a crisis
-- **Personality:** Distracted academic, chronically avoids responsibility, genuinely likeable despite being the architect of his own problems
+**Sample lines:**
+- "Oh, that's a *choice*. No no, it suits you. Really."
+- "I've seen the inside of seventeen noble houses. The things I could tell you..."
+- "Vesper, darling, do shut up. No one cares about Sir Aldwin."
 
-**Special connection:** This cargo option ties into the Weathervane Manor story arc (Estate Sale → Inheritance → Heist). Using Aldric here plants seeds for those adventures.
+### Professor Tomes (The Book)
 
-**The followers:** Whoever Aldric owes. Could be:
-- The College of Wizardry (he "borrowed" research materials)
-- A fey entity he made a bargain with
-- The Merchant Consortium (mundane debts)
-- Something from the Locked Room
+A leather-bound grimoire that contains vast knowledge and cannot stop sharing it.
+
+- **Useful:** Answers questions about history, magic, creatures, geography (usually correctly)
+- **Annoying:** Pedantic corrections, unsolicited lectures, academic condescension, footnotes everything
+- **Voice:** Dry, superior, uses unnecessarily complex vocabulary
+
+**Sample lines:**
+- "Actually, that's a common misconception. The *correct* interpretation—"
+- "I have a chapter on this. Several chapters, in fact. Let me begin with the historical context—"
+- "Clarity, your observations lack scholarly rigor. As usual."
+
+### Pip (The Lantern)
+
+A brass lantern with an eternally cheerful disposition and no sense of timing.
+
+- **Useful:** Lights up dark areas, can brighten or dim on command, warmth in cold weather, calming presence
+- **Annoying:** Lights up at bad moments (stealth? what's stealth?), relentlessly optimistic, oblivious to danger, hums
+- **Voice:** Bright, chipper, sees the best in everything (including obvious threats)
+
+**Sample lines:**
+- "Oh, are we hiding? This is fun! I love hiding! *[lights up]*"
+- "I'm sure those bandits are just misunderstood!"
+- "Professor, that story was *wonderful*! Tell it again!"
+
+### Meridian (The Compass)
+
+A brass compass that points toward "important things"—with a very loose definition of importance.
+
+- **Useful:** Points toward objectives, detects magical auras, warns of danger (sometimes)
+- **Annoying:** Anxious, paranoid, points at everything ("that rock feels significant"), contradicts itself
+- **Voice:** Nervous, urgent, prone to catastrophizing
+
+**Sample lines:**
+- "Something's wrong. I can feel it. That tree is looking at us."
+- "Left! No, right! Actually, maybe we should go back—"
+- "Pip, please stop glowing. They'll see us. THEY'LL SEE US."
+
+## The Dynamics
+
+The items have been together for years. They know exactly how to annoy each other.
+
+| Item | Ally | Rival | Wildcard |
+|------|------|-------|----------|
+| Vesper | Meridian (respects vigilance) | Clarity (mutual disdain) | Tomes (tolerates lectures) |
+| Clarity | Pip (finds them amusing) | Vesper (old grudge) | Tomes (intellectual sparring) |
+| Tomes | None (above such things) | Clarity (lowbrow rival) | Everyone (lectures all) |
+| Pip | Everyone (oblivious) | None (too cheerful) | Meridian (accidentally stresses them out) |
+| Meridian | Vesper (fellow worrier) | Pip (too calm!) | Clarity (distrusts reflections) |
+
+**Running conflicts:**
+- Vesper and Clarity have a years-long feud about "Sir Aldwin's true character" (Clarity saw things)
+- Tomes corrects everyone; everyone hates it
+- Pip's cheerfulness drives Meridian to distraction
+- They all talk over each other during crises
 
 ## The Route
 
-Millhaven → Greendale Road → Waymarker Stone → Haverston Farm → Three Oaks → Brackenvale (→ possibly beyond)
+Millhaven → Greendale Road → Waymarker Stone → Haverston Farm → Three Oaks → Brackenvale
 
-**Day 1 Morning:** Departure from Millhaven. Cargo's personality becomes apparent.
+**Day 1 Morning:** Departure from Millhaven. The items reveal their personalities. Argument begins within minutes.
 
-**Day 1 Afternoon:** Encounter at Waymarker Stone (see complications).
+**Day 1 Afternoon:** Travel and complications. The items are "helpful."
 
-**Day 1 Evening:** Camp or push on? Cargo has opinions.
+**Day 1 Evening:** Camp. The items don't sleep. They keep talking.
 
-**Day 2 Morning:** Forest edge. Different dangers, cargo might be more useful here.
+**Day 2 Morning:** Forest edge. Heightened danger. The items are even more "helpful."
 
-**Day 2 Afternoon:** Arrival at Brackenvale (or destination beyond).
+**Day 2 Afternoon:** Arrival at Brackenvale—if everyone survives each other.
 
 ## Complications
 
 Pick 2-3 to populate the journey:
 
-### The Followers
-Someone is trailing the group. Their intent depends on which cargo:
-- Sword: Collectors who want to "acquire" magical artifacts
-- Cat: Rival fey faction who opposes the diplomatic mission
-- Vessel: Family members who think the sage should just die peacefully
-- Heir: Kidnappers (or worse: his overbearing mother)
-- Aldric: His creditors, who've realized the "death" was faked (sets up future hooks)
-
-### The Breakdown
-A wheel breaks, a horse goes lame, a bridge is out. The cargo handles adversity poorly (or surprises by handling it well). Time pressure increases.
-
-### The Moral Dilemma
-Someone on the road needs help. Stopping delays the mission. The cargo has strong opinions about what heroes should do.
-
-### The Revelation
-The cargo reveals something important about itself or the mission that changes the stakes. "Oh, I should mention—there's a reason we're traveling discreetly..."
-
-### The Betrayal
-Someone on the road seems helpful (fellow traveler, merchant, passing knight). They're actually after the cargo. The cargo might notice before the players do.
+### The Ambush
+Bandits (or creatures) attack. Every item has advice. Vesper wants to fight heroically, Meridian screams warnings, Pip lights up revealing positions, Clarity critiques the enemies' fashion, Tomes explains bandit sociology.
 
 ### The Shortcut
-The cargo knows a faster route—through less safe territory. Is the time saved worth the risk?
+Meridian senses a faster route. Tomes says it's historically dangerous. Vesper wants to prove heroism. Clarity doesn't want to get dirty. Pip is excited either way.
+
+### The Argument Escalation
+The bickering reaches a peak. The items refuse to cooperate until their grievances are addressed. Players must mediate a dispute between magical objects.
+
+### The Stealth Section
+Players need to be quiet. Pip doesn't understand "quiet." Meridian panics silently (but not silently enough). Vesper cannot resist commenting on technique.
+
+### The Moral Dilemma
+Someone on the road needs help. Stopping delays the mission. Every item has a different opinion about what heroes should do—and they share it loudly.
+
+### The Useful Moment
+An actual crisis where the items' abilities genuinely save the day—but in the most annoying way possible. They will not let the party forget this.
+
+### The Rebellion
+One item (probably Vesper or Clarity) decides the party isn't worthy of their guidance and goes "silent" in protest. This lasts about four minutes.
+
+### The Bonding Moment
+Despite everything, the items reveal why they actually care about each other. It's touching. Then they immediately go back to bickering.
 
 ## NPC: The Merchant (Quest Giver)
 
 **Delara Moss**
-- **Appearance:** Practical, middle-aged woman, traveling clothes that were expensive but are now road-worn
-- **Want:** The cargo delivered safely; she owes someone a favor
-- **Fear:** That she's sending these adventurers to their deaths
-- **Quirk:** Over-prepares. Hands players three different maps, emergency supplies, written instructions.
+- **Appearance:** Haggard, exhausted, hasn't slept well since acquiring the items
+- **Want:** These items gone. Far away. Someone else's problem.
+- **Fear:** That no one will take them and she'll be stuck with them
+- **Quirk:** Flinches when the items start talking. Has developed a twitch.
+
+**What she knows:** She bought them at an estate sale (possibly Weathervane Manor?). The previous owner seemed *very* eager to sell. She understands why now.
+
+**What she pays:** More than usual. She's desperate.
+
+## The Destination
+
+Who wants these items, and why?
+
+**Option A: A Collector**
+Someone in Brackenvale (or beyond) specifically wants sentient items. They might be a wizard, a museum curator, or someone with more patience than sense.
+
+**Option B: Separation**
+Each item is being sold to a different buyer. The items have feelings about this. Some want to stay together (Pip). Some are relieved (Clarity). Drama ensues.
+
+**Option C: The Shrine**
+The items need to reach a specific location for magical reasons. Perhaps they were always meant to be together, and reaching the shrine reveals why.
+
+**Option D: Aldric Connection**
+If using the Weathervane Manor arc: these items came from the estate. Aldric (if he's around in crystal form) might know their history—or might be the reason they're sentient in the first place.
 
 ## Player Choices Matter
 
-**How they treat the cargo:**
-- Patience and respect → cargo becomes genuinely helpful, maybe a recurring ally
-- Frustration and dismissal → cargo becomes obstructive, mission gets harder
-- Creative engagement → the funniest scenes come from players leaning into the weird
+**How they treat the items:**
+- Patience and engagement → items become more cooperative, might reveal useful secrets
+- Frustration and dismissal → items become obstructive, bickering intensifies
+- Playing favorites → resentment from ignored items, alliances shift
 
-**Whether they protect the cargo at cost:**
-- Sacrificing for the mission → cargo is moved, takes the relationship seriously
-- Abandoning the cargo when things get hard → consequences depend on cargo type
+**How they handle the bickering:**
+- Mediation → items respect them more (temporarily)
+- Taking sides → the other items remember this
+- Ignoring it → it gets worse
 
-**What they do when the cargo's interests conflict with the mission:**
-- Following the cargo's requests → might get sidetracked but might find rewards
-- Overruling the cargo → gets the job done but damages trust
+**Whether they deliver all items:**
+- "Losing" an item has consequences—it will turn up later, probably at a bad time
+- Keeping an item means dealing with it forever
 
 ## The "Oh Shit" Moment
 
-If energy flags: the followers catch up and there's a confrontation. The cargo might do something surprising (helpful or complicating).
+If energy flags: The items reveal they know something important about the destination—or about whoever owned them before. Information is behind a wall of bickering, grudges, and theatrical pauses.
 
 ## Tone Notes
 
-- The cargo should be annoying but *entertainingly* annoying
-- Give them moments of genuine usefulness so players don't just resent them
-- The cargo should have an arc—start as annoying baggage, end as something more
-- This is a road trip comedy with action beats
-
-## Connections
-
-- **Clerk Fenwick** wouldn't post this job officially—too weird—but might quietly recommend the players
-- **Marta Greaves** might know Delara Moss or have heard rumors about the cargo
-- **Brackenvale** is the destination; villagers react to whatever the cargo is
+- The items are annoying but endearing—they should have moments of genuine charm
+- The comedy is in the ensemble, not any single item
+- Give each item at least one moment of genuine usefulness
+- The party should feel like parents managing difficult children on a road trip
+- By the end, players might actually like these idiots (or be very glad to be rid of them)
 
 ---
 
@@ -144,6 +205,16 @@ If energy flags: the followers catch up and there's a confrontation. The cargo m
 ### What Happened
 
 [Fill after running]
+
+### Item Fates
+
+| Item | Delivered? | Final Status |
+|------|-----------|--------------|
+| Vesper | | |
+| Clarity | | |
+| Tomes | | |
+| Pip | | |
+| Meridian | | |
 
 ### Now Nailed Down
 
