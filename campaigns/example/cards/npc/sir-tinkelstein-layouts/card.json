@@ -1,0 +1,8 @@
+{
+  "category": "npc",
+  "name": "Sir Tinkelstein of Gnomewood",
+  "description": "A fastidious gnome knight in immaculately polished armor three sizes too large. Speaks in overly formal declarations and insists on proper introductions. You met him at the Gilded Gear tavern.",
+  "footer": "Example Campaign",
+  "portrait": "portrait.png",
+  "image_prompt": "Portrait of a dignified gnome knight, proud expression, wearing oversized polished plate armor, small stature but noble bearing, fantasy art style, warm tavern lighting"
+}

@@ -123,6 +123,7 @@ When spawning agents:
 |------|----------|
 | Add session log | Create `campaigns/<name>/sessions/YYYY-MM-DD.md` |
 | New NPC | Add to `campaigns/<name>/characters/npcs/` |
+| Create NPC/location card | See `packages/card-generator/CLAUDE.md` |
 | Design encounter | Use encounter agent template or create in `encounters/` |
 | Find information | Use `Explore` subagent or grep the codebase |
 | Bulk edits | Write a script in `scripts/` |

@@ -1,0 +1,8 @@
+{
+  "category": "npc",
+  "name": "Sir Tinkelstein of Gnomewood",
+  "description": "Tiny knight, enormous dignity. His oversized armor clanks comically as he walks, but his swordsmanship is clearly practiced. Met at the Gilded Gear where he was loudly debating the finer points of chivalric conduct.",
+  "footer": "Example Campaign",
+  "portrait": "v2-portrait.png",
+  "image_prompt": "Gnome knight in comically oversized armor, formal pose, heraldic surcoat over plate mail, serious expression contrasting with absurd proportions, fantasy portrait, painterly style"
+}

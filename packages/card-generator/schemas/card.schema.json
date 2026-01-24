@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Card Definition",
+  "description": "Player-facing reference card. NO SPOILERS - only what players have observed.",
+  "type": "object",
+  "required": ["category", "name", "description"],
+  "properties": {
+    "category": {
+      "type": "string",
+      "enum": ["npc", "location", "item", "faction", "mystery"],
+      "description": "Card type. Use 'mystery' for blank cards players can scribble on."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name. For mystery cards: '???' or descriptive nickname like 'The Hooded Figure'",
+      "maxLength": 40
+    },
+    "description": {
+      "type": "string",
+      "description": "Player-facing prose: appearance, demeanor, context of encounter. NO secrets/hooks/motivations - those are GM info. Unstructured text, 2-4 sentences.",
+      "maxLength": 350
+    },
+    "footer": {
+      "type": "string",
+      "description": "Campaign name or location context",
+      "maxLength": 30
+    },
+    "portrait": {
+      "type": "string",
+      "description": "Path to portrait image"
+    },
+    "image_prompt": {
+      "type": "string",
+      "description": "Prompt for generating portrait"
+    },
+    "source_entity": {
+      "type": "string",
+      "description": "Path to full GM entity file (has secrets etc - never shown to players)"
+    }
+  }
+}

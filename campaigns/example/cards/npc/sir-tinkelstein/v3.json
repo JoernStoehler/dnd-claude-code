@@ -1,0 +1,8 @@
+{
+  "category": "npc",
+  "name": "Sir Tinkelstein of Gnomewood",
+  "description": "A gnome who carries himself like a man twice his height. His armor bears the heraldry of a human knight—perhaps inherited? Seemed touchy when someone laughed at his formal manner.",
+  "footer": "Example Campaign",
+  "portrait": "v3-portrait.png",
+  "image_prompt": "Noble gnome warrior, determined expression, ornate inherited armor with human-sized proportions modified for small frame, sword at hip, fantasy character portrait, heroic lighting"
+}
