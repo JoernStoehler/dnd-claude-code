@@ -391,6 +391,40 @@ If energy flags: The items reveal they know something important about the destin
 - The party should feel like parents managing difficult children on a road trip
 - By the end, players might actually like these idiots (or be very glad to be rid of them)
 
+## Item Plotlines (Discoverable During Journey)
+
+Each item has personal stakes that can emerge naturally. These are optional—use if players engage.
+
+### Bastion
+- **The Unfinished Quest:** Sir Aldwin died mid-quest. Bastion knows what he was trying to do but never tells anyone. If the route passes near something relevant, Bastion might reveal it.
+- **Clarity Knows Something:** Their feud isn't just personality. Clarity saw Sir Aldwin (and Bastion) flee from a fight. She's been holding it over him for years.
+- **Resolution:** If someone sincerely thanks Bastion for help, or if Bastion's warnings actually save someone, he might gain real confidence.
+
+### Madame Clarity
+- **The Secret She's Holding:** Seen inside seventeen noble houses. Knows something valuable—a scandal, a hidden treasure, a crime. Waiting for the right buyer.
+- **Looking for Someone:** Once belonged to someone she actually liked. Watching for their reflection ever since.
+- **Resolution:** Trade information for something she wants (nicer frame, prominent display), or help her find closure about the past.
+
+### Professor Tomes
+- **The Missing Chapter:** Several pages torn out long ago. Tomes knows what was there—forbidden knowledge or something someone wanted hidden. The gap bothers him deeply.
+- **The Error:** One thing in Tomes is wrong. He knows but can't change it. It's been eating at him for decades.
+- **Resolution:** Someone formally acknowledges a correction, or promises to add his new observations to a companion volume.
+
+### Pip
+- **Why So Cheerful?:** Pip witnessed something terrible—the relentless optimism is a coping mechanism. "If I stop being cheerful, I'll remember."
+- **Looking for a Home:** Doesn't want to be transported. Wants to be placed somewhere and stay—lighting the same room for people who come back.
+- **Fear of Extinguishment:** What happens to a lantern that stops being lit? Pip doesn't know and doesn't want to find out.
+- **Resolution:** Find Pip a permanent home, or help them process without forcing them to relive trauma.
+
+### Meridian
+- **The Wrong Direction:** Once pointed confidently toward something "important" and led people into disaster. People died. The constant anxiety is guilt.
+- **Pointing at Something Specific:** Keeps being drawn toward one direction—not the destination, but something else. Something "important" that Meridian doesn't understand.
+- **Resolution:** Trust Meridian's direction in a crisis and have it work; or help them accept that being wrong sometimes doesn't mean being useless.
+
+### Shared Plotlines
+- **Why Are They Together?:** Five sentient items, all sold together. Did one owner create them all? Is there a reason they shouldn't be separated?
+- **The Bickering Is Defense:** They argue because they care. If they stopped, they'd have to acknowledge they're a family.
+
 ---
 
 ## Post-Session

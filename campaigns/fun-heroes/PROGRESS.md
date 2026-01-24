@@ -107,16 +107,16 @@ Each item is rated on: Personality, Usefulness, Annoyingness, Voice/Lines, Dynam
 
 | Item | Overall | Personality | Useful | Annoying | Voice | Dynamics | Plotlines |
 |------|---------|-------------|--------|----------|-------|----------|-----------|
-| Bastion (Shield) | 85% | ✓ Clear (cowardly glory-seeker) | ✓ Defined | ✓ Clear | ✓ Sample lines | ✓ Mapped | Sketched |
-| Madame Clarity (Mirror) | 85% | ✓ Clear (catty gossip) | ✓ Defined | ✓ Clear | ✓ Sample lines | ✓ Mapped | Sketched |
-| Professor Tomes (Book) | 85% | ✓ Clear (pedantic lecturer) | ✓ Defined | ✓ Clear | ✓ Sample lines | ✓ Mapped | Sketched |
-| Pip (Lantern) | 85% | ✓ Clear (relentlessly cheerful) | ✓ Defined | ✓ Clear | ✓ Sample lines | ✓ Mapped | Sketched |
-| Meridian (Compass) | 85% | ✓ Clear (anxious paranoid) | ✓ Defined | ✓ Clear | ✓ Sample lines | ✓ Mapped | Sketched |
+| Bastion (Shield) | 90% | ✓ Clear (cowardly glory-seeker) | ✓ Defined | ✓ Clear | ✓ Sample lines | ✓ Mapped | ✓ In file |
+| Madame Clarity (Mirror) | 90% | ✓ Clear (catty gossip) | ✓ Defined | ✓ Clear | ✓ Sample lines | ✓ Mapped | ✓ In file |
+| Professor Tomes (Book) | 90% | ✓ Clear (pedantic lecturer) | ✓ Defined | ✓ Clear | ✓ Sample lines | ✓ Mapped | ✓ In file |
+| Pip (Lantern) | 90% | ✓ Clear (relentlessly cheerful) | ✓ Defined | ✓ Clear | ✓ Sample lines | ✓ Mapped | ✓ In file |
+| Meridian (Compass) | 90% | ✓ Clear (anxious paranoid) | ✓ Defined | ✓ Clear | ✓ Sample lines | ✓ Mapped | ✓ In file |
 
 **Item dynamics table:** Complete
 **Running conflicts:** Defined
 **Reactions to every route NPC:** Done
-**Individual plotlines:** Brainstormed (not in file yet)
+**Individual plotlines:** Written to file (Bastion, Clarity, Tomes, Pip, Meridian + shared)
 
 ### World Building — 40%
 
@@ -239,7 +239,7 @@ These are areas that would increase readiness if developed. No order implied.
 
 **High Impact (Gameplay):**
 - [ ] Develop NPC voices (practice speaking as them)
-- [ ] Add plotlines section to Sentient Cargo file
+- [x] Add plotlines section to Sentient Cargo file ✓
 - [ ] Flesh out Missing Tax Collector (Percival's trail)
 - [ ] Flesh out Wrongly Accused (the actual crime and suspects)
 
