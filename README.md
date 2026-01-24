@@ -12,6 +12,13 @@ This repo stores campaign materials (lore, characters, session logs, encounters)
 - Generating prompts for image creation
 - Automating bulk content operations
 
+## Setup
+
+```bash
+export FAL_KEY="..."       # fal.ai API key for AI portraits: https://fal.ai/dashboard/keys
+export GITHUB_TOKEN="..."  # (optional) GitHub PAT: https://github.com/settings/tokens
+```
+
 ## For Humans
 
 If you found this repo and want to understand it, the easiest approach is:
