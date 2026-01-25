@@ -16,6 +16,7 @@ const sharp = require('sharp');
 const CARD_WIDTH = 827;
 const CARD_HEIGHT = 1417;
 const PADDING = 40;
+const PORTRAIT_BORDER = 40; // Category-colored border around portrait (MTG-style framing)
 
 // Style configurations (tarot size)
 const STYLES = {
@@ -51,8 +52,19 @@ const CATEGORY_COLORS = {
   mystery: { accent: '#4A4A4A', light: '#6A6A6A', dark: '#2A2A2A' }
 };
 
-async function createBackground(width, height, colors, style) {
+async function createBackground(width, height, colors, style, headerHeight, portraitHeight) {
   const s = STYLES[style];
+
+  // Portrait border area (category-colored frame around portrait)
+  const borderGradient = `
+    <defs>
+      <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:${colors.accent}"/>
+        <stop offset="100%" style="stop-color:${colors.light}"/>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="${headerHeight}" width="${width}" height="${portraitHeight}" fill="url(#borderGrad)"/>
+  `;
 
   const svg = `
     <svg width="${width}" height="${height}">
@@ -64,6 +76,7 @@ async function createBackground(width, height, colors, style) {
         </linearGradient>
       </defs>
       <rect width="${width}" height="${height}" fill="url(#bg)"/>
+      ${borderGradient}
     </svg>
   `;
   return sharp(Buffer.from(svg)).png().toBuffer();
@@ -252,9 +265,11 @@ async function renderCard(cardPath, outputPath, style = 'dark') {
   const colors = CATEGORY_COLORS[card.category] || CATEGORY_COLORS.npc;
   const s = STYLES[style];
 
-  // Portrait dimensions
-  const portraitWidth = CARD_WIDTH;
-  const portraitHeight = s.portraitHeight;
+  // Portrait dimensions (with border)
+  const portraitAreaWidth = CARD_WIDTH;
+  const portraitAreaHeight = s.portraitHeight;
+  const portraitWidth = portraitAreaWidth - PORTRAIT_BORDER * 2;
+  const portraitHeight = portraitAreaHeight - PORTRAIT_BORDER * 2;
 
   // Load or create portrait
   let portraitBuffer = null;
@@ -282,15 +297,15 @@ async function renderCard(cardPath, outputPath, style = 'dark') {
   const bodyHeight = CARD_HEIGHT - s.headerHeight - s.portraitHeight - s.footerHeight;
 
   const [background, header, body, footer] = await Promise.all([
-    createBackground(CARD_WIDTH, CARD_HEIGHT, colors, style),
+    createBackground(CARD_WIDTH, CARD_HEIGHT, colors, style, s.headerHeight, s.portraitHeight),
     createHeader(CARD_WIDTH, s.headerHeight, card.category, card.name, colors, style),
     createBody(CARD_WIDTH, bodyHeight, card.description, colors, style),
     createFooter(CARD_WIDTH, s.footerHeight, card.footer, style)
   ]);
 
-  // Portrait position
-  const portraitLeft = 0;
-  const portraitTop = s.headerHeight;
+  // Portrait position (centered within border)
+  const portraitLeft = PORTRAIT_BORDER;
+  const portraitTop = s.headerHeight + PORTRAIT_BORDER;
 
   await sharp(background)
     .composite([
