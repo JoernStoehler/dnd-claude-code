@@ -12,17 +12,17 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-// Card dimensions (poker size at 300dpi)
-const CARD_WIDTH = 750;
-const CARD_HEIGHT = 1050;
-const PADDING = 36;
+// Card dimensions (tarot size at 300dpi: 70×120mm)
+const CARD_WIDTH = 827;
+const CARD_HEIGHT = 1417;
+const PADDING = 40;
 
-// Style configurations
+// Style configurations (tarot size)
 const STYLES = {
   dark: {
-    portraitHeight: 750,
-    headerHeight: 80,
-    footerHeight: 36,
+    portraitHeight: 827,
+    headerHeight: 90,
+    footerHeight: 40,
     bgColor: '#1a1a1a',
     textColor: '#e0e0e0',
     headerTextColor: 'white',
@@ -30,9 +30,9 @@ const STYLES = {
     footerTextColor: '#666666'
   },
   parchment: {
-    portraitHeight: 750,
-    headerHeight: 80,
-    footerHeight: 36,
+    portraitHeight: 827,
+    headerHeight: 90,
+    footerHeight: 40,
     bgColor: '#f4e4c1',
     textColor: '#2a2016',
     headerTextColor: '#f4e4c1',
@@ -79,13 +79,70 @@ const CATEGORY_ICONS = {
   mystery: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4" fill="white"/>' // eye
 };
 
+// Calculate font size for header based on name length
+// Returns { fontSize, lines } where lines is array of text lines
+function calculateHeaderFont(name, maxWidth, iconMargin, iconSize) {
+  const availableWidth = maxWidth - (iconMargin + iconSize) * 2 - 20; // 20px extra padding
+  const baseFontSize = 52;
+  const minFontSize = 32;
+
+  // Approximate character width as 0.6 * fontSize for serif
+  const charWidthRatio = 0.55;
+
+  // Try single line first
+  for (let fontSize = baseFontSize; fontSize >= minFontSize; fontSize -= 4) {
+    const estimatedWidth = name.length * fontSize * charWidthRatio;
+    if (estimatedWidth <= availableWidth) {
+      return { fontSize, lines: [name] };
+    }
+  }
+
+  // Need to wrap to 2 lines at minimum font size
+  const fontSize = minFontSize;
+  const charsPerLine = Math.floor(availableWidth / (fontSize * charWidthRatio));
+  const words = name.split(' ');
+  const lines = [];
+  let currentLine = '';
+
+  for (const word of words) {
+    if ((currentLine + ' ' + word).trim().length <= charsPerLine) {
+      currentLine = (currentLine + ' ' + word).trim();
+    } else {
+      if (currentLine) lines.push(currentLine);
+      currentLine = word;
+    }
+  }
+  if (currentLine) lines.push(currentLine);
+
+  // Limit to 2 lines
+  if (lines.length > 2) {
+    lines[1] = lines.slice(1).join(' ');
+    lines.length = 2;
+    // Truncate if still too long
+    if (lines[1].length > charsPerLine) {
+      lines[1] = lines[1].slice(0, charsPerLine - 3) + '...';
+    }
+  }
+
+  return { fontSize, lines };
+}
+
 async function createHeader(width, height, category, name, colors, style) {
   const s = STYLES[style];
-  const safeName = escapeXml(name);
-  const fontSize = 48;
-  const iconSize = 28;
-  const iconMargin = 20;
+  const iconSize = 32;
+  const iconMargin = 24;
   const icon = CATEGORY_ICONS[category] || CATEGORY_ICONS.npc;
+
+  const { fontSize, lines } = calculateHeaderFont(name, width, iconMargin, iconSize);
+  const lineHeight = fontSize * 1.1;
+  const totalTextHeight = lines.length * lineHeight;
+  const textStartY = (height + fontSize * 0.35) / 2 - (totalTextHeight - lineHeight) / 2;
+
+  const textElements = lines.map((line, i) =>
+    `<text x="${width/2}" y="${textStartY + i * lineHeight}"
+           font-family="serif" font-size="${fontSize}" font-weight="bold"
+           fill="${s.headerTextColor}" text-anchor="middle">${escapeXml(line)}</text>`
+  ).join('\n');
 
   const svg = `
     <svg width="${width}" height="${height}">
@@ -100,9 +157,7 @@ async function createHeader(width, height, category, name, colors, style) {
          fill="rgba(255,255,255,0.7)" stroke="none">${icon}</g>
       <g transform="translate(${width - iconMargin - iconSize}, ${(height - iconSize) / 2}) scale(${iconSize / 24})"
          fill="rgba(255,255,255,0.7)" stroke="none">${icon}</g>
-      <text x="${width/2}" y="${height/2 + fontSize/3}"
-            font-family="serif" font-size="${fontSize}" font-weight="bold"
-            fill="${s.headerTextColor}" text-anchor="middle">${safeName}</text>
+      ${textElements}
     </svg>
   `;
   return sharp(Buffer.from(svg)).png().toBuffer();
@@ -111,12 +166,29 @@ async function createHeader(width, height, category, name, colors, style) {
 async function createBody(width, height, description, colors, style) {
   const s = STYLES[style];
   const safeDesc = escapeXml(description || '');
-  const fontSize = 28;
-  const lineHeight = 34;
-  const maxChars = 42;
 
-  const descLines = wordWrap(safeDesc, maxChars);
-  const descY = 40;
+  // Standard font for 1-6 lines, smaller for 7+
+  const standardFontSize = 28;
+  const standardLineHeight = 36;
+  const standardMaxChars = 46;
+
+  const smallFontSize = 24;
+  const smallLineHeight = 30;
+  const smallMaxChars = 54;
+
+  // First try with standard font
+  let descLines = wordWrap(safeDesc, standardMaxChars);
+  let fontSize = standardFontSize;
+  let lineHeight = standardLineHeight;
+
+  // If more than 6 lines, switch to smaller font
+  if (descLines.length > 6) {
+    descLines = wordWrap(safeDesc, smallMaxChars);
+    fontSize = smallFontSize;
+    lineHeight = smallLineHeight;
+  }
+
+  const descY = 44;
 
   const descText = descLines.map((line, i) =>
     `<text x="${PADDING}" y="${descY + i * lineHeight}"
