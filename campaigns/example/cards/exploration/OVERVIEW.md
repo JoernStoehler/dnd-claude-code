@@ -19,6 +19,7 @@ These produce **distinct, recognizable** artistic styles:
 | **Ink Wash** | ![](style-ink-wash.png) | ![](card-ink-wash.png) | ✓ Best for whimsical campaigns. Has character and soul. **Currently selected.** |
 | **Watercolor** | ![](style-watercolor.png) | ![](card-watercolor.png) | ✓ Softer, more painterly. Good alternative. |
 | **Renaissance** | ![](style-renaissance.png) | ![](card-renaissance.png) | ✓ Distinct but serious/dramatic. Wrong tone for fun-heroes. |
+| **Graphic Novel** | ![](style-graphic-novel.png) | N/A | ✓ Distinct style, would fit fun-heroes. Alternative to ink wash. |
 
 ### Styles That Collapse
 
@@ -30,7 +31,6 @@ These prompts produce **indistinguishable generic output** - avoid:
 | Oil Painting | ![](style-oil-painting.png) | ✗ Generic, "devoid of soul" |
 | Storybook | ![](style-storybook.png) | ✗ Indistinguishable from above |
 | Digital Painterly | ![](style-digital-painterly.png) | ✗ Generic AI look |
-| Graphic Novel | ![](style-graphic-novel.png) | ✗ Not actually graphic novel style |
 
 **Finding:** Flux flattens vague style descriptors ("oil painting", "fantasy illustration") to the same generic output. Use specific technique descriptors ("ink drawing with watercolor wash, pen and ink linework").
 
@@ -94,8 +94,8 @@ Tested tarot layout with varied content lengths.
 ├─────────────────────────────┤
 │                             │
 │                             │
-│  PORTRAIT (827px)           │  Square image, 0% crop
-│                             │
+│  PORTRAIT (827×827px)       │  Square image, 0% crop
+│  margin: 0 (edge-to-edge)   │  TBD: could add side margins
 │                             │
 │                             │
 ├─────────────────────────────┤
