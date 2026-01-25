@@ -63,7 +63,7 @@ Constraints in tension:
 - Zero crop, readable font, plenty of text space
 - No downside since sleeve constraint doesn't exist yet
 
-**Final sample:** ![](card-tarot-inkwash.png)
+**Final sample:** ![](card-final.png)
 
 ---
 
