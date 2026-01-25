@@ -75,68 +75,37 @@
 
 ---
 
-## Open Questions Requiring User Input
+## Resolved Design Decisions
 
 ### 1. Per-Category Layouts
 
-Current: Same layout for all categories.
+**Decision:** Same layout for all categories (KISS, YAGNI).
 
-**Problem:** Locations and items may need different information than NPCs.
-- Location: Might benefit from a map/wider image instead of portrait
-- Item: Might need stats (rarity, value, weight)
-- Faction: Might need crest/symbol instead of portrait
+### 2. Card Lifecycle
 
-**Question:** Use one layout for everything, or design category-specific variants?
+**Decision:** Batch generate → select one → becomes canonical version.
 
-### 2. Snapshot vs Living Document
+Updates happen via edits or replacement when new information is available. Campaign documents are source of truth; cards are reminders for players, not revelations.
 
-Current: Cards are static snapshots.
-
-**Problem:** NPCs die, relationships change, players learn new info.
-
-**Options:**
-- A) Cards are snapshots, frozen at creation (simple)
-- B) Cards can be regenerated/updated (need versioning)
-- C) Cards have a notes area for handwritten updates (hybrid)
-
-**Question:** How do you want to handle changes over time?
+**Cleanup policy:** Keep only canonical versions in HEAD. Rejected drafts and obsolete versions live in git history only - don't clutter working directory.
 
 ### 3. Primary Use Case
 
-Cards could serve different purposes with different priorities:
+**Decision:** Help GM and players keep track of things and names. Portraits + descriptions for visual memory.
 
-| Use Case | Priority |
-|----------|----------|
-| Table handout | Visual recognition, quick glance |
-| GM reference | Dense information, all details |
-| Player collection | Visual polish, trophy feel |
-| Quick lookup | Scannable text, clear hierarchy |
+### 4. Short Descriptions
 
-**Question:** Which use case is primary? This affects information density and visual polish level.
+**Decision:** Accept empty space - unavoidable with variable content.
 
-### 4. Short Description Problem
+Font sizing rules:
+- 1-6 lines: Standard size (28px)
+- 7+ lines: Smaller font allowed if needed
 
-Cards with very short descriptions (e.g., "A quiet halfling barmaid. Observant.") leave large empty space in the body area.
+No dynamic layout resizing.
 
-**Options:**
-- A) Accept it - sparse cards are fine
-- B) Add more content types (tags, relationships, stats)
-- C) Dynamically adjust portrait/body ratio (complex)
-- D) Set minimum description length (content constraint)
+### 5. Long Names
 
-**Question:** How should short descriptions be handled?
-
-### 5. Name Length Limits
-
-Long names like "Bartholomew Fitzgerald Maximilian von Hornsworth III" may not fit header.
-
-**Options:**
-- A) Truncate with ellipsis
-- B) Reduce font size dynamically
-- C) Wrap to two lines
-- D) Set maximum name length (content constraint)
-
-**Question:** How should long names be handled?
+**Decision:** Shrink font dynamically. If still too long, wrap to 2 lines.
 
 ---
 
@@ -160,4 +129,4 @@ Long names like "Bartholomew Fitzgerald Maximilian von Hornsworth III" may not f
 
 ## Sample Output
 
-See `campaigns/example/cards/npc/tarot-sample/card-tarot-inkwash.png` for current output.
+See `campaigns/example/cards/exploration/card-tarot-inkwash.png` for current output.

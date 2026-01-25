@@ -112,24 +112,22 @@ Background: Parchment gradient
 
 ---
 
-## Open Questions
-
-Decisions still needed from user:
+## Design Decisions (Resolved)
 
 ### 1. Per-Category Layouts
-Same layout for NPCs, locations, items, factions? Or category-specific variants?
+**Decision:** Same layout for all (KISS, YAGNI).
 
-### 2. Snapshot vs Living
-Cards frozen at creation? Or updatable over time?
+### 2. Card Lifecycle
+**Decision:** Batch generate → select one → canonical. Updates via edits/replacement. Keep only canonical in HEAD; rejected/obsolete versions in git history only.
 
 ### 3. Primary Use Case
-Table handout? GM reference? Player collection? Affects information density.
+**Decision:** Help GM and players track things and names. Portraits + descriptions for visual memory.
 
 ### 4. Short Descriptions
-Cards with 1-2 lines leave empty space. Accept it? Add more content types? Dynamic layout?
+**Decision:** Accept empty space. Font: 28px for 1-6 lines, smaller allowed for 7+.
 
 ### 5. Long Names
-Names exceeding header width: truncate? shrink font? wrap? max length?
+**Decision:** Shrink font dynamically, wrap to 2 lines if still needed.
 
 ---
 
