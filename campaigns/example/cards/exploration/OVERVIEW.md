@@ -92,12 +92,11 @@ Tested tarot layout with varied content lengths.
 │  HEADER (90px)              │  Category gradient + title + icons
 │  52px serif title           │
 ├─────────────────────────────┤
-│                             │
-│                             │
-│  PORTRAIT (827×827px)       │  Square image, 0% crop
-│  margin: 0 (edge-to-edge)   │  TBD: could add side margins
-│                             │
-│                             │
+│ ┌─────────────────────────┐ │
+│ │                         │ │  40px category-colored border
+│ │  PORTRAIT (747×747px)   │ │  (MTG-style framing)
+│ │                         │ │  Aids cutting + category recognition
+│ └─────────────────────────┘ │
 ├─────────────────────────────┤
 │  BODY (460px)               │  28px serif, 36px line height
 │  ~11 lines of text          │  Left-aligned, 40px padding
@@ -108,7 +107,22 @@ Tested tarot layout with varied content lengths.
 
 Card size: 827×1417px (70×120mm at 300dpi)
 Background: Parchment gradient
+Portrait border: 40px category color (like MTG card frames)
 ```
+
+### Why 40px Border?
+
+Follows MTG design convention. Benefits:
+- **Cutting guide**: Clear edge for scissors
+- **Category recognition**: Colored frame reinforces card type
+- **Visual framing**: Portrait looks intentional, not edge-bleed accident
+
+Our cards differ from MTG in:
+- Larger portrait ratio (visual memory is primary goal)
+- Simpler header (no mana cost)
+- More text space per line (no competing symbols)
+
+But the fundamental layout principle (colored frame around art) transfers well.
 
 ---
 
@@ -153,5 +167,5 @@ Background: Parchment gradient
 - `test-npc-short.png` through `test-item-medium.png` - Varied content lengths
 
 ### Final Sample
-- `card-tarot-inkwash.png` - Current best output
-- `portrait.png` - Source portrait for tarot sample
+- `card-final.png` - Current output (tarot size, ink wash, 40px border)
+- `portrait.png` - Source portrait

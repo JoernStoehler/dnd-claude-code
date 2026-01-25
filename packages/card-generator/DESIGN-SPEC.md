@@ -30,8 +30,9 @@
 | Element | Size | Justification |
 |---------|------|---------------|
 | Header | 90px | Fits 52px title + 32px icons |
-| Portrait | 827×827px | Full card width, square |
-| Portrait margin | 0px | Edge-to-edge (TBD: could add side margins for framed look) |
+| Portrait area | 827×827px | Total area including border |
+| Portrait | 747×747px | Actual image (827 - 40×2 border) |
+| Portrait border | 40px | Category-colored frame (MTG-style, aids cutting + recognition) |
 | Body | 460px | 11 lines at 28px/36px |
 | Footer | 40px | Small, secondary info |
 | Padding | 40px | Buffer for imprecise hand-cutting |
@@ -130,4 +131,4 @@ No dynamic layout resizing.
 
 ## Sample Output
 
-See `campaigns/example/cards/exploration/card-tarot-inkwash.png` for current output.
+See `campaigns/example/cards/exploration/card-final.png` for current output.
