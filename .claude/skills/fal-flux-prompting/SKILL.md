@@ -60,11 +60,18 @@ oil painting style, fantasy illustration, centered composition
 
 ### Style Consistency
 
-For a cohesive card set, use consistent style tags:
+For a cohesive card set, use consistent style tags. **Avoid vague descriptors** like "fantasy illustration" or "oil painting" - Flux flattens these to generic output.
+
+**Recommended styles** (actually produce distinct results):
+- `ink drawing with watercolor wash, pen and ink linework` - Best for whimsical/fun campaigns
+- `watercolor painting, soft edges, flowing colors` - Softer, more painterly
+- `renaissance portrait, chiaroscuro lighting, dark background` - Serious/dramatic campaigns
+
+**Avoid** (collapse to same generic output):
 - "oil painting style"
 - "fantasy illustration"
-- "detailed fantasy art"
 - "in the style of classic D&D art"
+- "storybook illustration"
 
 ### Avoid
 
