@@ -30,7 +30,8 @@
 | Element | Size | Justification |
 |---------|------|---------------|
 | Header | 90px | Fits 52px title + 32px icons |
-| Portrait | 827px | Full card width, square |
+| Portrait | 827×827px | Full card width, square |
+| Portrait margin | 0px | Edge-to-edge (TBD: could add side margins for framed look) |
 | Body | 460px | 11 lines at 28px/36px |
 | Footer | 40px | Small, secondary info |
 | Padding | 40px | Buffer for imprecise hand-cutting |
