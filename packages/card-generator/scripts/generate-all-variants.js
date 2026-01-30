@@ -80,11 +80,14 @@ function overlayOnlySvg(opts = {}) {
   const lineHeight = 32;
   const textStartY = textAreaTop + 40 + (divider ? 16 : 0);
 
-  // Text with stroke for readability on texture (no separate background overlay)
-  const textStroke = 'stroke="rgba(0,0,0,0.6)" stroke-width="3" paint-order="stroke"';
+  // Text with stroke for readability on texture
+  const textStroke = 'stroke="rgba(0,0,0,0.5)" stroke-width="2" paint-order="stroke"';
+
+  // Subtle overlay on text area only for better readability (texture still visible)
+  const textBgSvg = `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="rgba(0,0,0,0.35)"/>`;
 
   return `<svg width="${W}" height="${H}">
-    <!-- Transparent background - texture shows through uniformly -->
+    ${textBgSvg}
     ${icons}
     <text x="${W/2}" y="${headerH/2 + titleSize/3}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="#f4e4c1" text-anchor="middle" ${textStroke}>${esc(CARD.name)}</text>
     ${dividerSvg}

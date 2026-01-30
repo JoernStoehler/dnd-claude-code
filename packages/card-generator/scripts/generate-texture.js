@@ -22,7 +22,7 @@ const CATEGORY_TEXTURES = {
   npc: {
     colors: { accent: '#8B4513', light: '#D2691E' },
     defaultStyle: 'leather',
-    promptBase: 'warm brown leather texture with subtle gold embossing, medieval book cover'
+    promptBase: 'extreme close-up macro photograph of brown leather surface, studio product photography, soft diffused lighting, warm cognac tones, visible natural grain, full frame composition filling entire image, 8k texture detail'
   },
   location: {
     colors: { accent: '#2E8B57', light: '#3CB371' },
