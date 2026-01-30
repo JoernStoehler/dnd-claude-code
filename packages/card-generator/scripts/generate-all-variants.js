@@ -23,37 +23,49 @@ async function render(svg, portraitPath, outputPath, pX, pY, pW, pH) {
   await sharp(bg).composite([{ input: portrait, top: pY, left: pX }]).png().toFile(outputPath);
 }
 
-// NEW DEFAULT: Full frame with icons, larger header
+// NEW LAYOUT: Header full-width at top, border on sides/bottom only
+// HHHH  <- header edge-to-edge
+// XPPX  <- portrait with side borders
+// XTTX  <- text with side borders
+// XXXX  <- bottom border
 function baseFullFrame(opts = {}) {
-  const headerH = opts.headerH || 100;  // Larger header for readability
-  const portraitH = opts.portraitH || 680;  // Adjusted for larger header
-  const textBg = opts.textBg || '#f4e4c1';
+  const headerH = opts.headerH || 90;
+  const portraitH = opts.portraitH || 680;
+  const solidColor = opts.solidColor !== false;  // Default: solid category color for text area
+  const textBg = solidColor ? 'none' : (opts.textBg || '#f4e4c1');
+  const textColor = solidColor ? '#f4e4c1' : '#2a2016';
   const textBgOpacity = opts.textBgOpacity || 1;
   const footerH = opts.footerH || 36;
   const showFooter = opts.showFooter !== false;
   const showIcons = opts.showIcons !== false;
   const fontFamily = opts.fontFamily || 'serif';
-  const titleSize = opts.titleSize || 52;  // Larger title for readability
+  const titleSize = opts.titleSize || 52;
   const bodySize = opts.bodySize || 24;
   const bodyStyle = opts.bodyStyle || 'normal';
   const textAlign = opts.textAlign || 'start';
   const textX = textAlign === 'middle' ? W/2 : B + 24;
   const charsPerLine = opts.charsPerLine || 42;
   const divider = opts.divider || false;
-  const rounded = opts.rounded || false;
 
-  const textAreaTop = B + headerH + portraitH;
-  const textAreaH = H - B*2 - headerH - portraitH - (showFooter ? footerH : 0);
+  // Layout: header at y=0, portrait at y=headerH, text below portrait, bottom border
+  const portraitTop = headerH;
+  const textAreaTop = headerH + portraitH;
+  const textAreaH = H - headerH - portraitH - B - (showFooter ? footerH : 0);
 
+  // Icons centered vertically in header
+  const iconY = (headerH - 36) / 2;
   const icons = showIcons ? `
-    <g transform="translate(${B + 12}, ${B + 32})">${ICON_SVG}</g>
-    <g transform="translate(${W - B - 48}, ${B + 32})">${ICON_SVG}</g>
+    <g transform="translate(${B + 12}, ${iconY})">${ICON_SVG}</g>
+    <g transform="translate(${W - B - 48}, ${iconY})">${ICON_SVG}</g>
   ` : '';
 
-  const footerSvg = showFooter ? `
+  const footerSvg = showFooter ? (solidColor ? `
+    <rect x="${B}" y="${H - B - footerH}" width="${W - B*2}" height="${footerH}" fill="rgba(0,0,0,0.2)"/>
+    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="#f4e4c1" text-anchor="middle">${esc(CARD.footer)}</text>
+  ` : `
     <rect x="${B}" y="${H - B - footerH}" width="${W - B*2}" height="${footerH}" fill="#e8d4a8"/>
     <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="#5a4a36" text-anchor="middle">${esc(CARD.footer)}</text>
-  ` : '';
+  `) : '';
 
   const dividerSvg = divider ? `
     <line x1="${B + 20}" y1="${textAreaTop + 10}" x2="${W - B - 20}" y2="${textAreaTop + 10}" stroke="${NPC_COLORS.accent}" stroke-width="2"/>
@@ -70,13 +82,16 @@ function baseFullFrame(opts = {}) {
         <stop offset="100%" style="stop-color:${NPC_COLORS.light}"/>
       </linearGradient>
     </defs>
+    <!-- Full card background (border color) -->
     <rect width="${W}" height="${H}" fill="url(#c)"/>
-    <rect x="${B}" y="${B}" width="${W - B*2}" height="${headerH}" fill="url(#c)"/>
+    <!-- Header: full width at top -->
+    <rect width="${W}" height="${headerH}" fill="url(#c)"/>
     ${icons}
-    <text x="${W/2}" y="${B + 68}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${esc(CARD.name)}</text>
-    <rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="${textBg}" opacity="${textBgOpacity}"/>
+    <text x="${W/2}" y="${headerH/2 + titleSize/3}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${esc(CARD.name)}</text>
+    <!-- Text area (inset by border on sides and bottom) -->
+    ${textBg !== 'none' ? `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="${textBg}" opacity="${textBgOpacity}"/>` : ''}
     ${dividerSvg}
-    ${lines.map((l, i) => `<text x="${textX}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" font-style="${bodyStyle}" fill="#2a2016" text-anchor="${textAlign}">${l}</text>`).join('')}
+    ${lines.map((l, i) => `<text x="${textX}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" font-style="${bodyStyle}" fill="${textColor}" text-anchor="${textAlign}">${l}</text>`).join('')}
     ${footerSvg}
   </svg>`;
 }
@@ -85,10 +100,10 @@ const variants = [
   // === CURRENT DEFAULT ===
   {
     id: '00-default',
-    desc: 'NEW DEFAULT: Full frame, 40px border, 100px header, icons',
+    desc: 'NEW DEFAULT: Header full-width, 40px side border, icons',
     gen: async (p, o) => {
       const svg = baseFullFrame();
-      await render(svg, p, o, B, B + 100, W - B*2, 680);
+      await render(svg, p, o, B, 90, W - B*2, 680);  // portrait at y=headerH
     }
   },
 
@@ -118,99 +133,63 @@ const variants = [
 
   // === TEXT BOX STYLING ===
   {
-    id: '02-tinted-textbox',
-    desc: 'Tinted text box: light category color',
+    id: '02-parchment-textbox',
+    desc: 'Parchment text box (OLD default)',
     gen: async (p, o) => {
-      const svg = baseFullFrame({ textBg: NPC_COLORS.light, textBgOpacity: 0.2 });
-      await render(svg, p, o, B, B + 100, W - B*2, 680);
-    }
-  },
-  {
-    id: '03-solid-textbox',
-    desc: 'Solid text box: category color background',
-    gen: async (p, o) => {
-      const svg = `<svg width="${W}" height="${H}">
-        <defs><linearGradient id="c" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:${NPC_COLORS.accent}"/><stop offset="100%" style="stop-color:${NPC_COLORS.light}"/></linearGradient></defs>
-        <rect width="${W}" height="${H}" fill="url(#c)"/>
-        <g transform="translate(${B + 12}, ${B + 22})">${ICON_SVG}</g>
-        <g transform="translate(${W - B - 48}, ${B + 22})">${ICON_SVG}</g>
-        <text x="${W/2}" y="${B + 54}" font-family="serif" font-size="44" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${esc(CARD.name)}</text>
-        ${wrap(esc(CARD.desc), 42).map((l, i) => `<text x="${B + 24}" y="${B + 80 + 700 + 40 + i * 32}" font-family="serif" font-size="24" fill="#f4e4c1">${l}</text>`).join('')}
-        <rect x="${B}" y="${H - B - 36}" width="${W - B*2}" height="36" fill="rgba(0,0,0,0.2)"/>
-        <text x="${W/2}" y="${H - B - 10}" font-family="serif" font-size="20" fill="#f4e4c1" text-anchor="middle">${esc(CARD.footer)}</text>
-      </svg>`;
-      await render(svg, p, o, B, B + 100, W - B*2, 680);
-    }
-  },
-
-  // === PORTRAIT SIZE ===
-  {
-    id: '04-larger-portrait',
-    desc: 'Larger portrait (800px): less text space',
-    gen: async (p, o) => {
-      const pH = 800;
-      const svg = baseFullFrame({ portraitH: pH });
-      await render(svg, p, o, B, B + 80, W - B*2, pH);
+      const svg = baseFullFrame({ solidColor: false });
+      await render(svg, p, o, B, 90, W - B*2, 680);
     }
   },
 
   // === HEADER VARIATIONS ===
   {
-    id: '05-no-icons',
+    id: '03-no-icons',
     desc: 'No category icons in header',
     gen: async (p, o) => {
       const svg = baseFullFrame({ showIcons: false });
-      await render(svg, p, o, B, B + 100, W - B*2, 680);
-    }
-  },
-  {
-    id: '06-smaller-header',
-    desc: 'Smaller header (80px) - previous default',
-    gen: async (p, o) => {
-      const svg = baseFullFrame({ headerH: 80, titleSize: 44, portraitH: 700 });
-      await render(svg, p, o, B, B + 80, W - B*2, 700);
+      await render(svg, p, o, B, 90, W - B*2, 680);
     }
   },
 
   // === DECORATIVE ELEMENTS ===
   {
-    id: '07-divider-line',
+    id: '04-divider-line',
     desc: 'Divider line between portrait and text',
     gen: async (p, o) => {
       const svg = baseFullFrame({ divider: true });
-      await render(svg, p, o, B, B + 100, W - B*2, 680);
+      await render(svg, p, o, B, 90, W - B*2, 680);
     }
   },
 
   // === TYPOGRAPHY ===
   {
-    id: '08-sans-serif',
+    id: '05-sans-serif',
     desc: 'Sans-serif font throughout',
     gen: async (p, o) => {
       const svg = baseFullFrame({ fontFamily: 'sans-serif', bodySize: 22, charsPerLine: 46 });
-      await render(svg, p, o, B, B + 100, W - B*2, 680);
+      await render(svg, p, o, B, 90, W - B*2, 680);
     }
   },
   {
-    id: '09-centered-text',
+    id: '06-centered-text',
     desc: 'Center-aligned description text',
     gen: async (p, o) => {
       const svg = baseFullFrame({ textAlign: 'middle' });
-      await render(svg, p, o, B, B + 100, W - B*2, 680);
+      await render(svg, p, o, B, 90, W - B*2, 680);
     }
   },
   {
-    id: '10-italic-desc',
+    id: '07-italic-desc',
     desc: 'Italic description text',
     gen: async (p, o) => {
       const svg = baseFullFrame({ bodyStyle: 'italic' });
-      await render(svg, p, o, B, B + 100, W - B*2, 680);
+      await render(svg, p, o, B, 90, W - B*2, 680);
     }
   },
 
   // === PORTRAIT-ONLY FRAME (old style for comparison) ===
   {
-    id: '11-portrait-frame-only',
+    id: '08-portrait-frame-only',
     desc: 'OLD STYLE: Border only around portrait',
     gen: async (p, o) => {
       const svg = `<svg width="${W}" height="${H}">
@@ -248,49 +227,31 @@ async function main() {
   // Generate markdown
   let md = `# Layout Variant Comparison
 
-New default: **Full frame**, 40px border, 100px header, icons.
-
-**Feedback needed:** Which elements work best? Any combinations to try?
+New default: **Full frame**, 40px border, 90px header, solid color, icons, divider line.
 
 ---
 
 ## New Default
 
-| Full frame (NEW DEFAULT) |
+| Solid color (NEW DEFAULT) |
 |:---:|
 | <img src="00-default.png" width="300"/> |
 
 ---
 
-## Border Width
-
-| 40px (default) | 20px |
-|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="01-border-20px.png" width="250"/> |
-
----
-
 ## Text Box Background
 
-| Parchment (default) | Tinted | Solid color |
-|:---:|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="02-tinted-textbox.png" width="250"/> | <img src="03-solid-textbox.png" width="250"/> |
-
----
-
-## Portrait Size
-
-| Default (680px) | Larger (800px) |
+| Solid (default) | Parchment (old) |
 |:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="04-larger-portrait.png" width="250"/> |
+| <img src="00-default.png" width="250"/> | <img src="02-parchment-textbox.png" width="250"/> |
 
 ---
 
-## Header Variations
+## Header Icons
 
-| With icons (default, 100px) | No icons | Smaller header (80px) |
-|:---:|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="05-no-icons.png" width="250"/> | <img src="06-smaller-header.png" width="250"/> |
+| With icons (default) | No icons |
+|:---:|:---:|
+| <img src="00-default.png" width="250"/> | <img src="03-no-icons.png" width="250"/> |
 
 ---
 
@@ -298,7 +259,7 @@ New default: **Full frame**, 40px border, 100px header, icons.
 
 | Default | With divider line |
 |:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="07-divider-line.png" width="250"/> |
+| <img src="00-default.png" width="250"/> | <img src="04-divider-line.png" width="250"/> |
 
 ---
 
@@ -306,15 +267,7 @@ New default: **Full frame**, 40px border, 100px header, icons.
 
 | Serif (default) | Sans-serif | Centered | Italic |
 |:---:|:---:|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="08-sans-serif.png" width="250"/> | <img src="09-centered-text.png" width="250"/> | <img src="10-italic-desc.png" width="250"/> |
-
----
-
-## Full Frame vs Portrait Frame
-
-| Full frame (NEW) | Portrait frame only (OLD) |
-|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="11-portrait-frame-only.png" width="250"/> |
+| <img src="00-default.png" width="250"/> | <img src="05-sans-serif.png" width="250"/> | <img src="06-centered-text.png" width="250"/> | <img src="07-italic-desc.png" width="250"/> |
 
 ---
 `;
