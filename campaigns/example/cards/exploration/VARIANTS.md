@@ -51,3 +51,13 @@ New default: **Full frame**, 40px border, 90px header, solid color, icons, **div
 <img src="07-italic-desc.png" width="300"/>
 
 ---
+
+## Background Style
+
+| Gradient (default) | AI Texture |
+|:---:|:---:|
+| <img src="00-default.png" width="250"/> | <img src="09-texture-bg.png" width="250"/> |
+
+Generate texture: `node scripts/generate-texture.js texture.png --category=npc --api`
+
+---
