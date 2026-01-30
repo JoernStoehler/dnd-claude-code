@@ -17,10 +17,82 @@ const CARD = { name: 'Grimble Thornwick', desc: 'A tinkering gnome inventor with
 const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const wrap = (t,n) => { const w=t.split(' '),l=[]; let c=''; for(const x of w){if((c+' '+x).trim().length<=n)c=(c+' '+x).trim();else{if(c)l.push(c);c=x;}} if(c)l.push(c); return l; };
 
-async function render(svg, portraitPath, outputPath, pX, pY, pW, pH) {
-  const bg = await sharp(Buffer.from(svg)).png().toBuffer();
+// Render card with optional texture background
+// Layers (bottom to top): texture/gradient → portrait → SVG overlay
+async function render(svg, portraitPath, outputPath, pX, pY, pW, pH, texturePath = null) {
   const portrait = await sharp(portraitPath).resize(pW, pH, { fit: 'cover' }).toBuffer();
-  await sharp(bg).composite([{ input: portrait, top: pY, left: pX }]).png().toFile(outputPath);
+
+  if (texturePath && fs.existsSync(texturePath)) {
+    // Use texture as background
+    const texture = await sharp(texturePath).resize(W, H, { fit: 'cover' }).toBuffer();
+    const overlay = await sharp(Buffer.from(svg)).png().toBuffer();
+
+    await sharp(texture)
+      .composite([
+        { input: portrait, top: pY, left: pX },
+        { input: overlay, top: 0, left: 0 }
+      ])
+      .png()
+      .toFile(outputPath);
+  } else {
+    // Use SVG gradient as background (current behavior)
+    const bg = await sharp(Buffer.from(svg)).png().toBuffer();
+    await sharp(bg).composite([{ input: portrait, top: pY, left: pX }]).png().toFile(outputPath);
+  }
+}
+
+// Generate SVG overlay (transparent background, only text/icons/decorations)
+function overlayOnlySvg(opts = {}) {
+  const headerH = opts.headerH || 90;
+  const portraitH = opts.portraitH || 680;
+  const solidColor = opts.solidColor !== false;
+  const textColor = solidColor ? '#f4e4c1' : '#2a2016';
+  const footerH = opts.footerH || 36;
+  const showFooter = opts.showFooter !== false;
+  const showIcons = opts.showIcons !== false;
+  const fontFamily = opts.fontFamily || 'serif';
+  const titleSize = opts.titleSize || 52;
+  const bodySize = opts.bodySize || 24;
+  const bodyStyle = opts.bodyStyle || 'normal';
+  const textAlign = opts.textAlign || 'start';
+  const textX = textAlign === 'middle' ? W/2 : B + 24;
+  const charsPerLine = opts.charsPerLine || 42;
+  const divider = opts.divider !== false;  // Default: true for texture mode
+
+  const textAreaTop = headerH + portraitH;
+  const textAreaH = H - headerH - portraitH - B - (showFooter ? footerH : 0);
+
+  const iconY = (headerH - 36) / 2;
+  const icons = showIcons ? `
+    <g transform="translate(${B + 12}, ${iconY})">${ICON_SVG}</g>
+    <g transform="translate(${W - B - 48}, ${iconY})">${ICON_SVG}</g>
+  ` : '';
+
+  const footerSvg = showFooter ? `
+    <rect x="${B}" y="${H - B - footerH}" width="${W - B*2}" height="${footerH}" fill="rgba(0,0,0,0.3)"/>
+    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="#f4e4c1" text-anchor="middle">${esc(CARD.footer)}</text>
+  ` : '';
+
+  const dividerSvg = divider ? `
+    <line x1="${B + 20}" y1="${textAreaTop + 10}" x2="${W - B - 20}" y2="${textAreaTop + 10}" stroke="#f4e4c1" stroke-width="3" opacity="0.7"/>
+  ` : '';
+
+  const lines = wrap(esc(CARD.desc), charsPerLine);
+  const lineHeight = 32;
+  const textStartY = textAreaTop + 40 + (divider ? 16 : 0);
+
+  // Semi-transparent text area background for readability on texture
+  const textBgSvg = `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="rgba(0,0,0,0.5)"/>`;
+
+  return `<svg width="${W}" height="${H}">
+    <!-- Transparent background - texture shows through -->
+    ${textBgSvg}
+    ${icons}
+    <text x="${W/2}" y="${headerH/2 + titleSize/3}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="#f4e4c1" text-anchor="middle" stroke="rgba(0,0,0,0.3)" stroke-width="2" paint-order="stroke">${esc(CARD.name)}</text>
+    ${dividerSvg}
+    ${lines.map((l, i) => `<text x="${textX}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" font-style="${bodyStyle}" fill="${textColor}" text-anchor="${textAlign}">${l}</text>`).join('')}
+    ${footerSvg}
+  </svg>`;
 }
 
 // NEW LAYOUT: Header full-width at top, border on sides/bottom only
@@ -208,17 +280,28 @@ const variants = [
       await render(svg, p, o, 40, 130, W - 80, 747);
     }
   },
+
+  // === TEXTURE BACKGROUND ===
+  {
+    id: '09-texture-bg',
+    desc: 'AI-generated texture background (requires texture.png)',
+    gen: async (p, o, texturePath) => {
+      const svg = overlayOnlySvg({ divider: true });
+      await render(svg, p, o, B, 90, W - B*2, 680, texturePath);
+    }
+  },
 ];
 
 async function main() {
   const outDir = process.argv[2] || 'campaigns/example/cards/exploration';
   const portraitPath = path.join(outDir, 'portrait.png');
+  const texturePath = path.join(outDir, 'texture.png');
 
   console.log(`Generating ${variants.length} layout variants...\n`);
 
   for (const v of variants) {
     const outPath = path.join(outDir, `${v.id}.png`);
-    await v.gen(portraitPath, outPath);
+    await v.gen(portraitPath, outPath, texturePath);
     console.log(`  ${v.id}: ${v.desc}`);
   }
 
@@ -274,6 +357,16 @@ New default: **Full frame**, 40px border, 90px header, solid color, icons, **div
 
 **Italic**
 <img src="07-italic-desc.png" width="300"/>
+
+---
+
+## Background Style
+
+| Gradient (default) | AI Texture |
+|:---:|:---:|
+| <img src="00-default.png" width="250"/> | <img src="09-texture-bg.png" width="250"/> |
+
+Generate texture: \`node scripts/generate-texture.js texture.png --category=npc --api\`
 
 ---
 `;
