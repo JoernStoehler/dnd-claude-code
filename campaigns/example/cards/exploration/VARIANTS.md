@@ -38,12 +38,16 @@ New default: **Full frame**, 40px border, 90px header, solid color, icons, **div
 
 ## Typography
 
-| Serif (default) | Sans-serif |
-|:---:|:---:|
-| <img src="00-default.png" width="300"/> | <img src="05-sans-serif.png" width="300"/> |
+**Serif (default)**
+<img src="00-default.png" width="300"/>
 
-| Centered | Italic |
-|:---:|:---:|
-| <img src="06-centered-text.png" width="300"/> | <img src="07-italic-desc.png" width="300"/> |
+**Sans-serif**
+<img src="05-sans-serif.png" width="300"/>
+
+**Centered**
+<img src="06-centered-text.png" width="300"/>
+
+**Italic**
+<img src="07-italic-desc.png" width="300"/>
 
 ---

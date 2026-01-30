@@ -68,7 +68,7 @@ function baseFullFrame(opts = {}) {
   `) : '';
 
   const dividerSvg = divider ? `
-    <line x1="${B + 20}" y1="${textAreaTop + 10}" x2="${W - B - 20}" y2="${textAreaTop + 10}" stroke="${NPC_COLORS.accent}" stroke-width="2"/>
+    <line x1="${B + 20}" y1="${textAreaTop + 10}" x2="${W - B - 20}" y2="${textAreaTop + 10}" stroke="#f4e4c1" stroke-width="3" opacity="0.7"/>
   ` : '';
 
   const lines = wrap(esc(CARD.desc), charsPerLine);
@@ -82,10 +82,8 @@ function baseFullFrame(opts = {}) {
         <stop offset="100%" style="stop-color:${NPC_COLORS.light}"/>
       </linearGradient>
     </defs>
-    <!-- Full card background (border color) -->
+    <!-- Single background for entire card -->
     <rect width="${W}" height="${H}" fill="url(#c)"/>
-    <!-- Header: full width at top -->
-    <rect width="${W}" height="${headerH}" fill="url(#c)"/>
     ${icons}
     <text x="${W/2}" y="${headerH/2 + titleSize/3}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${esc(CARD.name)}</text>
     <!-- Text area (inset by border on sides and bottom) -->
@@ -265,13 +263,17 @@ New default: **Full frame**, 40px border, 90px header, solid color, icons, **div
 
 ## Typography
 
-| Serif (default) | Sans-serif |
-|:---:|:---:|
-| <img src="00-default.png" width="300"/> | <img src="05-sans-serif.png" width="300"/> |
+**Serif (default)**
+<img src="00-default.png" width="300"/>
 
-| Centered | Italic |
-|:---:|:---:|
-| <img src="06-centered-text.png" width="300"/> | <img src="07-italic-desc.png" width="300"/> |
+**Sans-serif**
+<img src="05-sans-serif.png" width="300"/>
+
+**Centered**
+<img src="06-centered-text.png" width="300"/>
+
+**Italic**
+<img src="07-italic-desc.png" width="300"/>
 
 ---
 `;
