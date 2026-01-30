@@ -69,8 +69,7 @@ function overlayOnlySvg(opts = {}) {
   ` : '';
 
   const footerSvg = showFooter ? `
-    <rect x="${B}" y="${H - B - footerH}" width="${W - B*2}" height="${footerH}" fill="rgba(0,0,0,0.3)"/>
-    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="#f4e4c1" text-anchor="middle">${esc(CARD.footer)}</text>
+    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="#f4e4c1" text-anchor="middle" stroke="rgba(0,0,0,0.6)" stroke-width="2" paint-order="stroke">${esc(CARD.footer)}</text>
   ` : '';
 
   const dividerSvg = divider ? `
@@ -81,16 +80,15 @@ function overlayOnlySvg(opts = {}) {
   const lineHeight = 32;
   const textStartY = textAreaTop + 40 + (divider ? 16 : 0);
 
-  // Semi-transparent text area background for readability on texture
-  const textBgSvg = `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="rgba(0,0,0,0.5)"/>`;
+  // Text with stroke for readability on texture (no separate background overlay)
+  const textStroke = 'stroke="rgba(0,0,0,0.6)" stroke-width="3" paint-order="stroke"';
 
   return `<svg width="${W}" height="${H}">
-    <!-- Transparent background - texture shows through -->
-    ${textBgSvg}
+    <!-- Transparent background - texture shows through uniformly -->
     ${icons}
-    <text x="${W/2}" y="${headerH/2 + titleSize/3}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="#f4e4c1" text-anchor="middle" stroke="rgba(0,0,0,0.3)" stroke-width="2" paint-order="stroke">${esc(CARD.name)}</text>
+    <text x="${W/2}" y="${headerH/2 + titleSize/3}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="#f4e4c1" text-anchor="middle" ${textStroke}>${esc(CARD.name)}</text>
     ${dividerSvg}
-    ${lines.map((l, i) => `<text x="${textX}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" font-style="${bodyStyle}" fill="${textColor}" text-anchor="${textAlign}">${l}</text>`).join('')}
+    ${lines.map((l, i) => `<text x="${textX}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" font-style="${bodyStyle}" fill="${textColor}" text-anchor="${textAlign}" ${textStroke}>${l}</text>`).join('')}
     ${footerSvg}
   </svg>`;
 }
