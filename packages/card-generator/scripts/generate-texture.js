@@ -119,10 +119,10 @@ async function generateApiTexture(outputPath, options = {}) {
   console.log(`  Prompt: "${fullPrompt.slice(0, 80)}..."`);
 
   try {
-    // Use portrait aspect ratio closest to card dimensions
+    // Generate at square 1:1 ratio, then crop center to avoid boundary effects
     const payload = JSON.stringify({
       prompt: fullPrompt,
-      image_size: 'portrait_4_3',  // 768x1024, will resize to card
+      image_size: 'square_hd',  // 1024x1024 - will crop center
       num_images: 1
     });
 
@@ -148,9 +148,17 @@ async function generateApiTexture(outputPath, options = {}) {
     const tempPath = outputPath + '.tmp.png';
     execSync(`curl -s -o "${tempPath}" "${imageUrl}"`, { timeout: 60000 });
 
-    // Resize to exact card dimensions
+    // Crop center 60% to avoid boundary effects, then resize to card dimensions
     const sharp = require('sharp');
+    const metadata = await sharp(tempPath).metadata();
+    const cropSize = Math.floor(Math.min(metadata.width, metadata.height) * 0.6);
+    const cropX = Math.floor((metadata.width - cropSize) / 2);
+    const cropY = Math.floor((metadata.height - cropSize) / 2);
+
+    console.log(`  Cropping center ${cropSize}x${cropSize} to remove boundary effects...`);
+
     await sharp(tempPath)
+      .extract({ left: cropX, top: cropY, width: cropSize, height: cropSize })
       .resize(CARD_WIDTH, CARD_HEIGHT, { fit: 'cover' })
       .png()
       .toFile(outputPath);
