@@ -1,168 +1,83 @@
 # Layout Variant Comparison
 
-Generated 20 design variants. Please review and provide feedback.
+20 design variants. Images shown at ~250px width for easier comparison.
 
-**What I want feedback on:** Which layout elements work best? Any combinations you'd like to see?
-
----
-
-## border 40px
-
-**Current: 40px category border around portrait**
-
-![01-border-40px](01-border-40px.png)
+**Feedback needed:** Which elements work best? Any combinations to try?
 
 ---
 
-## border 20px
+## Border Width
 
-**Thinner border: 20px (more portrait visible)**
-
-![02-border-20px](02-border-20px.png)
-
----
-
-## border none
-
-**No border: edge-to-edge portrait**
-
-![03-border-none](03-border-none.png)
+| 40px (current) | 20px | None |
+|:---:|:---:|:---:|
+| <img src="01-border-40px.png" width="250"/> | <img src="02-border-20px.png" width="250"/> | <img src="03-border-none.png" width="250"/> |
 
 ---
 
-## fullframe
+## Frame Style
 
-**Full frame: category border around entire card**
-
-![04-fullframe](04-fullframe.png)
-
----
-
-## tinted textbox
-
-**Tinted text box: light category color behind text**
-
-![05-tinted-textbox](05-tinted-textbox.png)
+| Portrait frame (current) | Full card frame |
+|:---:|:---:|
+| <img src="01-border-40px.png" width="250"/> | <img src="04-fullframe.png" width="250"/> |
 
 ---
 
-## solid textbox
+## Text Box Background
 
-**Solid text box: same color as header**
-
-![06-solid-textbox](06-solid-textbox.png)
-
----
-
-## smaller portrait
-
-**Smaller portrait (650px): more text space**
-
-![07-smaller-portrait](07-smaller-portrait.png)
+| Parchment (current) | Tinted | Solid color |
+|:---:|:---:|:---:|
+| <img src="01-border-40px.png" width="250"/> | <img src="05-tinted-textbox.png" width="250"/> | <img src="06-solid-textbox.png" width="250"/> |
 
 ---
 
-## larger portrait
+## Portrait Size
 
-**Larger portrait (900px): less text space**
-
-![08-larger-portrait](08-larger-portrait.png)
-
----
-
-## no icons
-
-**No category icons in header**
-
-![09-no-icons](09-no-icons.png)
+| Smaller (650px) | Current (747px) | Larger (900px) |
+|:---:|:---:|:---:|
+| <img src="07-smaller-portrait.png" width="250"/> | <img src="01-border-40px.png" width="250"/> | <img src="08-larger-portrait.png" width="250"/> |
 
 ---
 
-## larger header
+## Header Variations
 
-**Larger header (120px) with bigger title**
+| No icons | Current | Larger header (120px) |
+|:---:|:---:|:---:|
+| <img src="09-no-icons.png" width="250"/> | <img src="01-border-40px.png" width="250"/> | <img src="10-larger-header.png" width="250"/> |
 
-![10-larger-header](10-larger-header.png)
-
----
-
-## name below portrait
-
-**Name below portrait (reversed layout)**
-
-![11-name-below-portrait](11-name-below-portrait.png)
+| Name below portrait |
+|:---:|
+| <img src="11-name-below-portrait.png" width="250"/> |
 
 ---
 
-## rounded portrait
+## Decorative Elements
 
-**Rounded corners on portrait area**
-
-![12-rounded-portrait](12-rounded-portrait.png)
-
----
-
-## divider line
-
-**Divider line between portrait and text**
-
-![13-divider-line](13-divider-line.png)
+| Rounded corners | Divider line |
+|:---:|:---:|
+| <img src="12-rounded-portrait.png" width="250"/> | <img src="13-divider-line.png" width="250"/> |
 
 ---
 
-## dark theme
+## Theme & Category
 
-**Dark theme: dark background, light text**
-
-![14-dark-theme](14-dark-theme.png)
-
----
-
-## category badge
-
-**Category badge in corner instead of icons**
-
-![15-category-badge](15-category-badge.png)
+| Dark theme | Category badge |
+|:---:|:---:|
+| <img src="14-dark-theme.png" width="250"/> | <img src="15-category-badge.png" width="250"/> |
 
 ---
 
-## no footer
+## Footer Variations
 
-**No footer: more text space**
-
-![16-no-footer](16-no-footer.png)
-
----
-
-## footer in portrait
-
-**Footer overlaid on portrait bottom**
-
-![17-footer-in-portrait](17-footer-in-portrait.png)
+| Current | No footer | Overlaid on portrait |
+|:---:|:---:|:---:|
+| <img src="01-border-40px.png" width="250"/> | <img src="16-no-footer.png" width="250"/> | <img src="17-footer-in-portrait.png" width="250"/> |
 
 ---
 
-## sans serif
+## Typography
 
-**Sans-serif font throughout**
-
-![18-sans-serif](18-sans-serif.png)
-
----
-
-## centered text
-
-**Center-aligned description text**
-
-![19-centered-text](19-centered-text.png)
+| Serif (current) | Sans-serif | Centered | Italic |
+|:---:|:---:|:---:|:---:|
+| <img src="01-border-40px.png" width="250"/> | <img src="18-sans-serif.png" width="250"/> | <img src="19-centered-text.png" width="250"/> | <img src="20-italic-desc.png" width="250"/> |
 
 ---
-
-## italic desc
-
-**Italic description text**
-
-![20-italic-desc](20-italic-desc.png)
-
----
-
