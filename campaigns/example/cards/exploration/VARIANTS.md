@@ -1,6 +1,6 @@
 # Layout Variant Comparison
 
-New default: **Full frame** with 40px border and icons.
+New default: **Full frame**, 40px border, 100px header, icons.
 
 **Feedback needed:** Which elements work best? Any combinations to try?
 
@@ -32,7 +32,7 @@ New default: **Full frame** with 40px border and icons.
 
 ## Portrait Size
 
-| Default (700px) | Larger (800px) |
+| Default (680px) | Larger (800px) |
 |:---:|:---:|
 | <img src="00-default.png" width="250"/> | <img src="04-larger-portrait.png" width="250"/> |
 
@@ -40,9 +40,9 @@ New default: **Full frame** with 40px border and icons.
 
 ## Header Variations
 
-| With icons (default) | No icons | Larger header |
+| With icons (default, 100px) | No icons | Smaller header (80px) |
 |:---:|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="05-no-icons.png" width="250"/> | <img src="06-larger-header.png" width="250"/> |
+| <img src="00-default.png" width="250"/> | <img src="05-no-icons.png" width="250"/> | <img src="06-smaller-header.png" width="250"/> |
 
 ---
 
@@ -54,27 +54,11 @@ New default: **Full frame** with 40px border and icons.
 
 ---
 
-## Theme
-
-| Light (default) | Dark |
-|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="08-dark-theme.png" width="250"/> |
-
----
-
-## Footer Variations
-
-| Default | No footer | Overlaid on portrait |
-|:---:|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="09-no-footer.png" width="250"/> | <img src="10-footer-in-portrait.png" width="250"/> |
-
----
-
 ## Typography
 
 | Serif (default) | Sans-serif | Centered | Italic |
 |:---:|:---:|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="11-sans-serif.png" width="250"/> | <img src="12-centered-text.png" width="250"/> | <img src="13-italic-desc.png" width="250"/> |
+| <img src="00-default.png" width="250"/> | <img src="08-sans-serif.png" width="250"/> | <img src="09-centered-text.png" width="250"/> | <img src="10-italic-desc.png" width="250"/> |
 
 ---
 
@@ -82,6 +66,6 @@ New default: **Full frame** with 40px border and icons.
 
 | Full frame (NEW) | Portrait frame only (OLD) |
 |:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="14-portrait-frame-only.png" width="250"/> |
+| <img src="00-default.png" width="250"/> | <img src="11-portrait-frame-only.png" width="250"/> |
 
 ---
