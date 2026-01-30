@@ -1,6 +1,6 @@
 # Layout Variant Comparison
 
-New default: **Full frame**, 40px border, 90px header, solid color, icons, divider line.
+New default: **Full frame**, 40px border, 90px header, solid color, icons, **divider line**.
 
 ---
 
@@ -30,16 +30,20 @@ New default: **Full frame**, 40px border, 90px header, solid color, icons, divid
 
 ## Decorative Elements
 
-| Default | With divider line |
+| With divider (default) | Without divider |
 |:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="04-divider-line.png" width="250"/> |
+| <img src="00-default.png" width="250"/> | <img src="04-no-divider.png" width="250"/> |
 
 ---
 
 ## Typography
 
-| Serif (default) | Sans-serif | Centered | Italic |
-|:---:|:---:|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="05-sans-serif.png" width="250"/> | <img src="06-centered-text.png" width="250"/> | <img src="07-italic-desc.png" width="250"/> |
+| Serif (default) | Sans-serif |
+|:---:|:---:|
+| <img src="00-default.png" width="300"/> | <img src="05-sans-serif.png" width="300"/> |
+
+| Centered | Italic |
+|:---:|:---:|
+| <img src="06-centered-text.png" width="300"/> | <img src="07-italic-desc.png" width="300"/> |
 
 ---
