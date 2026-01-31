@@ -1,15 +1,81 @@
 #!/usr/bin/env node
 /**
  * Generate layout variants for comparison
- * NEW DEFAULTS: Full frame, 40px border, icons in header
+ *
+ * LAYOUT SPECIFICATION
+ * ====================
+ * Card dimensions: W=827px, H=1417px (tarot size at 300dpi)
+ *
+ * MARGINS (B=40px on all four sides for print safety):
+ *   Safe area: x ∈ [B, W-B] = [40, 787], y ∈ [B, H-B] = [40, 1377]
+ *
+ * VERTICAL REGIONS (top to bottom, all within safe area):
+ *   Header:   y ∈ [B, B+HEADER_H]                    - title + corner icons
+ *   Portrait: y ∈ [B+HEADER_H, B+HEADER_H+PORTRAIT_H] - character image
+ *   Text:     y ∈ [portrait_bottom, footer_top]      - description
+ *   Footer:   y ∈ [H-B-FOOTER_H, H-B]                - location + corner icons
+ *
+ * CONSTRAINTS:
+ *   C1: Title must fit between header icons (width ≤ TITLE_MAX_W)
+ *   C2: 2-line title (75px) must fit in header region
+ *   C3: All content must stay within safe area (B margin from edges)
+ *   C4: Icons vertically centered in their regions
+ *
+ * DERIVED MEASUREMENTS:
+ *   - Icon size: 36px (24px base scaled 1.5x)
+ *   - 2-line title at 34px: 2 * 34 * 1.1 = 75px height
+ *   - Header needs: max(icon_h, title_h) + padding ≈ 80px
  */
 
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-const W = 827, H = 1417;
-const B = 40; // Border width
+// =============================================================================
+// LAYOUT CONSTANTS - All positioning derives from these values
+// =============================================================================
+const W = 827, H = 1417;           // Card dimensions
+const B = 40;                       // Margin on ALL four sides
+
+// Vertical region heights (content heights, not including margins)
+const HEADER_CONTENT_H = 80;        // Space for title + icons (fits 2-line title)
+const PORTRAIT_H = 650;             // Portrait image height (reduced to fit margins)
+const FOOTER_H = 40;                // Footer text + icons
+
+// Derived vertical positions (all respect top margin B)
+const HEADER_TOP = B;                                    // 40
+const HEADER_BOTTOM = B + HEADER_CONTENT_H;              // 120
+const PORTRAIT_TOP = HEADER_BOTTOM;                      // 120
+const PORTRAIT_BOTTOM = PORTRAIT_TOP + PORTRAIT_H;       // 770
+const TEXT_TOP = PORTRAIT_BOTTOM;                        // 770
+const FOOTER_TOP = H - B - FOOTER_H;                     // 1337
+const FOOTER_BOTTOM = H - B;                             // 1377
+const TEXT_BOTTOM = FOOTER_TOP;                          // 1337
+
+// Horizontal positions
+const CONTENT_LEFT = B;                                  // 40
+const CONTENT_RIGHT = W - B;                             // 787
+const CONTENT_W = W - 2 * B;                             // 747
+
+// Icon dimensions and positions
+const ICON_SIZE = 36;
+const ICON_MARGIN = 12;                                  // Margin from content edge
+const ICON_LEFT_X = CONTENT_LEFT + ICON_MARGIN;          // 52
+const ICON_RIGHT_X = CONTENT_RIGHT - ICON_SIZE - ICON_MARGIN;  // 739
+
+// Title constraints
+const TITLE_MAX_W = CONTENT_W - 2 * (ICON_SIZE + ICON_MARGIN + 10);  // ~611px
+// Measured character limits (worst-case W chars): 52px≤14, 42px≤17, 34px≤21, 28px≤26
+
+// Portrait positioning (with padding to be narrower than text)
+const PORTRAIT_PADDING = 20;
+const PORTRAIT_W = CONTENT_W - 2 * PORTRAIT_PADDING;     // 707
+const PORTRAIT_X = CONTENT_LEFT + PORTRAIT_PADDING;      // 60
+
+// =============================================================================
+// END LAYOUT CONSTANTS
+// =============================================================================
+
 const NPC_COLORS = { accent: '#8B4513', light: '#D2691E' };
 
 // Category-specific icons (simple SVG paths for different card types)
@@ -103,14 +169,9 @@ async function render(svg, portraitPath, outputPath, pX, pY, pW, pH, texturePath
 }
 
 // Generate SVG overlay for texture backgrounds
-// Options for text area: tint (none, dark, leather), border (none, line, decorative)
-// Options for portrait: border (none, line), corners (square, rounded)
+// Uses layout constants defined at top of file
 function textureOverlaySvg(opts = {}) {
-  // B is the uniform margin on all four sides (print safety)
-  const headerH = opts.headerH || 90;
-  const portraitH = opts.portraitH || 680;
   const textColor = '#f4e4c1';
-  const footerH = opts.footerH || 36;
   const showFooter = opts.showFooter !== false;
   const showIcons = opts.showIcons !== false;
   const fontFamily = opts.fontFamily || 'serif';
@@ -118,18 +179,11 @@ function textureOverlaySvg(opts = {}) {
   const bodySize = opts.bodySize || 28;
   const divider = opts.divider !== false;
   const charsPerLine = opts.charsPerLine || 38;
+  const cornerRadius = opts.cornerRadius || 20;
 
   // Custom card content and icon support
   const cardData = opts.cardData || CARD;
   const iconSvg = opts.iconSvg || ICON_SVG;
-
-  // Title: use SVG textLength to constrain width - no estimation needed
-  // Available width between header icons
-  const titleMaxWidth = W - 2 * (B + 48 + 10); // ~631px
-
-  // For 2-line titles: only 34px and 28px fit in 90px header
-  // 2 lines @ 34px = ~75px, 2 lines @ 28px = ~62px
-  const maxTwoLineSize = 34;
 
   // Find best 2-line split (minimize the longer line's length)
   const bestSplit = (name) => {
@@ -191,55 +245,53 @@ function textureOverlaySvg(opts = {}) {
   // Portrait styling
   const portraitBorder = opts.portraitBorder || 'none';  // 'none', 'line'
   const portraitCorners = opts.portraitCorners || 'square';  // 'square', 'rounded'
-  const cornerRadius = opts.cornerRadius || 20;
 
-  const textAreaTop = headerH + portraitH;
-  const textAreaH = H - headerH - portraitH - B - (showFooter ? footerH : 0);
-  const portraitPadding = opts.portraitPadding || 20;
-  const portraitW = W - B * 2 - portraitPadding * 2;
-  const portraitX = B + portraitPadding;
+  // Use layout constants (defined at top of file)
+  const textAreaH = TEXT_BOTTOM - TEXT_TOP - (showFooter ? FOOTER_H : 0);
 
-  // Header icons positioned with top margin B
-  const iconY = B + (headerH - B - 36) / 2; // Centered in header area below top margin
+  // Header icons: vertically centered in header region [HEADER_TOP, HEADER_BOTTOM]
+  const headerIconY = HEADER_TOP + (HEADER_CONTENT_H - ICON_SIZE) / 2;
   const icons = showIcons ? `
-    <g transform="translate(${B + 12}, ${iconY})">${iconSvg}</g>
-    <g transform="translate(${W - B - 48}, ${iconY})">${iconSvg}</g>
+    <g transform="translate(${ICON_LEFT_X}, ${headerIconY})">${iconSvg}</g>
+    <g transform="translate(${ICON_RIGHT_X}, ${headerIconY})">${iconSvg}</g>
   ` : '';
 
   const textStroke = 'stroke="rgba(0,0,0,0.5)" stroke-width="2" paint-order="stroke"';
 
-  // Footer centered in footer area (footerH = 36, fontSize = 24)
-  const footerY = H - B - footerH/2 + 8; // baseline offset for vertical centering
+  // Footer: vertically centered in footer region [FOOTER_TOP, FOOTER_BOTTOM]
+  const footerCenterY = FOOTER_TOP + FOOTER_H / 2;
+  const footerTextY = footerCenterY + 8; // baseline offset
   const footerSvg = showFooter ? `
-    <text x="${W/2}" y="${footerY}" font-family="${fontFamily}" font-size="24" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(displayFooter)}</text>
+    <text x="${W/2}" y="${footerTextY}" font-family="${fontFamily}" font-size="24" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(displayFooter)}</text>
   ` : '';
 
-  // Move divider down if there's a text border to avoid intersection
-  const dividerY = textAreaTop + (textBorder !== 'none' ? 20 : 10);
+  // Divider line at top of text area
+  const dividerY = TEXT_TOP + (textBorder !== 'none' ? 20 : 10);
   const dividerSvg = divider ? `
-    <line x1="${B + 20}" y1="${dividerY}" x2="${W - B - 20}" y2="${dividerY}" stroke="${textColor}" stroke-width="3" opacity="0.7"/>
+    <line x1="${CONTENT_LEFT + 20}" y1="${dividerY}" x2="${CONTENT_RIGHT - 20}" y2="${dividerY}" stroke="${textColor}" stroke-width="3" opacity="0.7"/>
   ` : '';
 
   const lines = wrap(esc(cardData.desc), charsPerLine);
   const lineHeight = 36;
-  const textStartY = textAreaTop + 44 + (divider ? 16 : 0);
+  const textStartY = TEXT_TOP + 44 + (divider ? 16 : 0);
 
   // Text area background based on tint option
+  const textBgH = TEXT_BOTTOM - TEXT_TOP + (showFooter ? FOOTER_H : 0);
   let textBgSvg = '';
   if (textTint === 'dark') {
-    textBgSvg = `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="rgba(0,0,0,0.35)"/>`;
+    textBgSvg = `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="rgba(0,0,0,0.35)"/>`;
   } else if (textTint === 'leather') {
-    textBgSvg = `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="rgba(90,50,20,0.5)"/>`;
+    textBgSvg = `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="rgba(90,50,20,0.5)"/>`;
   }
   // 'none' = no background
 
   // Text area border
   let textBorderSvg = '';
   if (textBorder === 'line') {
-    textBorderSvg = `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="none" stroke="${textColor}" stroke-width="2" opacity="0.5"/>`;
+    textBorderSvg = `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="none" stroke="${textColor}" stroke-width="2" opacity="0.5"/>`;
   } else if (textBorder === 'decorative') {
     // Decorative corners
-    const tbX = B, tbY = textAreaTop, tbW = W - B*2, tbH = textAreaH + (showFooter ? footerH : 0);
+    const tbX = CONTENT_LEFT, tbY = TEXT_TOP, tbW = CONTENT_W, tbH = textBgH;
     const cs = 15; // corner size
     textBorderSvg = `
       <path d="M${tbX+cs},${tbY} L${tbX},${tbY} L${tbX},${tbY+cs}" fill="none" stroke="${textColor}" stroke-width="2"/>
@@ -248,46 +300,42 @@ function textureOverlaySvg(opts = {}) {
       <path d="M${tbX+tbW},${tbY+tbH-cs} L${tbX+tbW},${tbY+tbH} L${tbX+tbW-cs},${tbY+tbH}" fill="none" stroke="${textColor}" stroke-width="2"/>
     `;
   } else if (textBorder === 'icons') {
-    // Category icons centered vertically in footer area
-    const tbX = B, tbW = W - B*2;
-    const iconMargin = 12; // horizontal margin from edges
-    const iconWidth = 36; // icon scaled size
-    const footerTop = H - B - footerH;
-    const iconY = footerTop + (footerH - iconWidth) / 2; // center icons in footer area
+    // Footer icons: centered in footer region [FOOTER_TOP, FOOTER_BOTTOM]
+    const footerIconY = FOOTER_TOP + (FOOTER_H - ICON_SIZE) / 2;
     textBorderSvg = `
-      <g transform="translate(${tbX + iconMargin}, ${iconY})">${iconSvg}</g>
-      <g transform="translate(${tbX + tbW - iconWidth - iconMargin}, ${iconY})">${iconSvg}</g>
+      <g transform="translate(${ICON_LEFT_X}, ${footerIconY})">${iconSvg}</g>
+      <g transform="translate(${ICON_RIGHT_X}, ${footerIconY})">${iconSvg}</g>
     `;
   }
 
   // Portrait border - draw OUTSIDE the portrait area with clear offset
   let portraitBorderSvg = '';
   if (portraitBorder === 'line') {
-    const borderOffset = 4; // Larger offset so border is clearly visible
+    const borderOffset = 4;
     const strokeW = 4;
     if (portraitCorners === 'rounded') {
-      portraitBorderSvg = `<rect x="${portraitX - borderOffset}" y="${headerH - borderOffset}" width="${portraitW + borderOffset*2}" height="${portraitH + borderOffset*2}" rx="${cornerRadius + borderOffset}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
+      portraitBorderSvg = `<rect x="${PORTRAIT_X - borderOffset}" y="${PORTRAIT_TOP - borderOffset}" width="${PORTRAIT_W + borderOffset*2}" height="${PORTRAIT_H + borderOffset*2}" rx="${cornerRadius + borderOffset}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
     } else {
-      portraitBorderSvg = `<rect x="${portraitX - borderOffset}" y="${headerH - borderOffset}" width="${portraitW + borderOffset*2}" height="${portraitH + borderOffset*2}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
+      portraitBorderSvg = `<rect x="${PORTRAIT_X - borderOffset}" y="${PORTRAIT_TOP - borderOffset}" width="${PORTRAIT_W + borderOffset*2}" height="${PORTRAIT_H + borderOffset*2}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
     }
   }
 
-  // Clip path for rounded portrait (will be used by render function)
+  // Clip path for rounded portrait
   let defs = '';
   if (portraitCorners === 'rounded') {
     defs = `<defs>
       <clipPath id="portraitClip">
-        <rect x="${portraitX}" y="${headerH}" width="${portraitW}" height="${portraitH}" rx="${cornerRadius}"/>
+        <rect x="${PORTRAIT_X}" y="${PORTRAIT_TOP}" width="${PORTRAIT_W}" height="${PORTRAIT_H}" rx="${cornerRadius}"/>
       </clipPath>
     </defs>`;
   }
 
-  // Generate title SVG (1 or 2 lines, vertically centered in header safe area)
-  // Header safe area: y = B to y = headerH (respects top margin)
+  // Generate title SVG (1 or 2 lines, vertically centered in header region)
+  // Header region: y ∈ [HEADER_TOP, HEADER_BOTTOM]
   const titleLineHeight = autoTitleSize * 1.1;
   const titleBlockHeight = titleLines.length * titleLineHeight;
-  const headerCenter = (B + headerH) / 2; // Center of safe header area
-  const titleStartY = headerCenter - titleBlockHeight/2 + autoTitleSize * 0.75;
+  const headerCenterY = HEADER_TOP + HEADER_CONTENT_H / 2;
+  const titleStartY = headerCenterY - titleBlockHeight/2 + autoTitleSize * 0.75;
   const titleSvg = titleLines.map((line, i) =>
     `<text x="${W/2}" y="${titleStartY + i * titleLineHeight}" font-family="${fontFamily}" font-size="${autoTitleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(line)}</text>`
   ).join('\n    ');
@@ -300,27 +348,23 @@ function textureOverlaySvg(opts = {}) {
     ${icons}
     ${titleSvg}
     ${dividerSvg}
-    ${lines.map((l, i) => `<text x="${B + 24}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" fill="${textColor}" ${textStroke}>${l}</text>`).join('')}
+    ${lines.map((l, i) => `<text x="${CONTENT_LEFT + 24}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" fill="${textColor}" ${textStroke}>${l}</text>`).join('')}
     ${footerSvg}
   </svg>`;
 }
 
-// Render with rounded portrait corners
+// Render card with texture background and portrait
+// Uses layout constants for positioning
 async function renderTextureCard(svg, portraitPath, outputPath, texturePath, opts = {}) {
-  const headerH = opts.headerH || 90;
-  const portraitH = opts.portraitH || 680;
-  const portraitPadding = opts.portraitPadding || 20; // Inset from border edges
-  const portraitW = W - B * 2 - portraitPadding * 2;
-  const portraitX = B + portraitPadding;
   const cornerRadius = opts.cornerRadius || 20;
   const roundedPortrait = opts.roundedPortrait || false;
 
-  let portrait = await sharp(portraitPath).resize(portraitW, portraitH, { fit: 'cover' });
+  let portrait = await sharp(portraitPath).resize(PORTRAIT_W, PORTRAIT_H, { fit: 'cover' });
 
   if (roundedPortrait) {
     // Create rounded corners mask
-    const mask = Buffer.from(`<svg width="${portraitW}" height="${portraitH}">
-      <rect width="${portraitW}" height="${portraitH}" rx="${cornerRadius}" fill="white"/>
+    const mask = Buffer.from(`<svg width="${PORTRAIT_W}" height="${PORTRAIT_H}">
+      <rect width="${PORTRAIT_W}" height="${PORTRAIT_H}" rx="${cornerRadius}" fill="white"/>
     </svg>`);
     const maskBuffer = await sharp(mask).png().toBuffer();
     portrait = await portrait
@@ -336,7 +380,7 @@ async function renderTextureCard(svg, portraitPath, outputPath, texturePath, opt
 
   await sharp(texture)
     .composite([
-      { input: portrait, top: headerH, left: portraitX },
+      { input: portrait, top: PORTRAIT_TOP, left: PORTRAIT_X },
       { input: overlay, top: 0, left: 0 }
     ])
     .png()
