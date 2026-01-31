@@ -7,27 +7,30 @@ This repository supports collaborative preparation of fantasy TTRPG campaigns. C
 ```
 CLAUDE.md           # You are here - agent onboarding
 README.md           # Brief overview for human visitors
-PROJECT.md          # Backlog, completed work, project status
 
+campaigns/<name>/   # Individual campaigns (each has its own CLAUDE.md)
+packages/<name>/    # Larger tools/applications (e.g., card-generator)
+resources/          # Curated GM resources and references
 scripts/            # Reusable scripts (sh, js, py)
-packages/<name>/    # Larger tools/applications with dependencies
-campaigns/<name>/   # Individual campaigns (see below)
+docs/               # Conventions and notes
 
 .claude/
   settings.json     # Hooks and configuration
-  skills/<slug>/    # Progressive disclosure knowledge (SKILL.md + references/)
-  agents/<name>.md  # Reusable agent prompts for Task() subagents
+  hooks/            # SessionStart and other hooks
+  skills/<slug>/    # Progressive disclosure knowledge
+  agents/<name>.md  # Specialized agent prompts
 ```
 
 ### Campaign Structure
 
 Each campaign directory contains:
-- `CLAUDE.md` - Campaign-specific agent onboarding
+- `CLAUDE.md` - **Read this first** for campaign tone, philosophy, and guidelines
+- `PROGRESS.md` - Current status and next steps
 - `lore/` - World-building, factions, locations, history
-- `characters/` - NPCs, player characters, character sheets
-- `sessions/` - Session logs, prep notes, handouts
-- `encounters/` - Combat encounters, puzzles, social challenges
-- `assets/` - Images, maps, reference materials
+- `characters/` - NPCs, player characters
+- `sessions/` - Session logs, prep notes, hooks
+- `encounters/` - Combat, puzzles, social challenges
+- `assets/` - Images, maps, handouts
 
 ## Core Conventions
 
@@ -36,7 +39,7 @@ Each campaign directory contains:
 - Use precise, clear language everywhere
 - Write out implications explicitly - don't require agents to deduce
 - "Present interesting information in a boring manner" - state facts plainly
-- Example: Don't hint that a character is selfish; write "Motivation: selfish egoist" in their notes
+- Example: Don't hint that a character is selfish; write "Motivation: selfish egoist"
 
 ### Information States
 
@@ -78,91 +81,28 @@ A brief interruption beats a dead end.
 
 ### What Agents Do Well
 
-**Text Processing**
-- Read and extract information very quickly
-- Imitate styles, give characters distinct voices
-- Search, index, and summarize for knowledge gathering
-- Write and iterate on content (expect multiple passes for quality)
-
-**Reasoning**
-- Short-horizon planning: combat tactics, character reactions, scene improvisation
-- Following established patterns and procedures
-- Applying rules and checking consistency
-
-**Coding**
-- Automate bulk operations (e.g., HTML-to-markdown conversion)
-- Write scripts for repetitive tasks
-- Build tools for campaign management
-
-**Knowledge**
-- Familiar with D&D, Pathfinder, VtM, and other TTRPG systems (with caveats below)
-- Can refresh knowledge by reading rulebook excerpts
-- Good at general fantasy/genre knowledge
+- **Text**: Read/extract fast, imitate styles, give characters distinct voices
+- **Search**: Index, summarize, grep across files for knowledge gathering
+- **Reasoning**: Short-horizon planning, applying rules, checking consistency
+- **Coding**: Automate bulk operations, write scripts, build tools
+- **Knowledge**: Familiar with D&D, Pathfinder, VtM (with caveats below)
 
 ### What Agents Do Poorly
 
-**Images**
-- Cannot create images directly (can prompt other AI tools)
-- Weak at judging image quality, style consistency, character likeness
+- **Images**: Cannot create directly, weak at judging quality/consistency
+- **First drafts**: Often need revision, may fill gaps overconfidently
+- **Long arcs**: May miss creative solutions, complex plans need human review
+- **Rules precision**: Training mixes systems; verify mechanical details against source
 
-**Text Quality**
-- First drafts often need revision
-- May fill gaps overconfidently - review for coherence
-- Better at short pieces than long narrative arcs
-
-**Long-Horizon Planning**
-- Heuristics work for predictable actors
-- May miss creative solutions that a thinking human would find
-- Complex multi-step plans need human review
-
-**Rules Details**
-- Training mixes up similar systems and homebrew
-- Exact modifiers and edge cases may be wrong
-- Always verify mechanical details against source material
-
-## Working with Subagents
-
-Use `Task()` to spawn subagents for focused work. Available patterns:
-
-**Built-in types:**
-- `Explore` - Codebase navigation and search
-- `Plan` - Architecture and implementation planning
-- `Bash` - Command execution
-- `general-purpose` - Multi-step research tasks
-
-**Custom agents:** See `.claude/agents/` for campaign-specific agent prompts (e.g., character creation, encounter design, image generation instructions).
-
-When spawning agents:
-- Provide complete context; they don't see conversation history
-- Be explicit about whether to research only or make changes
-- Use for parallelizable work to save time
-
-## Quick Reference
-
-### Common Tasks
-
-| Task | Approach |
-|------|----------|
-| Add session log | Create `campaigns/<name>/sessions/YYYY-MM-DD.md` |
-| New NPC | Add to `campaigns/<name>/characters/npcs/` |
-| Create NPC/location card | See `packages/card-generator/CLAUDE.md` |
-| Design encounter | Use encounter agent template or create in `encounters/` |
-| Find information | Use `Explore` subagent or grep the codebase |
-| Bulk edits | Write a script in `scripts/` |
-
-### File Naming
+## File Naming
 
 - Dates: `YYYY-MM-DD` format
 - Slugs: `lowercase-with-dashes`
 - Be descriptive: `the-crimson-merchant.md` not `npc-042.md`
 
-## Environment
-
-This repo is designed for Claude Code Web and similar environments. Most tools are available by default. If a script needs dependencies, document installation in the script's header or a local README.
-
 ## Getting Started
 
-1. Read `PROJECT.md` for current status and priorities
-2. Check relevant `campaigns/<name>/CLAUDE.md` for campaign context
+1. Check relevant `campaigns/<name>/CLAUDE.md` for campaign context and tone
+2. Review `campaigns/<name>/PROGRESS.md` for current status
 3. Review recent session logs to understand what's "nailed down"
 4. Ask clarifying questions before making changes to established canon

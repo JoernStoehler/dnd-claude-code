@@ -1,3 +1,8 @@
+---
+name: session-handoff
+description: Use this checklist at the end of a working session before context is lost.
+---
+
 # Session Handoff Skill
 
 Use this checklist at the end of a working session before context is lost.
