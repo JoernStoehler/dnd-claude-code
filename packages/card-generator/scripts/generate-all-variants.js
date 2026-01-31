@@ -121,23 +121,63 @@ function textureOverlaySvg(opts = {}) {
   // Max width for title = card width minus icon areas (icons at B+12 to B+48 on each side)
   const titleMaxWidth = W - 2 * (B + 48 + 10); // ~620px usable
   const avgCharWidth = 0.55; // approximate ratio for serif bold
+  const sizes = [52, 42, 34, 28];
+
   const fitsAtSize = (text, size) => text.length * size * avgCharWidth <= titleMaxWidth;
+  const maxCharsAtSize = (size) => Math.floor(titleMaxWidth / (size * avgCharWidth));
 
-  let autoTitleSize = titleSize; // 52px default
-  let titleLines = [cardData.name];
-
-  if (!fitsAtSize(cardData.name, 52)) {
-    if (fitsAtSize(cardData.name, 42)) {
-      autoTitleSize = 42;
-    } else if (fitsAtSize(cardData.name, 34)) {
-      autoTitleSize = 34;
-    } else {
-      // Wrap to 2 lines at 42px
-      autoTitleSize = 42;
-      const words = cardData.name.split(' ');
-      const mid = Math.ceil(words.length / 2);
-      titleLines = [words.slice(0, mid).join(' '), words.slice(mid).join(' ')];
+  // Find best 2-line split (minimize the longer line's length)
+  const bestSplit = (name) => {
+    const words = name.split(' ');
+    if (words.length < 2) return [name]; // Can't split single word
+    let best = null, bestMax = Infinity;
+    for (let i = 1; i < words.length; i++) {
+      const line1 = words.slice(0, i).join(' ');
+      const line2 = words.slice(i).join(' ');
+      const maxLen = Math.max(line1.length, line2.length);
+      if (maxLen < bestMax) {
+        bestMax = maxLen;
+        best = [line1, line2];
+      }
     }
+    return best;
+  };
+
+  // Truncate text to fit with ellipsis
+  const truncateToFit = (text, size) => {
+    const maxChars = maxCharsAtSize(size) - 1; // -1 for ellipsis
+    return text.length <= maxChars + 1 ? text : text.slice(0, maxChars) + '…';
+  };
+
+  let autoTitleSize = titleSize;
+  let titleLines = [cardData.name];
+  const split = bestSplit(cardData.name);
+
+  // Try options in priority order: larger fonts preferred, single line slightly preferred at same size
+  // 1-line@52, 1-line@42, 2-line@52, 1-line@34, 2-line@42, 1-line@28, 2-line@34, 2-line@28, truncate
+  const fits1 = (size) => fitsAtSize(cardData.name, size);
+  const fits2 = (size) => split && split.length === 2 && fitsAtSize(split[0], size) && fitsAtSize(split[1], size);
+
+  // Constraints:
+  // - Width: title must fit within ~620px (between header icons)
+  // - Height: 2-line titles must fit in 90px header (only 34px and 28px work for 2 lines)
+  // Priority: larger font preferred, single line preferred at same size
+  if (fits1(52)) {
+    autoTitleSize = 52; titleLines = [cardData.name];
+  } else if (fits1(42)) {
+    autoTitleSize = 42; titleLines = [cardData.name];
+  } else if (fits1(34)) {
+    autoTitleSize = 34; titleLines = [cardData.name];
+  } else if (fits2(34)) {
+    autoTitleSize = 34; titleLines = split;  // 2 lines at 34px fits in 90px header
+  } else if (fits1(28)) {
+    autoTitleSize = 28; titleLines = [cardData.name];
+  } else if (fits2(28)) {
+    autoTitleSize = 28; titleLines = split;  // 2 lines at 28px fits in 90px header
+  } else {
+    // Fallback: truncate at smallest size
+    autoTitleSize = 28;
+    titleLines = [truncateToFit(cardData.name, 28)];
   }
 
   // Truncate footer if too long (max ~40 chars for single line)
