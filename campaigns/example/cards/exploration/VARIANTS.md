@@ -74,10 +74,10 @@ Generate texture: `node scripts/generate-texture.js texture.png --category=npc -
 |:---:|:---:|:---:|
 | <img src="14-tex-rounded-portrait.png" width="200"/> | <img src="15-tex-portrait-border.png" width="200"/> | <img src="16-tex-rounded-with-border.png" width="200"/> |
 
-### Full Polish
+### Text Area Decoration
 
-<img src="17-tex-full-polish.png" width="300"/>
-
-Rounded portrait + decorative text border corners
+| Decorative corners | Icons in corners |
+|:---:|:---:|
+| <img src="17-tex-decorative-corners.png" width="250"/> | <img src="18-tex-corner-icons.png" width="250"/> |
 
 ---
