@@ -30,6 +30,40 @@
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
+const opentype = require('opentype.js');
+
+// Load system serif font for text measurement
+// Falls back to a reasonable default if not found
+let titleFont = null;
+const fontPaths = [
+  '/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf',
+  '/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf',
+  '/System/Library/Fonts/Times.ttc',
+  'C:\\Windows\\Fonts\\timesbd.ttf'
+];
+for (const fp of fontPaths) {
+  if (fs.existsSync(fp)) {
+    try {
+      titleFont = opentype.loadSync(fp);
+      break;
+    } catch (e) { /* try next */ }
+  }
+}
+
+// Measure actual text width in pixels at given font size
+function measureTextWidth(text, fontSize) {
+  if (!titleFont) {
+    // Fallback: estimate based on 0.6 average char width
+    return text.length * fontSize * 0.6;
+  }
+  const scale = fontSize / titleFont.unitsPerEm;
+  let width = 0;
+  for (let i = 0; i < text.length; i++) {
+    const glyph = titleFont.charToGlyph(text[i]);
+    width += glyph.advanceWidth * scale;
+  }
+  return width;
+}
 
 // =============================================================================
 // LAYOUT CONSTANTS - All positioning derives from these values
@@ -210,25 +244,45 @@ function textureOverlaySvg(opts = {}) {
     autoTitleSize = opts.forceTitleSize;
     titleLines = [name];
   } else {
-    // Measured limits (worst-case chars like W at 52px fit ~14-15)
-    // Single line: 52px ≤14 chars, 42px ≤17 chars, 34px ≤21 chars, 28px ≤26 chars
-    // For 2 lines: each line must fit, so use same limits per line
-    if (name.length <= 14) {
-      autoTitleSize = 52; titleLines = [name];
-    } else if (name.length <= 17) {
-      autoTitleSize = 42; titleLines = [name];
-    } else if (name.length <= 21) {
-      autoTitleSize = 34; titleLines = [name];
-    } else if (split && Math.max(split[0].length, split[1].length) <= 21) {
-      autoTitleSize = 34; titleLines = split;
-    } else if (name.length <= 26) {
-      autoTitleSize = 28; titleLines = [name];
-    } else if (split && Math.max(split[0].length, split[1].length) <= 26) {
-      autoTitleSize = 28; titleLines = split;
-    } else {
-      // Truncate
+    // Use actual text measurement to determine font size
+    // Try sizes from largest to smallest, use first that fits
+    const sizes = [52, 42, 34, 28];
+    let fitted = false;
+
+    // Try single line at each size
+    for (const size of sizes) {
+      const width = measureTextWidth(name, size);
+      if (width <= TITLE_MAX_W) {
+        autoTitleSize = size;
+        titleLines = [name];
+        fitted = true;
+        break;
+      }
+    }
+
+    // If single line doesn't fit, try 2 lines (only 34px and 28px fit in header height)
+    if (!fitted && split) {
+      for (const size of [34, 28]) {
+        const w1 = measureTextWidth(split[0], size);
+        const w2 = measureTextWidth(split[1], size);
+        if (w1 <= TITLE_MAX_W && w2 <= TITLE_MAX_W) {
+          autoTitleSize = size;
+          titleLines = split;
+          fitted = true;
+          break;
+        }
+      }
+    }
+
+    // Fallback: truncate at smallest size
+    if (!fitted) {
       autoTitleSize = 28;
-      titleLines = [name.slice(0, 25) + '…'];
+      // Truncate to fit
+      let truncated = name;
+      while (measureTextWidth(truncated + '…', 28) > TITLE_MAX_W && truncated.length > 1) {
+        truncated = truncated.slice(0, -1);
+      }
+      titleLines = [truncated + '…'];
     }
   }
 
