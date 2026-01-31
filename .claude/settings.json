@@ -1,4 +1,32 @@
 {
-  "permissions": {},
-  "hooks": {}
+  "permissions": {
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/secrets/**)",
+      "Read(**/.env)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)"
+    ]
+  },
+  "env": {
+    "GIT_TERMINAL_PROMPT": "0",
+    "GIT_SSH_COMMAND": "ssh -oBatchMode=yes",
+    "GIT_ASKPASS": "/bin/true",
+    "GCM_INTERACTIVE": "Never",
+    "GIT_PAGER": "cat",
+    "GIT_EDITOR": "true"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -lc \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-start.sh\""
+          }
+        ]
+      }
+    ]
+  }
 }
