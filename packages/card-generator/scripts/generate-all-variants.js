@@ -50,6 +50,11 @@ const CARD_SAMPLES = {
     desc: 'An ancient wizard of immense power who has lived for millennia through forbidden time magic. His tower stands at the crossroads of three ley lines, drawing arcane energy from the very fabric of reality. Those who seek his counsel must first solve three riddles, survive the maze of living shadows, and prove their worth in a battle of wits against his enchanted chess set. Many have tried; few have succeeded.',
     footer: "Tower of Eternal Mysteries, Northwest of the Crystal Lake"
   },
+  // Width measurement tests at 52px (find where overlap starts)
+  test15: { name: 'WWWWWWWWWWWWWWW', desc: 'Test 15 wide chars', footer: 'Test' }, // 15 chars
+  test17: { name: 'WWWWWWWWWWWWWWWWW', desc: 'Test 17 wide chars', footer: 'Test' }, // 17 chars
+  test19: { name: 'WWWWWWWWWWWWWWWWWWW', desc: 'Test 19 wide chars', footer: 'Test' }, // 19 chars
+  test21: { name: 'WWWWWWWWWWWWWWWWWWWWW', desc: 'Test 21 wide chars', footer: 'Test' }, // 21 chars
   // Category-specific samples
   location: {
     name: 'The Gilded Tankard',
@@ -117,67 +122,59 @@ function textureOverlaySvg(opts = {}) {
   const cardData = opts.cardData || CARD;
   const iconSvg = opts.iconSvg || ICON_SVG;
 
-  // Auto-scale title: fit with default font, smaller if needed, 2 lines if needed
-  // Max width for title = card width minus icon areas (icons at B+12 to B+48 on each side)
-  const titleMaxWidth = W - 2 * (B + 48 + 10); // ~620px usable
-  const avgCharWidth = 0.55; // approximate ratio for serif bold
-  const sizes = [52, 42, 34, 28];
+  // Title: use SVG textLength to constrain width - no estimation needed
+  // Available width between header icons
+  const titleMaxWidth = W - 2 * (B + 48 + 10); // ~631px
 
-  const fitsAtSize = (text, size) => text.length * size * avgCharWidth <= titleMaxWidth;
-  const maxCharsAtSize = (size) => Math.floor(titleMaxWidth / (size * avgCharWidth));
+  // For 2-line titles: only 34px and 28px fit in 90px header
+  // 2 lines @ 34px = ~75px, 2 lines @ 28px = ~62px
+  const maxTwoLineSize = 34;
 
   // Find best 2-line split (minimize the longer line's length)
   const bestSplit = (name) => {
     const words = name.split(' ');
-    if (words.length < 2) return [name]; // Can't split single word
+    if (words.length < 2) return null;
     let best = null, bestMax = Infinity;
     for (let i = 1; i < words.length; i++) {
       const line1 = words.slice(0, i).join(' ');
       const line2 = words.slice(i).join(' ');
       const maxLen = Math.max(line1.length, line2.length);
-      if (maxLen < bestMax) {
-        bestMax = maxLen;
-        best = [line1, line2];
-      }
+      if (maxLen < bestMax) { bestMax = maxLen; best = [line1, line2]; }
     }
     return best;
   };
 
-  // Truncate text to fit with ellipsis
-  const truncateToFit = (text, size) => {
-    const maxChars = maxCharsAtSize(size) - 1; // -1 for ellipsis
-    return text.length <= maxChars + 1 ? text : text.slice(0, maxChars) + '…';
-  };
+  const name = cardData.name;
+  const split = bestSplit(name);
 
   let autoTitleSize = titleSize;
-  let titleLines = [cardData.name];
-  const split = bestSplit(cardData.name);
+  let titleLines = [name];
 
-  // Try options in priority order: larger fonts preferred, single line slightly preferred at same size
-  // 1-line@52, 1-line@42, 2-line@52, 1-line@34, 2-line@42, 1-line@28, 2-line@34, 2-line@28, truncate
-  const fits1 = (size) => fitsAtSize(cardData.name, size);
-  const fits2 = (size) => split && split.length === 2 && fitsAtSize(split[0], size) && fitsAtSize(split[1], size);
-
-  // Constraints:
-  // - Width: title must fit within ~620px (between header icons)
-  // - Height: 2-line titles must fit in 90px header (only 34px and 28px work for 2 lines)
-  // Priority: larger font preferred, single line preferred at same size
-  if (fits1(52)) {
-    autoTitleSize = 52; titleLines = [cardData.name];
-  } else if (fits1(42)) {
-    autoTitleSize = 42; titleLines = [cardData.name];
-  } else if (fits1(34)) {
-    autoTitleSize = 34; titleLines = [cardData.name];
-  } else if (fits2(34)) {
-    autoTitleSize = 34; titleLines = split;  // 2 lines at 34px fits in 90px header
-  } else if (fits1(28)) {
-    autoTitleSize = 28; titleLines = [cardData.name];
-  } else if (fits2(28)) {
-    autoTitleSize = 28; titleLines = split;  // 2 lines at 28px fits in 90px header
+  // Allow forcing a specific size for measurement tests
+  if (opts.forceTitleSize) {
+    autoTitleSize = opts.forceTitleSize;
+    titleLines = [name];
   } else {
-    // Fallback: truncate at smallest size
-    autoTitleSize = 28;
-    titleLines = [truncateToFit(cardData.name, 28)];
+    // Measured limits (worst-case chars like W at 52px fit ~14-15)
+    // Single line: 52px ≤14 chars, 42px ≤17 chars, 34px ≤21 chars, 28px ≤26 chars
+    // For 2 lines: each line must fit, so use same limits per line
+    if (name.length <= 14) {
+      autoTitleSize = 52; titleLines = [name];
+    } else if (name.length <= 17) {
+      autoTitleSize = 42; titleLines = [name];
+    } else if (name.length <= 21) {
+      autoTitleSize = 34; titleLines = [name];
+    } else if (split && Math.max(split[0].length, split[1].length) <= 21) {
+      autoTitleSize = 34; titleLines = split;
+    } else if (name.length <= 26) {
+      autoTitleSize = 28; titleLines = [name];
+    } else if (split && Math.max(split[0].length, split[1].length) <= 26) {
+      autoTitleSize = 28; titleLines = split;
+    } else {
+      // Truncate
+      autoTitleSize = 28;
+      titleLines = [name.slice(0, 25) + '…'];
+    }
   }
 
   // Truncate footer if too long (max ~40 chars for single line)
@@ -286,7 +283,7 @@ function textureOverlaySvg(opts = {}) {
   // Generate title SVG (1 or 2 lines, vertically centered in header)
   const titleLineHeight = autoTitleSize * 1.1;
   const titleBlockHeight = titleLines.length * titleLineHeight;
-  const titleStartY = headerH/2 - titleBlockHeight/2 + autoTitleSize * 0.75; // baseline of first line
+  const titleStartY = headerH/2 - titleBlockHeight/2 + autoTitleSize * 0.75;
   const titleSvg = titleLines.map((line, i) =>
     `<text x="${W/2}" y="${titleStartY + i * titleLineHeight}" font-family="${fontFamily}" font-size="${autoTitleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(line)}</text>`
   ).join('\n    ');
@@ -701,6 +698,56 @@ const variants = [
         textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
         cardData: CARD_SAMPLES.faction,
         iconSvg: CATEGORY_ICONS.faction
+      });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+
+  // === WIDTH MEASUREMENT TESTS (all at 52px to find limit) ===
+  {
+    id: '40-width-15W',
+    desc: 'Width test: 15 W chars at 52px',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({
+        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
+        cardData: CARD_SAMPLES.test15,
+        forceTitleSize: 52
+      });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+  {
+    id: '41-width-17W',
+    desc: 'Width test: 17 W chars at 52px',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({
+        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
+        cardData: CARD_SAMPLES.test17,
+        forceTitleSize: 52
+      });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+  {
+    id: '42-width-19W',
+    desc: 'Width test: 19 W chars at 52px',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({
+        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
+        cardData: CARD_SAMPLES.test19,
+        forceTitleSize: 52
+      });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+  {
+    id: '43-width-21W',
+    desc: 'Width test: 21 W chars at 52px',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({
+        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
+        cardData: CARD_SAMPLES.test21,
+        forceTitleSize: 52
       });
       await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
     }
