@@ -52,6 +52,28 @@ Track what information is "nailed down" (revealed to players) vs "mutable" (can 
 - Keep documentation current; outdated docs cause mistakes
 - Prefer editing existing files over creating new ones
 
+### Source of Truth Chain
+
+When content conflicts, trust in this order:
+1. **Session logs** - What actually happened at the table (immutable)
+2. **Character sheets** - Player characters, stated NPC details
+3. **Lore documents** - World-building, factions, history
+4. **Unrevealed plans** - Can be changed freely until revealed
+
+If session log says X and lore doc says Y, session log wins.
+
+### Escalation Triggers
+
+Stop and ask the human when:
+- **Canon conflict**: New content contradicts session logs
+- **Player agency**: Decision affects PC backstory or choices
+- **Tone uncertainty**: Unsure if content fits campaign tone
+- **Mechanical questions**: D&D rules edge cases (verify against source)
+- **Scope creep**: Task expanding beyond original request
+- **Blocked**: Can't proceed without information not in repo
+
+A brief interruption beats a dead end.
+
 ## Agent Capabilities and Limitations
 
 ### What Agents Do Well
