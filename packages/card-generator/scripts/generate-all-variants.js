@@ -53,9 +53,9 @@ function textureOverlaySvg(opts = {}) {
   const showIcons = opts.showIcons !== false;
   const fontFamily = opts.fontFamily || 'serif';
   const titleSize = opts.titleSize || 52;
-  const bodySize = opts.bodySize || 24;
+  const bodySize = opts.bodySize || 28;
   const divider = opts.divider !== false;
-  const charsPerLine = opts.charsPerLine || 42;
+  const charsPerLine = opts.charsPerLine || 38;
 
   // Text area styling
   const textTint = opts.textTint || 'dark';  // 'none', 'dark', 'leather'
@@ -79,7 +79,7 @@ function textureOverlaySvg(opts = {}) {
   const textStroke = 'stroke="rgba(0,0,0,0.5)" stroke-width="2" paint-order="stroke"';
 
   const footerSvg = showFooter ? `
-    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(CARD.footer)}</text>
+    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="24" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(CARD.footer)}</text>
   ` : '';
 
   // Move divider down if there's a text border to avoid intersection
@@ -89,8 +89,8 @@ function textureOverlaySvg(opts = {}) {
   ` : '';
 
   const lines = wrap(esc(CARD.desc), charsPerLine);
-  const lineHeight = 32;
-  const textStartY = textAreaTop + 40 + (divider ? 16 : 0);
+  const lineHeight = 36;
+  const textStartY = textAreaTop + 44 + (divider ? 16 : 0);
 
   // Text area background based on tint option
   let textBgSvg = '';
@@ -116,11 +116,13 @@ function textureOverlaySvg(opts = {}) {
       <path d="M${tbX+tbW},${tbY+tbH-cs} L${tbX+tbW},${tbY+tbH} L${tbX+tbW-cs},${tbY+tbH}" fill="none" stroke="${textColor}" stroke-width="2"/>
     `;
   } else if (textBorder === 'icons') {
-    // Category icons in lower corners of text area
+    // Category icons in lower corners of text area (same 12px margin as header icons)
     const tbX = B, tbY = textAreaTop, tbW = W - B*2, tbH = textAreaH + (showFooter ? footerH : 0);
+    const iconMargin = 12;
+    const iconWidth = 36; // ICON_SVG scaled size
     textBorderSvg = `
-      <g transform="translate(${tbX + 8}, ${tbY + tbH - 44})">${ICON_SVG}</g>
-      <g transform="translate(${tbX + tbW - 44}, ${tbY + tbH - 44})">${ICON_SVG}</g>
+      <g transform="translate(${tbX + iconMargin}, ${tbY + tbH - iconWidth - iconMargin})">${ICON_SVG}</g>
+      <g transform="translate(${tbX + tbW - iconWidth - iconMargin}, ${tbY + tbH - iconWidth - iconMargin})">${ICON_SVG}</g>
     `;
   }
 
