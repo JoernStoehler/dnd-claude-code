@@ -117,9 +117,28 @@ function textureOverlaySvg(opts = {}) {
   const cardData = opts.cardData || CARD;
   const iconSvg = opts.iconSvg || ICON_SVG;
 
-  // Auto-scale title size based on name length
-  const nameLen = cardData.name.length;
-  const autoTitleSize = nameLen > 40 ? 28 : (nameLen > 30 ? 34 : (nameLen > 22 ? 42 : (nameLen > 16 ? 48 : titleSize)));
+  // Auto-scale title: fit with default font, smaller if needed, 2 lines if needed
+  // Max width for title = card width minus icon areas (icons at B+12 to B+48 on each side)
+  const titleMaxWidth = W - 2 * (B + 48 + 10); // ~620px usable
+  const avgCharWidth = 0.55; // approximate ratio for serif bold
+  const fitsAtSize = (text, size) => text.length * size * avgCharWidth <= titleMaxWidth;
+
+  let autoTitleSize = titleSize; // 52px default
+  let titleLines = [cardData.name];
+
+  if (!fitsAtSize(cardData.name, 52)) {
+    if (fitsAtSize(cardData.name, 42)) {
+      autoTitleSize = 42;
+    } else if (fitsAtSize(cardData.name, 34)) {
+      autoTitleSize = 34;
+    } else {
+      // Wrap to 2 lines at 42px
+      autoTitleSize = 42;
+      const words = cardData.name.split(' ');
+      const mid = Math.ceil(words.length / 2);
+      titleLines = [words.slice(0, mid).join(' '), words.slice(mid).join(' ')];
+    }
+  }
 
   // Truncate footer if too long (max ~40 chars for single line)
   const maxFooterLen = 40;
@@ -224,13 +243,21 @@ function textureOverlaySvg(opts = {}) {
     </defs>`;
   }
 
+  // Generate title SVG (1 or 2 lines, vertically centered in header)
+  const titleLineHeight = autoTitleSize * 1.1;
+  const titleBlockHeight = titleLines.length * titleLineHeight;
+  const titleStartY = headerH/2 - titleBlockHeight/2 + autoTitleSize * 0.75; // baseline of first line
+  const titleSvg = titleLines.map((line, i) =>
+    `<text x="${W/2}" y="${titleStartY + i * titleLineHeight}" font-family="${fontFamily}" font-size="${autoTitleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(line)}</text>`
+  ).join('\n    ');
+
   return `<svg width="${W}" height="${H}">
     ${defs}
     ${textBgSvg}
     ${textBorderSvg}
     ${portraitBorderSvg}
     ${icons}
-    <text x="${W/2}" y="${headerH/2 + autoTitleSize/3}" font-family="${fontFamily}" font-size="${autoTitleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(cardData.name)}</text>
+    ${titleSvg}
     ${dividerSvg}
     ${lines.map((l, i) => `<text x="${B + 24}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" fill="${textColor}" ${textStroke}>${l}</text>`).join('')}
     ${footerSvg}
