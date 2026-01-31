@@ -68,7 +68,9 @@ function textureOverlaySvg(opts = {}) {
 
   const textAreaTop = headerH + portraitH;
   const textAreaH = H - headerH - portraitH - B - (showFooter ? footerH : 0);
-  const portraitW = W - B * 2;
+  const portraitPadding = opts.portraitPadding || 20;
+  const portraitW = W - B * 2 - portraitPadding * 2;
+  const portraitX = B + portraitPadding;
 
   const iconY = (headerH - 36) / 2;
   const icons = showIcons ? `
@@ -132,9 +134,9 @@ function textureOverlaySvg(opts = {}) {
     const borderOffset = 4; // Larger offset so border is clearly visible
     const strokeW = 4;
     if (portraitCorners === 'rounded') {
-      portraitBorderSvg = `<rect x="${B - borderOffset}" y="${headerH - borderOffset}" width="${portraitW + borderOffset*2}" height="${portraitH + borderOffset*2}" rx="${cornerRadius + borderOffset}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
+      portraitBorderSvg = `<rect x="${portraitX - borderOffset}" y="${headerH - borderOffset}" width="${portraitW + borderOffset*2}" height="${portraitH + borderOffset*2}" rx="${cornerRadius + borderOffset}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
     } else {
-      portraitBorderSvg = `<rect x="${B - borderOffset}" y="${headerH - borderOffset}" width="${portraitW + borderOffset*2}" height="${portraitH + borderOffset*2}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
+      portraitBorderSvg = `<rect x="${portraitX - borderOffset}" y="${headerH - borderOffset}" width="${portraitW + borderOffset*2}" height="${portraitH + borderOffset*2}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
     }
   }
 
@@ -143,7 +145,7 @@ function textureOverlaySvg(opts = {}) {
   if (portraitCorners === 'rounded') {
     defs = `<defs>
       <clipPath id="portraitClip">
-        <rect x="${B}" y="${headerH}" width="${portraitW}" height="${portraitH}" rx="${cornerRadius}"/>
+        <rect x="${portraitX}" y="${headerH}" width="${portraitW}" height="${portraitH}" rx="${cornerRadius}"/>
       </clipPath>
     </defs>`;
   }
@@ -165,7 +167,9 @@ function textureOverlaySvg(opts = {}) {
 async function renderTextureCard(svg, portraitPath, outputPath, texturePath, opts = {}) {
   const headerH = opts.headerH || 90;
   const portraitH = opts.portraitH || 680;
-  const portraitW = W - B * 2;
+  const portraitPadding = opts.portraitPadding || 20; // Inset from border edges
+  const portraitW = W - B * 2 - portraitPadding * 2;
+  const portraitX = B + portraitPadding;
   const cornerRadius = opts.cornerRadius || 20;
   const roundedPortrait = opts.roundedPortrait || false;
 
@@ -190,7 +194,7 @@ async function renderTextureCard(svg, portraitPath, outputPath, texturePath, opt
 
   await sharp(texture)
     .composite([
-      { input: portrait, top: headerH, left: B },
+      { input: portrait, top: headerH, left: portraitX },
       { input: overlay, top: 0, left: 0 }
     ])
     .png()
