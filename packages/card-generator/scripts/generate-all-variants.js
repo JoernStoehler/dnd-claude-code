@@ -106,6 +106,7 @@ async function render(svg, portraitPath, outputPath, pX, pY, pW, pH, texturePath
 // Options for text area: tint (none, dark, leather), border (none, line, decorative)
 // Options for portrait: border (none, line), corners (square, rounded)
 function textureOverlaySvg(opts = {}) {
+  // B is the uniform margin on all four sides (print safety)
   const headerH = opts.headerH || 90;
   const portraitH = opts.portraitH || 680;
   const textColor = '#f4e4c1';
@@ -198,7 +199,8 @@ function textureOverlaySvg(opts = {}) {
   const portraitW = W - B * 2 - portraitPadding * 2;
   const portraitX = B + portraitPadding;
 
-  const iconY = (headerH - 36) / 2;
+  // Header icons positioned with top margin B
+  const iconY = B + (headerH - B - 36) / 2; // Centered in header area below top margin
   const icons = showIcons ? `
     <g transform="translate(${B + 12}, ${iconY})">${iconSvg}</g>
     <g transform="translate(${W - B - 48}, ${iconY})">${iconSvg}</g>
@@ -280,10 +282,12 @@ function textureOverlaySvg(opts = {}) {
     </defs>`;
   }
 
-  // Generate title SVG (1 or 2 lines, vertically centered in header)
+  // Generate title SVG (1 or 2 lines, vertically centered in header safe area)
+  // Header safe area: y = B to y = headerH (respects top margin)
   const titleLineHeight = autoTitleSize * 1.1;
   const titleBlockHeight = titleLines.length * titleLineHeight;
-  const titleStartY = headerH/2 - titleBlockHeight/2 + autoTitleSize * 0.75;
+  const headerCenter = (B + headerH) / 2; // Center of safe header area
+  const titleStartY = headerCenter - titleBlockHeight/2 + autoTitleSize * 0.75;
   const titleSvg = titleLines.map((line, i) =>
     `<text x="${W/2}" y="${titleStartY + i * titleLineHeight}" font-family="${fontFamily}" font-size="${autoTitleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(line)}</text>`
   ).join('\n    ');
