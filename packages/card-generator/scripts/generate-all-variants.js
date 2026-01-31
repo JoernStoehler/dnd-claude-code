@@ -11,8 +11,64 @@ const sharp = require('sharp');
 const W = 827, H = 1417;
 const B = 40; // Border width
 const NPC_COLORS = { accent: '#8B4513', light: '#D2691E' };
-const ICON_SVG = `<g transform="translate(0,0) scale(1.5)" fill="none" stroke="#f4e4c1" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M4 22c0-6 4-9 8-9s8 3 8 9"/></g>`;
-const CARD = { name: 'Grimble Thornwick', desc: 'A tinkering gnome inventor with perpetually soot-stained fingers and an infectious enthusiasm for clockwork contraptions.', footer: "Thornwick's Emporium" };
+
+// Category-specific icons (simple SVG paths for different card types)
+const CATEGORY_ICONS = {
+  npc: `<g transform="translate(0,0) scale(1.5)" fill="none" stroke="#f4e4c1" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M4 22c0-6 4-9 8-9s8 3 8 9"/></g>`,
+  location: `<g transform="translate(0,0) scale(1.5)" fill="none" stroke="#f4e4c1" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></g>`,
+  item: `<g transform="translate(0,0) scale(1.5)" fill="none" stroke="#f4e4c1" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></g>`,
+  faction: `<g transform="translate(0,0) scale(1.5)" fill="none" stroke="#f4e4c1" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></g>`,
+  quest: `<g transform="translate(0,0) scale(1.5)" fill="none" stroke="#f4e4c1" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></g>`
+};
+
+const ICON_SVG = CATEGORY_ICONS.npc; // Default icon
+
+// Test card content for edge cases
+const CARD_SAMPLES = {
+  default: {
+    name: 'Grimble Thornwick',
+    desc: 'A tinkering gnome inventor with perpetually soot-stained fingers and an infectious enthusiasm for clockwork contraptions.',
+    footer: "Thornwick's Emporium"
+  },
+  shortText: {
+    name: 'Bob',
+    desc: 'A friendly innkeeper.',
+    footer: 'Inn'
+  },
+  mediumText: {
+    name: 'Lady Seraphina Windwhisper',
+    desc: 'An elegant elven diplomat known for her silver tongue and keen political instincts.',
+    footer: "Elven Embassy"
+  },
+  longText: {
+    name: 'Bartholomew Coppergear III',
+    desc: 'A meticulous dwarven artificer who spent three centuries perfecting the art of clockwork engineering. His workshop is filled with whirring gears, ticking mechanisms, and the occasional explosive prototype. Despite his gruff exterior, he secretly crafts music boxes for orphaned children.',
+    footer: "The Grand Clockwork Emporium of Wonders"
+  },
+  veryLongText: {
+    name: 'High Archmagister Valdris Stormweaver the Eternal',
+    desc: 'An ancient wizard of immense power who has lived for millennia through forbidden time magic. His tower stands at the crossroads of three ley lines, drawing arcane energy from the very fabric of reality. Those who seek his counsel must first solve three riddles, survive the maze of living shadows, and prove their worth in a battle of wits against his enchanted chess set. Many have tried; few have succeeded.',
+    footer: "Tower of Eternal Mysteries, Northwest of the Crystal Lake"
+  },
+  // Category-specific samples
+  location: {
+    name: 'The Gilded Tankard',
+    desc: 'A bustling tavern at the crossroads where travelers share tales and merchants strike deals over foaming ales.',
+    footer: 'Market District'
+  },
+  item: {
+    name: 'Blade of the Dawn',
+    desc: 'An ancient longsword that glows with warm light. Deals extra radiant damage to undead.',
+    footer: 'Legendary Weapon'
+  },
+  faction: {
+    name: 'The Silver Hand',
+    desc: 'A secretive order of paladins dedicated to hunting down evil across the realm.',
+    footer: 'Lawful Good'
+  }
+};
+
+const CARD = CARD_SAMPLES.default;
 
 const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const wrap = (t,n) => { const w=t.split(' '),l=[]; let c=''; for(const x of w){if((c+' '+x).trim().length<=n)c=(c+' '+x).trim();else{if(c)l.push(c);c=x;}} if(c)l.push(c); return l; };
@@ -57,6 +113,20 @@ function textureOverlaySvg(opts = {}) {
   const divider = opts.divider !== false;
   const charsPerLine = opts.charsPerLine || 38;
 
+  // Custom card content and icon support
+  const cardData = opts.cardData || CARD;
+  const iconSvg = opts.iconSvg || ICON_SVG;
+
+  // Auto-scale title size based on name length
+  const nameLen = cardData.name.length;
+  const autoTitleSize = nameLen > 40 ? 28 : (nameLen > 30 ? 34 : (nameLen > 22 ? 42 : (nameLen > 16 ? 48 : titleSize)));
+
+  // Truncate footer if too long (max ~40 chars for single line)
+  const maxFooterLen = 40;
+  const displayFooter = cardData.footer.length > maxFooterLen
+    ? cardData.footer.slice(0, maxFooterLen - 1) + '…'
+    : cardData.footer;
+
   // Text area styling
   const textTint = opts.textTint || 'dark';  // 'none', 'dark', 'leather'
   const textBorder = opts.textBorder || 'none';  // 'none', 'line', 'decorative'
@@ -74,14 +144,16 @@ function textureOverlaySvg(opts = {}) {
 
   const iconY = (headerH - 36) / 2;
   const icons = showIcons ? `
-    <g transform="translate(${B + 12}, ${iconY})">${ICON_SVG}</g>
-    <g transform="translate(${W - B - 48}, ${iconY})">${ICON_SVG}</g>
+    <g transform="translate(${B + 12}, ${iconY})">${iconSvg}</g>
+    <g transform="translate(${W - B - 48}, ${iconY})">${iconSvg}</g>
   ` : '';
 
   const textStroke = 'stroke="rgba(0,0,0,0.5)" stroke-width="2" paint-order="stroke"';
 
+  // Footer centered in footer area (footerH = 36, fontSize = 24)
+  const footerY = H - B - footerH/2 + 8; // baseline offset for vertical centering
   const footerSvg = showFooter ? `
-    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="24" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(CARD.footer)}</text>
+    <text x="${W/2}" y="${footerY}" font-family="${fontFamily}" font-size="24" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(displayFooter)}</text>
   ` : '';
 
   // Move divider down if there's a text border to avoid intersection
@@ -90,7 +162,7 @@ function textureOverlaySvg(opts = {}) {
     <line x1="${B + 20}" y1="${dividerY}" x2="${W - B - 20}" y2="${dividerY}" stroke="${textColor}" stroke-width="3" opacity="0.7"/>
   ` : '';
 
-  const lines = wrap(esc(CARD.desc), charsPerLine);
+  const lines = wrap(esc(cardData.desc), charsPerLine);
   const lineHeight = 36;
   const textStartY = textAreaTop + 44 + (divider ? 16 : 0);
 
@@ -121,10 +193,10 @@ function textureOverlaySvg(opts = {}) {
     // Category icons in lower corners of text area (same 12px margin as header icons)
     const tbX = B, tbY = textAreaTop, tbW = W - B*2, tbH = textAreaH + (showFooter ? footerH : 0);
     const iconMargin = 12;
-    const iconWidth = 36; // ICON_SVG scaled size
+    const iconWidth = 36; // icon scaled size
     textBorderSvg = `
-      <g transform="translate(${tbX + iconMargin}, ${tbY + tbH - iconWidth - iconMargin})">${ICON_SVG}</g>
-      <g transform="translate(${tbX + tbW - iconWidth - iconMargin}, ${tbY + tbH - iconWidth - iconMargin})">${ICON_SVG}</g>
+      <g transform="translate(${tbX + iconMargin}, ${tbY + tbH - iconWidth - iconMargin})">${iconSvg}</g>
+      <g transform="translate(${tbX + tbW - iconWidth - iconMargin}, ${tbY + tbH - iconWidth - iconMargin})">${iconSvg}</g>
     `;
   }
 
@@ -156,7 +228,7 @@ function textureOverlaySvg(opts = {}) {
     ${textBorderSvg}
     ${portraitBorderSvg}
     ${icons}
-    <text x="${W/2}" y="${headerH/2 + titleSize/3}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(CARD.name)}</text>
+    <text x="${W/2}" y="${headerH/2 + autoTitleSize/3}" font-family="${fontFamily}" font-size="${autoTitleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(cardData.name)}</text>
     ${dividerSvg}
     ${lines.map((l, i) => `<text x="${B + 24}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" fill="${textColor}" ${textStroke}>${l}</text>`).join('')}
     ${footerSvg}
@@ -480,6 +552,90 @@ const variants = [
       await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
     }
   },
+
+  // === TEXT LENGTH TESTS ===
+  {
+    id: '20-text-short',
+    desc: 'Test: short text (minimal content)',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({
+        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
+        cardData: CARD_SAMPLES.shortText
+      });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+  {
+    id: '21-text-medium',
+    desc: 'Test: medium text (typical NPC)',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({
+        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
+        cardData: CARD_SAMPLES.mediumText
+      });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+  {
+    id: '22-text-long',
+    desc: 'Test: long text (detailed description)',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({
+        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
+        cardData: CARD_SAMPLES.longText
+      });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+  {
+    id: '23-text-very-long',
+    desc: 'Test: very long text (potential overflow)',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({
+        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
+        cardData: CARD_SAMPLES.veryLongText
+      });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+
+  // === CATEGORY TESTS ===
+  {
+    id: '30-cat-location',
+    desc: 'Test: location category (different icon)',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({
+        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
+        cardData: CARD_SAMPLES.location,
+        iconSvg: CATEGORY_ICONS.location
+      });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+  {
+    id: '31-cat-item',
+    desc: 'Test: item category (different icon)',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({
+        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
+        cardData: CARD_SAMPLES.item,
+        iconSvg: CATEGORY_ICONS.item
+      });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+  {
+    id: '32-cat-faction',
+    desc: 'Test: faction category (different icon)',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({
+        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
+        cardData: CARD_SAMPLES.faction,
+        iconSvg: CATEGORY_ICONS.faction
+      });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
 ];
 
 async function main() {
@@ -579,6 +735,26 @@ Generate texture: \`node scripts/generate-texture.js texture.png --category=npc 
 | Decorative corners | Icons in corners |
 |:---:|:---:|
 | <img src="17-tex-decorative-corners.png" width="250"/> | <img src="18-tex-corner-icons.png" width="250"/> |
+
+---
+
+## Edge Case Tests
+
+### Text Length Handling
+
+| Short text | Medium text |
+|:---:|:---:|
+| <img src="20-text-short.png" width="250"/> | <img src="21-text-medium.png" width="250"/> |
+
+| Long text | Very long text |
+|:---:|:---:|
+| <img src="22-text-long.png" width="250"/> | <img src="23-text-very-long.png" width="250"/> |
+
+### Category Variants (different icons)
+
+| Location | Item | Faction |
+|:---:|:---:|:---:|
+| <img src="30-cat-location.png" width="200"/> | <img src="31-cat-item.png" width="200"/> | <img src="32-cat-faction.png" width="200"/> |
 
 ---
 `;

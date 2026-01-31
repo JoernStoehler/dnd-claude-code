@@ -83,3 +83,23 @@ Generate texture: `node scripts/generate-texture.js texture.png --category=npc -
 | <img src="17-tex-decorative-corners.png" width="250"/> | <img src="18-tex-corner-icons.png" width="250"/> |
 
 ---
+
+## Edge Case Tests
+
+### Text Length Handling
+
+| Short text | Medium text |
+|:---:|:---:|
+| <img src="20-text-short.png" width="250"/> | <img src="21-text-medium.png" width="250"/> |
+
+| Long text | Very long text |
+|:---:|:---:|
+| <img src="22-text-long.png" width="250"/> | <img src="23-text-very-long.png" width="250"/> |
+
+### Category Variants (different icons)
+
+| Location | Item | Faction |
+|:---:|:---:|:---:|
+| <img src="30-cat-location.png" width="200"/> | <img src="31-cat-item.png" width="200"/> | <img src="32-cat-faction.png" width="200"/> |
+
+---
