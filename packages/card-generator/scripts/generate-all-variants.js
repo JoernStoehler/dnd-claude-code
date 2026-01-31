@@ -97,14 +97,16 @@ const ICON_MARGIN = 12;                                  // Margin from content 
 const ICON_LEFT_X = CONTENT_LEFT + ICON_MARGIN;          // 52
 const ICON_RIGHT_X = CONTENT_RIGHT - ICON_SIZE - ICON_MARGIN;  // 739
 
-// Title constraints
+// Title constraints (actual width measured via opentype.js)
 const TITLE_MAX_W = CONTENT_W - 2 * (ICON_SIZE + ICON_MARGIN + 10);  // ~611px
-// Measured character limits (worst-case W chars): 52px≤14, 42px≤17, 34px≤21, 28px≤26
 
 // Portrait positioning (with padding to be narrower than text)
 const PORTRAIT_PADDING = 20;
 const PORTRAIT_W = CONTENT_W - 2 * PORTRAIT_PADDING;     // 707
 const PORTRAIT_X = CONTENT_LEFT + PORTRAIT_PADDING;      // 60
+
+// Colors
+const TEXT_COLOR = '#f4e4c1';  // Cream/parchment for text on dark backgrounds
 
 // =============================================================================
 // END LAYOUT CONSTANTS
@@ -224,14 +226,13 @@ async function render(svg, portraitPath, outputPath, pX, pY, pW, pH, texturePath
 // Generate SVG overlay for texture backgrounds
 // Uses layout constants defined at top of file
 function textureOverlaySvg(opts = {}) {
-  const textColor = '#f4e4c1';
+  const textColor = TEXT_COLOR;
   const showFooter = opts.showFooter !== false;
   const showIcons = opts.showIcons !== false;
   const fontFamily = opts.fontFamily || 'serif';
   const titleSize = opts.titleSize || 52;
   const bodySize = opts.bodySize || 28;
   const divider = opts.divider !== false;
-  const charsPerLine = opts.charsPerLine || 38;
   const cornerRadius = opts.cornerRadius || 20;
 
   // Custom card content and icon support
@@ -351,7 +352,7 @@ function textureOverlaySvg(opts = {}) {
     <line x1="${CONTENT_LEFT + 20}" y1="${dividerY}" x2="${CONTENT_RIGHT - 20}" y2="${dividerY}" stroke="${textColor}" stroke-width="3" opacity="0.7"/>
   ` : '';
 
-  // Text wrapping with actual measurement (ignore charsPerLine, use actual width)
+  // Text wrapping with actual measurement
   const textAreaPadding = 24;
   const textMaxWidth = CONTENT_W - textAreaPadding * 2;
   const lines = wrap(esc(cardData.desc), textMaxWidth, bodySize);
@@ -496,7 +497,6 @@ function baseFullFrame(opts = {}) {
   const bodyStyle = opts.bodyStyle || 'normal';
   const textAlign = opts.textAlign || 'start';
   const textX = textAlign === 'middle' ? W/2 : B + 24;
-  const charsPerLine = opts.charsPerLine || 42;
   const divider = opts.divider || false;
 
   // Layout: header at y=0, portrait at y=headerH, text below portrait, bottom border
@@ -505,7 +505,7 @@ function baseFullFrame(opts = {}) {
   const textAreaH = H - headerH - portraitH - B - (showFooter ? footerH : 0);
 
   // Icons centered vertically in header
-  const iconY = (headerH - 36) / 2;
+  const iconY = (headerH - ICON_SIZE) / 2;
   const icons = showIcons ? `
     <g transform="translate(${B + 12}, ${iconY})">${ICON_SVG}</g>
     <g transform="translate(${W - B - 48}, ${iconY})">${ICON_SVG}</g>
@@ -618,7 +618,7 @@ const variants = [
     id: '05-sans-serif',
     desc: 'Sans-serif font throughout',
     gen: async (p, o) => {
-      const svg = baseFullFrame({ fontFamily: 'sans-serif', bodySize: 22, charsPerLine: 46 });
+      const svg = baseFullFrame({ fontFamily: 'sans-serif', bodySize: 22 });
       await render(svg, p, o, B, 90, W - B*2, 680);
     }
   },
