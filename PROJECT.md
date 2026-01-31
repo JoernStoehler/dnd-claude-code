@@ -64,6 +64,23 @@ Repository structure and meta-tooling established. Card generator prototype comp
 - Example cards in `campaigns/example/cards/`
 - Added env var setup to root README.md
 
+### 2026-01-31: Card Generator Layout Improvements
+
+- Replaced character-count heuristics with actual text measurement (opentype.js)
+- Added 40px print-safe margins on all sides
+- Fixed title sizing to never overlap header icons
+- Fixed footer/icon vertical alignment
+- Extracted layout constants (W, H, B, HEADER_CONTENT_H, etc.)
+- Current default: `18-tex-corner-icons` (texture background, rounded portrait, footer icons)
+- VARIANTS.md now shows current settings vs alternatives
+
+#### Tech Debt (future cleanup)
+- [ ] Factory pattern for 30+ repetitive variant definitions
+- [ ] Break up 210-line `textureOverlaySvg()` into smaller functions
+- [ ] Extract remaining magic numbers (padding values: 20, 24, 44, etc.)
+- [ ] Align line heights (36 vs 32 between functions)
+- [ ] Clean up or deprecate legacy gradient variants (00-08)
+
 ### 2026-01-24: Fun Heroes Campaign - Full Development Session
 
 **Campaign Foundation:**
