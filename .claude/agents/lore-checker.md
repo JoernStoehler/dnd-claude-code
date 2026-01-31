@@ -1,7 +1,5 @@
 ---
-name: lore-checker
 description: Verify lore consistency across campaign materials. Use when adding new lore, after writing session logs, when the user asks to check for contradictions, or proactively after significant content additions.
-tools: Read, Grep, Glob
 model: haiku
 ---
 

@@ -1,7 +1,5 @@
 ---
-description: "Reflect on a session to improve future workflows. Use at end of session, when something went wrong, or to improve prompts."
-allowed_tools: ["Read", "Write", "Edit", "Grep", "Glob"]
-model: sonnet
+description: Reflect on a session to improve future workflows. Use at end of session, when something went wrong, or to improve prompts.
 ---
 
 # Postmortem Agent

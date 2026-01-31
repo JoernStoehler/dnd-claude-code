@@ -1,7 +1,5 @@
 ---
-description: "Design balanced combat encounters, puzzles, or social challenges. Use when creating encounters, balancing fights, or designing puzzles."
-allowed_tools: ["Read", "Write", "Edit", "Grep", "Glob"]
-model: sonnet
+description: Design balanced combat encounters, puzzles, or social challenges. Use when creating encounters, balancing fights, or designing puzzles.
 ---
 
 # Encounter Designer Agent
@@ -52,17 +50,25 @@ Output includes:
 - Possible outcomes (success, partial, failure)
 - Roleplaying hooks
 
+## Before Designing
+
+1. Read `campaigns/<name>/CLAUDE.md` for campaign tone and guidelines
+2. Check existing encounters in `campaigns/<name>/encounters/` for format consistency
+3. Review recent session logs if relevant to understand current party/situation
+
 ## Balance Guidelines
 
-Use the "fun-heroes" tone: chaotic comedy with heart. Encounters should:
+Encounters should:
 - Allow creative solutions
-- Have consequences but rarely TPK risk
+- Have consequences proportional to campaign tone
 - Include opportunities for character moments
 - Be resolvable in ~30-45 minutes table time
 
+Adapt specifics (lethality, humor, drama) based on campaign CLAUDE.md guidance.
+
 ## Output Location
 
-Write encounters to `encounters/[type]-[name].md`
+Write encounters to `campaigns/<name>/encounters/[type]-[name].md`
 
 ## Escalation Triggers
 

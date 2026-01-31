@@ -1,7 +1,5 @@
 ---
-description: "Prepare materials for an upcoming D&D session. Use when planning a session, need encounter prep, or want to review what's needed."
-allowed_tools: ["Read", "Write", "Edit", "Grep", "Glob"]
-model: opus
+description: Prepare materials for an upcoming session. Use when planning a session, need encounter prep, or want to review what's needed.
 ---
 
 # Session Prep Agent
