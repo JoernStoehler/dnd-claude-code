@@ -176,7 +176,26 @@ const CARD_SAMPLES = {
 const CARD = CARD_SAMPLES.default;
 
 const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const wrap = (t,n) => { const w=t.split(' '),l=[]; let c=''; for(const x of w){if((c+' '+x).trim().length<=n)c=(c+' '+x).trim();else{if(c)l.push(c);c=x;}} if(c)l.push(c); return l; };
+
+// Wrap text to fit within maxWidth pixels at given fontSize
+// Uses actual text measurement instead of character count
+const wrap = (text, maxWidth, fontSize) => {
+  const words = text.split(' ');
+  const lines = [];
+  let currentLine = '';
+
+  for (const word of words) {
+    const testLine = currentLine ? currentLine + ' ' + word : word;
+    if (measureTextWidth(testLine, fontSize) <= maxWidth) {
+      currentLine = testLine;
+    } else {
+      if (currentLine) lines.push(currentLine);
+      currentLine = word;
+    }
+  }
+  if (currentLine) lines.push(currentLine);
+  return lines;
+};
 
 // Render card with optional texture background
 // Layers (bottom to top): texture/gradient → portrait → SVG overlay
@@ -219,16 +238,16 @@ function textureOverlaySvg(opts = {}) {
   const cardData = opts.cardData || CARD;
   const iconSvg = opts.iconSvg || ICON_SVG;
 
-  // Find best 2-line split (minimize the longer line's length)
-  const bestSplit = (name) => {
+  // Find best 2-line split (minimize the wider line's measured width)
+  const bestSplit = (name, fontSize = 34) => {
     const words = name.split(' ');
     if (words.length < 2) return null;
-    let best = null, bestMax = Infinity;
+    let best = null, bestMaxW = Infinity;
     for (let i = 1; i < words.length; i++) {
       const line1 = words.slice(0, i).join(' ');
       const line2 = words.slice(i).join(' ');
-      const maxLen = Math.max(line1.length, line2.length);
-      if (maxLen < bestMax) { bestMax = maxLen; best = [line1, line2]; }
+      const maxW = Math.max(measureTextWidth(line1, fontSize), measureTextWidth(line2, fontSize));
+      if (maxW < bestMaxW) { bestMaxW = maxW; best = [line1, line2]; }
     }
     return best;
   };
@@ -286,11 +305,18 @@ function textureOverlaySvg(opts = {}) {
     }
   }
 
-  // Truncate footer if too long (max ~40 chars for single line)
-  const maxFooterLen = 40;
-  const displayFooter = cardData.footer.length > maxFooterLen
-    ? cardData.footer.slice(0, maxFooterLen - 1) + '…'
-    : cardData.footer;
+  // Truncate footer if too wide (must fit in content area)
+  const FOOTER_FONT_SIZE = 24;
+  const FOOTER_MAX_W = CONTENT_W - 2 * 20; // content width minus padding
+  let displayFooter = cardData.footer;
+  if (measureTextWidth(displayFooter, FOOTER_FONT_SIZE) > FOOTER_MAX_W) {
+    // Truncate until it fits
+    let truncated = displayFooter;
+    while (measureTextWidth(truncated + '…', FOOTER_FONT_SIZE) > FOOTER_MAX_W && truncated.length > 1) {
+      truncated = truncated.slice(0, -1);
+    }
+    displayFooter = truncated + '…';
+  }
 
   // Text area styling
   const textTint = opts.textTint || 'dark';  // 'none', 'dark', 'leather'
@@ -325,7 +351,10 @@ function textureOverlaySvg(opts = {}) {
     <line x1="${CONTENT_LEFT + 20}" y1="${dividerY}" x2="${CONTENT_RIGHT - 20}" y2="${dividerY}" stroke="${textColor}" stroke-width="3" opacity="0.7"/>
   ` : '';
 
-  const lines = wrap(esc(cardData.desc), charsPerLine);
+  // Text wrapping with actual measurement (ignore charsPerLine, use actual width)
+  const textAreaPadding = 24;
+  const textMaxWidth = CONTENT_W - textAreaPadding * 2;
+  const lines = wrap(esc(cardData.desc), textMaxWidth, bodySize);
   const lineHeight = 36;
   const textStartY = TEXT_TOP + 44 + (divider ? 16 : 0);
 
@@ -494,7 +523,9 @@ function baseFullFrame(opts = {}) {
     <line x1="${B + 20}" y1="${textAreaTop + 10}" x2="${W - B - 20}" y2="${textAreaTop + 10}" stroke="#f4e4c1" stroke-width="3" opacity="0.7"/>
   ` : '';
 
-  const lines = wrap(esc(CARD.desc), charsPerLine);
+  // Text wrapping with actual measurement
+  const textMaxW = W - B * 2 - 48; // content width minus padding
+  const lines = wrap(esc(CARD.desc), textMaxW, bodySize);
   const lineHeight = 32;
   const textStartY = textAreaTop + 40 + (divider ? 16 : 0);
 
@@ -544,7 +575,7 @@ const variants = [
         <g transform="translate(${W - b - 48}, ${b + 32})">${ICON_SVG}</g>
         <text x="${W/2}" y="${b + 68}" font-family="serif" font-size="52" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${esc(CARD.name)}</text>
         <rect x="${b}" y="${b + headerH + portraitH}" width="${W-b*2}" height="${H - b*2 - headerH - portraitH - 36}" fill="#f4e4c1"/>
-        ${wrap(esc(CARD.desc), 44).map((l, i) => `<text x="${b + 24}" y="${b + headerH + portraitH + 40 + i * 32}" font-family="serif" font-size="24" fill="#2a2016">${l}</text>`).join('')}
+        ${wrap(esc(CARD.desc), W - b*2 - 48, 24).map((l, i) => `<text x="${b + 24}" y="${b + headerH + portraitH + 40 + i * 32}" font-family="serif" font-size="24" fill="#2a2016">${l}</text>`).join('')}
         <rect x="${b}" y="${H - b - 36}" width="${W-b*2}" height="36" fill="#e8d4a8"/>
         <text x="${W/2}" y="${H - b - 10}" font-family="serif" font-size="20" fill="#5a4a36" text-anchor="middle">${esc(CARD.footer)}</text>
       </svg>`;
@@ -624,7 +655,7 @@ const variants = [
         <g transform="translate(24, 27)">${ICON_SVG}</g>
         <g transform="translate(${W - 60}, 27)">${ICON_SVG}</g>
         <text x="${W/2}" y="62" font-family="serif" font-size="52" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${esc(CARD.name)}</text>
-        ${wrap(esc(CARD.desc), 46).map((l, i) => `<text x="40" y="${961 + i * 36}" font-family="serif" font-size="28" fill="#2a2016">${l}</text>`).join('')}
+        ${wrap(esc(CARD.desc), W - 80, 28).map((l, i) => `<text x="40" y="${961 + i * 36}" font-family="serif" font-size="28" fill="#2a2016">${l}</text>`).join('')}
         <rect y="${H - 40}" height="40" width="${W}" fill="#e8d4a8"/>
         <text x="${W/2}" y="${H - 13}" font-family="serif" font-size="22" fill="#5a4a36" text-anchor="middle">${esc(CARD.footer)}</text>
       </svg>`;
@@ -872,87 +903,51 @@ async function main() {
   // Generate markdown
   let md = `# Layout Variant Comparison
 
-**Texture cards**: AI-generated leather background, no tint, rounded portrait, icons in corners.
+## Current Default
 
-Legacy: Gradient background with solid color text area.
+**Settings**: Texture background, no tint, rounded portrait, icons in footer corners.
 
----
-
-## New Default
-
-| Solid color (NEW DEFAULT) |
+| CURRENT DEFAULT (18-tex-corner-icons) |
 |:---:|
-| <img src="00-default.png" width="300"/> |
+| <img src="18-tex-corner-icons.png" width="350"/> |
 
 ---
 
-## Text Box Background
-
-| Solid (default) | Parchment (old) |
-|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="02-parchment-textbox.png" width="250"/> |
-
----
-
-## Header Icons
-
-| With icons (default) | No icons |
-|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="03-no-icons.png" width="250"/> |
-
----
-
-## Decorative Elements
-
-| With divider (default) | Without divider |
-|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="04-no-divider.png" width="250"/> |
-
----
-
-## Typography
-
-**Serif (default)**
-<img src="00-default.png" width="300"/>
-
-**Sans-serif**
-<img src="05-sans-serif.png" width="300"/>
-
-**Centered**
-<img src="06-centered-text.png" width="300"/>
-
-**Italic**
-<img src="07-italic-desc.png" width="300"/>
-
----
-
-## Texture Background Variants
-
-Generate texture: \`node scripts/generate-texture.js texture.png --category=npc --api\`
+## Alternative Settings
 
 ### Text Area Tinting
 
-| Dark tint | Leather tint | No tint (preferred) |
+| No tint (CURRENT) | Dark tint | Leather tint |
 |:---:|:---:|:---:|
-| <img src="09-tex-dark-tint.png" width="200"/> | <img src="10-tex-leather-tint.png" width="200"/> | <img src="11-tex-no-tint.png" width="200"/> |
+| <img src="18-tex-corner-icons.png" width="200"/> | <img src="09-tex-dark-tint.png" width="200"/> | <img src="10-tex-leather-tint.png" width="200"/> |
 
-### Text Area Borders
+### Footer Decoration
 
-| Line border | Decorative corners |
-|:---:|:---:|
-| <img src="12-tex-line-border.png" width="250"/> | <img src="13-tex-decorative-border.png" width="250"/> |
+| Icons (CURRENT) | Decorative corners | None |
+|:---:|:---:|:---:|
+| <img src="18-tex-corner-icons.png" width="200"/> | <img src="17-tex-decorative-corners.png" width="200"/> | <img src="11-tex-no-tint.png" width="200"/> |
 
 ### Portrait Styling
 
-| Rounded corners | Border line | Rounded + border |
+| Rounded (CURRENT) | Square | Rounded + border |
 |:---:|:---:|:---:|
-| <img src="14-tex-rounded-portrait.png" width="200"/> | <img src="15-tex-portrait-border.png" width="200"/> | <img src="16-tex-rounded-with-border.png" width="200"/> |
+| <img src="18-tex-corner-icons.png" width="200"/> | <img src="11-tex-no-tint.png" width="200"/> | <img src="16-tex-rounded-with-border.png" width="200"/> |
 
-### Text Area Decoration
+### Text Area Borders
 
-| Decorative corners | Icons in corners |
-|:---:|:---:|
-| <img src="17-tex-decorative-corners.png" width="250"/> | <img src="18-tex-corner-icons.png" width="250"/> |
+| None (CURRENT) | Line border | Decorative corners |
+|:---:|:---:|:---:|
+| <img src="18-tex-corner-icons.png" width="200"/> | <img src="12-tex-line-border.png" width="200"/> | <img src="13-tex-decorative-border.png" width="200"/> |
+
+---
+
+## Legacy Variants (Gradient Background)
+
+These use a solid color gradient instead of texture background.
+
+| Gradient default | Parchment text box | No icons |
+|:---:|:---:|:---:|
+| <img src="00-default.png" width="200"/> | <img src="02-parchment-textbox.png" width="200"/> | <img src="03-no-icons.png" width="200"/> |
 
 ---
 
