@@ -108,6 +108,19 @@ const PORTRAIT_X = CONTENT_LEFT + PORTRAIT_PADDING;      // 60
 // Colors
 const TEXT_COLOR = '#f4e4c1';  // Cream/parchment for text on dark backgrounds
 
+// Typography
+const LINE_HEIGHT = 36;                                  // Standard line height for body text
+const TEXT_AREA_PADDING = 24;                            // Horizontal padding inside text area
+const TEXT_START_OFFSET = 44;                            // Vertical offset from TEXT_TOP to first line
+
+// Decorative elements
+const DIVIDER_MARGIN = 20;                               // Horizontal margin for divider line
+const DIVIDER_OFFSET = 16;                               // Extra vertical offset when divider present
+const FOOTER_SIDE_PADDING = 20;                          // Side padding for footer text
+const DECORATIVE_CORNER_SIZE = 15;                       // Size of decorative corner brackets
+const PORTRAIT_BORDER_OFFSET = 4;                        // Offset for portrait border stroke
+const PORTRAIT_BORDER_WIDTH = 4;                         // Stroke width for portrait border
+
 // =============================================================================
 // END LAYOUT CONSTANTS
 // =============================================================================
@@ -199,6 +212,184 @@ const wrap = (text, maxWidth, fontSize) => {
   return lines;
 };
 
+// =============================================================================
+// SVG HELPER FUNCTIONS
+// These are extracted from textureOverlaySvg() to improve readability
+// =============================================================================
+
+// Find best 2-line split for a title (minimizes the wider line's width)
+function findBestTitleSplit(name, fontSize = 34) {
+  const words = name.split(' ');
+  if (words.length < 2) return null;
+  let best = null, bestMaxW = Infinity;
+  for (let i = 1; i < words.length; i++) {
+    const line1 = words.slice(0, i).join(' ');
+    const line2 = words.slice(i).join(' ');
+    const maxW = Math.max(measureTextWidth(line1, fontSize), measureTextWidth(line2, fontSize));
+    if (maxW < bestMaxW) { bestMaxW = maxW; best = [line1, line2]; }
+  }
+  return best;
+}
+
+// Calculate optimal title size and line breaks
+function calculateAutoTitle(name, defaultSize, forceTitleSize = null) {
+  const split = findBestTitleSplit(name);
+
+  if (forceTitleSize) {
+    return { size: forceTitleSize, lines: [name] };
+  }
+
+  // Try sizes from largest to smallest
+  const sizes = [52, 42, 34, 28];
+
+  // Try single line at each size
+  for (const size of sizes) {
+    if (measureTextWidth(name, size) <= TITLE_MAX_W) {
+      return { size, lines: [name] };
+    }
+  }
+
+  // Try 2 lines (only 34px and 28px fit in header height)
+  if (split) {
+    for (const size of [34, 28]) {
+      const w1 = measureTextWidth(split[0], size);
+      const w2 = measureTextWidth(split[1], size);
+      if (w1 <= TITLE_MAX_W && w2 <= TITLE_MAX_W) {
+        return { size, lines: split };
+      }
+    }
+  }
+
+  // Fallback: truncate at smallest size
+  let truncated = name;
+  while (measureTextWidth(truncated + '…', 28) > TITLE_MAX_W && truncated.length > 1) {
+    truncated = truncated.slice(0, -1);
+  }
+  return { size: 28, lines: [truncated + '…'] };
+}
+
+// Truncate text to fit within maxWidth at given fontSize
+function truncateToFit(text, fontSize, maxWidth) {
+  if (measureTextWidth(text, fontSize) <= maxWidth) {
+    return text;
+  }
+  let truncated = text;
+  while (measureTextWidth(truncated + '…', fontSize) > maxWidth && truncated.length > 1) {
+    truncated = truncated.slice(0, -1);
+  }
+  return truncated + '…';
+}
+
+// Generate header icons SVG
+function generateHeaderIcons(iconSvg, showIcons) {
+  if (!showIcons) return '';
+  const headerIconY = HEADER_TOP + (HEADER_CONTENT_H - ICON_SIZE) / 2;
+  return `
+    <g transform="translate(${ICON_LEFT_X}, ${headerIconY})">${iconSvg}</g>
+    <g transform="translate(${ICON_RIGHT_X}, ${headerIconY})">${iconSvg}</g>
+  `;
+}
+
+// Generate footer SVG
+function generateFooterSvg(footer, fontFamily, textColor, textStroke, showFooter) {
+  if (!showFooter) return '';
+  const FOOTER_FONT_SIZE = 24;
+  const FOOTER_MAX_W = CONTENT_W - 2 * FOOTER_SIDE_PADDING;
+  const displayFooter = truncateToFit(footer, FOOTER_FONT_SIZE, FOOTER_MAX_W);
+  const footerCenterY = FOOTER_TOP + FOOTER_H / 2;
+  const footerTextY = footerCenterY + 8;
+  return `
+    <text x="${W/2}" y="${footerTextY}" font-family="${fontFamily}" font-size="${FOOTER_FONT_SIZE}" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(displayFooter)}</text>
+  `;
+}
+
+// Generate divider line SVG
+function generateDividerSvg(divider, textColor, textBorder) {
+  if (!divider) return '';
+  const dividerY = TEXT_TOP + (textBorder !== 'none' ? DIVIDER_MARGIN : 10);
+  return `
+    <line x1="${CONTENT_LEFT + DIVIDER_MARGIN}" y1="${dividerY}" x2="${CONTENT_RIGHT - DIVIDER_MARGIN}" y2="${dividerY}" stroke="${textColor}" stroke-width="3" opacity="0.7"/>
+  `;
+}
+
+// Generate text area background SVG
+function generateTextAreaBg(textTint, showFooter) {
+  const textBgH = TEXT_BOTTOM - TEXT_TOP + (showFooter ? FOOTER_H : 0);
+  if (textTint === 'dark') {
+    return `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="rgba(0,0,0,0.35)"/>`;
+  } else if (textTint === 'leather') {
+    return `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="rgba(90,50,20,0.5)"/>`;
+  }
+  return '';
+}
+
+// Generate text area border SVG
+function generateTextAreaBorder(textBorder, textColor, iconSvg, showFooter) {
+  const textBgH = TEXT_BOTTOM - TEXT_TOP + (showFooter ? FOOTER_H : 0);
+
+  if (textBorder === 'line') {
+    return `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="none" stroke="${textColor}" stroke-width="2" opacity="0.5"/>`;
+  }
+
+  if (textBorder === 'decorative') {
+    const tbX = CONTENT_LEFT, tbY = TEXT_TOP, tbW = CONTENT_W, tbH = textBgH;
+    const cs = DECORATIVE_CORNER_SIZE;
+    return `
+      <path d="M${tbX+cs},${tbY} L${tbX},${tbY} L${tbX},${tbY+cs}" fill="none" stroke="${textColor}" stroke-width="2"/>
+      <path d="M${tbX+tbW-cs},${tbY} L${tbX+tbW},${tbY} L${tbX+tbW},${tbY+cs}" fill="none" stroke="${textColor}" stroke-width="2"/>
+      <path d="M${tbX},${tbY+tbH-cs} L${tbX},${tbY+tbH} L${tbX+cs},${tbY+tbH}" fill="none" stroke="${textColor}" stroke-width="2"/>
+      <path d="M${tbX+tbW},${tbY+tbH-cs} L${tbX+tbW},${tbY+tbH} L${tbX+tbW-cs},${tbY+tbH}" fill="none" stroke="${textColor}" stroke-width="2"/>
+    `;
+  }
+
+  if (textBorder === 'icons') {
+    const footerIconY = FOOTER_TOP + (FOOTER_H - ICON_SIZE) / 2;
+    return `
+      <g transform="translate(${ICON_LEFT_X}, ${footerIconY})">${iconSvg}</g>
+      <g transform="translate(${ICON_RIGHT_X}, ${footerIconY})">${iconSvg}</g>
+    `;
+  }
+
+  return '';
+}
+
+// Generate portrait border SVG
+function generatePortraitBorder(portraitBorder, portraitCorners, cornerRadius, textColor) {
+  if (portraitBorder !== 'line') return '';
+
+  const offset = PORTRAIT_BORDER_OFFSET;
+  if (portraitCorners === 'rounded') {
+    return `<rect x="${PORTRAIT_X - offset}" y="${PORTRAIT_TOP - offset}" width="${PORTRAIT_W + offset*2}" height="${PORTRAIT_H + offset*2}" rx="${cornerRadius + offset}" fill="none" stroke="${textColor}" stroke-width="${PORTRAIT_BORDER_WIDTH}"/>`;
+  }
+  return `<rect x="${PORTRAIT_X - offset}" y="${PORTRAIT_TOP - offset}" width="${PORTRAIT_W + offset*2}" height="${PORTRAIT_H + offset*2}" fill="none" stroke="${textColor}" stroke-width="${PORTRAIT_BORDER_WIDTH}"/>`;
+}
+
+// Generate title SVG (1 or 2 lines, vertically centered in header)
+function generateTitleSvg(titleLines, titleSize, fontFamily, textColor, textStroke) {
+  const titleLineHeight = titleSize * 1.1;
+  const titleBlockHeight = titleLines.length * titleLineHeight;
+  const headerCenterY = HEADER_TOP + HEADER_CONTENT_H / 2;
+  const titleStartY = headerCenterY - titleBlockHeight/2 + titleSize * 0.75;
+
+  return titleLines.map((line, i) =>
+    `<text x="${W/2}" y="${titleStartY + i * titleLineHeight}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(line)}</text>`
+  ).join('\n    ');
+}
+
+// Generate clip path defs for rounded portrait
+function generatePortraitClipDefs(portraitCorners, cornerRadius) {
+  if (portraitCorners !== 'rounded') return '';
+  return `<defs>
+    <clipPath id="portraitClip">
+      <rect x="${PORTRAIT_X}" y="${PORTRAIT_TOP}" width="${PORTRAIT_W}" height="${PORTRAIT_H}" rx="${cornerRadius}"/>
+    </clipPath>
+  </defs>`;
+}
+
+// =============================================================================
+// END SVG HELPER FUNCTIONS
+// =============================================================================
+
 // Render card with optional texture background
 // Layers (bottom to top): texture/gradient → portrait → SVG overlay
 async function render(svg, portraitPath, outputPath, pX, pY, pW, pH, texturePath = null) {
@@ -224,216 +415,47 @@ async function render(svg, portraitPath, outputPath, pX, pY, pW, pH, texturePath
 }
 
 // Generate SVG overlay for texture backgrounds
-// Uses layout constants defined at top of file
+// Uses layout constants and helper functions defined above
 function textureOverlaySvg(opts = {}) {
+  // Parse options with defaults
   const textColor = TEXT_COLOR;
   const showFooter = opts.showFooter !== false;
   const showIcons = opts.showIcons !== false;
   const fontFamily = opts.fontFamily || 'serif';
-  const titleSize = opts.titleSize || 52;
   const bodySize = opts.bodySize || 28;
   const divider = opts.divider !== false;
   const cornerRadius = opts.cornerRadius || 20;
-
-  // Custom card content and icon support
   const cardData = opts.cardData || CARD;
   const iconSvg = opts.iconSvg || ICON_SVG;
+  const textTint = opts.textTint || 'dark';
+  const textBorder = opts.textBorder || 'none';
+  const portraitBorder = opts.portraitBorder || 'none';
+  const portraitCorners = opts.portraitCorners || 'square';
 
-  // Find best 2-line split (minimize the wider line's measured width)
-  const bestSplit = (name, fontSize = 34) => {
-    const words = name.split(' ');
-    if (words.length < 2) return null;
-    let best = null, bestMaxW = Infinity;
-    for (let i = 1; i < words.length; i++) {
-      const line1 = words.slice(0, i).join(' ');
-      const line2 = words.slice(i).join(' ');
-      const maxW = Math.max(measureTextWidth(line1, fontSize), measureTextWidth(line2, fontSize));
-      if (maxW < bestMaxW) { bestMaxW = maxW; best = [line1, line2]; }
-    }
-    return best;
-  };
+  // Calculate title sizing
+  const { size: autoTitleSize, lines: titleLines } = calculateAutoTitle(
+    cardData.name, opts.titleSize || 52, opts.forceTitleSize
+  );
 
-  const name = cardData.name;
-  const split = bestSplit(name);
-
-  let autoTitleSize = titleSize;
-  let titleLines = [name];
-
-  // Allow forcing a specific size for measurement tests
-  if (opts.forceTitleSize) {
-    autoTitleSize = opts.forceTitleSize;
-    titleLines = [name];
-  } else {
-    // Use actual text measurement to determine font size
-    // Try sizes from largest to smallest, use first that fits
-    const sizes = [52, 42, 34, 28];
-    let fitted = false;
-
-    // Try single line at each size
-    for (const size of sizes) {
-      const width = measureTextWidth(name, size);
-      if (width <= TITLE_MAX_W) {
-        autoTitleSize = size;
-        titleLines = [name];
-        fitted = true;
-        break;
-      }
-    }
-
-    // If single line doesn't fit, try 2 lines (only 34px and 28px fit in header height)
-    if (!fitted && split) {
-      for (const size of [34, 28]) {
-        const w1 = measureTextWidth(split[0], size);
-        const w2 = measureTextWidth(split[1], size);
-        if (w1 <= TITLE_MAX_W && w2 <= TITLE_MAX_W) {
-          autoTitleSize = size;
-          titleLines = split;
-          fitted = true;
-          break;
-        }
-      }
-    }
-
-    // Fallback: truncate at smallest size
-    if (!fitted) {
-      autoTitleSize = 28;
-      // Truncate to fit
-      let truncated = name;
-      while (measureTextWidth(truncated + '…', 28) > TITLE_MAX_W && truncated.length > 1) {
-        truncated = truncated.slice(0, -1);
-      }
-      titleLines = [truncated + '…'];
-    }
-  }
-
-  // Truncate footer if too wide (must fit in content area)
-  const FOOTER_FONT_SIZE = 24;
-  const FOOTER_MAX_W = CONTENT_W - 2 * 20; // content width minus padding
-  let displayFooter = cardData.footer;
-  if (measureTextWidth(displayFooter, FOOTER_FONT_SIZE) > FOOTER_MAX_W) {
-    // Truncate until it fits
-    let truncated = displayFooter;
-    while (measureTextWidth(truncated + '…', FOOTER_FONT_SIZE) > FOOTER_MAX_W && truncated.length > 1) {
-      truncated = truncated.slice(0, -1);
-    }
-    displayFooter = truncated + '…';
-  }
-
-  // Text area styling
-  const textTint = opts.textTint || 'dark';  // 'none', 'dark', 'leather'
-  const textBorder = opts.textBorder || 'none';  // 'none', 'line', 'decorative'
-
-  // Portrait styling
-  const portraitBorder = opts.portraitBorder || 'none';  // 'none', 'line'
-  const portraitCorners = opts.portraitCorners || 'square';  // 'square', 'rounded'
-
-  // Use layout constants (defined at top of file)
-  const textAreaH = TEXT_BOTTOM - TEXT_TOP - (showFooter ? FOOTER_H : 0);
-
-  // Header icons: vertically centered in header region [HEADER_TOP, HEADER_BOTTOM]
-  const headerIconY = HEADER_TOP + (HEADER_CONTENT_H - ICON_SIZE) / 2;
-  const icons = showIcons ? `
-    <g transform="translate(${ICON_LEFT_X}, ${headerIconY})">${iconSvg}</g>
-    <g transform="translate(${ICON_RIGHT_X}, ${headerIconY})">${iconSvg}</g>
-  ` : '';
-
+  // Common stroke style for text readability on textures
   const textStroke = 'stroke="rgba(0,0,0,0.5)" stroke-width="2" paint-order="stroke"';
 
-  // Footer: vertically centered in footer region [FOOTER_TOP, FOOTER_BOTTOM]
-  const footerCenterY = FOOTER_TOP + FOOTER_H / 2;
-  const footerTextY = footerCenterY + 8; // baseline offset
-  const footerSvg = showFooter ? `
-    <text x="${W/2}" y="${footerTextY}" font-family="${fontFamily}" font-size="24" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(displayFooter)}</text>
-  ` : '';
+  // Build body text lines
+  const textMaxWidth = CONTENT_W - TEXT_AREA_PADDING * 2;
+  const bodyLines = wrap(esc(cardData.desc), textMaxWidth, bodySize);
+  const textStartY = TEXT_TOP + TEXT_START_OFFSET + (divider ? DIVIDER_OFFSET : 0);
 
-  // Divider line at top of text area
-  const dividerY = TEXT_TOP + (textBorder !== 'none' ? 20 : 10);
-  const dividerSvg = divider ? `
-    <line x1="${CONTENT_LEFT + 20}" y1="${dividerY}" x2="${CONTENT_RIGHT - 20}" y2="${dividerY}" stroke="${textColor}" stroke-width="3" opacity="0.7"/>
-  ` : '';
-
-  // Text wrapping with actual measurement
-  const textAreaPadding = 24;
-  const textMaxWidth = CONTENT_W - textAreaPadding * 2;
-  const lines = wrap(esc(cardData.desc), textMaxWidth, bodySize);
-  const lineHeight = 36;
-  const textStartY = TEXT_TOP + 44 + (divider ? 16 : 0);
-
-  // Text area background based on tint option
-  const textBgH = TEXT_BOTTOM - TEXT_TOP + (showFooter ? FOOTER_H : 0);
-  let textBgSvg = '';
-  if (textTint === 'dark') {
-    textBgSvg = `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="rgba(0,0,0,0.35)"/>`;
-  } else if (textTint === 'leather') {
-    textBgSvg = `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="rgba(90,50,20,0.5)"/>`;
-  }
-  // 'none' = no background
-
-  // Text area border
-  let textBorderSvg = '';
-  if (textBorder === 'line') {
-    textBorderSvg = `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="none" stroke="${textColor}" stroke-width="2" opacity="0.5"/>`;
-  } else if (textBorder === 'decorative') {
-    // Decorative corners
-    const tbX = CONTENT_LEFT, tbY = TEXT_TOP, tbW = CONTENT_W, tbH = textBgH;
-    const cs = 15; // corner size
-    textBorderSvg = `
-      <path d="M${tbX+cs},${tbY} L${tbX},${tbY} L${tbX},${tbY+cs}" fill="none" stroke="${textColor}" stroke-width="2"/>
-      <path d="M${tbX+tbW-cs},${tbY} L${tbX+tbW},${tbY} L${tbX+tbW},${tbY+cs}" fill="none" stroke="${textColor}" stroke-width="2"/>
-      <path d="M${tbX},${tbY+tbH-cs} L${tbX},${tbY+tbH} L${tbX+cs},${tbY+tbH}" fill="none" stroke="${textColor}" stroke-width="2"/>
-      <path d="M${tbX+tbW},${tbY+tbH-cs} L${tbX+tbW},${tbY+tbH} L${tbX+tbW-cs},${tbY+tbH}" fill="none" stroke="${textColor}" stroke-width="2"/>
-    `;
-  } else if (textBorder === 'icons') {
-    // Footer icons: centered in footer region [FOOTER_TOP, FOOTER_BOTTOM]
-    const footerIconY = FOOTER_TOP + (FOOTER_H - ICON_SIZE) / 2;
-    textBorderSvg = `
-      <g transform="translate(${ICON_LEFT_X}, ${footerIconY})">${iconSvg}</g>
-      <g transform="translate(${ICON_RIGHT_X}, ${footerIconY})">${iconSvg}</g>
-    `;
-  }
-
-  // Portrait border - draw OUTSIDE the portrait area with clear offset
-  let portraitBorderSvg = '';
-  if (portraitBorder === 'line') {
-    const borderOffset = 4;
-    const strokeW = 4;
-    if (portraitCorners === 'rounded') {
-      portraitBorderSvg = `<rect x="${PORTRAIT_X - borderOffset}" y="${PORTRAIT_TOP - borderOffset}" width="${PORTRAIT_W + borderOffset*2}" height="${PORTRAIT_H + borderOffset*2}" rx="${cornerRadius + borderOffset}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
-    } else {
-      portraitBorderSvg = `<rect x="${PORTRAIT_X - borderOffset}" y="${PORTRAIT_TOP - borderOffset}" width="${PORTRAIT_W + borderOffset*2}" height="${PORTRAIT_H + borderOffset*2}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
-    }
-  }
-
-  // Clip path for rounded portrait
-  let defs = '';
-  if (portraitCorners === 'rounded') {
-    defs = `<defs>
-      <clipPath id="portraitClip">
-        <rect x="${PORTRAIT_X}" y="${PORTRAIT_TOP}" width="${PORTRAIT_W}" height="${PORTRAIT_H}" rx="${cornerRadius}"/>
-      </clipPath>
-    </defs>`;
-  }
-
-  // Generate title SVG (1 or 2 lines, vertically centered in header region)
-  // Header region: y ∈ [HEADER_TOP, HEADER_BOTTOM]
-  const titleLineHeight = autoTitleSize * 1.1;
-  const titleBlockHeight = titleLines.length * titleLineHeight;
-  const headerCenterY = HEADER_TOP + HEADER_CONTENT_H / 2;
-  const titleStartY = headerCenterY - titleBlockHeight/2 + autoTitleSize * 0.75;
-  const titleSvg = titleLines.map((line, i) =>
-    `<text x="${W/2}" y="${titleStartY + i * titleLineHeight}" font-family="${fontFamily}" font-size="${autoTitleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(line)}</text>`
-  ).join('\n    ');
-
+  // Assemble SVG from helper-generated components
   return `<svg width="${W}" height="${H}">
-    ${defs}
-    ${textBgSvg}
-    ${textBorderSvg}
-    ${portraitBorderSvg}
-    ${icons}
-    ${titleSvg}
-    ${dividerSvg}
-    ${lines.map((l, i) => `<text x="${CONTENT_LEFT + 24}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" fill="${textColor}" ${textStroke}>${l}</text>`).join('')}
-    ${footerSvg}
+    ${generatePortraitClipDefs(portraitCorners, cornerRadius)}
+    ${generateTextAreaBg(textTint, showFooter)}
+    ${generateTextAreaBorder(textBorder, textColor, iconSvg, showFooter)}
+    ${generatePortraitBorder(portraitBorder, portraitCorners, cornerRadius, textColor)}
+    ${generateHeaderIcons(iconSvg, showIcons)}
+    ${generateTitleSvg(titleLines, autoTitleSize, fontFamily, textColor, textStroke)}
+    ${generateDividerSvg(divider, textColor, textBorder)}
+    ${bodyLines.map((l, i) => `<text x="${CONTENT_LEFT + TEXT_AREA_PADDING}" y="${textStartY + i * LINE_HEIGHT}" font-family="${fontFamily}" font-size="${bodySize}" fill="${textColor}" ${textStroke}>${l}</text>`).join('')}
+    ${generateFooterSvg(cardData.footer, fontFamily, textColor, textStroke, showFooter)}
   </svg>`;
 }
 
@@ -520,14 +542,13 @@ function baseFullFrame(opts = {}) {
   `) : '';
 
   const dividerSvg = divider ? `
-    <line x1="${B + 20}" y1="${textAreaTop + 10}" x2="${W - B - 20}" y2="${textAreaTop + 10}" stroke="#f4e4c1" stroke-width="3" opacity="0.7"/>
+    <line x1="${B + DIVIDER_MARGIN}" y1="${textAreaTop + 10}" x2="${W - B - DIVIDER_MARGIN}" y2="${textAreaTop + 10}" stroke="#f4e4c1" stroke-width="3" opacity="0.7"/>
   ` : '';
 
   // Text wrapping with actual measurement
-  const textMaxW = W - B * 2 - 48; // content width minus padding
+  const textMaxW = CONTENT_W - TEXT_AREA_PADDING * 2;
   const lines = wrap(esc(CARD.desc), textMaxW, bodySize);
-  const lineHeight = 32;
-  const textStartY = textAreaTop + 40 + (divider ? 16 : 0);
+  const textStartY = textAreaTop + TEXT_START_OFFSET + (divider ? DIVIDER_OFFSET : 0);
 
   return `<svg width="${W}" height="${H}">
     <defs>
@@ -543,106 +564,104 @@ function baseFullFrame(opts = {}) {
     <!-- Text area (inset by border on sides and bottom) -->
     ${textBg !== 'none' ? `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="${textBg}" opacity="${textBgOpacity}"/>` : ''}
     ${dividerSvg}
-    ${lines.map((l, i) => `<text x="${textX}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" font-style="${bodyStyle}" fill="${textColor}" text-anchor="${textAlign}">${l}</text>`).join('')}
+    ${lines.map((l, i) => `<text x="${textX}" y="${textStartY + i * LINE_HEIGHT}" font-family="${fontFamily}" font-size="${bodySize}" font-style="${bodyStyle}" fill="${textColor}" text-anchor="${textAlign}">${l}</text>`).join('')}
     ${footerSvg}
   </svg>`;
 }
 
-const variants = [
-  // === CURRENT DEFAULT ===
-  {
-    id: '00-default',
-    desc: 'NEW DEFAULT: Header full-width, 40px side border, icons, divider',
-    gen: async (p, o) => {
-      const svg = baseFullFrame({ divider: true });
-      await render(svg, p, o, B, 90, W - B*2, 680);  // portrait at y=headerH
-    }
-  },
+// =============================================================================
+// VARIANT FACTORY FUNCTIONS
+// These reduce repetition in the variants array
+// =============================================================================
 
-  // === BORDER VARIATIONS ===
+// Factory for gradient-based variants (00-08 series)
+function gradientVariant(id, desc, opts = {}) {
+  return {
+    id,
+    desc,
+    gen: async (p, o) => {
+      const svg = baseFullFrame(opts);
+      await render(svg, p, o, B, 90, W - B*2, 680);
+    }
+  };
+}
+
+// Factory for texture-based variants (09-18 series)
+function textureVariant(id, desc, svgOpts = {}, renderOpts = {}) {
+  return {
+    id,
+    desc,
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg(svgOpts);
+      await renderTextureCard(svg, p, o, texturePath, renderOpts);
+    }
+  };
+}
+
+// Common render options for "preferred style" variants
+const PREFERRED_RENDER_OPTS = { roundedPortrait: true, cornerRadius: 20 };
+const PREFERRED_SVG_BASE = { textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded' };
+
+// Factory for test variants (20-43 series) - uses preferred style
+function testVariant(id, desc, sampleKey, iconKey = null, extraOpts = {}) {
+  return {
+    id,
+    desc,
+    gen: async (p, o, texturePath) => {
+      const svgOpts = {
+        ...PREFERRED_SVG_BASE,
+        cardData: CARD_SAMPLES[sampleKey],
+        ...extraOpts
+      };
+      if (iconKey) {
+        svgOpts.iconSvg = CATEGORY_ICONS[iconKey];
+      }
+      const svg = textureOverlaySvg(svgOpts);
+      await renderTextureCard(svg, p, o, texturePath, PREFERRED_RENDER_OPTS);
+    }
+  };
+}
+
+// =============================================================================
+// END VARIANT FACTORY FUNCTIONS
+// =============================================================================
+
+const variants = [
+  // =============================================================================
+  // LEGACY GRADIENT VARIANTS (00-08)
+  // These use gradient backgrounds instead of textures. Kept for comparison.
+  // =============================================================================
+  gradientVariant('00-default', 'Gradient: full-width header, 40px border, icons, divider', { divider: true }),
+  // 01-border-20px: Custom layout with 20px border (not refactorable to factory)
   {
     id: '01-border-20px',
-    desc: 'Thinner border: 20px',
+    desc: 'Gradient: thinner 20px border (custom layout)',
     gen: async (p, o) => {
-      const b = 20;
-      const headerH = 100;
-      const portraitH = 700; // slightly taller due to thinner border
+      const b = 20, headerH = 100, portraitH = 700;
       const svg = `<svg width="${W}" height="${H}">
         <defs><linearGradient id="c" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:${NPC_COLORS.accent}"/><stop offset="100%" style="stop-color:${NPC_COLORS.light}"/></linearGradient></defs>
         <rect width="${W}" height="${H}" fill="url(#c)"/>
-        <rect x="${b}" y="${b}" width="${W-b*2}" height="${headerH}" fill="url(#c)"/>
         <g transform="translate(${b + 12}, ${b + 32})">${ICON_SVG}</g>
         <g transform="translate(${W - b - 48}, ${b + 32})">${ICON_SVG}</g>
         <text x="${W/2}" y="${b + 68}" font-family="serif" font-size="52" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${esc(CARD.name)}</text>
         <rect x="${b}" y="${b + headerH + portraitH}" width="${W-b*2}" height="${H - b*2 - headerH - portraitH - 36}" fill="#f4e4c1"/>
-        ${wrap(esc(CARD.desc), W - b*2 - 48, 24).map((l, i) => `<text x="${b + 24}" y="${b + headerH + portraitH + 40 + i * 32}" font-family="serif" font-size="24" fill="#2a2016">${l}</text>`).join('')}
+        ${wrap(esc(CARD.desc), W - b*2 - 48, 24).map((l, i) => `<text x="${b + 24}" y="${b + headerH + portraitH + TEXT_START_OFFSET + i * LINE_HEIGHT}" font-family="serif" font-size="24" fill="#2a2016">${l}</text>`).join('')}
         <rect x="${b}" y="${H - b - 36}" width="${W-b*2}" height="36" fill="#e8d4a8"/>
         <text x="${W/2}" y="${H - b - 10}" font-family="serif" font-size="20" fill="#5a4a36" text-anchor="middle">${esc(CARD.footer)}</text>
       </svg>`;
       await render(svg, p, o, b, b + headerH, W - b*2, portraitH);
     }
   },
-
-  // === TEXT BOX STYLING ===
-  {
-    id: '02-parchment-textbox',
-    desc: 'Parchment text box (OLD default)',
-    gen: async (p, o) => {
-      const svg = baseFullFrame({ solidColor: false });
-      await render(svg, p, o, B, 90, W - B*2, 680);
-    }
-  },
-
-  // === HEADER VARIATIONS ===
-  {
-    id: '03-no-icons',
-    desc: 'No category icons in header',
-    gen: async (p, o) => {
-      const svg = baseFullFrame({ showIcons: false });
-      await render(svg, p, o, B, 90, W - B*2, 680);
-    }
-  },
-
-  // === DECORATIVE ELEMENTS ===
-  {
-    id: '04-no-divider',
-    desc: 'No divider line between portrait and text',
-    gen: async (p, o) => {
-      const svg = baseFullFrame({ divider: false });
-      await render(svg, p, o, B, 90, W - B*2, 680);
-    }
-  },
-
-  // === TYPOGRAPHY ===
-  {
-    id: '05-sans-serif',
-    desc: 'Sans-serif font throughout',
-    gen: async (p, o) => {
-      const svg = baseFullFrame({ fontFamily: 'sans-serif', bodySize: 22 });
-      await render(svg, p, o, B, 90, W - B*2, 680);
-    }
-  },
-  {
-    id: '06-centered-text',
-    desc: 'Center-aligned description text',
-    gen: async (p, o) => {
-      const svg = baseFullFrame({ textAlign: 'middle' });
-      await render(svg, p, o, B, 90, W - B*2, 680);
-    }
-  },
-  {
-    id: '07-italic-desc',
-    desc: 'Italic description text',
-    gen: async (p, o) => {
-      const svg = baseFullFrame({ bodyStyle: 'italic' });
-      await render(svg, p, o, B, 90, W - B*2, 680);
-    }
-  },
-
-  // === PORTRAIT-ONLY FRAME (old style for comparison) ===
+  gradientVariant('02-parchment-textbox', 'Gradient: parchment text box (old default)', { solidColor: false }),
+  gradientVariant('03-no-icons', 'Gradient: no category icons', { showIcons: false }),
+  gradientVariant('04-no-divider', 'Gradient: no divider line', { divider: false }),
+  gradientVariant('05-sans-serif', 'Gradient: sans-serif font', { fontFamily: 'sans-serif', bodySize: 22 }),
+  gradientVariant('06-centered-text', 'Gradient: centered description', { textAlign: 'middle' }),
+  gradientVariant('07-italic-desc', 'Gradient: italic description', { bodyStyle: 'italic' }),
+  // 08-portrait-frame-only: Old style with portrait-only frame (custom layout)
   {
     id: '08-portrait-frame-only',
-    desc: 'OLD STYLE: Border only around portrait',
+    desc: 'Gradient: old style portrait-only frame (custom layout)',
     gen: async (p, o) => {
       const svg = `<svg width="${W}" height="${H}">
         <defs>
@@ -655,7 +674,7 @@ const variants = [
         <g transform="translate(24, 27)">${ICON_SVG}</g>
         <g transform="translate(${W - 60}, 27)">${ICON_SVG}</g>
         <text x="${W/2}" y="62" font-family="serif" font-size="52" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${esc(CARD.name)}</text>
-        ${wrap(esc(CARD.desc), W - 80, 28).map((l, i) => `<text x="40" y="${961 + i * 36}" font-family="serif" font-size="28" fill="#2a2016">${l}</text>`).join('')}
+        ${wrap(esc(CARD.desc), W - 80, 28).map((l, i) => `<text x="40" y="${961 + i * LINE_HEIGHT}" font-family="serif" font-size="28" fill="#2a2016">${l}</text>`).join('')}
         <rect y="${H - 40}" height="40" width="${W}" fill="#e8d4a8"/>
         <text x="${W/2}" y="${H - 13}" font-family="serif" font-size="22" fill="#5a4a36" text-anchor="middle">${esc(CARD.footer)}</text>
       </svg>`;
@@ -663,228 +682,53 @@ const variants = [
     }
   },
 
-  // === TEXTURE BACKGROUND VARIANTS ===
+  // =============================================================================
+  // TEXTURE VARIANTS (09-18)
+  // These use texture backgrounds - the preferred style for production cards.
+  // =============================================================================
+
   // Text area tinting options
-  {
-    id: '09-tex-dark-tint',
-    desc: 'Texture: dark tint on text area (current)',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({ textTint: 'dark' });
-      await renderTextureCard(svg, p, o, texturePath, {});
-    }
-  },
-  {
-    id: '10-tex-leather-tint',
-    desc: 'Texture: leather-colored tint on text area',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({ textTint: 'leather' });
-      await renderTextureCard(svg, p, o, texturePath, {});
-    }
-  },
-  {
-    id: '11-tex-no-tint',
-    desc: 'Texture: no tint (text stroke only)',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({ textTint: 'none' });
-      await renderTextureCard(svg, p, o, texturePath, {});
-    }
-  },
+  textureVariant('09-tex-dark-tint', 'Texture: dark tint on text area', { textTint: 'dark' }),
+  textureVariant('10-tex-leather-tint', 'Texture: leather-colored tint', { textTint: 'leather' }),
+  textureVariant('11-tex-no-tint', 'Texture: no tint (stroke only)', { textTint: 'none' }),
 
   // Text area border options
-  {
-    id: '12-tex-line-border',
-    desc: 'Texture: line border around text area',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({ textTint: 'none', textBorder: 'line' });
-      await renderTextureCard(svg, p, o, texturePath, {});
-    }
-  },
-  {
-    id: '13-tex-decorative-border',
-    desc: 'Texture: decorative corner border on text area',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({ textTint: 'none', textBorder: 'decorative' });
-      await renderTextureCard(svg, p, o, texturePath, {});
-    }
-  },
+  textureVariant('12-tex-line-border', 'Texture: line border on text area', { textTint: 'none', textBorder: 'line' }),
+  textureVariant('13-tex-decorative-border', 'Texture: decorative corners', { textTint: 'none', textBorder: 'decorative' }),
 
   // Portrait options
-  {
-    id: '14-tex-rounded-portrait',
-    desc: 'Texture: rounded portrait corners',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({ textTint: 'dark' });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
-  {
-    id: '15-tex-portrait-border',
-    desc: 'Texture: border line around portrait',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({ textTint: 'dark', portraitBorder: 'line' });
-      await renderTextureCard(svg, p, o, texturePath, {});
-    }
-  },
+  textureVariant('14-tex-rounded-portrait', 'Texture: rounded portrait', { textTint: 'dark' }, PREFERRED_RENDER_OPTS),
+  textureVariant('15-tex-portrait-border', 'Texture: portrait border line', { textTint: 'dark', portraitBorder: 'line' }),
 
-  // Combined options
-  {
-    id: '16-tex-rounded-with-border',
-    desc: 'Texture: rounded portrait + border',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({ textTint: 'dark', portraitBorder: 'line', portraitCorners: 'rounded' });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
-  {
-    id: '17-tex-decorative-corners',
-    desc: 'Texture: rounded portrait + decorative corner brackets',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({ textTint: 'none', textBorder: 'decorative', portraitCorners: 'rounded' });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
-  {
-    id: '18-tex-corner-icons',
-    desc: 'Texture: rounded portrait + icons in lower corners',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({ textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded' });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
+  // Combined options (preferred style)
+  textureVariant('16-tex-rounded-with-border', 'Texture: rounded + border',
+    { textTint: 'dark', portraitBorder: 'line', portraitCorners: 'rounded' }, PREFERRED_RENDER_OPTS),
+  textureVariant('17-tex-decorative-corners', 'Texture: rounded + decorative',
+    { textTint: 'none', textBorder: 'decorative', portraitCorners: 'rounded' }, PREFERRED_RENDER_OPTS),
+  textureVariant('18-tex-corner-icons', 'Texture: rounded + corner icons (CURRENT DEFAULT)',
+    { textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded' }, PREFERRED_RENDER_OPTS),
 
-  // === TEXT LENGTH TESTS ===
-  {
-    id: '20-text-short',
-    desc: 'Test: short text (minimal content)',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({
-        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
-        cardData: CARD_SAMPLES.shortText
-      });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
-  {
-    id: '21-text-medium',
-    desc: 'Test: medium text (typical NPC)',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({
-        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
-        cardData: CARD_SAMPLES.mediumText
-      });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
-  {
-    id: '22-text-long',
-    desc: 'Test: long text (detailed description)',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({
-        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
-        cardData: CARD_SAMPLES.longText
-      });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
-  {
-    id: '23-text-very-long',
-    desc: 'Test: very long text (potential overflow)',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({
-        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
-        cardData: CARD_SAMPLES.veryLongText
-      });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
+  // =============================================================================
+  // TEST VARIANTS (20-43)
+  // These test edge cases using the preferred style (18-tex-corner-icons settings).
+  // =============================================================================
 
-  // === CATEGORY TESTS ===
-  {
-    id: '30-cat-location',
-    desc: 'Test: location category (different icon)',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({
-        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
-        cardData: CARD_SAMPLES.location,
-        iconSvg: CATEGORY_ICONS.location
-      });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
-  {
-    id: '31-cat-item',
-    desc: 'Test: item category (different icon)',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({
-        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
-        cardData: CARD_SAMPLES.item,
-        iconSvg: CATEGORY_ICONS.item
-      });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
-  {
-    id: '32-cat-faction',
-    desc: 'Test: faction category (different icon)',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({
-        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
-        cardData: CARD_SAMPLES.faction,
-        iconSvg: CATEGORY_ICONS.faction
-      });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
+  // Text length tests
+  testVariant('20-text-short', 'Test: short text', 'shortText'),
+  testVariant('21-text-medium', 'Test: medium text', 'mediumText'),
+  testVariant('22-text-long', 'Test: long text', 'longText'),
+  testVariant('23-text-very-long', 'Test: very long text', 'veryLongText'),
 
-  // === WIDTH MEASUREMENT TESTS (all at 52px to find limit) ===
-  {
-    id: '40-width-15W',
-    desc: 'Width test: 15 W chars at 52px',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({
-        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
-        cardData: CARD_SAMPLES.test15,
-        forceTitleSize: 52
-      });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
-  {
-    id: '41-width-17W',
-    desc: 'Width test: 17 W chars at 52px',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({
-        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
-        cardData: CARD_SAMPLES.test17,
-        forceTitleSize: 52
-      });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
-  {
-    id: '42-width-19W',
-    desc: 'Width test: 19 W chars at 52px',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({
-        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
-        cardData: CARD_SAMPLES.test19,
-        forceTitleSize: 52
-      });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
-  {
-    id: '43-width-21W',
-    desc: 'Width test: 21 W chars at 52px',
-    gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({
-        textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded',
-        cardData: CARD_SAMPLES.test21,
-        forceTitleSize: 52
-      });
-      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
-    }
-  },
+  // Category tests (different icons)
+  testVariant('30-cat-location', 'Test: location icon', 'location', 'location'),
+  testVariant('31-cat-item', 'Test: item icon', 'item', 'item'),
+  testVariant('32-cat-faction', 'Test: faction icon', 'faction', 'faction'),
+
+  // Width measurement tests (force 52px title to test overflow)
+  testVariant('40-width-15W', 'Test: 15 W chars at 52px', 'test15', null, { forceTitleSize: 52 }),
+  testVariant('41-width-17W', 'Test: 17 W chars at 52px', 'test17', null, { forceTitleSize: 52 }),
+  testVariant('42-width-19W', 'Test: 19 W chars at 52px', 'test19', null, { forceTitleSize: 52 }),
+  testVariant('43-width-21W', 'Test: 21 W chars at 52px', 'test21', null, { forceTitleSize: 52 }),
 ];
 
 async function main() {
