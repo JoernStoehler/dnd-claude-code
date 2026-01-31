@@ -183,19 +183,28 @@ Full recommended set (from msc-viterbo):
 
 ## P1: High Priority Improvements
 
-### 4. Convert Critical Skills to Agents (CCWeb Workaround)
+### 4. Handle Skills for CCWeb
 
 **Problem:** Skills don't auto-load in CCWeb.
 
-**Solution:** For skills that must work in CCWeb, create agent versions.
+**Solution:** Different approaches depending on skill type:
 
-**Current skills:**
-- `session-handoff` - Important, should be an agent
-- `dnd-5e-rules` - Reference, less critical
-- `create-agent` - Meta, rarely needed
-- `create-skill` - Meta, rarely needed
+| Skill Type | Solution |
+|------------|----------|
+| **Agent-like** (spawns subagent, does work) | Convert to `.claude/agents/` |
+| **Reference/knowledge** (context for main agent) | Convert to `docs/*.md` + mention in CLAUDE.md |
+| **Alternative** | SessionStart hook that reads and prints skill descriptions |
 
-**Implementation for session-handoff:**
+**Current skills assessment:**
+
+| Skill | Type | Recommended Action |
+|-------|------|-------------------|
+| `session-handoff` | Agent-like | Convert to `.claude/agents/session-handoff.md` |
+| `dnd-5e-rules` | Reference | Move to `docs/references/dnd-5e-rules.md`, mention in CLAUDE.md |
+| `create-agent` | Reference | Move to `docs/conventions/create-agent.md` |
+| `create-skill` | Reference | Move to `docs/conventions/create-skill.md` |
+
+**Option A: Convert session-handoff to agent**
 
 Create `.claude/agents/session-handoff.md`:
 ```markdown
@@ -216,17 +225,34 @@ Run this at the end of a work session to ensure clean handoff.
 3. **Handoff notes**: Write clear notes for the next agent in PROGRESS.md
 4. **Git commit**: If changes were made, commit with descriptive message
 5. **Open questions**: Document any unresolved questions
-
-## Process
-
-1. Check what files were modified this session
-2. Verify PROGRESS.md reflects current state
-3. Add "Handoff Notes" section if not present
-4. Create commit if uncommitted changes exist
 ```
 
-**Effort:** 20 min per skill converted
+**Option B: Skill-loading script in SessionStart**
+
+Add to `.claude/hooks/session-start.sh`:
+```bash
+# Print skill descriptions for agent awareness
+echo "=== Available Skills ==="
+for skill_dir in "$CLAUDE_PROJECT_DIR"/.claude/skills/*/; do
+    if [ -f "$skill_dir/SKILL.md" ]; then
+        skill_name=$(basename "$skill_dir")
+        # Extract description from frontmatter or first paragraph
+        desc=$(sed -n '/^description:/p' "$skill_dir/SKILL.md" | head -1 | sed 's/description: *//')
+        if [ -z "$desc" ]; then
+            desc=$(sed -n '/^# /{ n; p; }' "$skill_dir/SKILL.md" | head -1)
+        fi
+        echo "- $skill_name: $desc"
+    fi
+done
+echo ""
+```
+
+This injects skill awareness without CLAUDE.md clutter.
+
+**Effort:** 20-30 min total
 **Impact:** High for CCWeb users
+
+**Note:** This approach is CCWeb-specific. For Local-primary repos like msc-viterbo, skills work natively and this complexity is unnecessary.
 
 ---
 
