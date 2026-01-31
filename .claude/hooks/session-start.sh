@@ -10,47 +10,9 @@ source=$(echo "$hook_input" | jq -r '.source // "startup"')
 # Only run on fresh startup, not resume/compact/clear
 [ "$source" != "startup" ] && exit 0
 
-echo "=== D&D Campaign Quick Reference ==="
-echo ""
-
-# Active campaigns
-for campaign_dir in "$CLAUDE_PROJECT_DIR"/campaigns/*/; do
-    campaign_name=$(basename "$campaign_dir")
-    [ "$campaign_name" = "example" ] && continue
-    [ ! -d "$campaign_dir" ] && continue
-
-    # Check for campaign CLAUDE.md to confirm it's a real campaign
-    if [ -f "$campaign_dir/CLAUDE.md" ]; then
-        echo "Campaign: $campaign_name"
-
-        # Recent sessions (last 3)
-        sessions=$(ls -t "$campaign_dir"/sessions/*.md 2>/dev/null | grep -v template | head -3)
-        if [ -n "$sessions" ]; then
-            echo "  Recent sessions:"
-            echo "$sessions" | while read f; do
-                echo "    - $(basename "$f" .md)"
-            done
-        fi
-
-        # Core NPCs (up to 5)
-        npcs=$(ls "$campaign_dir"/characters/npcs/*.md 2>/dev/null | grep -v template | head -5)
-        if [ -n "$npcs" ]; then
-            npc_names=$(echo "$npcs" | xargs -I{} basename {} .md | tr '\n' ', ' | sed 's/,$//')
-            npc_count=$(ls "$campaign_dir"/characters/npcs/*.md 2>/dev/null | grep -v template | wc -l)
-            if [ "$npc_count" -gt 5 ]; then
-                echo "  NPCs: $npc_names (+$((npc_count - 5)) more)"
-            else
-                echo "  NPCs: $npc_names"
-            fi
-        fi
-
-        # Progress file
-        if [ -f "$campaign_dir/PROGRESS.md" ]; then
-            echo "  Progress: See $campaign_name/PROGRESS.md"
-        fi
-        echo ""
-    fi
-done
+# Campaign overview via file-index.py (single source of truth)
+echo "=== Repository Overview ==="
+python3 "$CLAUDE_PROJECT_DIR/scripts/file-index.py" "$CLAUDE_PROJECT_DIR"
 
 # Available skills (CCWeb workaround - skills don't auto-load)
 echo "=== Available Skills ==="
