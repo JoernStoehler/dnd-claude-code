@@ -107,11 +107,21 @@ const PORTRAIT_X = CONTENT_LEFT + PORTRAIT_PADDING;      // 60
 
 // Colors
 const TEXT_COLOR = '#f4e4c1';  // Cream/parchment for text on dark backgrounds
+const TEXT_COLOR_DARK = '#2a2016';  // Dark text for light backgrounds
+const PARCHMENT_LIGHT = '#f4e4c1';  // Light parchment background
+const PARCHMENT_DARK = '#e8d4a8';   // Darker parchment for footer
+const FOOTER_TEXT_DARK = '#5a4a36'; // Footer text on light background
+const DARK_TINT = 'rgba(0,0,0,0.35)';  // Dark overlay for text area
+const LEATHER_TINT = 'rgba(90,50,20,0.5)';  // Leather-colored overlay
+const TEXT_STROKE_COLOR = 'rgba(0,0,0,0.5)';  // Text stroke for readability
 
 // Typography
 const LINE_HEIGHT = 36;                                  // Standard line height for body text
 const TEXT_AREA_PADDING = 24;                            // Horizontal padding inside text area
 const TEXT_START_OFFSET = 44;                            // Vertical offset from TEXT_TOP to first line
+const FOOTER_BASELINE_OFFSET = 8;                        // Baseline offset for footer text
+const TITLE_SIZES_SINGLE = [52, 42, 34, 28];             // Title sizes to try for single line
+const TITLE_SIZES_DOUBLE = [34, 28];                     // Title sizes that fit 2 lines in header
 
 // Decorative elements
 const DIVIDER_MARGIN = 20;                               // Horizontal margin for divider line
@@ -190,7 +200,8 @@ const CARD_SAMPLES = {
 
 const CARD = CARD_SAMPLES.default;
 
-const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+/** Escape special XML characters in text for safe SVG embedding */
+const escapeXml = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
 // Wrap text to fit within maxWidth pixels at given fontSize
 // Uses actual text measurement instead of character count
@@ -231,7 +242,13 @@ function findBestTitleSplit(name, fontSize = 34) {
   return best;
 }
 
-// Calculate optimal title size and line breaks
+/**
+ * Calculate optimal title size and line breaks to fit within header
+ * @param {string} name - The title text
+ * @param {number} defaultSize - Default font size (typically 52)
+ * @param {number|null} forceTitleSize - Force specific size (for testing)
+ * @returns {{size: number, lines: string[]}} Optimal size and line array
+ */
 function calculateAutoTitle(name, defaultSize, forceTitleSize = null) {
   const split = findBestTitleSplit(name);
 
@@ -239,19 +256,16 @@ function calculateAutoTitle(name, defaultSize, forceTitleSize = null) {
     return { size: forceTitleSize, lines: [name] };
   }
 
-  // Try sizes from largest to smallest
-  const sizes = [52, 42, 34, 28];
-
-  // Try single line at each size
-  for (const size of sizes) {
+  // Try single line at each size (largest to smallest)
+  for (const size of TITLE_SIZES_SINGLE) {
     if (measureTextWidth(name, size) <= TITLE_MAX_W) {
       return { size, lines: [name] };
     }
   }
 
-  // Try 2 lines (only 34px and 28px fit in header height)
+  // Try 2 lines (only smaller sizes fit in header height)
   if (split) {
-    for (const size of [34, 28]) {
+    for (const size of TITLE_SIZES_DOUBLE) {
       const w1 = measureTextWidth(split[0], size);
       const w2 = measureTextWidth(split[1], size);
       if (w1 <= TITLE_MAX_W && w2 <= TITLE_MAX_W) {
@@ -261,11 +275,12 @@ function calculateAutoTitle(name, defaultSize, forceTitleSize = null) {
   }
 
   // Fallback: truncate at smallest size
+  const minSize = TITLE_SIZES_SINGLE[TITLE_SIZES_SINGLE.length - 1];
   let truncated = name;
-  while (measureTextWidth(truncated + '…', 28) > TITLE_MAX_W && truncated.length > 1) {
+  while (measureTextWidth(truncated + '…', minSize) > TITLE_MAX_W && truncated.length > 1) {
     truncated = truncated.slice(0, -1);
   }
-  return { size: 28, lines: [truncated + '…'] };
+  return { size: minSize, lines: [truncated + '…'] };
 }
 
 // Truncate text to fit within maxWidth at given fontSize
@@ -290,16 +305,24 @@ function generateHeaderIcons(iconSvg, showIcons) {
   `;
 }
 
-// Generate footer SVG
+/**
+ * Generate footer SVG with location text
+ * @param {string} footer - Footer text (location name)
+ * @param {string} fontFamily - Font family name
+ * @param {string} textColor - Fill color for text
+ * @param {string} textStroke - Stroke style for text readability
+ * @param {boolean} showFooter - Whether to render footer
+ * @returns {string} SVG text element or empty string
+ */
 function generateFooterSvg(footer, fontFamily, textColor, textStroke, showFooter) {
   if (!showFooter) return '';
   const FOOTER_FONT_SIZE = 24;
   const FOOTER_MAX_W = CONTENT_W - 2 * FOOTER_SIDE_PADDING;
   const displayFooter = truncateToFit(footer, FOOTER_FONT_SIZE, FOOTER_MAX_W);
   const footerCenterY = FOOTER_TOP + FOOTER_H / 2;
-  const footerTextY = footerCenterY + 8;
+  const footerTextY = footerCenterY + FOOTER_BASELINE_OFFSET;
   return `
-    <text x="${W/2}" y="${footerTextY}" font-family="${fontFamily}" font-size="${FOOTER_FONT_SIZE}" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(displayFooter)}</text>
+    <text x="${W/2}" y="${footerTextY}" font-family="${fontFamily}" font-size="${FOOTER_FONT_SIZE}" fill="${textColor}" text-anchor="middle" ${textStroke}>${escapeXml(displayFooter)}</text>
   `;
 }
 
@@ -312,13 +335,18 @@ function generateDividerSvg(divider, textColor, textBorder) {
   `;
 }
 
-// Generate text area background SVG
+/**
+ * Generate text area background SVG with optional tint overlay
+ * @param {'dark'|'leather'|'none'} textTint - Tint style for text area
+ * @param {boolean} showFooter - Whether footer is visible (affects height)
+ * @returns {string} SVG rect element or empty string
+ */
 function generateTextAreaBg(textTint, showFooter) {
   const textBgH = TEXT_BOTTOM - TEXT_TOP + (showFooter ? FOOTER_H : 0);
   if (textTint === 'dark') {
-    return `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="rgba(0,0,0,0.35)"/>`;
+    return `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="${DARK_TINT}"/>`;
   } else if (textTint === 'leather') {
-    return `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="rgba(90,50,20,0.5)"/>`;
+    return `<rect x="${CONTENT_LEFT}" y="${TEXT_TOP}" width="${CONTENT_W}" height="${textBgH}" fill="${LEATHER_TINT}"/>`;
   }
   return '';
 }
@@ -372,7 +400,7 @@ function generateTitleSvg(titleLines, titleSize, fontFamily, textColor, textStro
   const titleStartY = headerCenterY - titleBlockHeight/2 + titleSize * 0.75;
 
   return titleLines.map((line, i) =>
-    `<text x="${W/2}" y="${titleStartY + i * titleLineHeight}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(line)}</text>`
+    `<text x="${W/2}" y="${titleStartY + i * titleLineHeight}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${escapeXml(line)}</text>`
   ).join('\n    ');
 }
 
@@ -442,7 +470,7 @@ function textureOverlaySvg(opts = {}) {
 
   // Build body text lines
   const textMaxWidth = CONTENT_W - TEXT_AREA_PADDING * 2;
-  const bodyLines = wrap(esc(cardData.desc), textMaxWidth, bodySize);
+  const bodyLines = wrap(escapeXml(cardData.desc), textMaxWidth, bodySize);
   const textStartY = TEXT_TOP + TEXT_START_OFFSET + (divider ? DIVIDER_OFFSET : 0);
 
   // Assemble SVG from helper-generated components
@@ -535,10 +563,10 @@ function baseFullFrame(opts = {}) {
 
   const footerSvg = showFooter ? (solidColor ? `
     <rect x="${B}" y="${H - B - footerH}" width="${W - B*2}" height="${footerH}" fill="rgba(0,0,0,0.2)"/>
-    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="#f4e4c1" text-anchor="middle">${esc(CARD.footer)}</text>
+    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="#f4e4c1" text-anchor="middle">${escapeXml(CARD.footer)}</text>
   ` : `
     <rect x="${B}" y="${H - B - footerH}" width="${W - B*2}" height="${footerH}" fill="#e8d4a8"/>
-    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="#5a4a36" text-anchor="middle">${esc(CARD.footer)}</text>
+    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="#5a4a36" text-anchor="middle">${escapeXml(CARD.footer)}</text>
   `) : '';
 
   const dividerSvg = divider ? `
@@ -547,7 +575,7 @@ function baseFullFrame(opts = {}) {
 
   // Text wrapping with actual measurement
   const textMaxW = CONTENT_W - TEXT_AREA_PADDING * 2;
-  const lines = wrap(esc(CARD.desc), textMaxW, bodySize);
+  const lines = wrap(escapeXml(CARD.desc), textMaxW, bodySize);
   const textStartY = textAreaTop + TEXT_START_OFFSET + (divider ? DIVIDER_OFFSET : 0);
 
   return `<svg width="${W}" height="${H}">
@@ -560,7 +588,7 @@ function baseFullFrame(opts = {}) {
     <!-- Single background for entire card -->
     <rect width="${W}" height="${H}" fill="url(#c)"/>
     ${icons}
-    <text x="${W/2}" y="${headerH/2 + titleSize/3}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${esc(CARD.name)}</text>
+    <text x="${W/2}" y="${headerH/2 + titleSize/3}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${escapeXml(CARD.name)}</text>
     <!-- Text area (inset by border on sides and bottom) -->
     ${textBg !== 'none' ? `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="${textBg}" opacity="${textBgOpacity}"/>` : ''}
     ${dividerSvg}
@@ -571,43 +599,87 @@ function baseFullFrame(opts = {}) {
 
 // =============================================================================
 // VARIANT FACTORY FUNCTIONS
-// These reduce repetition in the variants array
+// These reduce repetition in the variants array by providing common patterns
+// for creating variant objects with consistent structure.
 // =============================================================================
 
-// Factory for gradient-based variants (00-08 series)
+/**
+ * Factory for gradient-based card variants (00-08 series)
+ * Uses baseFullFrame() for SVG generation with solid color gradient backgrounds.
+ *
+ * @param {string} id - Unique variant ID (e.g., '00-default')
+ * @param {string} desc - Human-readable description
+ * @param {Object} opts - Options passed to baseFullFrame():
+ *   - {boolean} divider - Show divider line (default: false)
+ *   - {boolean} showIcons - Show category icons (default: true)
+ *   - {boolean} solidColor - Use solid color vs parchment (default: true)
+ *   - {string} fontFamily - Font name (default: 'serif')
+ *   - {string} textAlign - 'start' or 'middle' (default: 'start')
+ *   - {string} bodyStyle - 'normal' or 'italic' (default: 'normal')
+ * @returns {{id: string, desc: string, gen: Function}} Variant object
+ */
 function gradientVariant(id, desc, opts = {}) {
   return {
     id,
     desc,
-    gen: async (p, o) => {
+    gen: async (portraitPath, outputPath) => {
       const svg = baseFullFrame(opts);
-      await render(svg, p, o, B, 90, W - B*2, 680);
+      await render(svg, portraitPath, outputPath, B, 90, W - B*2, 680);
     }
   };
 }
 
-// Factory for texture-based variants (09-18 series)
+/**
+ * Factory for texture-based card variants (09-18 series)
+ * Uses textureOverlaySvg() for SVG and renderTextureCard() for compositing.
+ *
+ * @param {string} id - Unique variant ID (e.g., '09-tex-dark-tint')
+ * @param {string} desc - Human-readable description
+ * @param {Object} svgOpts - Options for textureOverlaySvg():
+ *   - {string} textTint - 'dark', 'leather', or 'none'
+ *   - {string} textBorder - 'none', 'line', 'decorative', or 'icons'
+ *   - {string} portraitBorder - 'none' or 'line'
+ *   - {string} portraitCorners - 'square' or 'rounded'
+ * @param {Object} renderOpts - Options for renderTextureCard():
+ *   - {boolean} roundedPortrait - Apply rounded corners to portrait
+ *   - {number} cornerRadius - Radius for rounded corners (default: 20)
+ * @returns {{id: string, desc: string, gen: Function}} Variant object
+ */
 function textureVariant(id, desc, svgOpts = {}, renderOpts = {}) {
   return {
     id,
     desc,
-    gen: async (p, o, texturePath) => {
+    gen: async (portraitPath, outputPath, texturePath) => {
       const svg = textureOverlaySvg(svgOpts);
-      await renderTextureCard(svg, p, o, texturePath, renderOpts);
+      await renderTextureCard(svg, portraitPath, outputPath, texturePath, renderOpts);
     }
   };
 }
 
-// Common render options for "preferred style" variants
+// Default options for the "preferred style" (variant 18-tex-corner-icons)
 const PREFERRED_RENDER_OPTS = { roundedPortrait: true, cornerRadius: 20 };
 const PREFERRED_SVG_BASE = { textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded' };
 
-// Factory for test variants (20-43 series) - uses preferred style
+/**
+ * Factory for test variants (20-43 series) using preferred style settings.
+ * All test variants use the same visual style (rounded portrait, corner icons)
+ * but with different card content or forced settings for edge case testing.
+ *
+ * @param {string} id - Unique variant ID (e.g., '20-text-short')
+ * @param {string} desc - Human-readable description
+ * @param {string} sampleKey - Key in CARD_SAMPLES for test content
+ * @param {string|null} iconKey - Key in CATEGORY_ICONS, or null for default
+ * @param {Object} extraOpts - Additional options (e.g., {forceTitleSize: 52})
+ * @returns {{id: string, desc: string, gen: Function}} Variant object
+ */
 function testVariant(id, desc, sampleKey, iconKey = null, extraOpts = {}) {
+  if (!CARD_SAMPLES[sampleKey]) {
+    throw new Error(`testVariant: Unknown sample key "${sampleKey}"`);
+  }
   return {
     id,
     desc,
-    gen: async (p, o, texturePath) => {
+    gen: async (portraitPath, outputPath, texturePath) => {
       const svgOpts = {
         ...PREFERRED_SVG_BASE,
         cardData: CARD_SAMPLES[sampleKey],
@@ -617,7 +689,7 @@ function testVariant(id, desc, sampleKey, iconKey = null, extraOpts = {}) {
         svgOpts.iconSvg = CATEGORY_ICONS[iconKey];
       }
       const svg = textureOverlaySvg(svgOpts);
-      await renderTextureCard(svg, p, o, texturePath, PREFERRED_RENDER_OPTS);
+      await renderTextureCard(svg, portraitPath, outputPath, texturePath, PREFERRED_RENDER_OPTS);
     }
   };
 }
@@ -643,11 +715,11 @@ const variants = [
         <rect width="${W}" height="${H}" fill="url(#c)"/>
         <g transform="translate(${b + 12}, ${b + 32})">${ICON_SVG}</g>
         <g transform="translate(${W - b - 48}, ${b + 32})">${ICON_SVG}</g>
-        <text x="${W/2}" y="${b + 68}" font-family="serif" font-size="52" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${esc(CARD.name)}</text>
+        <text x="${W/2}" y="${b + 68}" font-family="serif" font-size="52" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${escapeXml(CARD.name)}</text>
         <rect x="${b}" y="${b + headerH + portraitH}" width="${W-b*2}" height="${H - b*2 - headerH - portraitH - 36}" fill="#f4e4c1"/>
-        ${wrap(esc(CARD.desc), W - b*2 - 48, 24).map((l, i) => `<text x="${b + 24}" y="${b + headerH + portraitH + TEXT_START_OFFSET + i * LINE_HEIGHT}" font-family="serif" font-size="24" fill="#2a2016">${l}</text>`).join('')}
+        ${wrap(escapeXml(CARD.desc), W - b*2 - 48, 24).map((l, i) => `<text x="${b + 24}" y="${b + headerH + portraitH + TEXT_START_OFFSET + i * LINE_HEIGHT}" font-family="serif" font-size="24" fill="#2a2016">${l}</text>`).join('')}
         <rect x="${b}" y="${H - b - 36}" width="${W-b*2}" height="36" fill="#e8d4a8"/>
-        <text x="${W/2}" y="${H - b - 10}" font-family="serif" font-size="20" fill="#5a4a36" text-anchor="middle">${esc(CARD.footer)}</text>
+        <text x="${W/2}" y="${H - b - 10}" font-family="serif" font-size="20" fill="#5a4a36" text-anchor="middle">${escapeXml(CARD.footer)}</text>
       </svg>`;
       await render(svg, p, o, b, b + headerH, W - b*2, portraitH);
     }
@@ -673,10 +745,10 @@ const variants = [
         <rect y="90" height="827" width="${W}" fill="url(#c)"/>
         <g transform="translate(24, 27)">${ICON_SVG}</g>
         <g transform="translate(${W - 60}, 27)">${ICON_SVG}</g>
-        <text x="${W/2}" y="62" font-family="serif" font-size="52" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${esc(CARD.name)}</text>
-        ${wrap(esc(CARD.desc), W - 80, 28).map((l, i) => `<text x="40" y="${961 + i * LINE_HEIGHT}" font-family="serif" font-size="28" fill="#2a2016">${l}</text>`).join('')}
+        <text x="${W/2}" y="62" font-family="serif" font-size="52" font-weight="bold" fill="#f4e4c1" text-anchor="middle">${escapeXml(CARD.name)}</text>
+        ${wrap(escapeXml(CARD.desc), W - 80, 28).map((l, i) => `<text x="40" y="${961 + i * LINE_HEIGHT}" font-family="serif" font-size="28" fill="#2a2016">${l}</text>`).join('')}
         <rect y="${H - 40}" height="40" width="${W}" fill="#e8d4a8"/>
-        <text x="${W/2}" y="${H - 13}" font-family="serif" font-size="22" fill="#5a4a36" text-anchor="middle">${esc(CARD.footer)}</text>
+        <text x="${W/2}" y="${H - 13}" font-family="serif" font-size="22" fill="#5a4a36" text-anchor="middle">${escapeXml(CARD.footer)}</text>
       </svg>`;
       await render(svg, p, o, 40, 130, W - 80, 747);
     }
@@ -736,13 +808,32 @@ async function main() {
   const portraitPath = path.join(outDir, 'portrait.png');
   const texturePath = path.join(outDir, 'texture.png');
 
+  // Validate required files exist
+  if (!fs.existsSync(portraitPath)) {
+    console.error(`Error: Portrait not found: ${portraitPath}`);
+    process.exit(1);
+  }
+  if (!fs.existsSync(texturePath)) {
+    console.error(`Error: Texture not found: ${texturePath}`);
+    process.exit(1);
+  }
+
   console.log(`Generating ${variants.length} layout variants...\n`);
 
+  let successCount = 0;
   for (const v of variants) {
     const outPath = path.join(outDir, `${v.id}.png`);
-    await v.gen(portraitPath, outPath, texturePath);
-    console.log(`  ${v.id}: ${v.desc}`);
+    try {
+      await v.gen(portraitPath, outPath, texturePath);
+      console.log(`  ✓ ${v.id}: ${v.desc}`);
+      successCount++;
+    } catch (err) {
+      console.error(`  ✗ ${v.id}: ${v.desc}`);
+      console.error(`    Error: ${err.message}`);
+      throw err; // Stop on first error for debugging
+    }
   }
+  console.log(`\nGenerated ${successCount}/${variants.length} variants successfully.`);
 
   // Generate markdown
   let md = `# Layout Variant Comparison
