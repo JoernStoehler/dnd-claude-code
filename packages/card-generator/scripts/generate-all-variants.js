@@ -190,13 +190,15 @@ function textureOverlaySvg(opts = {}) {
       <path d="M${tbX+tbW},${tbY+tbH-cs} L${tbX+tbW},${tbY+tbH} L${tbX+tbW-cs},${tbY+tbH}" fill="none" stroke="${textColor}" stroke-width="2"/>
     `;
   } else if (textBorder === 'icons') {
-    // Category icons in lower corners of text area (same 12px margin as header icons)
-    const tbX = B, tbY = textAreaTop, tbW = W - B*2, tbH = textAreaH + (showFooter ? footerH : 0);
-    const iconMargin = 12;
+    // Category icons centered vertically in footer area
+    const tbX = B, tbW = W - B*2;
+    const iconMargin = 12; // horizontal margin from edges
     const iconWidth = 36; // icon scaled size
+    const footerTop = H - B - footerH;
+    const iconY = footerTop + (footerH - iconWidth) / 2; // center icons in footer area
     textBorderSvg = `
-      <g transform="translate(${tbX + iconMargin}, ${tbY + tbH - iconWidth - iconMargin})">${iconSvg}</g>
-      <g transform="translate(${tbX + tbW - iconWidth - iconMargin}, ${tbY + tbH - iconWidth - iconMargin})">${iconSvg}</g>
+      <g transform="translate(${tbX + iconMargin}, ${iconY})">${iconSvg}</g>
+      <g transform="translate(${tbX + tbW - iconWidth - iconMargin}, ${iconY})">${iconSvg}</g>
     `;
   }
 
