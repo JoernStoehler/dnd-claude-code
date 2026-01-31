@@ -1,6 +1,8 @@
 # Layout Variant Comparison
 
-New default: **Full frame**, 40px border, 90px header, solid color, icons, **divider line**.
+**Texture cards**: AI-generated leather background, no tint, rounded portrait, icons in corners.
+
+Legacy: Gradient background with solid color text area.
 
 ---
 
@@ -58,7 +60,7 @@ Generate texture: `node scripts/generate-texture.js texture.png --category=npc -
 
 ### Text Area Tinting
 
-| Dark tint (current) | Leather tint | No tint |
+| Dark tint | Leather tint | No tint (preferred) |
 |:---:|:---:|:---:|
 | <img src="09-tex-dark-tint.png" width="200"/> | <img src="10-tex-leather-tint.png" width="200"/> | <img src="11-tex-no-tint.png" width="200"/> |
 
