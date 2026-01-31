@@ -41,26 +41,34 @@ async function render(svg, portraitPath, outputPath, pX, pY, pW, pH, texturePath
   }
 }
 
-// Generate SVG overlay (transparent background, only text/icons/decorations)
-function overlayOnlySvg(opts = {}) {
+// Generate SVG overlay for texture backgrounds
+// Options for text area: tint (none, dark, leather), border (none, line, decorative)
+// Options for portrait: border (none, line), corners (square, rounded)
+function textureOverlaySvg(opts = {}) {
   const headerH = opts.headerH || 90;
   const portraitH = opts.portraitH || 680;
-  const solidColor = opts.solidColor !== false;
-  const textColor = solidColor ? '#f4e4c1' : '#2a2016';
+  const textColor = '#f4e4c1';
   const footerH = opts.footerH || 36;
   const showFooter = opts.showFooter !== false;
   const showIcons = opts.showIcons !== false;
   const fontFamily = opts.fontFamily || 'serif';
   const titleSize = opts.titleSize || 52;
   const bodySize = opts.bodySize || 24;
-  const bodyStyle = opts.bodyStyle || 'normal';
-  const textAlign = opts.textAlign || 'start';
-  const textX = textAlign === 'middle' ? W/2 : B + 24;
+  const divider = opts.divider !== false;
   const charsPerLine = opts.charsPerLine || 42;
-  const divider = opts.divider !== false;  // Default: true for texture mode
+
+  // Text area styling
+  const textTint = opts.textTint || 'dark';  // 'none', 'dark', 'leather'
+  const textBorder = opts.textBorder || 'none';  // 'none', 'line', 'decorative'
+
+  // Portrait styling
+  const portraitBorder = opts.portraitBorder || 'none';  // 'none', 'line'
+  const portraitCorners = opts.portraitCorners || 'square';  // 'square', 'rounded'
+  const cornerRadius = opts.cornerRadius || 20;
 
   const textAreaTop = headerH + portraitH;
   const textAreaH = H - headerH - portraitH - B - (showFooter ? footerH : 0);
+  const portraitW = W - B * 2;
 
   const iconY = (headerH - 36) / 2;
   const icons = showIcons ? `
@@ -68,32 +76,117 @@ function overlayOnlySvg(opts = {}) {
     <g transform="translate(${W - B - 48}, ${iconY})">${ICON_SVG}</g>
   ` : '';
 
+  const textStroke = 'stroke="rgba(0,0,0,0.5)" stroke-width="2" paint-order="stroke"';
+
   const footerSvg = showFooter ? `
-    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="#f4e4c1" text-anchor="middle" stroke="rgba(0,0,0,0.6)" stroke-width="2" paint-order="stroke">${esc(CARD.footer)}</text>
+    <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(CARD.footer)}</text>
   ` : '';
 
   const dividerSvg = divider ? `
-    <line x1="${B + 20}" y1="${textAreaTop + 10}" x2="${W - B - 20}" y2="${textAreaTop + 10}" stroke="#f4e4c1" stroke-width="3" opacity="0.7"/>
+    <line x1="${B + 20}" y1="${textAreaTop + 10}" x2="${W - B - 20}" y2="${textAreaTop + 10}" stroke="${textColor}" stroke-width="3" opacity="0.7"/>
   ` : '';
 
   const lines = wrap(esc(CARD.desc), charsPerLine);
   const lineHeight = 32;
   const textStartY = textAreaTop + 40 + (divider ? 16 : 0);
 
-  // Text with stroke for readability on texture
-  const textStroke = 'stroke="rgba(0,0,0,0.5)" stroke-width="2" paint-order="stroke"';
+  // Text area background based on tint option
+  let textBgSvg = '';
+  if (textTint === 'dark') {
+    textBgSvg = `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="rgba(0,0,0,0.35)"/>`;
+  } else if (textTint === 'leather') {
+    textBgSvg = `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="rgba(90,50,20,0.5)"/>`;
+  }
+  // 'none' = no background
 
-  // Subtle overlay on text area only for better readability (texture still visible)
-  const textBgSvg = `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="rgba(0,0,0,0.35)"/>`;
+  // Text area border
+  let textBorderSvg = '';
+  if (textBorder === 'line') {
+    textBorderSvg = `<rect x="${B}" y="${textAreaTop}" width="${W - B*2}" height="${textAreaH + (showFooter ? footerH : 0)}" fill="none" stroke="${textColor}" stroke-width="2" opacity="0.5"/>`;
+  } else if (textBorder === 'decorative') {
+    // Decorative corners
+    const tbX = B, tbY = textAreaTop, tbW = W - B*2, tbH = textAreaH + (showFooter ? footerH : 0);
+    const cs = 15; // corner size
+    textBorderSvg = `
+      <path d="M${tbX+cs},${tbY} L${tbX},${tbY} L${tbX},${tbY+cs}" fill="none" stroke="${textColor}" stroke-width="2"/>
+      <path d="M${tbX+tbW-cs},${tbY} L${tbX+tbW},${tbY} L${tbX+tbW},${tbY+cs}" fill="none" stroke="${textColor}" stroke-width="2"/>
+      <path d="M${tbX},${tbY+tbH-cs} L${tbX},${tbY+tbH} L${tbX+cs},${tbY+tbH}" fill="none" stroke="${textColor}" stroke-width="2"/>
+      <path d="M${tbX+tbW},${tbY+tbH-cs} L${tbX+tbW},${tbY+tbH} L${tbX+tbW-cs},${tbY+tbH}" fill="none" stroke="${textColor}" stroke-width="2"/>
+    `;
+  }
+
+  // Portrait border
+  let portraitBorderSvg = '';
+  if (portraitBorder === 'line') {
+    if (portraitCorners === 'rounded') {
+      portraitBorderSvg = `<rect x="${B}" y="${headerH}" width="${portraitW}" height="${portraitH}" rx="${cornerRadius}" fill="none" stroke="${textColor}" stroke-width="3"/>`;
+    } else {
+      portraitBorderSvg = `<rect x="${B}" y="${headerH}" width="${portraitW}" height="${portraitH}" fill="none" stroke="${textColor}" stroke-width="3"/>`;
+    }
+  }
+
+  // Clip path for rounded portrait (will be used by render function)
+  let defs = '';
+  if (portraitCorners === 'rounded') {
+    defs = `<defs>
+      <clipPath id="portraitClip">
+        <rect x="${B}" y="${headerH}" width="${portraitW}" height="${portraitH}" rx="${cornerRadius}"/>
+      </clipPath>
+    </defs>`;
+  }
 
   return `<svg width="${W}" height="${H}">
+    ${defs}
     ${textBgSvg}
+    ${textBorderSvg}
+    ${portraitBorderSvg}
     ${icons}
-    <text x="${W/2}" y="${headerH/2 + titleSize/3}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="#f4e4c1" text-anchor="middle" ${textStroke}>${esc(CARD.name)}</text>
+    <text x="${W/2}" y="${headerH/2 + titleSize/3}" font-family="${fontFamily}" font-size="${titleSize}" font-weight="bold" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(CARD.name)}</text>
     ${dividerSvg}
-    ${lines.map((l, i) => `<text x="${textX}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" font-style="${bodyStyle}" fill="${textColor}" text-anchor="${textAlign}" ${textStroke}>${l}</text>`).join('')}
+    ${lines.map((l, i) => `<text x="${B + 24}" y="${textStartY + i * lineHeight}" font-family="${fontFamily}" font-size="${bodySize}" fill="${textColor}" ${textStroke}>${l}</text>`).join('')}
     ${footerSvg}
   </svg>`;
+}
+
+// Render with rounded portrait corners
+async function renderTextureCard(svg, portraitPath, outputPath, texturePath, opts = {}) {
+  const headerH = opts.headerH || 90;
+  const portraitH = opts.portraitH || 680;
+  const portraitW = W - B * 2;
+  const cornerRadius = opts.cornerRadius || 20;
+  const roundedPortrait = opts.roundedPortrait || false;
+
+  let portrait = await sharp(portraitPath).resize(portraitW, portraitH, { fit: 'cover' });
+
+  if (roundedPortrait) {
+    // Create rounded corners mask
+    const mask = Buffer.from(`<svg width="${portraitW}" height="${portraitH}">
+      <rect width="${portraitW}" height="${portraitH}" rx="${cornerRadius}" fill="white"/>
+    </svg>`);
+    const maskBuffer = await sharp(mask).png().toBuffer();
+    portrait = await portrait
+      .composite([{ input: maskBuffer, blend: 'dest-in' }])
+      .png()
+      .toBuffer();
+  } else {
+    portrait = await portrait.toBuffer();
+  }
+
+  const texture = await sharp(texturePath).resize(W, H, { fit: 'cover' }).toBuffer();
+  const overlay = await sharp(Buffer.from(svg)).png().toBuffer();
+
+  await sharp(texture)
+    .composite([
+      { input: portrait, top: headerH, left: B },
+      { input: overlay, top: 0, left: 0 }
+    ])
+    .png()
+    .toFile(outputPath);
+}
+
+// Original overlay function for backwards compatibility
+function overlayOnlySvg(opts = {}) {
+  return textureOverlaySvg({ ...opts, textTint: 'dark' });
 }
 
 // NEW LAYOUT: Header full-width at top, border on sides/bottom only
@@ -282,13 +375,84 @@ const variants = [
     }
   },
 
-  // === TEXTURE BACKGROUND ===
+  // === TEXTURE BACKGROUND VARIANTS ===
+  // Text area tinting options
   {
-    id: '09-texture-bg',
-    desc: 'AI-generated texture background (requires texture.png)',
+    id: '09-tex-dark-tint',
+    desc: 'Texture: dark tint on text area (current)',
     gen: async (p, o, texturePath) => {
-      const svg = overlayOnlySvg({ divider: true });
-      await render(svg, p, o, B, 90, W - B*2, 680, texturePath);
+      const svg = textureOverlaySvg({ textTint: 'dark' });
+      await renderTextureCard(svg, p, o, texturePath, {});
+    }
+  },
+  {
+    id: '10-tex-leather-tint',
+    desc: 'Texture: leather-colored tint on text area',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({ textTint: 'leather' });
+      await renderTextureCard(svg, p, o, texturePath, {});
+    }
+  },
+  {
+    id: '11-tex-no-tint',
+    desc: 'Texture: no tint (text stroke only)',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({ textTint: 'none' });
+      await renderTextureCard(svg, p, o, texturePath, {});
+    }
+  },
+
+  // Text area border options
+  {
+    id: '12-tex-line-border',
+    desc: 'Texture: line border around text area',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({ textTint: 'none', textBorder: 'line' });
+      await renderTextureCard(svg, p, o, texturePath, {});
+    }
+  },
+  {
+    id: '13-tex-decorative-border',
+    desc: 'Texture: decorative corner border on text area',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({ textTint: 'none', textBorder: 'decorative' });
+      await renderTextureCard(svg, p, o, texturePath, {});
+    }
+  },
+
+  // Portrait options
+  {
+    id: '14-tex-rounded-portrait',
+    desc: 'Texture: rounded portrait corners',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({ textTint: 'dark' });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+  {
+    id: '15-tex-portrait-border',
+    desc: 'Texture: border line around portrait',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({ textTint: 'dark', portraitBorder: 'line' });
+      await renderTextureCard(svg, p, o, texturePath, {});
+    }
+  },
+
+  // Combined options
+  {
+    id: '16-tex-rounded-with-border',
+    desc: 'Texture: rounded portrait + border',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({ textTint: 'dark', portraitBorder: 'line', portraitCorners: 'rounded' });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+  {
+    id: '17-tex-full-polish',
+    desc: 'Texture: rounded portrait + decorative text border',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({ textTint: 'none', textBorder: 'decorative', portraitBorder: 'line', portraitCorners: 'rounded' });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
     }
   },
 ];
@@ -361,13 +525,33 @@ New default: **Full frame**, 40px border, 90px header, solid color, icons, **div
 
 ---
 
-## Background Style
-
-| Gradient (default) | AI Texture |
-|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="09-texture-bg.png" width="250"/> |
+## Texture Background Variants
 
 Generate texture: \`node scripts/generate-texture.js texture.png --category=npc --api\`
+
+### Text Area Tinting
+
+| Dark tint (current) | Leather tint | No tint |
+|:---:|:---:|:---:|
+| <img src="09-tex-dark-tint.png" width="200"/> | <img src="10-tex-leather-tint.png" width="200"/> | <img src="11-tex-no-tint.png" width="200"/> |
+
+### Text Area Borders
+
+| Line border | Decorative corners |
+|:---:|:---:|
+| <img src="12-tex-line-border.png" width="250"/> | <img src="13-tex-decorative-border.png" width="250"/> |
+
+### Portrait Styling
+
+| Rounded corners | Border line | Rounded + border |
+|:---:|:---:|:---:|
+| <img src="14-tex-rounded-portrait.png" width="200"/> | <img src="15-tex-portrait-border.png" width="200"/> | <img src="16-tex-rounded-with-border.png" width="200"/> |
+
+### Full Polish
+
+<img src="17-tex-full-polish.png" width="300"/>
+
+Rounded portrait + decorative text border corners
 
 ---
 `;
