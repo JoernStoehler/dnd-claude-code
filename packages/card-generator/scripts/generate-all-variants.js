@@ -82,8 +82,10 @@ function textureOverlaySvg(opts = {}) {
     <text x="${W/2}" y="${H - B - 10}" font-family="${fontFamily}" font-size="20" fill="${textColor}" text-anchor="middle" ${textStroke}>${esc(CARD.footer)}</text>
   ` : '';
 
+  // Move divider down if there's a text border to avoid intersection
+  const dividerY = textAreaTop + (textBorder !== 'none' ? 20 : 10);
   const dividerSvg = divider ? `
-    <line x1="${B + 20}" y1="${textAreaTop + 10}" x2="${W - B - 20}" y2="${textAreaTop + 10}" stroke="${textColor}" stroke-width="3" opacity="0.7"/>
+    <line x1="${B + 20}" y1="${dividerY}" x2="${W - B - 20}" y2="${dividerY}" stroke="${textColor}" stroke-width="3" opacity="0.7"/>
   ` : '';
 
   const lines = wrap(esc(CARD.desc), charsPerLine);
@@ -113,15 +115,24 @@ function textureOverlaySvg(opts = {}) {
       <path d="M${tbX},${tbY+tbH-cs} L${tbX},${tbY+tbH} L${tbX+cs},${tbY+tbH}" fill="none" stroke="${textColor}" stroke-width="2"/>
       <path d="M${tbX+tbW},${tbY+tbH-cs} L${tbX+tbW},${tbY+tbH} L${tbX+tbW-cs},${tbY+tbH}" fill="none" stroke="${textColor}" stroke-width="2"/>
     `;
+  } else if (textBorder === 'icons') {
+    // Category icons in lower corners of text area
+    const tbX = B, tbY = textAreaTop, tbW = W - B*2, tbH = textAreaH + (showFooter ? footerH : 0);
+    textBorderSvg = `
+      <g transform="translate(${tbX + 8}, ${tbY + tbH - 44})">${ICON_SVG}</g>
+      <g transform="translate(${tbX + tbW - 44}, ${tbY + tbH - 44})">${ICON_SVG}</g>
+    `;
   }
 
-  // Portrait border
+  // Portrait border - draw OUTSIDE the portrait area with clear offset
   let portraitBorderSvg = '';
   if (portraitBorder === 'line') {
+    const borderOffset = 4; // Larger offset so border is clearly visible
+    const strokeW = 4;
     if (portraitCorners === 'rounded') {
-      portraitBorderSvg = `<rect x="${B}" y="${headerH}" width="${portraitW}" height="${portraitH}" rx="${cornerRadius}" fill="none" stroke="${textColor}" stroke-width="3"/>`;
+      portraitBorderSvg = `<rect x="${B - borderOffset}" y="${headerH - borderOffset}" width="${portraitW + borderOffset*2}" height="${portraitH + borderOffset*2}" rx="${cornerRadius + borderOffset}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
     } else {
-      portraitBorderSvg = `<rect x="${B}" y="${headerH}" width="${portraitW}" height="${portraitH}" fill="none" stroke="${textColor}" stroke-width="3"/>`;
+      portraitBorderSvg = `<rect x="${B - borderOffset}" y="${headerH - borderOffset}" width="${portraitW + borderOffset*2}" height="${portraitH + borderOffset*2}" fill="none" stroke="${textColor}" stroke-width="${strokeW}"/>`;
     }
   }
 
@@ -448,10 +459,18 @@ const variants = [
     }
   },
   {
-    id: '17-tex-full-polish',
-    desc: 'Texture: rounded portrait + decorative text border',
+    id: '17-tex-decorative-corners',
+    desc: 'Texture: rounded portrait + decorative corner brackets',
     gen: async (p, o, texturePath) => {
-      const svg = textureOverlaySvg({ textTint: 'none', textBorder: 'decorative', portraitBorder: 'line', portraitCorners: 'rounded' });
+      const svg = textureOverlaySvg({ textTint: 'none', textBorder: 'decorative', portraitCorners: 'rounded' });
+      await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
+    }
+  },
+  {
+    id: '18-tex-corner-icons',
+    desc: 'Texture: rounded portrait + icons in lower corners',
+    gen: async (p, o, texturePath) => {
+      const svg = textureOverlaySvg({ textTint: 'none', textBorder: 'icons', portraitCorners: 'rounded' });
       await renderTextureCard(svg, p, o, texturePath, { roundedPortrait: true, cornerRadius: 20 });
     }
   },
@@ -547,11 +566,11 @@ Generate texture: \`node scripts/generate-texture.js texture.png --category=npc 
 |:---:|:---:|:---:|
 | <img src="14-tex-rounded-portrait.png" width="200"/> | <img src="15-tex-portrait-border.png" width="200"/> | <img src="16-tex-rounded-with-border.png" width="200"/> |
 
-### Full Polish
+### Text Area Decoration
 
-<img src="17-tex-full-polish.png" width="300"/>
-
-Rounded portrait + decorative text border corners
+| Decorative corners | Icons in corners |
+|:---:|:---:|
+| <img src="17-tex-decorative-corners.png" width="250"/> | <img src="18-tex-corner-icons.png" width="250"/> |
 
 ---
 `;
