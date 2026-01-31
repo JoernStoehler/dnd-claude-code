@@ -52,12 +52,32 @@ New default: **Full frame**, 40px border, 90px header, solid color, icons, **div
 
 ---
 
-## Background Style
-
-| Gradient (default) | AI Texture |
-|:---:|:---:|
-| <img src="00-default.png" width="250"/> | <img src="09-texture-bg.png" width="250"/> |
+## Texture Background Variants
 
 Generate texture: `node scripts/generate-texture.js texture.png --category=npc --api`
+
+### Text Area Tinting
+
+| Dark tint (current) | Leather tint | No tint |
+|:---:|:---:|:---:|
+| <img src="09-tex-dark-tint.png" width="200"/> | <img src="10-tex-leather-tint.png" width="200"/> | <img src="11-tex-no-tint.png" width="200"/> |
+
+### Text Area Borders
+
+| Line border | Decorative corners |
+|:---:|:---:|
+| <img src="12-tex-line-border.png" width="250"/> | <img src="13-tex-decorative-border.png" width="250"/> |
+
+### Portrait Styling
+
+| Rounded corners | Border line | Rounded + border |
+|:---:|:---:|:---:|
+| <img src="14-tex-rounded-portrait.png" width="200"/> | <img src="15-tex-portrait-border.png" width="200"/> | <img src="16-tex-rounded-with-border.png" width="200"/> |
+
+### Full Polish
+
+<img src="17-tex-full-polish.png" width="300"/>
+
+Rounded portrait + decorative text border corners
 
 ---
