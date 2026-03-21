@@ -234,48 +234,6 @@ Documents need to be formatted for actual GM use, not just contain information.
 
 ---
 
-## Improvement Priorities (Not a Backlog)
-
-These are areas that would increase readiness if developed. No order implied.
-
-**High Impact (Gameplay):**
-- [ ] Develop NPC voices (practice speaking as them)
-- [x] Add plotlines section to Sentient Cargo file ✓
-- [ ] Flesh out Missing Tax Collector (Percival's trail)
-- [ ] Flesh out Wrongly Accused (the actual crime and suspects)
-
-**High Impact (Visual/Structural):**
-- [x] Weathervane Manor floor plans (3 floors + basement) ✓
-- [x] Manor item placement (where is everything specifically?) ✓
-- [x] Manor hidden secrets (what can players discover?) ✓ — "The Crucible" puzzle added
-- [ ] Escort route visual/map with encounter markers
-
-**Medium Impact:**
-- [ ] Millhaven city map (districts, streets, key buildings)
-- [ ] Brackenvale village map (buildings, paths)
-- [ ] Greendale Reach area map (terrain, scale, landmarks)
-- [ ] Write auction mechanics for Estate Sale
-- [ ] Detail Heist security options per owner type
-- [ ] Level-adjustable encounters for Manor
-- [ ] Quest-dependent state changes for Manor (during + after each hook)
-- [ ] Develop one undeveloped hook (Festival? Monster Mediation?)
-
-**Meta (Document Quality):**
-- [ ] Add "At a Glance" boxes to location files
-- [ ] Add "During Play Quick-Ref" sections to hooks (separate from prep reading)
-- [x] Manor room-by-room quick reference card ✓ — `weathervane-manor-reference.md`
-- [ ] Review all files for skimmability (bold key facts, reduce prose)
-- [ ] Consider GM cheat sheets (1-page summaries for each hook)
-
-**Low Priority:**
-- [ ] Cosmology/gods (only if a hook needs it)
-- [ ] Monster ecology (only if relevant)
-- [ ] Detailed history (only if plot requires)
-- [ ] Beyond-sandbox geography (only if players go there)
-- [ ] Random encounter tables for routes
-
----
-
 ## Session Log
 
 *Track what's been run and what changed*
@@ -286,28 +244,9 @@ These are areas that would increase readiness if developed. No order implied.
 
 ---
 
-## Handoff Notes for Next Agents
-
-**Recommended Task Order:**
-
-1. **First: Document format polish** — Add "At a Glance" boxes to location files, create "During Play" quick-ref sections. This establishes patterns for other agents to follow.
-
-2. **Then parallel:**
-   - Flesh out Missing Tax Collector (Percival's trail, scene beats)
-   - Flesh out Wrongly Accused (the crime, culprit, wrong suspects)
-   - Weathervane Manor floor plans (3 floors + basement ASCII/descriptions)
-
-**Key files to read:**
-- `campaigns/fun-heroes/CLAUDE.md` — Tone, philosophy, NPC design principles
-- `campaigns/fun-heroes/sessions/hook-sentient-cargo.md` — **Format model** (copy this structure)
-- This file (PROGRESS.md) — What's done, what's needed
-
-**Workflow convention:** Brainstorm in conversation → validate concept → write to file. Don't end a session with important decisions only in conversation.
-
----
-
 ## Notes
 
 - Percentages are conservative estimates
 - "Ready to run" assumes improvisation-friendly GM
 - Route NPCs can recur in other hooks if players met them
+- Agent tasks and improvement priorities are tracked in root-level `TASKS.md`
