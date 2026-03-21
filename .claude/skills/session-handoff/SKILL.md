@@ -1,58 +1,68 @@
 ---
 name: session-handoff
-description: Use this checklist at the end of a working session before context is lost.
+description: Use this checklist at the end of a working session before context is lost. Captures session state into persistent artifacts and optionally spawns a review subagent to verify completeness.
+user-invocable: true
 ---
 
-# Session Handoff Skill
+# Session Handoff
 
-Use this checklist at the end of a working session before context is lost.
+Use at the end of a working session before context is lost. Runs in main context (needs session history).
 
-## When to Use
+## When to use
 
-- Before ending a session (user says "wrap up", "handoff", "done for now")
+- Before ending a session ("wrap up", "handoff", "done for now")
 - Before context compaction warnings
 - After completing a major piece of work
 
-## Handoff Checklist
+## Step 1: Persist decisions to files
 
-### 1. Write Decisions to Files
+Anything decided in conversation but not yet written to files will be lost.
 
-- [ ] Any important decisions made in conversation? Write them to relevant files.
-- [ ] Any brainstormed content not yet saved? Add to appropriate location.
-- [ ] User corrections or clarifications? Update affected files.
+- Decisions, corrections, or clarifications from Jörn → update affected files
+- Brainstormed content not yet saved → add to appropriate location
+- Conventions established this session → update CLAUDE.md or relevant skill
+- Discovered tasks → add to TASKS.md
 
-### 2. Update Progress Tracking
+## Step 2: Update task tracking
 
-- [ ] Update PROGRESS.md (or equivalent) with current state
-- [ ] Mark completed items as done
-- [ ] Add new items discovered during session
-- [ ] Check for outdated notes and fix them
+- Update TASKS.md (or PROGRESS.md) with current state
+- Mark completed items as done
+- Add new items discovered during session
+- Remove or correct outdated entries
 
-### 3. Add Handoff Notes (if applicable)
+## Step 3: Write handoff file (if work continues)
 
-If work continues in another session:
-- [ ] Recommended task order for next agent
-- [ ] Key files to read for onboarding
-- [ ] Any conventions established this session
-- [ ] Warnings about pitfalls or known issues
+If a future session will continue this work, write a handoff file to `handoffs/`. See the `collaboration` skill for the handoff file format (Context, Scope, Out of scope, Key files, Prior findings, Success criteria, Dependencies).
 
-### 4. Commit and Push
+Key principles:
+- Pointers over summaries — point to files, don't describe them
+- One task per handoff file
+- Scope boundaries prevent drift — name what's out of scope
+- Include findings the next agent would otherwise re-derive
 
-- [ ] Stage all changes: `git add -A`
-- [ ] Write clear commit message summarizing session work
-- [ ] Push to branch: `git push -u origin <branch>`
-- [ ] Confirm push succeeded
+## Step 4: Commit
 
-### 5. Verify Nothing Lost
+- Stage changes (prefer specific files over `git add -A`)
+- Write clear commit message summarizing session work
+- Push if working on a branch
 
-- [ ] Re-read final PROGRESS.md or handoff section
-- [ ] Does it capture everything the next agent needs to know?
-- [ ] Would you understand the context if you read only the files?
+## Step 5: Subagent review (recommended for substantial sessions)
 
-## Common Mistakes to Avoid
+Spawn a review subagent that reads ONLY the persistent artifacts (handoff files, TASKS.md, updated CLAUDE.md, changed files) — not the conversation. The subagent answers:
 
-- Leaving important context only in conversation
-- Forgetting to update progress percentages
-- Not specifying recommended task order when it matters
-- Outdated notes that contradict current state
+1. Could a new agent reconstruct what to do next from files alone?
+2. Are there decisions or context mentioned in the handoff that aren't backed by file changes?
+3. Is anything in TASKS.md contradicted by the actual file state?
+4. Are handoff file pointers valid (do the referenced files exist)?
+
+The subagent simulates what the next session will experience. If it can't reconstruct the state, the handoff has gaps — fix them.
+
+**When to skip:** Trivial sessions (single small edit, no continuation needed). When in doubt, run it — the cost is low and it catches gaps the main agent is blind to.
+
+## Common mistakes
+
+- Leaving important context only in conversation (the next agent can't see it)
+- Not writing a handoff file when work will continue
+- Assuming the next agent knows what you know
+- Handoff files that summarize instead of pointing to files
 - Uncommitted work
