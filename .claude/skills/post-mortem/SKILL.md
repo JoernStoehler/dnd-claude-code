@@ -14,19 +14,19 @@ Be concrete and specific. Vague feedback is not useful.
 What slowed you down?
 
 Bad: "The codebase was confusing"
-Good: "Couldn't find NPC files - they're split between characters/npcs/ and some are inline in session logs"
+Good: "Couldn't find which module owns the KKT solver — there are copies in 3 crates with no comment explaining which is canonical"
 
 ### 2. Unclear Instructions
 What was confusing in CLAUDE.md, skills, or agent prompts?
 
 Bad: "The prompt was unclear"
-Good: "The NPC template doesn't specify whether to include combat stats for non-combat NPCs"
+Good: "rust-conventions skill doesn't specify whether to use thiserror or anyhow for library crates vs binaries"
 
 ### 3. Missing Context
 What information wasn't provided but was needed?
 
 Bad: "Didn't have enough context"
-Good: "Needed to know which session hooks have been played vs are still available"
+Good: "Needed to know whether the Adem-Wu proof in Chapter 3 has been reviewed by the advisor or is still draft"
 
 ### 4. Jörn's Time
 Where did Jörn spend time this session? What work did Jörn do, and was it used afterward? Purpose: detect work Jörn does that agents could also do, or that needn't be done at all.
@@ -38,14 +38,14 @@ What should be preserved or expanded?
 Specific, actionable improvements.
 
 Bad: "Make things clearer"
-Good: "Add a 'last played' field to session hook files"
+Good: "Add a 'verified by advisor' field to theorem environments"
 
 ## Process checks — report only items that apply
 
 6. **Agent splitting needed?** — Did any multi-responsibility agent fail to cover all its checks? Recommend splitting if so.
-7. **Fabrications slipped through?** — Did fabricated claims or convention violations reach Jörn that subagent review should have caught?
+7. **Fabrications slipped through?** — Did fabricated claims, wrong theorem names, or incorrect citations reach Jörn that subagent review should have caught?
 8. **Iterated in front of user?** — Did I run multiple fix/review cycles in conversation instead of using subagents offline?
-9. **False attribution?** — Did I attribute something to Jörn or a source that didn't actually say it?
+9. **False attribution?** — Did I attribute a mathematical result to a source that didn't actually state it?
 10. **Assumed Jörn read something?** — Did I act as if Jörn saw a question or information that he may not have read?
 
 ## Generalize from issues
@@ -64,7 +64,6 @@ Persist actionable findings so future agents benefit. For each finding, decide w
 Don't persist everything — only findings that would change future agent behavior. A postmortem that produces zero repo changes is fine if nothing actionable emerged.
 
 Additional follow-up actions:
-- Update CLAUDE.md or agent prompts directly for quick fixes
 - Add TODO comments in relevant files for localized issues
 - Add to TASKS.md for issues needing more context
 - Update PROGRESS.md if session changed campaign readiness
