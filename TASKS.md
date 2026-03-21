@@ -35,7 +35,7 @@
 - 🟡 Detail Heist security options per owner type
 - 🟡 Level-adjustable encounters for Weathervane Manor
 - 🟡 Quest-dependent state changes for Manor (during + after each hook)
-- 🟢 Develop one undeveloped hook (Festival Disaster, Monster Mediation, Tournament, or Inspection)
+- 🟡 Develop one undeveloped hook (Festival Disaster, Monster Mediation, Tournament, or Inspection)
 
 ### Maps and visuals
 
