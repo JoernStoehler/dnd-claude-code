@@ -2,6 +2,11 @@
 
 Creates tarot-sized player-facing cards with texture backgrounds.
 
+## Prerequisites
+
+- `FAL_KEY` env var must be set for AI image generation (`--api` mode). Loaded from repo root `.env` via shell profile. If missing, scripts fall back to placeholder images and print a warning.
+- **Never read `.env` directly** — it contains secrets. Just check `echo $FAL_KEY` to verify it's set.
+
 ## Pipeline
 
 ```bash
