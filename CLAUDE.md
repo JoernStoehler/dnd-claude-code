@@ -7,6 +7,7 @@ This repository supports collaborative preparation of fantasy TTRPG campaigns. C
 ```
 CLAUDE.md           # You are here - agent onboarding
 README.md           # Brief overview for human visitors
+TASKS.md            # Agent task tracking with escalation markers
 
 campaigns/<name>/   # Individual campaigns (each has its own CLAUDE.md)
 packages/<name>/    # Larger tools/applications (e.g., card-generator)
@@ -25,7 +26,7 @@ docs/               # Conventions and notes
 
 Each campaign directory contains:
 - `CLAUDE.md` - **Read this first** for campaign tone, philosophy, and guidelines
-- `PROGRESS.md` - Current status and next steps
+- `PROGRESS.md` - Play-readiness status and session log
 - `lore/` - World-building, factions, locations, history
 - `characters/` - NPCs, player characters
 - `sessions/` - Session logs, prep notes, hooks
@@ -95,7 +96,7 @@ Proceeding while overwhelmed produces work that looks plausible but drops constr
 
 **Plan before acting (at the right level).** Don't plan individual edits — but do have a plan before starting any non-trivial task. Ask: "Do I have a goal? Is my approach approved? Am I working from verified assumptions?" If the answer is no, stop and fix that first. Agents consistently skip planning at levels where it's obviously worth it, and agree in hindsight that planning would have helped.
 
-**Ask questions when the expected value is positive.** A question that costs Jörn 10 seconds but has a 10% chance of saving 1 hour of wasted work is obviously worth asking. Agents systematically under-ask because they weigh the visible cost (Jörn's time right now) but ignore the expected cost of being wrong. When in doubt, ask. Especially ask about: the goal of the task, whether an assumption is correct, whether work should be verified before proceeding.
+**Ask questions when the expected value is positive.** A question that costs Jörn 5 seconds but has a 10% chance of saving 1 hour of wasted work is obviously worth asking. Agents systematically under-ask because they weigh the visible cost (Jörn's time right now) but ignore the expected cost of being wrong. When in doubt, ask. Especially ask about: the goal of the task, whether an assumption is correct, whether work should be verified before proceeding.
 
 **Communicate reliably.** Do not assume Jörn read your messages — messages overlap, tool calls interrupt, and Jörn switches between sessions. Specific failure modes to avoid:
 - Assuming Jörn saw a question or piece of information you wrote
@@ -103,7 +104,7 @@ Proceeding while overwhelmed produces work that looks plausible but drops constr
 - Giving up on a question after it goes unanswered — repeat it
 - Misinterpreting what Jörn is referring to without checking
 
-**Model your own unreliability.** You are not reliable at: complex reasoning on first attempt, verifying your own output, maintaining focus across long sessions, following all active instructions simultaneously. Act accordingly — seek verification, use checklists, request review of critical output rather than assuming it's correct.
+**Model your own unreliability.** You are not reliable at: complex reasoning on a first attempt, verifying your own output, maintaining focus across long sessions, following all active instructions simultaneously. Act accordingly — seek verification, use checklists, request review of critical output rather than assuming it's correct.
 
 ## Agent Capabilities and Limitations
 
@@ -131,6 +132,7 @@ Proceeding while overwhelmed produces work that looks plausible but drops constr
 ## Getting Started
 
 1. Check relevant `campaigns/<name>/CLAUDE.md` for campaign context and tone
-2. Review `campaigns/<name>/PROGRESS.md` for current status
-3. Review recent session logs to understand what's "nailed down"
-4. Ask clarifying questions before making changes to established canon
+2. Review `TASKS.md` for current agent tasks and priorities
+3. Review `campaigns/<name>/PROGRESS.md` for play-readiness status
+4. Review recent session logs to understand what's "nailed down"
+5. Ask clarifying questions before making changes to established canon

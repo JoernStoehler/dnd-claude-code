@@ -7,7 +7,7 @@
 
 | Area | Status |
 |------|--------|
-| Agent infrastructure (skills, agents, hooks) | Draft — meta-skills synced from msc-math, behavior norms added |
+| Agent infrastructure (skills, agents, hooks) | Draft — meta-skills synced, behavior norms, failure modes, delegation safeguards, knowledge taxonomy |
 | Campaign framework (tone, philosophy, templates) | Settled |
 | Sentient Cargo one-shot | Settled — format model for other content |
 | Weathervane Manor | Draft — explorable but needs quest-dependent polish |
@@ -23,7 +23,7 @@
 - 🟡 Review synced meta-skills (meta-documentation, collaboration, feedback-processing) for dnd fitness
 - 🟡 Create convention skills for campaign content (npc-conventions, encounter-conventions, location-conventions)
 - 🟡 Create review agent(s) loading conventions + checklists
-- 🔴 Migrate from PROGRESS.md to TASKS.md — verify nothing was lost (this task)
+- ✅ Migrate from PROGRESS.md to TASKS.md — verified by subagent comparison (2026-03-21)
 
 ### Campaign content
 
