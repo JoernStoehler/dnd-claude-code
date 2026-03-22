@@ -2,7 +2,7 @@
 description: Review campaign content (hooks, NPCs, locations) against convention skills. Checks formatting, skimmability, completeness of required sections, and cross-references. Does NOT check lore consistency (use lore-checker), D&D mechanical correctness (verify against source), or creative quality (Jörn judges this).
 model: sonnet
 skills:
-  - hook-conventions
+  - plot-hook-conventions
   - npc-conventions
   - location-conventions
 ---

@@ -1,6 +1,6 @@
 ---
-name: hook-conventions
-description: Conventions for writing one-shot hooks. Covers structure, skimmability, NPC integration, complications, and outcome paths. Based on Sentient Cargo as format model. Does not cover encounter balance (see dnd-5e-rules) or campaign-level arc design.
+name: plot-hook-conventions
+description: Conventions for writing one-shot plot hooks. Covers structure, skimmability, NPC integration, complications, and outcome paths. Based on Sentient Cargo as format model. Does not cover encounter balance (see dnd-5e-rules) or campaign-level arc design.
 ---
 
 # Hook Conventions
