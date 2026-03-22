@@ -10,13 +10,13 @@ Creates tarot-sized player-facing cards with texture backgrounds.
 ## Pipeline
 
 ```bash
-# 1. Generate portrait (placeholder or via fal.ai)
-node scripts/generate-portrait.js portrait.png --category=npc
-node scripts/generate-portrait.js portrait.png --prompt="gnome inventor" --api  # requires FAL_KEY
+# 1. Generate portrait (prompt → fal.ai Flux if FAL_KEY set, else placeholder)
+node scripts/generate-portrait.js portrait.png "gnome inventor, ink wash style"
+node scripts/generate-portrait.js portrait.png   # placeholder
 
-# 2. Generate texture background
-node scripts/generate-texture.js texture.png --category=npc
-node scripts/generate-texture.js texture.png --category=npc --api  # requires FAL_KEY
+# 2. Generate texture background (same: prompt → API or placeholder)
+node scripts/generate-texture.js texture.png "brown leather surface, warm cognac tones, 8k detail"
+node scripts/generate-texture.js texture.png     # placeholder
 
 # 3. Render card from JSON + portrait + texture
 node scripts/render-card.js card.json card.png

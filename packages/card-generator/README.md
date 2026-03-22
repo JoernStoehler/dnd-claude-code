@@ -10,20 +10,20 @@ Cards have a category-specific texture background, a portrait image, title, desc
 cd packages/card-generator
 npm install
 
-# Generate placeholder images for testing
-node scripts/generate-portrait.js portrait.png --category=npc
-node scripts/generate-texture.js texture.png --category=npc
+# Generate placeholder images for layout testing
+node scripts/generate-portrait.js portrait.png
+node scripts/generate-texture.js texture.png
 
 # Render a card
 node scripts/render-card.js card.json card.png --portrait=portrait.png --texture=texture.png
 ```
 
-For real images, set `FAL_KEY` and add `--api`:
+For real images, set `FAL_KEY` and provide a prompt:
 
 ```bash
 export FAL_KEY="..."  # https://fal.ai/dashboard/keys
-node scripts/generate-portrait.js portrait.png --prompt="gnome inventor, ink wash style" --api
-node scripts/generate-texture.js texture.png --category=npc --api
+node scripts/generate-portrait.js portrait.png "gnome inventor, ink wash style"
+node scripts/generate-texture.js texture.png "brown leather surface, warm cognac tones, 8k detail"
 ```
 
 ## Card JSON
