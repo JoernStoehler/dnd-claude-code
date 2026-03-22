@@ -49,7 +49,8 @@ const outputPath = positional[1];
 const cardDir = path.dirname(path.resolve(cardPath));
 
 const card = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
-const portraitPath = flags.portrait || card.portrait || path.join(cardDir, 'portrait.png');
+const portraitFromJson = card.portrait ? path.resolve(cardDir, card.portrait) : null;
+const portraitPath = flags.portrait || portraitFromJson || path.join(cardDir, 'portrait.png');
 const texturePath = flags.texture || path.join(cardDir, 'texture.png');
 
 renderCard({

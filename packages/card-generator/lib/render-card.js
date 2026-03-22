@@ -69,8 +69,6 @@ const PORTRAIT_TOP = HEADER_BOTTOM;                       // 120
 const PORTRAIT_BOTTOM = PORTRAIT_TOP + PORTRAIT_H;        // 770
 const TEXT_TOP = PORTRAIT_BOTTOM;                          // 770
 const FOOTER_TOP = H - B - FOOTER_H;                      // 1337
-const FOOTER_BOTTOM = H - B;                              // 1377
-const TEXT_BOTTOM = FOOTER_TOP;                            // 1337
 
 // Horizontal positions
 const CONTENT_LEFT = B;                                   // 40
@@ -103,9 +101,6 @@ const FOOTER_SIDE_PADDING = 20;
 
 // Decorative
 const DIVIDER_MARGIN = 20;
-const DECORATIVE_CORNER_SIZE = 15;
-const PORTRAIT_BORDER_OFFSET = 4;
-const PORTRAIT_BORDER_WIDTH = 4;
 
 // Colors
 const TEXT_COLOR = '#f4e4c1';
@@ -127,6 +122,9 @@ const CATEGORY_ICONS = {
   mystery: `<g transform="translate(0,0) scale(1.5)" fill="none" stroke="#f4e4c1" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></g>`
 };
 
+// Category colors are used by generate-texture.js for placeholder gradients.
+// The renderer doesn't use them directly (textures carry the color), but they're
+// exported as reference data for the pipeline.
 const CATEGORY_COLORS = {
   npc: { accent: '#8B4513', light: '#D2691E' },
   location: { accent: '#2E8B57', light: '#3CB371' },
@@ -262,29 +260,20 @@ function generateDivider() {
   return `<line x1="${CONTENT_LEFT + DIVIDER_MARGIN}" y1="${dividerY}" x2="${CONTENT_RIGHT - DIVIDER_MARGIN}" y2="${dividerY}" stroke="${TEXT_COLOR}" stroke-width="3" opacity="0.7"/>`;
 }
 
-function generatePortraitClipDefs() {
-  return `<defs>
-    <clipPath id="portraitClip">
-      <rect x="${PORTRAIT_X}" y="${PORTRAIT_TOP}" width="${PORTRAIT_W}" height="${PORTRAIT_H}" rx="${CORNER_RADIUS}"/>
-    </clipPath>
-  </defs>`;
-}
-
 function generateOverlaySvg(card) {
   const iconSvg = CATEGORY_ICONS[card.category] || CATEGORY_ICONS.npc;
   const { size: titleSize, lines: titleLines } = calculateAutoTitle(card.name);
 
   const textMaxWidth = CONTENT_W - TEXT_AREA_PADDING * 2;
   const bodySize = 28;
-  const bodyLines = wrapText(escapeXml(card.description), textMaxWidth, bodySize);
+  const bodyLines = wrapText(card.description, textMaxWidth, bodySize);
   const textStartY = TEXT_TOP + TEXT_START_OFFSET + DIVIDER_OFFSET;
 
   return `<svg width="${W}" height="${H}">
-    ${generatePortraitClipDefs()}
     ${generateHeaderIcons(iconSvg)}
     ${generateTitleSvg(titleLines, titleSize)}
     ${generateDivider()}
-    ${bodyLines.map((l, i) => `<text x="${CONTENT_LEFT + TEXT_AREA_PADDING}" y="${textStartY + i * LINE_HEIGHT}" font-family="serif" font-size="${bodySize}" fill="${TEXT_COLOR}" ${TEXT_STROKE}>${l}</text>`).join('')}
+    ${bodyLines.map((l, i) => `<text x="${CONTENT_LEFT + TEXT_AREA_PADDING}" y="${textStartY + i * LINE_HEIGHT}" font-family="serif" font-size="${bodySize}" fill="${TEXT_COLOR}" ${TEXT_STROKE}>${escapeXml(l)}</text>`).join('')}
     ${generateFooterIcons(iconSvg)}
     ${generateFooterText(card.footer || '')}
   </svg>`;
