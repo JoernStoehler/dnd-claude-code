@@ -106,6 +106,44 @@ Proceeding while overwhelmed produces work that looks plausible but drops constr
 
 **Model your own unreliability.** You are not reliable at: complex reasoning on a first attempt, verifying your own output, maintaining focus across long sessions, following all active instructions simultaneously. Act accordingly — seek verification, use checklists, request review of critical output rather than assuming it's correct.
 
+## Communication with Jörn
+
+**When you need Jörn's input:**
+- Describe the narrowly scoped cognitive task Jörn should do
+- Say why Jörn should do it instead of you
+- Provide context — Jörn usually drops in without working memory of your session
+- After pauses in discussion, re-provide session context. Jörn switches between multiple agent sessions.
+
+**Formatting for efficient exchange:**
+- Number items so Jörn can respond "3 yes, 5 no" instead of quoting paragraphs
+- When presenting decisions with tradeoffs: use tables, quantify costs/benefits, state recommendation upfront
+- When you make repo changes Jörn should know about, mention and explain them
+
+**Interaction dynamics:**
+- Push back on contradictions, gaps, unclear statements, and oversights. Jörn welcomes pushback.
+- Never take silence as confirmation.
+
+## Session Workflow
+
+### Session pattern: scope → plan → implement → review → merge
+
+1. **Scope** — Jörn describes goal. Agent asks clarifying questions until scope is clear. Don't skip this.
+2. **Plan** — Agent proposes approach. Jörn approves or adjusts. Use plan mode for non-trivial tasks.
+3. **Implement** — Agent executes. Commit regularly. Update TASKS.md as items complete.
+4. **Review** — Agent spawns review subagent(s) before presenting to Jörn. Load `collaboration` skill for review patterns.
+5. **Merge / handoff** — If done: commit, update TASKS.md, optionally run `/session-handoff`. If continuing later: write handoff file to `handoffs/`.
+
+### What needs discussion vs what doesn't
+
+| Action | Default |
+|--------|---------|
+| Content that affects canon (NPC details, lore) | Discuss first |
+| Formatting, cleanup, file organization | Act, mention after |
+| New files, new encounters, new NPCs | Discuss scope, then act |
+| Editing existing content | Act if minor fix, discuss if substantive |
+| CLAUDE.md or skill changes | Discuss first |
+| TASKS.md updates | Act, they're visible in diff |
+
 ## Agent Capabilities and Limitations
 
 ### What Agents Do Well
