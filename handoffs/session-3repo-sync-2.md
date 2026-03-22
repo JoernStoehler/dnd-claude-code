@@ -32,11 +32,15 @@
 - Two clarity audits with loop instructions (subagents running)
 - TASKS.md update with new items
 
-## What remains (priority order)
+## Also done (after initial handoff draft)
 
-### Quick fixes
-- Commit pending subagent work
-- Sync any remaining changes across repos
+- Clarity fixes from looped audits (21 + 15 findings) across meta-documentation, collaboration, and dnd CLAUDE.md
+- msc-math: maturity map added to TASKS.md (from pause-game's innovation)
+- pause-game: escalation markers added to TASKS.md (from msc-math's innovation)
+- pause-game post-mortem checked: no real content loss from standardization (domain-specific examples replaced, structural improvements kept)
+- dnd agent descriptions fixed to state guarantees and limitations
+
+## What remains (for future sessions)
 
 ### Medium
 - CLAUDE.md clarity pass: strip embedded rationale from behavior norms per meta-documentation "pure action" rule
@@ -45,11 +49,7 @@
 ### Larger
 - Convention skills for dnd campaign content (npc-conventions, encounter-conventions, location-conventions)
 - Review agent(s) for dnd loading conventions + checklists
-- Re-run clarity audits properly — subagents fizzle out (Look→Think→Write→Submit instead of looping before Submit). Need to verify audit completeness.
-- Check whether pause-game's post-mortem extensions from session 1 were lost during standardization
 - msc-math: consider splitting monolithic review agent into per-concern reviewers
-- msc-math: add maturity map to TASKS.md (from pause-game's innovation)
-- pause-game: add escalation markers to TASKS.md (from msc-math's innovation)
 
 ## Key files
 
