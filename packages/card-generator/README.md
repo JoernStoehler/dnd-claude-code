@@ -1,95 +1,44 @@
-# Card Generator (Experimental)
+# Card Generator
 
-**Status: Exploratory prototypes** - throwaway code for figuring out the workflow.
+Generates tarot-sized (70x120mm) player-facing reference cards for a TTRPG campaign.
 
-## Environment Variables
+Cards have a category-specific texture background, a portrait image, title, description text, and footer with category icons.
 
-```bash
-export FAL_KEY="..."       # fal.ai API key for Flux portraits: https://fal.ai/dashboard/keys
-export GITHUB_TOKEN="..."  # (optional) GitHub PAT for PR automation: https://github.com/settings/tokens
-```
-
-## Scripts
-
-Single-purpose tools, run manually in sequence:
+## Quick Start
 
 ```bash
-# 1. Generate portrait (Flux standard size)
-node scripts/generate-portrait.js portrait.png --size=portrait_4_3 --category=npc
+cd packages/card-generator
+npm install
 
-# 2. Render card PNG from JSON definition
-node scripts/render-card-sharp.js card.json card.png --style=dark
+# Generate placeholder images for testing
+node scripts/generate-portrait.js portrait.png --category=npc
+node scripts/generate-texture.js texture.png --category=npc
+
+# Render a card
+node scripts/render-card.js card.json card.png --portrait=portrait.png --texture=texture.png
 ```
 
-### generate-portrait.js
-
-Creates portrait images using [Flux standard sizes](https://fal.ai/models/fal-ai/flux/dev/api).
+For real images, set `FAL_KEY` and add `--api`:
 
 ```bash
-node scripts/generate-portrait.js output.png --size=portrait_4_3 --category=npc
-node scripts/generate-portrait.js output.png --prompt="gnome knight" --api  # requires FAL_KEY
+export FAL_KEY="..."  # https://fal.ai/dashboard/keys
+node scripts/generate-portrait.js portrait.png --prompt="gnome inventor, ink wash style" --api
+node scripts/generate-texture.js texture.png --category=npc --api
 ```
 
-**Size presets (Flux standard):**
-| Preset | Dimensions | Use case |
-|--------|------------|----------|
-| `portrait_4_3` | 768x1024 | **Recommended for cards** |
-| `portrait_16_9` | 576x1024 | Taller/narrower |
-| `square` | 1024x1024 | Square images |
-| `landscape_4_3` | 1024x768 | Location cards? |
-| `landscape_16_9` | 1024x576 | Wide scenes |
-
-### render-card-sharp.js
-
-Renders card PNG directly using sharp. No browser needed.
-
-```bash
-node scripts/render-card-sharp.js card.json card.png --style=dark
-```
-
-**Layout styles:**
-| Style | Description |
-|-------|-------------|
-| `dark` | Dark textured background, light text (default) |
-| `parchment` | Aged paper look, dark text |
-| `minimal` | Clean white background, no texture |
-| `compact` | Smaller portrait (320px), more room for text |
-| `framed` | Portrait with decorative border/margin (not full-width) |
-
-## Card JSON Schema
-
-See `schemas/card.schema.json`. Cards are **player-facing** (no secrets/hooks).
+## Card JSON
 
 ```json
 {
   "category": "npc",
-  "name": "Sir Tinkelstein of Gnomewood",
-  "description": "A fastidious gnome knight in oversized armor. You met him at the Gilded Gear tavern.",
-  "footer": "Campaign Name",
-  "portrait": "portrait.png",
-  "image_prompt": "Portrait of a gnome knight, dignified expression..."
+  "name": "Grimble Thornwick",
+  "description": "A tinkering gnome inventor with soot-stained fingers.",
+  "footer": "Thornwick's Emporium"
 }
 ```
 
-## Folder Structure
+Categories: `npc`, `location`, `item`, `faction`, `quest`, `mystery`
 
-```
-campaigns/<campaign>/cards/
-├── npc/
-│   └── sir-tinkelstein/
-│       ├── card.json             # Definition (or v1.json, v2.json for variants)
-│       ├── portrait.png          # AI-generated portrait (768x1024)
-│       ├── card.png              # Final rendered card (750x1050)
-│       └── REVIEW.md             # For PR review
-├── location/
-└── item/
-```
+## Design
 
-## Example Output
-
-- **Text variants**: `campaigns/example/cards/npc/sir-tinkelstein/`
-- **Layout styles**: `campaigns/example/cards/npc/sir-tinkelstein-layouts/`
-
-## PR Review Workflow
-
-See `campaigns/example/cards/npc/sir-tinkelstein/REVIEW.md` for the markdown format.
+See [DESIGN-SPEC.md](DESIGN-SPEC.md) for layout details and design rationale.

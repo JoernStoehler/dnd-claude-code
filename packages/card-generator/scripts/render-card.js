@@ -1,149 +1,70 @@
 #!/usr/bin/env node
 /**
- * render-card.js - Render HTML card templates to PNG images
+ * Render a card PNG from a JSON definition.
  *
  * Usage:
- *   node render-card.js <input.html> [output.png] [--scale=N]
- *   node render-card.js card-template.html card.png --scale=3
+ *   node render-card.js <card.json> <output.png> [--portrait=PATH] [--texture=PATH]
  *
- * Options:
- *   --scale=N    Render at Nx resolution (default: 3 for 300dpi-equivalent)
- *   --selector   CSS selector for card element (default: .card)
- *   --all        Render all .card elements as separate files
- *
- * Dependencies: playwright (npm install playwright)
+ * If --portrait/--texture are not given, looks for portrait.png/texture.png
+ * next to the card JSON file.
  */
 
-const { chromium } = require('playwright');
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
+const { renderCard } = require('../lib/render-card');
 
-async function renderCard(inputPath, outputPath, options = {}) {
-  const scale = options.scale || 3; // 3x for ~300dpi from 100dpi base
-  const selector = options.selector || '.card';
-  const renderAll = options.all || false;
-
-  const absoluteInput = path.resolve(inputPath);
-  if (!fs.existsSync(absoluteInput)) {
-    console.error(`Input file not found: ${absoluteInput}`);
-    process.exit(1);
-  }
-
-  // Try to find an existing Chrome/Chromium installation
-  const possiblePaths = [
-    process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
-    '/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome',
-    '/usr/bin/chromium',
-    '/usr/bin/chromium-browser',
-    '/usr/bin/google-chrome',
-  ].filter(Boolean);
-
-  let executablePath = null;
-  for (const p of possiblePaths) {
-    if (fs.existsSync(p)) {
-      executablePath = p;
-      break;
-    }
-  }
-
-  const launchOptions = executablePath ? { executablePath } : {};
-  const browser = await chromium.launch(launchOptions);
-  const page = await browser.newPage();
-
-  // Set device scale factor for high-DPI rendering
-  await page.setViewportSize({ width: 1200, height: 2000 });
-
-  await page.goto(`file://${absoluteInput}`);
-
-  // Brief wait for rendering (don't wait for network - local file)
-  await page.waitForTimeout(500);
-
-  if (renderAll) {
-    // Render each card to a separate file
-    const cards = await page.$$(selector);
-    console.log(`Found ${cards.length} cards to render`);
-
-    for (let i = 0; i < cards.length; i++) {
-      const card = cards[i];
-      const outputFile = outputPath
-        ? outputPath.replace('.png', `-${i + 1}.png`)
-        : `card-${i + 1}.png`;
-
-      // Get bounding box and use page screenshot with clip
-      const box = await card.boundingBox();
-      if (box) {
-        await page.screenshot({
-          path: outputFile,
-          clip: { x: box.x, y: box.y, width: box.width, height: box.height },
-          omitBackground: true
-        });
-        console.log(`Rendered: ${outputFile}`);
-      }
-    }
-  } else {
-    // Render just the first matching card
-    const card = await page.$(selector);
-    if (!card) {
-      console.error(`No element found matching selector: ${selector}`);
-      await browser.close();
-      process.exit(1);
-    }
-
-    const output = outputPath || 'card.png';
-    const box = await card.boundingBox();
-    if (box) {
-      await page.screenshot({
-        path: output,
-        clip: { x: box.x, y: box.y, width: box.width, height: box.height },
-        omitBackground: true
-      });
-      console.log(`Rendered: ${output}`);
-    }
-  }
-
-  await browser.close();
-}
-
-// Parse command line arguments
 const args = process.argv.slice(2);
-const flags = args.filter(a => a.startsWith('--'));
 const positional = args.filter(a => !a.startsWith('--'));
+const flags = Object.fromEntries(
+  args.filter(a => a.startsWith('--'))
+    .map(a => a.slice(2).split('='))
+    .map(([k, v]) => [k, v ?? true])
+);
 
-const options = {
-  scale: 3,
-  all: flags.includes('--all'),
-  selector: '.card'
-};
-
-for (const flag of flags) {
-  if (flag.startsWith('--scale=')) {
-    options.scale = parseInt(flag.split('=')[1], 10);
-  }
-  if (flag.startsWith('--selector=')) {
-    options.selector = flag.split('=')[1];
-  }
-}
-
-if (positional.length < 1) {
+if (positional.length < 2) {
   console.log(`
-Card Renderer - Convert HTML cards to PNG images
+render-card.js - Render card PNG from JSON definition
 
 Usage:
-  node render-card.js <input.html> [output.png] [options]
+  node render-card.js <card.json> <output.png> [options]
 
 Options:
-  --scale=N     Render scale factor (default: 3 for ~300dpi)
-  --all         Render all cards in the file
-  --selector=S  CSS selector for cards (default: .card)
+  --portrait=PATH   Path to portrait image (default: portrait.png next to card.json)
+  --texture=PATH    Path to texture image (default: texture.png next to card.json)
 
-Examples:
-  node render-card.js card.html                    # Render first card to card.png
-  node render-card.js template.html cards.png --all  # Render all cards
+Card JSON fields:
+  category     npc | location | item | faction | quest | mystery
+  name         Display name (auto-sized, wraps to 2 lines if needed)
+  description  Player-facing text (2-4 sentences)
+  footer       Location or context label
+
+Example:
+  node render-card.js cards/npc/grimble/card.json cards/npc/grimble/card.png
 `);
   process.exit(0);
 }
 
-renderCard(positional[0], positional[1], options).catch(err => {
-  console.error('Render failed:', err);
+const cardPath = positional[0];
+const outputPath = positional[1];
+const cardDir = path.dirname(path.resolve(cardPath));
+
+const card = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+const portraitPath = flags.portrait || card.portrait || path.join(cardDir, 'portrait.png');
+const texturePath = flags.texture || path.join(cardDir, 'texture.png');
+
+renderCard({
+  card: {
+    name: card.name,
+    description: card.description,
+    footer: card.footer || '',
+    category: card.category || 'npc'
+  },
+  portraitPath: path.resolve(portraitPath),
+  texturePath: path.resolve(texturePath),
+  outputPath: path.resolve(outputPath)
+}).then(() => {
+  console.log(`Rendered: ${outputPath}`);
+}).catch(err => {
+  console.error(`Render failed: ${err.message}`);
   process.exit(1);
 });

@@ -1,16 +1,21 @@
 # Card Generator
 
-Creates player-facing cards for NPCs, locations, and items.
+Creates tarot-sized player-facing cards with texture backgrounds.
 
-## Scripts
+## Pipeline
 
 ```bash
-# Generate portrait (dummy or API)
-node scripts/generate-portrait.js output.png --size=portrait_4_3 --category=npc
-node scripts/generate-portrait.js output.png --prompt="gnome knight" --api  # requires FAL_KEY
+# 1. Generate portrait (placeholder or via fal.ai)
+node scripts/generate-portrait.js portrait.png --category=npc
+node scripts/generate-portrait.js portrait.png --prompt="gnome inventor" --api  # requires FAL_KEY
 
-# Render card PNG from JSON
-node scripts/render-card-sharp.js card.json card.png --style=dark
+# 2. Generate texture background
+node scripts/generate-texture.js texture.png --category=npc
+node scripts/generate-texture.js texture.png --category=npc --api  # requires FAL_KEY
+
+# 3. Render card from JSON + portrait + texture
+node scripts/render-card.js card.json card.png
+node scripts/render-card.js card.json card.png --portrait=p.png --texture=t.png
 ```
 
 ## Card JSON
@@ -20,7 +25,7 @@ node scripts/render-card-sharp.js card.json card.png --style=dark
   "category": "npc",
   "name": "Display Name",
   "description": "Player-facing only: appearance, demeanor, context. NO secrets.",
-  "footer": "Campaign Name",
+  "footer": "Location or context",
   "portrait": "portrait.png",
   "image_prompt": "Prompt for AI portrait generation"
 }
@@ -28,32 +33,24 @@ node scripts/render-card-sharp.js card.json card.png --style=dark
 
 Categories: `npc`, `location`, `item`, `faction`, `quest`, `mystery`
 
-## Layout Styles
+Schema: `schemas/card.schema.json`
 
-| Style | Description |
-|-------|-------------|
-| `dark` | Dark textured background, light text (default) |
-| `parchment` | Aged paper look, dark text |
+## Architecture
 
-## Flux Size Presets
+- `lib/render-card.js` -- renderer module (layout constants, SVG generation, sharp compositing)
+- `scripts/render-card.js` -- CLI wrapper
+- `scripts/generate-portrait.js` -- portrait generation (dummy or fal.ai Flux)
+- `scripts/generate-texture.js` -- texture generation (dummy or fal.ai Flux)
 
-| Preset | Dimensions | Use |
-|--------|------------|-----|
-| `portrait_4_3` | 768x1024 | Cards (recommended) |
-| `portrait_16_9` | 576x1024 | Taller/narrower |
-| `square` | 1024x1024 | Square |
-| `landscape_4_3` | 1024x768 | Locations |
-| `landscape_16_9` | 1024x576 | Wide scenes |
+Layout details and design rationale: `DESIGN-SPEC.md`
 
 ## Folder Structure
 
 ```
 campaigns/<campaign>/cards/
-├── npc/<slug>/
-│   ├── card.json
-│   ├── portrait.png
-│   ├── card.png
-│   └── REVIEW.md
-├── location/
-└── item/
+  <category>/<slug>/
+    card.json       # Card definition
+    portrait.png    # Character/location portrait
+    texture.png     # Background texture
+    card.png        # Rendered card
 ```

@@ -1,23 +1,20 @@
 #!/usr/bin/env node
 /**
- * generate-texture.js - Generate background textures for cards via fal.ai
+ * Generate background textures for cards.
  *
  * Usage:
- *   node generate-texture.js <output.png> --category=npc --style=leather
- *   node generate-texture.js texture.png --prompt="custom prompt" --api
+ *   node generate-texture.js <output.png> --category=npc
+ *   node generate-texture.js <output.png> --category=npc --api
+ *   node generate-texture.js <output.png> --prompt="dark stone wall" --api
  *
- * Dependencies: sharp
+ * Without --api, generates a dummy placeholder. With --api, calls fal.ai Flux.
  */
 
 const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
 
-// Card dimensions (tarot size)
 const CARD_WIDTH = 827;
 const CARD_HEIGHT = 1417;
 
-// Category base colors and texture styles
 const CATEGORY_TEXTURES = {
   npc: {
     colors: { accent: '#8B4513', light: '#D2691E' },
@@ -51,7 +48,6 @@ const CATEGORY_TEXTURES = {
   }
 };
 
-// Texture style variations
 const TEXTURE_STYLES = {
   leather: 'aged leather texture, embossed, warm tones, medieval book binding',
   parchment: 'weathered parchment paper, aged vellum, slightly yellowed',
@@ -68,7 +64,6 @@ async function generateDummyTexture(outputPath, options = {}) {
   const cat = CATEGORY_TEXTURES[options.category] || CATEGORY_TEXTURES.npc;
   const colors = cat.colors;
 
-  // Generate gradient with noise pattern as placeholder
   const svg = `
     <svg width="${CARD_WIDTH}" height="${CARD_HEIGHT}">
       <defs>
@@ -83,8 +78,6 @@ async function generateDummyTexture(outputPath, options = {}) {
         </filter>
       </defs>
       <rect width="${CARD_WIDTH}" height="${CARD_HEIGHT}" fill="url(#bg)" filter="url(#noise)"/>
-      <text x="${CARD_WIDTH/2}" y="${CARD_HEIGHT/2}" font-family="serif" font-size="32"
-            fill="rgba(255,255,255,0.2)" text-anchor="middle">[Texture Placeholder]</text>
     </svg>
   `;
 
@@ -95,22 +88,22 @@ async function generateDummyTexture(outputPath, options = {}) {
 async function generateApiTexture(outputPath, options = {}) {
   const apiKey = process.env.FAL_KEY;
   if (!apiKey) {
-    console.error('Error: FAL_KEY environment variable not set.');
-    console.error('Falling back to dummy texture.');
+    console.error('FAL_KEY not set. Falling back to dummy texture.');
     return generateDummyTexture(outputPath, options);
   }
+
+  const sharp = require('sharp');
+  const { fal } = require('@fal-ai/client');
+  fal.config({ credentials: apiKey });
 
   const cat = CATEGORY_TEXTURES[options.category] || CATEGORY_TEXTURES.npc;
   const style = options.style || cat.defaultStyle;
   const styleDesc = TEXTURE_STYLES[style] || TEXTURE_STYLES.leather;
 
-  // Build the prompt
   let prompt = options.prompt;
   if (!prompt) {
     prompt = `${cat.promptBase}, ${styleDesc}, seamless tileable texture, high detail, no text, no symbols, abstract background pattern`;
   }
-
-  // Add quality and style modifiers
   const fullPrompt = `${prompt}, 4k quality, photorealistic texture detail`;
 
   console.log(`Generating texture via fal.ai Flux...`);
@@ -119,56 +112,44 @@ async function generateApiTexture(outputPath, options = {}) {
   console.log(`  Prompt: "${fullPrompt.slice(0, 80)}..."`);
 
   try {
-    // Generate at square 1:1 ratio, then crop center to avoid boundary effects
-    const payload = JSON.stringify({
-      prompt: fullPrompt,
-      image_size: 'square_hd',  // 1024x1024 - will crop center
-      num_images: 1
+    const result = await fal.subscribe('fal-ai/flux/dev', {
+      input: {
+        prompt: fullPrompt,
+        image_size: 'square_hd',
+        num_images: 1
+      }
     });
 
-    const curlCmd = `curl -s -X POST "https://fal.run/fal-ai/flux/dev" \
-      -H "Authorization: Key ${apiKey}" \
-      -H "Content-Type: application/json" \
-      -d '${payload.replace(/'/g, "'\\''")}'`;
-
-    console.log('  Calling fal.ai API...');
-    const resultStr = execSync(curlCmd, { encoding: 'utf-8', timeout: 120000 });
-    const result = JSON.parse(resultStr);
-
-    if (!result.images?.[0]?.url) {
-      console.error('Error: No image URL in API response.');
-      console.error('Response:', JSON.stringify(result, null, 2));
+    if (!result.data?.images?.[0]?.url) {
+      console.error('No image URL in API response.');
       return generateDummyTexture(outputPath, options);
     }
 
-    const imageUrl = result.images[0].url;
-    console.log(`  Downloading from: ${imageUrl.slice(0, 60)}...`);
+    const imageUrl = result.data.images[0].url;
+    console.log(`  Downloading...`);
 
-    // Download to temp file
-    const tempPath = outputPath + '.tmp.png';
-    execSync(`curl -s -o "${tempPath}" "${imageUrl}"`, { timeout: 60000 });
+    const response = await fetch(imageUrl);
+    if (!response.ok) throw new Error(`Download failed: ${response.status}`);
+    const buffer = Buffer.from(await response.arrayBuffer());
 
-    // Crop center 60% to avoid boundary effects, then resize to card dimensions
-    const sharp = require('sharp');
-    const metadata = await sharp(tempPath).metadata();
+    // Crop center 60% to remove boundary effects, then resize to card dimensions
+    const tempBuf = buffer;
+    const metadata = await sharp(tempBuf).metadata();
     const cropSize = Math.floor(Math.min(metadata.width, metadata.height) * 0.6);
     const cropX = Math.floor((metadata.width - cropSize) / 2);
     const cropY = Math.floor((metadata.height - cropSize) / 2);
 
-    console.log(`  Cropping center ${cropSize}x${cropSize} to remove boundary effects...`);
+    console.log(`  Cropping center ${cropSize}x${cropSize}...`);
 
-    await sharp(tempPath)
+    await sharp(tempBuf)
       .extract({ left: cropX, top: cropY, width: cropSize, height: cropSize })
       .resize(CARD_WIDTH, CARD_HEIGHT, { fit: 'cover' })
       .png()
       .toFile(outputPath);
 
-    // Clean up temp
-    fs.unlinkSync(tempPath);
-
     console.log(`Generated: ${outputPath} (${CARD_WIDTH}x${CARD_HEIGHT})`);
   } catch (error) {
-    console.error('Error calling fal.ai API:', error.message);
+    console.error('fal.ai API error:', error.message);
     return generateDummyTexture(outputPath, options);
   }
 }
@@ -196,18 +177,13 @@ Options:
   --api              Use fal.ai Flux API (requires FAL_KEY)
 
 Examples:
-  node generate-texture.js bg-npc.png --category=npc            # Placeholder
-  node generate-texture.js bg-npc.png --category=npc --api      # Real texture
-  node generate-texture.js bg.png --style=leather --api         # Style override
-  node generate-texture.js bg.png --prompt="dark stone wall" --api
+  node generate-texture.js texture.png --category=npc
+  node generate-texture.js texture.png --category=npc --api
+  node generate-texture.js texture.png --prompt="dark stone wall" --api
 
-Categories and default styles:
-  npc      -> leather (warm brown, gold embossing)
-  location -> parchment (green-tinted, map-like)
-  item     -> velvet (deep blue, silver accents)
-  faction  -> banner (purple fabric, heraldic)
-  quest    -> scroll (golden aged paper)
-  mystery  -> shadow (dark fog, arcane)
+Category defaults:
+  npc      -> leather    location -> parchment    item    -> velvet
+  faction  -> banner     quest    -> scroll       mystery -> shadow
 `);
   process.exit(0);
 }

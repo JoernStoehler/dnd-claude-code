@@ -7,7 +7,7 @@
   "properties": {
     "category": {
       "type": "string",
-      "enum": ["npc", "location", "item", "faction", "mystery"],
+      "enum": ["npc", "location", "item", "faction", "quest", "mystery"],
       "description": "Card type. Use 'mystery' for blank cards players can scribble on."
     },
     "name": {
