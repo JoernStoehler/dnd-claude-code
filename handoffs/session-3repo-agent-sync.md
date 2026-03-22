@@ -53,7 +53,7 @@ File-based task management proven better than Linear, gh issues, or human-tracks
 ## Work completed this session
 
 1. Created `handoffs/` directories in dnd and pause-game
-2. Converted dnd postmortem from agent to skill (`.claude/agents/postmortem.md` deleted → `.claude/skills/post-mortem/SKILL.md` created)
+2. Converted dnd postmortem from agent to skill (`.claude/agents/postmortem.md` deleted → `.claude/skills/meta-post-mortem/SKILL.md` created)
 3. Extended pause-game post-mortem skill (was 15 lines / 5 items → full skill with shared core + process checks + generalize step)
 4. Committed checkpoint in msc-math (8032218) and pause-game (89d9d88) before starting work
 5. Created feedback memory about not assuming Jörn reads everything

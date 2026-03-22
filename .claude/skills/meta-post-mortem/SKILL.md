@@ -1,5 +1,5 @@
 ---
-name: post-mortem
+name: meta-post-mortem
 description: Run a session post-mortem to capture process failures and improvement opportunities. Use at end of session, when something went wrong, or to improve prompts.
 user-invocable: true
 ---

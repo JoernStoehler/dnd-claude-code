@@ -56,7 +56,7 @@
 - `handoffs/3repo-target-state.md` — original 14-item analysis (NOT an approved plan, treat as input)
 - `handoffs/session-3repo-sync-postmortem.md` — full list of session failures with abstract error classes
 - `.claude/skills/meta-documentation/SKILL.md` — failure modes, knowledge taxonomy, design principles
-- `.claude/skills/collaboration/SKILL.md` — delegation safeguards, handoff file format
+- `.claude/skills/meta-collaboration/SKILL.md` — delegation safeguards, handoff file format
 - `TASKS.md` — current agent task tracking
 
 ## Warnings for next session

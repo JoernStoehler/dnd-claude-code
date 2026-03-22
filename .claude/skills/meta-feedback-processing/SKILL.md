@@ -1,5 +1,5 @@
 ---
-name: feedback-processing
+name: meta-feedback-processing
 description: Workflow for processing Jörn's feedback during interactive sessions. Covers the generalization loop — fixing the instance, abstracting the error class, scanning for all instances, and recording durably. Load when receiving corrections or review feedback from Jörn.
 ---
 
