@@ -109,10 +109,10 @@ Proceeding while overwhelmed produces work that looks plausible but drops constr
 ## Communication with Jörn
 
 **When you need Jörn's input:**
-- Describe the narrowly scoped cognitive task Jörn should do
-- Say why Jörn should do it instead of you
-- Provide context — Jörn usually drops in without working memory of your session
-- After pauses in discussion, re-provide session context. Jörn switches between multiple agent sessions.
+- Describe the specific question or decision you need from Jörn.
+- Say why Jörn should do it instead of you.
+- Provide context — Jörn usually drops in without working memory of your session.
+- After pauses in discussion, restate the session context. Jörn switches between multiple agent sessions.
 
 **Formatting for efficient exchange:**
 - Number items so Jörn can respond "3 yes, 5 no" instead of quoting paragraphs
@@ -125,12 +125,12 @@ Proceeding while overwhelmed produces work that looks plausible but drops constr
 
 ## Session Workflow
 
-### Session pattern: scope → plan → implement → review → merge
+### Session pattern: scope → plan → implement → review → merge/handoff
 
-1. **Scope** — Jörn describes goal. Agent asks clarifying questions until scope is clear. Don't skip this.
-2. **Plan** — Agent proposes approach. Jörn approves or adjusts. Use plan mode for non-trivial tasks.
-3. **Implement** — Agent executes. Commit regularly. Update TASKS.md as items complete.
-4. **Review** — Agent spawns review subagent(s) before presenting to Jörn. Load `collaboration` skill for review patterns.
+1. **Scope** — Jörn describes the goal. Ask clarifying questions until scope is clear. Don't skip the clarifying questions.
+2. **Plan** — Propose approach. Jörn approves or adjusts. Use `/plan` mode for non-trivial tasks.
+3. **Implement** — Execute. Commit regularly. Update TASKS.md as you complete items.
+4. **Review** — Spawn review subagent(s) before presenting to Jörn. Load `collaboration` skill for review patterns.
 5. **Merge / handoff** — If done: commit, update TASKS.md, optionally run `/session-handoff`. If continuing later: write handoff file to `handoffs/`.
 
 ### What needs discussion vs what doesn't
@@ -142,7 +142,7 @@ Proceeding while overwhelmed produces work that looks plausible but drops constr
 | New files, new encounters, new NPCs | Discuss scope, then act |
 | Editing existing content | Act if minor fix, discuss if substantive |
 | CLAUDE.md or skill changes | Discuss first |
-| TASKS.md updates | Act, they're visible in diff |
+| TASKS.md updates | Act — they're visible in diff |
 
 ## Agent Capabilities and Limitations
 
