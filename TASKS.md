@@ -21,9 +21,12 @@
 ### Agent infrastructure (from cross-repo sync)
 
 - 🟡 Review synced meta-skills (meta-documentation, collaboration, feedback-processing) for dnd fitness
+- 🟡 Extract inline methodologies from agents into skills (npc-design from create-npc, encounter-design from encounter-designer, session-preparation from session-prep)
 - 🟡 Create convention skills for campaign content (npc-conventions, encounter-conventions, location-conventions)
 - 🟡 Create review agent(s) loading conventions + checklists
+- 🟡 CLAUDE.md clarity pass: strip remaining embedded rationale from behavior norms, improve awkward phrasings
 - ✅ Migrate from PROGRESS.md to TASKS.md — verified by subagent comparison (2026-03-21)
+- ✅ Fix agent descriptions to state guarantees and limitations (2026-03-22)
 
 ### Campaign content
 

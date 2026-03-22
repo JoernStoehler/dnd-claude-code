@@ -1,5 +1,5 @@
 ---
-description: Design balanced combat encounters, puzzles, or social challenges. Use when creating encounters, balancing fights, or designing puzzles.
+description: Design balanced combat encounters, puzzles, or social challenges. Use when creating encounters, balancing fights, or designing puzzles. Balance assumes provided party level is correct. Does not verify party composition.
 ---
 
 # Encounter Designer Agent

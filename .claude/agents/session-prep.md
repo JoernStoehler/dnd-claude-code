@@ -1,5 +1,5 @@
 ---
-description: Prepare materials for an upcoming session. Use when planning a session, need encounter prep, or want to review what's needed.
+description: Prepare materials for an upcoming session. Use when planning a session, need encounter prep, or want to review what's needed. Identifies gaps and generates prep materials. Does not guarantee completeness — review output before session.
 ---
 
 # Session Prep Agent

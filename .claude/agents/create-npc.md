@@ -1,5 +1,5 @@
 ---
-description: Generate a new NPC with personality, motivation, appearance, and stats. Use when the user asks to create a character, needs an NPC, wants to populate a location, or says "make me a character".
+description: Generate a new NPC with personality, motivation, appearance, and stats. Use when the user asks to create a character, needs an NPC, wants to populate a location, or says "make me a character". Does not verify lore consistency — run lore-checker separately to check for contradictions.
 model: sonnet
 ---
 
