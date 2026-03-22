@@ -40,4 +40,14 @@ echo "npm: $(npm -v 2>/dev/null || echo 'not found')"
 # Run warmup cache in background
 nohup .devcontainer/warmup-cache.sh >> "${HOME}/.cache/warmup.log" 2>&1 &
 
+# Source .env into shell profile (secrets like FAL_KEY)
+DOTENV_SOURCE='
+# Load project .env if present
+if [ -f /workspaces/dnd-claude-code/.env ]; then
+  set -a; source /workspaces/dnd-claude-code/.env; set +a
+fi'
+if ! grep -q 'source /workspaces/dnd-claude-code/.env' "${HOME}/.bashrc" 2>/dev/null; then
+  echo "$DOTENV_SOURCE" >> "${HOME}/.bashrc"
+fi
+
 echo "Local post-create complete."
