@@ -1,39 +1,60 @@
-# How to Read the Rules: Quick-Start Guide for Swords of the Serpentine
+Source: https://pelgranepress.com/2021/12/06/how-to-read-the-rules-a-quick-start-guide-for-swords-of-the-serpentine/
 
-**Source:** https://pelgranepress.com/2021/12/06/how-to-read-the-rules-a-quick-start-guide-for-swords-of-the-serpentine/
-**Author:** Kevin Kulp
+# How to Read the Rules: A Quick-Start Guide for Swords of the Serpentine
 
-## Recommended Reading Sequence
+**By Kevin Kulp**
 
-**Chapter 1: The Basics**
-Start here to determine if the game matches your interests. Designer sidebars explain development logic throughout the book.
+*Swords of the Serpentine* is Pelgrane Press's GUMSHOE sword & sorcery RPG by Emily Dresner and Kevin Kulp. It features morale-based social combat, freeform sorcery, cinematic combat, and an Allegiance system for political manipulation set in the canal-filled city of Eversink.
 
-**Chapter 2: Your Hero**
-A step-by-step flowchart of how to create a hero and where to look for each rule. Fantasy archetypes in the back offer quick playable options.
+## Reading Strategy for Pre-Orderers
 
-**Chapter 3: Rules**
-GMs should prioritize pages up to 84 (covering Morale). Skip Hazards/Traps initially, then read pages 97+ on Refreshes and Character Growth.
+### Chapter 1: The Basics
 
-**Chapter 4: Sorcery and Corruption**
-Read through Advanced Sorcery (page 120) if playing or running sorcerers; otherwise skip initially.
+Start here to determine if you'll enjoy the game's rules and setting. Designer sidebars explain the logic behind design decisions, helping you understand any rules you might want to modify.
 
-**Chapter 5: Wealth and Lifestyle**
-Essential for campaign play. Demonstrates how hero spending affects Repute mechanically.
+### Chapter 2: Your Hero
 
-**Chapter 6: Gear**
-Reference material for later use; not essential initially except for understanding armor and weapons mechanics.
+**For players:** Follow the step-by-step character creation flowchart. Skim investigative and general abilities initially. Fantasy archetypes at the chapter's end are fully playable and customizable.
 
-**Chapter 7: Adversaries**
-GMs should read the first half; players can skip entirely on first pass.
+### Chapter 3: Rules
 
-**Chapter 8: GM Advice**
-"Vitally important for GMs" and useful for players regarding structure and fun-optimization.
+**For GMs:** Essential material, especially pages covering combat and investigative abilities (which differ from other GUMSHOE games). Read through page 84 where Morale ends; you can skip Hazards and Traps initially. Resume at page 97 for Refreshes and Character Growth.
 
-**Chapter 9: The City of Eversink**
-Read pages up to History carefully; skim districts and Allegiances initially for flavor.
+**For players:** Less critical but worth reviewing.
 
-**Chapter 10: The World**
-Useful for international intrigue; otherwise reference as needed.
+### Chapter 4: Sorcery and Corruption
 
-**Chapter 11: Corpse Astray**
-GMs skim before deciding whether to run this introductory adventure.
+Read through Advanced Sorcery (p. 120) if GMing or playing a sorcerer. Others can defer this chapter.
+
+### Chapter 5: Wealth and Lifestyle
+
+Skip for one-shot games but essential for campaigns -- the system ties loot spending to Repute in mechanically meaningful ways.
+
+### Chapter 6: Gear
+
+Deferred reading. Check mundane items for armor and weapons mechanics; use as reference otherwise.
+
+### Chapter 7: Adversaries
+
+**For GMs:** Read the first half through Special Abilities, then reference later. **For players:** Skip entirely.
+
+### Chapter 8: GM Advice
+
+"This is vitally important for GMs, and pretty darn useful for players" regarding structuring play, running games, and tweaking rules.
+
+### Chapter 9: The City of Eversink
+
+Read initial sections carefully to understand tone and appearance. The city was designed so most features could serve as adventure hooks. Skim districts and Allegiances initially; revisit for details later.
+
+### Chapter 10: The World
+
+Priority varies. Essential for international intrigue; otherwise reference as needed.
+
+### Chapter 11: Corpse Astray
+
+**For players:** Skip. **For GMs:** Skim initially, then read thoroughly if running this introductory adventure -- a solid action mystery with suggestions for ongoing campaigns.
+
+## Additional Resources
+
+- Blog posts at pelgranepress.com offer free SotS resources
+- Free tools by Matt Breen at monstar.co.nz include a hero generator and adversary generator
