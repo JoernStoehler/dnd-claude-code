@@ -1,13 +1,13 @@
 ---
 name: npc-conventions
-description: Conventions for writing NPC profiles. Covers the standard template and the high-performance variant for ensemble/companion NPCs. Does not cover NPC creation workflow (see npc-design skill) or mechanical stat blocks (see dnd-5e-rules).
+description: Conventions for writing NPC profiles. Covers the standard template and the high-performance variant for ensemble/companion NPCs. Does not cover NPC creation workflow (see npc-design skill) or mechanical stat blocks (see sots-rules).
 ---
 
 # NPC Conventions
 
 ## Standard template
 
-Use for NPCs with a defined role and limited screen time. Template at `campaigns/fun-heroes/characters/npcs/_template.md`.
+Use for NPCs with a defined role and limited screen time.
 
 ```
 ## At a Glance
@@ -65,5 +65,5 @@ When 3+ NPCs interact with each other:
 ## Naming
 
 - File: `lowercase-with-dashes.md` (e.g., `the-crimson-merchant.md`)
-- Location: `campaigns/<name>/characters/npcs/`
+- Location: `characters/npcs/`
 - Be descriptive: names or titles, not codes

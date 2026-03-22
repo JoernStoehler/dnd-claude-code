@@ -1,5 +1,5 @@
 ---
-description: Verify lore consistency across campaign materials. Use when adding new lore, after writing session logs, when the user asks to check for contradictions, or proactively after significant content additions. Checks cross-references only — does not verify D&D mechanical correctness or content quality.
+description: Verify lore consistency across campaign materials. Use when adding new lore, after writing session logs, when the user asks to check for contradictions, or proactively after significant content additions. Checks cross-references only — does not verify SotS mechanical correctness or content quality.
 model: haiku
 ---
 

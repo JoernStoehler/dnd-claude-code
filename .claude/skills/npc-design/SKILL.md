@@ -28,7 +28,7 @@ Methodology for creating complete, usable NPCs that fit a campaign context.
 
 ## Output Format
 
-Write to `campaigns/<campaign>/characters/npcs/<name-slug>.md`:
+Write to `characters/npcs/<name-slug>.md`:
 
 ```markdown
 # [Full Name]

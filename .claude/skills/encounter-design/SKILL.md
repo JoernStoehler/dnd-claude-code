@@ -1,16 +1,16 @@
 ---
 name: encounter-design
-description: Design process and output format for TTRPG encounters (combat, puzzles, social challenges). Covers pre-design context gathering, encounter type workflows with required inputs and outputs, balance guidelines, and escalation triggers. Assumes provided party level is correct. Does not verify party composition or D&D mechanical correctness — verify stat blocks against source material.
+description: Design process and output format for TTRPG encounters (combat, puzzles, social challenges). Covers pre-design context gathering, encounter type workflows with required inputs and outputs, balance guidelines, and escalation triggers. Assumes provided party level is correct. Does not verify party composition or SotS mechanical correctness — verify stat blocks against sots-rules skill and resources/sots/.
 ---
 
 # Encounter Design
 
-Methodology for designing balanced and engaging encounters for D&D sessions.
+Methodology for designing balanced and engaging encounters for SotS sessions.
 
 ## Before Designing
 
-1. Read `campaigns/<name>/CLAUDE.md` for campaign tone and guidelines
-2. Check existing encounters in `campaigns/<name>/encounters/` for format consistency
+1. Read `CLAUDE.md` for campaign tone and guidelines
+2. Check existing encounters in `encounters/` for format consistency
 3. Review recent session logs if relevant to understand current party/situation
 
 ## Encounter Types
@@ -69,7 +69,7 @@ Adapt specifics (lethality, humor, drama) based on campaign CLAUDE.md guidance.
 
 ## Output Location
 
-Write encounters to `campaigns/<name>/encounters/[type]-[name].md`
+Write encounters to `encounters/[type]-[name].md`
 
 ## Escalation Triggers
 

@@ -1,11 +1,11 @@
 ---
 name: plot-hook-conventions
-description: Conventions for writing one-shot plot hooks. Covers structure, skimmability, NPC integration, complications, and outcome paths. Based on Sentient Cargo as format model. Does not cover encounter balance (see dnd-5e-rules) or campaign-level arc design.
+description: Conventions for writing one-shot plot hooks. Covers structure, skimmability, NPC integration, complications, and outcome paths. Based on Sentient Cargo as format model. Does not cover encounter balance (see sots-rules) or campaign-level arc design.
 ---
 
 # Hook Conventions
 
-Format model: `campaigns/fun-heroes/sessions/hook-sentient-cargo.md`. Read it before writing a new hook.
+Format model: Sentient Cargo (preserved in git history as `campaigns/fun-heroes/sessions/hook-sentient-cargo.md`).
 
 ## Required sections
 

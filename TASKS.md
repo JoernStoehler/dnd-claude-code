@@ -1,70 +1,64 @@
 # TASKS.md
 
-**Last updated:** 2026-03-21
-**Escalation markers:** 🔴 Jörn decision required · 🟡 Agent attempts, Jörn reviews · 🟢 Agent autonomous
+**Last updated:** 2026-03-22
+**Escalation markers:** :red_circle: Jörn decision required · :yellow_circle: Agent attempts, Jörn reviews · :green_circle: Agent autonomous
 
 ## Maturity Map
 
 | Area | Status |
 |------|--------|
-| Agent infrastructure (skills, agents, hooks) | Draft — meta-skills synced, behavior norms, failure modes, delegation safeguards, knowledge taxonomy |
-| Campaign framework (tone, philosophy, templates) | Settled |
-| Sentient Cargo one-shot | Settled — format model for other content |
-| Weathervane Manor | Draft — explorable but needs quest-dependent polish |
-| Other one-shot hooks | Placeholder — situations clear, detail missing |
-| NPC voices and depth | Placeholder — profiles exist, voices need practice |
-| Maps and visual aids | Not started (except manor floor plans) |
-| World building beyond sandbox | Not started |
+| Agent infrastructure (skills, agents, hooks) | Carried over from D&D era, needs SotS adaptation |
+| SotS rules references | In progress — free materials downloaded, PDF not yet purchased |
+| Campaign concept | Sketched — hub town, mountain dungeon, three factions, elder dragon BBEG |
+| World building | Not started |
+| Conspyramid / faction graph | Not started |
+| NPC roster | Not started |
+| Session content | Not started (pre-campaign) |
+| Maps and visuals | Not started |
+| Card generator SotS templates | Not started |
 
 ## Current
 
-### Agent infrastructure (from cross-repo sync)
+### Repo restructuring (2026-03-22)
 
-- 🟡 Review synced meta-skills (meta-documentation, collaboration, feedback-processing) for dnd fitness
-- ✅ Extract inline methodologies from agents into skills: npc-design, encounter-design, session-preparation (2026-03-22)
-- ✅ Create convention skills: hook-conventions, npc-conventions, location-conventions (2026-03-22)
-- ✅ Create content-review agent loading convention skills (2026-03-22)
-- ✅ Strip embedded rationale from behavior norms (2026-03-22)
-- ✅ Migrate from PROGRESS.md to TASKS.md — verified by subagent comparison (2026-03-21)
-- ✅ Fix agent descriptions to state guarantees and limitations (2026-03-22)
+- :green_circle: ~~Remove fun-heroes and example campaigns~~ (done, preserved in git history)
+- :green_circle: ~~Restructure as single-campaign repo~~ (done)
+- :green_circle: ~~Update CLAUDE.md for Dragons! Dragons! + SotS~~ (done)
+- :green_circle: ~~Download free SotS resources~~ (done, see resources/sots/)
+- :yellow_circle: Replace `dnd-5e-rules` skill with `sots-rules` skill
+- :yellow_circle: Update agents for SotS (create-npc, encounter-designer, etc.)
+- :yellow_circle: Update campaign-specific skills (encounter-design, npc-design, session-preparation)
 
-### Campaign content
+### SotS rules integration
 
-- 🟡 Add "At a Glance" boxes to location files (Millhaven, Brackenvale, Greendale Reach)
-- 🟡 Add "During Play Quick-Ref" sections to hook files (separate from prep reading)
-- 🟡 Flesh out Missing Tax Collector (Percival's trail, scene beats)
-- 🟡 Flesh out Wrongly Accused (the actual crime, culprit, suspects)
-- 🟡 Write auction mechanics for Estate Sale
-- 🟡 Detail Heist security options per owner type
-- 🟡 Level-adjustable encounters for Weathervane Manor
-- 🟡 Quest-dependent state changes for Manor (during + after each hook)
-- 🟡 Develop one undeveloped hook (Festival Disaster, Monster Mediation, Tournament, or Inspection)
+- :red_circle: Purchase and index SotS PDF
+- :yellow_circle: Build `sots-rules` skill from downloaded materials
+- :yellow_circle: Define SotS stat block templates (NPC, adversary, scene) as structured markdown
 
-### Maps and visuals
+### Campaign setup
 
-- 🔴 Escort route visual/map with encounter markers
-- 🔴 Millhaven city map
-- 🔴 Brackenvale village map
-- 🔴 Greendale Reach area map
+- :red_circle: Define campaign tone and philosophy (need Jörn input)
+- :red_circle: Design faction details (human kingdom, elf kingdom, hub town politics)
+- :red_circle: Design mountain dungeon layer concept
+- :red_circle: Design elder dragon BBEG
+- :yellow_circle: Build conspyramid data structure (graph schema)
+- :yellow_circle: Specialize card generator with SotS template fields
 
 ## Deferred
 
-- Cosmology/gods (only if a hook needs it)
-- Monster ecology (only if relevant)
-- Detailed history beyond Weathervane Manor (only if plot requires)
-- Beyond-sandbox geography (only if players go there)
-- Random encounter tables for routes
-- GM cheat sheets (1-page summaries per hook)
+- Player onboarding materials (need players first)
+- Session prep workflows (W2) — need content first
+- Mid-session generation workflows (W1) — need indexed rulebook
+- Post-session processing workflows (W3) — need sessions first
+- Between-session world evolution (W4) — need sessions first
+- Playtest/simulation workflows (W5) — need content first
 
-## Done
+## Done (this session)
 
-- ✅ Sentient Cargo — fully detailed, format model
-- ✅ Weathervane Manor floor plans (4 levels)
-- ✅ Manor item placement with search/trap DCs
-- ✅ Manor hidden secrets ("The Crucible" puzzle)
-- ✅ Manor room-by-room quick reference (`weathervane-manor-reference.md`)
-- ✅ Item plotlines (Bastion, Clarity, Tomes, Pip, Meridian + shared)
-- ✅ Cross-repo meta-skills sync (2026-03-21)
-- ✅ Agent behavior norms in CLAUDE.md (2026-03-21)
-- ✅ Session-handoff skill with review step (2026-03-21)
-- ✅ Post-mortem skill (2026-03-21)
+- :white_check_mark: Downloaded GUMSHOE SRD, GUMSHOE 101, High Fantasy Guide, reading order guide
+- :white_check_mark: Downloaded 8 Pelgrane blog articles (sorcery, social combat, politics, clues, factions, pregens)
+- :white_check_mark: Downloaded 4 Alexandrian articles (Three Clue Rule, Don't Prep Plots, Node-Based Design, Conspyramid)
+- :white_check_mark: Catalogued online tools (hero generator, adversary builder, name generators)
+- :white_check_mark: Removed fun-heroes and example campaigns (preserved in git history)
+- :white_check_mark: Restructured repo as single-campaign layout
+- :white_check_mark: Updated CLAUDE.md, README.md, TASKS.md

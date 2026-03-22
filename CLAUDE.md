@@ -1,37 +1,63 @@
 # CLAUDE.md - Agent Onboarding
 
-This repository supports collaborative preparation of fantasy TTRPG campaigns. Claude Code agents act as co-GMs who help outside of game sessions with planning, writing, and organization.
+This repository is the campaign bible for **Dragons! Dragons!**, a fantasy TTRPG campaign using **Swords of the Serpentine** (GUMSHOE system) with the **high fantasy variant** rules.
+
+Claude Code agents act as co-GMs who help outside of game sessions with planning, writing, and organization.
+
+## Campaign Premise
+
+A mountain hub town struggles to maintain independence between a human/multicultural kingdom and a forest elf kingdom of magical fairy/monster races. Deep inside the mountain, an elder dragon lies imprisoned, indirectly affecting events above. The mountain also hides the ruins of a legendary dwarven kingdom. Dragons — fake, real, and legendary — are everywhere.
+
+**System:** Swords of the Serpentine (SotS) with high fantasy variant rules
+**Structure:** Conspyramid (faction web) + node-based scenario design + Three Clue Rule
+**Status:** Pre-campaign (no sessions played, no canon established yet)
 
 ## Repository Layout
 
 ```
-CLAUDE.md           # You are here - agent onboarding
-README.md           # Brief overview for human visitors
-TASKS.md            # Agent task tracking with escalation markers
+CLAUDE.md              # You are here - agent onboarding
+TASKS.md               # Agent task tracking with escalation markers
+README.md              # Brief overview for human visitors
 
-campaigns/<name>/   # Individual campaigns (each has its own CLAUDE.md)
-packages/<name>/    # Larger tools/applications (e.g., card-generator)
-resources/          # Curated GM resources and references
-scripts/            # Reusable scripts (sh, js, py)
-docs/               # Conventions and notes
+lore/                  # World-building
+  factions/            # Political entities, allegiances
+  locations/           # Hub town, mountain, forest, key sites
+  history/             # Dwarven kingdom, elder dragon, world history
+  dragons/             # Dragon taxonomy, lore, the BBEG
+
+characters/            # NPCs and PCs
+  npcs/
+  pcs/
+
+sessions/              # Session logs, prep notes
+encounters/            # Combat, puzzles, social challenges
+assets/                # Images, maps, handouts
+
+conspyramid/           # Faction conspiracy graph (nodes + edges)
+
+resources/sots/        # SotS rules references and design articles
+packages/card-generator/  # Print card generation tool
+scripts/               # Reusable scripts
+docs/                  # Conventions and notes
 
 .claude/
-  settings.json     # Hooks and configuration
-  hooks/            # SessionStart and other hooks
-  skills/<slug>/    # Progressive disclosure knowledge
-  agents/<name>.md  # Specialized agent prompts
+  settings.json        # Hooks and configuration
+  hooks/               # SessionStart and other hooks
+  skills/<slug>/       # Progressive disclosure knowledge
+  agents/<name>.md     # Specialized agent prompts
 ```
 
-### Campaign Structure
+## Rule System: Swords of the Serpentine
 
-Each campaign directory contains:
-- `CLAUDE.md` - **Read this first** for campaign tone, philosophy, and guidelines
-- `PROGRESS.md` - Play-readiness status and session log
-- `lore/` - World-building, factions, locations, history
-- `characters/` - NPCs, player characters
-- `sessions/` - Session logs, prep notes, hooks
-- `encounters/` - Combat, puzzles, social challenges
-- `assets/` - Images, maps, handouts
+SotS is a GUMSHOE game. Key differences from D&D that agents must internalize:
+
+- **Investigative abilities auto-succeed.** If a character has the right ability and is in the right place, they get the clue. No roll. The drama is what they do with the information, not whether they find it.
+- **General abilities use d6 + pool spend.** Target number is usually 4. Players choose how many points to spend from their pool to boost the roll. Pools refresh between adventures.
+- **Health and Morale are parallel tracks.** Physical combat targets Health (via Warfare), social combat targets Morale (via Sway). Both can defeat opponents.
+- **Allegiances and Enemies** are mechanical. Heroes have faction relationships that function as investigative abilities. Enemies are spent by the GM to complicate things.
+- **Corruption/Arcana/Divinity** replace spell slots. Magic is described through Spheres (thematic constraints). The high fantasy variant adds Divinity for clerics and Arcana for wizards alongside the base Corruption system.
+
+Rules reference: `resources/sots/` (see `tools-and-references.md` for index)
 
 ## Core Conventions
 
@@ -48,6 +74,8 @@ Track what information is "nailed down" (revealed to players) vs "mutable" (can 
 - Session logs are the source of truth for what players know
 - Unrevealed lore can be revised freely
 - Once spoken at the table, it's canon
+
+**Current state:** No sessions played. Everything is mutable.
 
 ### Repository Hygiene
 
@@ -72,7 +100,7 @@ Stop and ask the human when:
 - **Canon conflict**: New content contradicts session logs
 - **Player agency**: Decision affects PC backstory or choices
 - **Tone uncertainty**: Unsure if content fits campaign tone
-- **Mechanical questions**: D&D rules edge cases (verify against source)
+- **Mechanical questions**: SotS rules edge cases (verify against `resources/sots/`)
 - **Scope creep**: Task expanding beyond original request
 - **Blocked**: Can't proceed without information not in repo
 
@@ -151,14 +179,14 @@ A brief interruption beats a dead end.
 - **Search**: Index, summarize, grep across files for knowledge gathering
 - **Reasoning**: Short-horizon planning, applying rules, checking consistency
 - **Coding**: Automate bulk operations, write scripts, build tools
-- **Knowledge**: Familiar with D&D, Pathfinder, VtM (with caveats below)
+- **Knowledge**: Familiar with GUMSHOE, SotS, D&D, and other TTRPG systems (with caveats below)
 
 ### What Agents Do Poorly
 
 - **Images**: Cannot create directly, weak at judging quality/consistency
 - **First drafts**: Often need revision, may fill gaps overconfidently
 - **Long arcs**: May miss creative solutions, complex plans need human review
-- **Rules precision**: Training mixes systems; verify mechanical details against source
+- **Rules precision**: Training mixes systems; verify SotS mechanical details against `resources/sots/`
 
 ## File Naming
 
@@ -168,8 +196,8 @@ A brief interruption beats a dead end.
 
 ## Getting Started
 
-1. Check relevant `campaigns/<name>/CLAUDE.md` for campaign context and tone
-2. Review `TASKS.md` for current agent tasks and priorities
-3. Review `campaigns/<name>/PROGRESS.md` for play-readiness status
-4. Review recent session logs to understand what's "nailed down"
+1. Read this file (you're doing it)
+2. Review `TASKS.md` for current priorities
+3. Review `resources/sots/tools-and-references.md` for available rules materials
+4. Review recent session logs (in `sessions/`) to understand what's canon
 5. Ask clarifying questions before making changes to established canon

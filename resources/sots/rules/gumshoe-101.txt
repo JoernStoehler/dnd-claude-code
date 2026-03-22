@@ -1,0 +1,170 @@
+GUMSHOE 101 for Players
+General Abilities are how you get stuff done.
+Sneaking, fighting, running… all these are done with General Abilities. If you have a General Ability
+rating of 8 or higher, you’re incredibly talented at that activity (and may get access to cool bonus
+stuff when using it, depending on which GUMSHOE game you’re playing). If you don’t have any
+rating at all in a General Ability, you stink at it and won’t generally succeed at non-trivial tasks. A 0 in
+Driving, for instance, lets you drive to the store and back but you’d fail at any driving maneuvers
+difficult enough to require a die roll. In comparison, an 8 in Driving makes you an expert wheelman.
+Similarly, a 0 in Shooting means you’re no good whatsoever at using firearms, while an 8 or higher in
+Shooting makes you an expert marksman. You get the idea.
+It’s traumatic for your dicebag, but in GUMSHOE you’ll only need one die: a d6. Roll it. Your
+Target Number is usually 4; remember that. If you roll a 4 or higher with a General Ability like
+Athletics, you probably succeed.
+Obviously, that would mean you only succeed half the time. You raise these odds by spending points
+from your General Ability pools and adding them to your d6 roll. Want to shoot someone? Spend
+2 points from your shooting pool, add it to your d6, and you usually only fail if you roll a 1. Spend 3
+points and you’re guaranteed to hit even on a d6 roll of 1 (as 1 + 3 = the target number of 4). When
+your pool drops to 0, you’re stuck just rolling a d6 until you get a rest and the GM says your pool
+refreshes.
+Don’t be shy about spending these points. Dropping enemies quickly is a great idea, and you’ll have
+chances for your pools to refresh.
+Investigative Abilities are how you learn stuff.
+They’re what makes GUMSHOE games unique. Ignore your General Abilities for a second and look
+over at your Investigative Abilities. These are broken into three sections to make things easier to find
+– academic, interpersonal and technical knowledge – but they all work pretty much the same way. If
+you have 1 or more points in any of these, you’re an expert at it. This matters because during the
+game, all you need to do is tell the GM that you’re using an appropriate ability and you’ll
+automatically get the clue if there is one. Yes, automatically, no roll required. The fun here is in what
+you do with that information, not how you get it.
+So let’s say you’re searching a private library for vital information. The GM may ask, “Do you have
+any points in Research?” Say yes and she’ll tell you everything you can find out. No roll is ever
+required. Same thing with Interpersonal Abilities; if you have Flattery, tell the GM you’re flattering
+someone (or better yet, roleplay it) and it will pay off.
+Spend these points to get cool in-game advantages. Take the interpersonal ability Flirting, for
+example. You meet the evil mastermind’s stunningly attractive protégé. Tell the GM you’re Flirting
+with the NPC, and he or she will let slip important clues during the banter. Tell the GM you’re
+spending 1 or more Flirting points to get cool stuff, though, and you’ll get a special benefit; in this
+case, the protégé may become infatuated with you and double-cross his or her boss at the best possible
+time.
+Just remember, spending a point from an Investigative Ability doesn’t stop you from knowing
+that topic. It just limits how many times in a game you can ask for special cool stuff.
+And really? That’s it. Your GM can tell you anything else you need to know.
+(c)2013 by Kevin Kulp — @kevinkulp.
+Night's Black Agents by Kenneth Hite is published by Pelgrane Press.
+
+GUMSHOE 101 for GMs:
+How to Run GUMSHOE
+1. Running a one-shot? Explain basic mechanics, nothing more. Players don't need to know
+everything until it becomes relevant over the course of play. If you're spending over 15 minutes
+acquainting new players with rules, it may be overkill.
+2. Start with action. James Bond movies don't start with investigation, they start in media res and with
+high action. I've written 3 NBA scenarios. One started with a car chase, one with skiing down a
+mountain being chased by machine-gun-wielding thugs on snowmobiles, and one with half the group
+in free fall with no parachutes. It really works nicely.
+3. When you start with action, flat-out tell your players that any points they spend in this first scene
+they will get back. This is incredibly important. Doing this immediately gets the players over their
+"I'm scared of spending a scarce resource" fear and gets them into the nature of the game.
+3. Don't over-think clues. As long as you know why something happened, don't stress ahead of time
+about every single clue available. Your players are smart. They will make suggestions, you will think
+"that's brilliant," and you will give them information pointing them in a direction. This was the hardest
+thing for me to understand.
+4. Plan narrow-wide-narrow. The beginning of an adventure is narrow, and starts one way. The
+middle of the adventure is wide, with lots of possible paths and approaches that the PCs can take. What
+they do and learn there will lead them into the final, narrow chute that leads to the climactic ending.
+5. Pay respect where it is due. GUMSHOE characters in NBA and Ashen Stars (and really, in
+general) are incredibly smart and competent badasses. Treat them that way.
+P: "Can I figure out where the money went?"
+GM: "You're a world-class spy, right? Hell yes. You have forensic accounting. You trace it
+through five shell corporations. No one else you know of would ever be able to figure it out,
+and it takes you a couple of hours, but you track it back to the original Swiss account. It's
+Malekov's, as you expected. Make a Digital Intrusion roll - a tough one - if you want to mess
+around with his balances."
+6. Pacing, pacing, pacing. Learn when to mix investigation with brief, explosive action. Action
+doesn't have to be lethal, but it should occur right around the points where things would otherwise bog
+down, and it should push the plot forward.
+7. Reward the behavior you want to see. If someone says something hilarious or does something
+brilliant, give them a pool refresh, either 3 points or a full pool. Trust me, that's the behavior the other
+players will start to emulate.
+8. No lolly-gagging. Shadowrun's big weakness is that planning a run takes forever. Preparedness and
+flashbacks means that you don't have to worry about that in GUMSHOE. Jump in more quickly, and
+get to the good stuff faster.
+
+(c)2013 by Kevin Kulp — @kevinkulp.
+Night's Black Agents by Kenneth Hite is published by Pelgrane Press.
+
+GUMSHOE 102 for GMs:
+How to Design Adventures in GUMSHOE
+Let me walk you through my own process. I seldom have more than a one-page outline when I run
+GUMSHOE, but it benefits from some pre-thought. Warning: there are spoilers here for a Night's
+Black Agents adventure I might eventually publish. All this applies only to my personal prep, and may
+not work for others.
+Step 1: have the core of a cool idea. My archeologist friend works in Peru, and she mentioned a kind
+of regional vampire legend called pishtacos (worth looking up on wikipedia.) They are vampires in the
+Peruvian Andes that drain body fat, not blood. I think this is incredibly cool, as they're a real legend
+that no one has ever heard of.
+Step 2: Develop the idea. Okay, the main bad guy is a pishtaco. But so what? It means that people
+around him die of wasting sickness, that his Renfields are probably cadaverously skinny, that he hangs
+out with Peruvians... I remember Famine from the book Good Omens. He was a diet guru making
+people starve themselves to death willingly. Gotta steal that.
+So my bad guy is a South American pishtaco who is also a diet guru. I cast him as "Dr. Gabe," a
+charming and handsome TV personality that is one of Oprah's favorites. He is opening a new line of
+diet restaurants with delicious and calorie-free food, and he has a brand new diet book about to debut.
+It'll be a best-seller.
+So what is he doing? Well, I have (from a previous adventure) an evangelical church that's secretly run
+by charismatic vampires. Let's say that Dr. Gabe is a member and he's convinced himself that he really
+is the embodiment of Famine. Although he feeds on body fat, he considers himself a divine tool, and
+the world is a fat fat place. He will change this. There was a Leverage episode about bio-engineered
+wheat blight -- a fungus that will wipe out all the world's wheat fields except for the crops designed to
+be resistant. I'll totally steal that plot, only the strain of fungus he wants to steal doesn't have a cure yet.
+How to distribute that fungus worldwide? Why, clearly in the pallets of books he's about to ship out
+from his warehouse. His agents internationally will secure fungus samples from those pallets and do
+the rest. Soon, the world will starve.
+Bingo. I have my charismatic super-villain and my overly complicated spy plot. Give the villain a
+henchman: a former Peruvian fashion model trained in Paris, then recruited as a French spy, now Dr
+Gabe's personal assistant. She's gorgeous, incredibly capable, and cadaverously skinny as a bit of
+foreshadowing. Let's call her Elena.
+Step 3: involve the PCs and consider clues. I want to start Narrow and with action, so half the PCs
+are trying to prevent a (supposedly) defunct Russian warhead from being launched by terrorists. To do
+so, they need a launch code from the phone of the Russian arms dealer who arranged this. He was on a
+plane, and before the PCs could grab him he got killed by the mysterious Elena and had his phone
+stolen.
+At game start, there's 30 seconds before warhead launch. The PCs in the missile base are fighting
+multiple thugs trying to kill them, and the other half are skydiving with no parachute, trying to catch up
+with Elena, her Peruvian bodyguards, and that phone she just stole.
+(c)2013 by Kevin Kulp — @kevinkulp.
+Night's Black Agents by Kenneth Hite is published by Pelgrane Press.
+
+[See this brief play-by-post for how this actually plays out:]
+http://www.enworld.org/forum/showthread.php?336526-Night-s-Black-Agents-Countdown-%28demoencounter%29
+I figure they'll get the phone, and if Elena "dies" I won't sweat it; she's a Renfield and can return
+through blatant GM fiat (proving she's not human). More likely she'll clone the phone and escape.
+Either way, that beginning set piece stops with the warhead disabled with mere seconds to spare, and
+the PCs (having stolen parachutes from dead skydiving bodyguards) landing safely. As noted earlier, at
+this point all the PCs refresh all General ability pools, since that was the intro scene that introduces the
+rules system.
+Step 4: Follow the logic through. Then the investigation. Who was that woman, and why did she
+want a copy of the phone info? The PCs will ID her through facial recognition, which leads them to
+Dr. Gabe. They find a code on the phone which matches the sequence used by Glenn-Reader security
+systems. A Glenn-Reader security system was robbed the day after the phone was stolen, the system
+guarding a high-tech agro-business.
+The investigation is Wide here. They have clues to Elena and Dr Gabe, but don't know why he's
+involved. They have clues to the agro-business lab. Investigation (in person or through contacts)
+reveals that dozens of vials of a grain blight were stolen, and the company is covering it up because
+their whole company is at stake. Now the PCs know that Dr Gabe has grain blight. But why?
+Step 5: Let them be clever. They'll probably have to infiltrate his offices to find out, and he is one
+charming SOB. He's arrogant enough that he'll probably even reveal his plan, secure that no one knows
+how to destroy him (actual method, according to legend? Mummy dust. Wacky) and excited about his
+new restaurant and books. It's up to the PCs how they proceed. They may figure out the vials are in his
+book warehouse, and go burn the whole thing down, or they may confront him at his restaurant
+opening. Lots of fun possibilities here.
+Due to his personality, threatening to ruin his carefully built reputation might actually get him to back
+down. He's a sucker for the limelight, it turns out. PCs can claim victory if they stop the blight,
+whether or not Dr Gabe is still around.
+Step 6: Aim for a big finale, preferable with explosions. So you'll notice that this end is crappily not
+narrow. It's a scenario flaw. Ideally, I'd lead up to a specific set piece and confrontation, and I can do
+that (a fight at the warehouse, a big reveal at the restaurant opening), but here I tend to leave it a little
+loose. In this adventure, the climax tends to happen on the red carpet outside of Dr. Gabe's star-studded
+restaurant opening, but I let the players choose how they want to settle the problem; then I think to
+myself, what's the most exciting thing that could possibly happen here?
+The takeaway?
+Step 1: make a cool bad guy.
+Step 2: give him a cool plot and cool henchmen.
+Step 3: Set the players on the right trail. Anything they do to follow that trail, if reasonable, will get
+them more info.
+Step 4: Don't dribble out clues too slowly. Give them good info, then glory in the chaos as they act on
+it.
+(c)2013 by Kevin Kulp — @kevinkulp.
+Night's Black Agents by Kenneth Hite is published by Pelgrane Press.
+
+
