@@ -5,63 +5,56 @@
 
 ## What was done this session
 
-### Across all 3 repos
-- **Meta-skills synced** from msc-math: feedback-processing, collaboration, meta-documentation (+references/)
-- **Behavior norms** (8 norms) added to CLAUDE.md: push back, defer, generalize, complexity limits, planning, EV-positive questions, communication, model unreliability
-- **13 agent failure modes** documented in meta-documentation skill, including 7 from session postmortem
-- **Delegation safeguards** in collaboration skill (don't auto-chain, verify after delegation, state result types, incomplete falsification, anticipate prompt ambiguity)
-- **Knowledge taxonomy** in meta-documentation (temporal lifetime, domain, source of truth, novelty axes)
+### All 3 repos
+- **11 meta-skills** synced, all byte-for-byte identical:
+  - Implementation: meta-claudemd, meta-skills, meta-subagents, meta-hooks
+  - Planning: meta-folder-layout, meta-cross-repo-sync
+  - Foundational: meta-documentation (split from 330-line monolith to 219-line analytical core)
+  - Workflow: meta-collaboration, meta-feedback-processing, meta-session-handoff, meta-post-mortem
+- **8 behavior norms** in CLAUDE.md (push back, defer, generalize, complexity limits, planning, EV-positive questions, communication, model unreliability) — stripped of embedded rationale
+- **13 agent failure modes** in meta-documentation (instruction overload, skipping planning, under-asking, unreliability, treating presentation as confirmation, not checking existing state, not modeling Jörn's state, transferring cognitive work, responding to social signal, not generalizing, delegation loud/silent, lossy transcription, defaulting to easy, defaulting to familiar)
+- **Knowledge taxonomy** (scope/lifetime, domain, source of truth, novelty axes)
+- **Delegation safeguards** in meta-collaboration
 - **Description-as-contract principle** for skills and agents
-- **Cross-repo sync note** documenting shared lineage
-- **Session-handoff skill** with subagent review step (explicit guarantees/limitations)
-- **Post-mortem skill** standardized (shared core identical, project-specific follow-ups only)
+- Clarity fixes from 3 rounds of looped audits (21 + 15 + 22 findings)
+- Behavior norms synced across repos (rationale stripped, 5s example, article fixes)
 
 ### dnd-claude-code specifically
-- TASKS.md created (migrated from PROGRESS.md, escalation markers + maturity map)
+- TASKS.md created (migrated from PROGRESS.md)
 - CLAUDE.md: added Communication with Jörn and Session Workflow sections
-- Agent descriptions fixed to state guarantees and limitations
-- PROGRESS.md trimmed to play-readiness info only, references TASKS.md
+- 3 convention skills: hook-conventions, npc-conventions, location-conventions
+- 3 workflow skills extracted from agents: npc-design, encounter-design, session-preparation
+- content-review agent loading convention skills
+- Agent descriptions fixed (guarantees and limitations stated)
+- Session postmortem written (`handoffs/session-3repo-sync-postmortem.md`)
 
 ### msc-math specifically
-- Post-mortem converted from meta-documentation content to standalone skill
-- Post-mortem duplication replaced with pointer in meta-documentation
+- Maturity map added to TASKS.md
+- Standalone meta-post-mortem skill created (was in meta-documentation)
+- meta-documentation split into 6 focused skills
 
-## Uncommitted work in progress
+### pause-game specifically
+- Escalation markers added to TASKS.md
 
-- Agent description fixes (subagent running)
-- Two clarity audits with loop instructions (subagents running)
-- TASKS.md update with new items
+## What needs Jörn's review
 
-## Also done (after initial handoff draft)
-
-- Clarity fixes from looped audits (21 + 15 findings) across meta-documentation, collaboration, and dnd CLAUDE.md
-- msc-math: maturity map added to TASKS.md (from pause-game's innovation)
-- pause-game: escalation markers added to TASKS.md (from msc-math's innovation)
-- pause-game post-mortem checked: no real content loss from standardization (domain-specific examples replaced, structural improvements kept)
-- dnd agent descriptions fixed to state guarantees and limitations
-
-## What remains (for future sessions)
-
-### Medium
-- CLAUDE.md clarity pass: strip embedded rationale from behavior norms per meta-documentation "pure action" rule
-- Extract inline methodologies from dnd agents into skills (npc-design, encounter-design, session-preparation)
-
-### Larger
-- Convention skills for dnd campaign content (npc-conventions, encounter-conventions, location-conventions)
-- Review agent(s) for dnd loading conventions + checklists
-- msc-math: consider splitting monolithic review agent into per-concern reviewers
+1. **Focused meta-skills** — do meta-claudemd, meta-skills, meta-subagents, meta-hooks, meta-folder-layout capture the right knowledge? (any repo, `.claude/skills/`)
+2. **dnd convention skills** — are hook-conventions, npc-conventions, location-conventions the right conventions for the campaign?
+3. **msc-math maturity map** — accurate? (`/home/joern/workspaces/msc-math/TASKS.md`)
+4. **pause-game escalation markers** — correct assignments? (`/home/joern/workspaces/xrisk-pause-game/TASKS.md`)
+5. **msc-math review agent splitting** — should the monolithic review agent become per-concern reviewers?
 
 ## Key files
 
-- `handoffs/3repo-target-state.md` — original 14-item analysis (NOT an approved plan, treat as input)
-- `handoffs/session-3repo-sync-postmortem.md` — full list of session failures with abstract error classes
-- `.claude/skills/meta-documentation/SKILL.md` — failure modes, knowledge taxonomy, design principles
-- `.claude/skills/meta-collaboration/SKILL.md` — delegation safeguards, handoff file format
+- `.claude/skills/meta-documentation/SKILL.md` — foundational analysis (failure modes, taxonomy, decisions)
+- `.claude/skills/meta-cross-repo-sync/SKILL.md` — what's shared, sync workflow
+- `handoffs/session-3repo-sync-postmortem.md` — full failure list with abstract error classes
+- `handoffs/3repo-target-state.md` — original 14-item analysis (input, not approved plan)
 - `TASKS.md` — current agent task tracking
 
 ## Warnings for next session
 
-- The /tmp comparison docs (compare-msc-math-vs-dnd-claude-code.md, comparison-msc-math-vs-pause-game.md, 3repo-present-state.md) were lost. Only the target state was persisted.
-- The behavior norms contain embedded rationale that violates meta-documentation's "pure action" rule. Intentionally kept for now because removing it risks agents misunderstanding the norms.
-- msc-math's "Processing feedback" line (line ~86) partially overlaps with the "Generalize from mistakes" norm but has a different trigger. Both kept intentionally.
-- This session had extensive process failures documented in the postmortem. The abstract error classes and failure modes are encoded in meta-documentation. The next session should verify these are actually followed, not just documented.
+- The /tmp comparison docs were lost. Only the target state was persisted.
+- msc-math's "Processing feedback" line partially overlaps with the "Generalize from mistakes" norm (different triggers — both kept intentionally).
+- This session had extensive process failures documented in the postmortem. Abstract error classes are in meta-documentation's failure modes section.
+- All meta-skills verified identical across repos as of session end.
