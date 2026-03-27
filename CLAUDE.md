@@ -57,7 +57,7 @@ SotS is a GUMSHOE game. Key differences from D&D that agents must internalize:
 - **Allegiances and Enemies** are mechanical. Heroes have faction relationships that function as investigative abilities. Enemies are spent by the GM to complicate things.
 - **Corruption/Arcana/Divinity** replace spell slots. Magic is described through Spheres (thematic constraints). The high fantasy variant adds Divinity for clerics and Arcana for wizards alongside the base Corruption system.
 
-Rules reference: `resources/sots/` (see `tools-and-references.md` for index)
+Rules reference: `resources/sots/` (see `INDEX.md` for index)
 
 ## Core Conventions
 
@@ -198,6 +198,6 @@ A brief interruption beats a dead end.
 
 1. Read this file (you're doing it)
 2. Review `TASKS.md` for current priorities
-3. Review `resources/sots/tools-and-references.md` for available rules materials
+3. Review `resources/sots/INDEX.md` for available rules materials
 4. Review recent session logs (in `sessions/`) to understand what's canon
 5. Ask clarifying questions before making changes to established canon

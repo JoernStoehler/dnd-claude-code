@@ -1,6 +1,6 @@
 # SotS Community Resources
 
-Compiled 2026-03-22 via web search. See `tools-and-references.md` for locally-saved articles and tools index.
+Compiled 2026-03-22 via web search. See `INDEX.md` for locally-saved articles and tools index.
 
 ---
 
@@ -48,7 +48,7 @@ Compiled 2026-03-22 via web search. See `tools-and-references.md` for locally-sa
 
 ### Matt Breen's SotS Tools (monstar.co.nz)
 
-All free, all at https://monstar.co.nz/matt/sotstools/ (already indexed in `tools-and-references.md`).
+All free, all at https://monstar.co.nz/matt/sotstools/ (already indexed in `INDEX.md`).
 
 - **Hero Generator** — Build/randomize characters, export to PDF
 - **Adversary Builder** — Stat block generator for foes
@@ -114,7 +114,7 @@ The underlying JavaScript data (ability lists, stat ranges, calculation formulas
 
 ## Pelgrane Blog Articles (GM Advice by Kevin Kulp)
 
-These are free articles on the Pelgrane Press blog. Some are already saved locally (see `tools-and-references.md`).
+These are free articles on the Pelgrane Press blog. Some are already saved locally (see `INDEX.md`).
 
 | Article | URL | Topic |
 |---------|-----|-------|

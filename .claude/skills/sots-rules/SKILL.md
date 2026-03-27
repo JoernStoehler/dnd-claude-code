@@ -139,9 +139,8 @@ Potential social conflict: [if applicable, NPC Morale/goals]
 ## Reference Files
 
 All in `resources/sots/`:
-- `rules/high-fantasy-guide.md` — The variant rules we use
-- `rules/gumshoe-srd.txt` — Base GUMSHOE mechanical skeleton
-- `rules/gumshoe-101.txt` — Player/GM onboarding
-- `articles/` — Design articles on specific subsystems
-- `alexandrian/` — Scenario design methodology
-- `tools-and-references.md` — Full index
+- `rules-high-fantasy-guide.md` — The variant rules we use
+- `rules-gumshoe-srd.txt` — Base GUMSHOE mechanical skeleton
+- `rules-gumshoe-101.txt` — Player/GM onboarding
+- `article-*.md` — Blog articles by the game's authors
+- `INDEX.md` — Full index
