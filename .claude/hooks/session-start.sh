@@ -22,3 +22,6 @@ if [ "${CLAUDE_CODE_REMOTE:-}" = "true" ] && [ -n "${CLAUDE_ENV_FILE:-}" ]; then
     echo "export GH_REPO=$REPO" >> "$CLAUDE_ENV_FILE"
   fi
 fi
+
+# Decrypt SotS rulebook if encrypted version exists and plaintext doesn't
+"$CLAUDE_PROJECT_DIR"/scripts/decrypt-rulebook.sh

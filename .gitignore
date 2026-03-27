@@ -30,5 +30,11 @@ playwright-report/
 # Scratch / temp
 scratch/
 
+# Decrypted copyrighted material (encrypted .enc versions are committed)
+resources/sots/rulebook.md
+
+# PDF source files
+*.pdf
+
 # Claude Code worktrees (created by --worktree / EnterWorktree)
 .claude/worktrees/

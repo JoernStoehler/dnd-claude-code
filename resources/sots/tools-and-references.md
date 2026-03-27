@@ -41,7 +41,12 @@ All at https://monstar.co.nz/matt/sotstools/
 
 See `community-resources.md` for comprehensive index of community-created content: cheat sheets, actual plays, VTT modules, reviews, adventures, character sheets, and discussion forums.
 
+## SotS Rulebook (encrypted)
+
+- `rulebook.md.enc` — Full rulebook transcription (405 pages), encrypted. Auto-decrypts to `rulebook.md` on session start if `SOTS_KEY` is set.
+- `rulebook-index.md` — Agent-facing index: chapter structure, page references, key sections. **Read this first** to know what to look up.
+- `rulebook-README.md` — Encryption/decryption instructions.
+
 ## Not Yet Acquired
 
-- [ ] **SotS PDF** ($24.95, Pelgrane/DTRPG) — primary rulebook, must be purchased
 - [ ] **Night's Black Agents** (Pelgrane, paid) — full Conspyramid chapter
