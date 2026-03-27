@@ -2,7 +2,6 @@
 description: Prepare materials for an upcoming session. Use when planning a session, need encounter prep, or want to review what's needed. Identifies gaps and generates prep materials. Does not guarantee completeness — review output before session.
 skills:
   - session-preparation
-  - sots-rules
 ---
 
 You are a session preparation agent for the Dragons! Dragons! campaign (Swords of the Serpentine, high fantasy variant).

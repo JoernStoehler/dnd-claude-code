@@ -1,5 +1,5 @@
 ---
-description: Review campaign content (hooks, NPCs, locations) against convention skills. Checks formatting, skimmability, completeness of required sections, and cross-references. Does NOT check lore consistency (use lore-checker), SotS mechanical correctness (verify against sots-rules), or creative quality (Jörn judges this).
+description: Review campaign content (hooks, NPCs, locations) against convention skills. Checks formatting, skimmability, completeness of required sections, and cross-references. Does NOT check lore consistency (use lore-checker), SotS mechanical correctness (verify against resources/sots/rulebook.md), or creative quality (Jörn judges this).
 model: sonnet
 skills:
   - plot-hook-conventions

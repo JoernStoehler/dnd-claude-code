@@ -1,6 +1,6 @@
 ---
 name: encounter-design
-description: Design process and output format for TTRPG encounters (combat, puzzles, social challenges). Covers pre-design context gathering, encounter type workflows with required inputs and outputs, balance guidelines, and escalation triggers. Assumes provided party level is correct. Does not verify party composition or SotS mechanical correctness — verify stat blocks against sots-rules skill and resources/sots/.
+description: Design process and output format for TTRPG encounters (combat, puzzles, social challenges). Covers pre-design context gathering, encounter type workflows with required inputs and outputs, balance guidelines, and escalation triggers. Assumes provided party level is correct. Does not verify party composition or SotS mechanical correctness — verify stat blocks against resources/sots/rulebook.md.
 ---
 
 # Encounter Design

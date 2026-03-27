@@ -1,6 +1,6 @@
 ---
 name: npc-conventions
-description: Conventions for writing NPC profiles. Covers the standard template and the high-performance variant for ensemble/companion NPCs. Does not cover NPC creation workflow (see npc-design skill) or mechanical stat blocks (see sots-rules).
+description: Conventions for writing NPC profiles. Covers the standard template and the high-performance variant for ensemble/companion NPCs. Does not cover NPC creation workflow (see npc-design skill) or mechanical stat blocks (see resources/sots/INDEX.md).
 ---
 
 # NPC Conventions
