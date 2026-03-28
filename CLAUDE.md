@@ -115,7 +115,7 @@ A brief interruption beats a dead end.
 - **Medium:** Entry in TASKS.md with enough context to act on later
 - **Heavy:** Raise it in conversation if it might block current work
 
-**Generalize from mistakes.** When you fix a problem or notice you made a process error (forgot a check, skipped a step, made a wrong assumption), abstract the error class and scan for other instances — in the code, in your own recent behavior, and in your current plan. This applies to your own oversights, not just bugs in artifacts. Load the `meta-feedback-processing` skill for the full workflow.
+**Generalize from mistakes.** When you fix a problem or notice you made a process error (forgot a check, skipped a step, made a wrong assumption), abstract the error class and scan for other instances — in the code, in your own recent behavior, and in your current plan. This applies to your own oversights, not just bugs in artifacts.
 
 **Recognize your complexity limits.** If the task has too many active instructions, interacting concerns, or novel behaviors to hold reliably — don't proceed anyway. Instead:
 1. Delegate to focused subagents with simpler prompts
@@ -157,8 +157,8 @@ A brief interruption beats a dead end.
 1. **Scope** — Jörn describes the goal. Ask clarifying questions until scope is clear. Don't skip the clarifying questions.
 2. **Plan** — Propose approach. Jörn approves or adjusts. Use `/plan` mode for non-trivial tasks.
 3. **Implement** — Execute. Commit regularly. Update TASKS.md as you complete items.
-4. **Review** — Spawn review subagent(s) before presenting to Jörn. Load `meta-collaboration` skill for review patterns.
-5. **Merge / handoff** — If done: commit, update TASKS.md, optionally run `/meta-session-handoff`. If continuing later: write handoff file to `handoffs/`.
+4. **Review** — Spawn review subagent(s) before presenting to Jörn.
+5. **Merge / handoff** — If done: commit, update TASKS.md. If continuing later: write handoff file to `handoffs/`.
 
 ### What needs discussion vs what doesn't
 
