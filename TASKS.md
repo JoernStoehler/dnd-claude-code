@@ -1,21 +1,16 @@
-# TASKS.md
+# TASKS
+
+Task list for campaign development.
+
+## How to use this file
+
+- **Format:** Each task has an escalation marker and a short description. Group under section headers.
+- **Maintenance:** Update immediately when completing or discovering tasks. Context not written here is context lost.
+- **Status dates:** Include a date when updating status (e.g. "Done (2026-03-28)").
+- **Completed tasks:** Move to the `## Done` section with a one-line summary.
+- **Escalation:** :red_circle: Jörn decides · :yellow_circle: Agent does, Jörn reviews · :green_circle: Agent autonomous
 
 **Last updated:** 2026-03-28
-**Escalation markers:** :red_circle: Jörn decision required · :yellow_circle: Agent attempts, Jörn reviews · :green_circle: Agent autonomous
-
-## Maturity Map
-
-| Area | Status |
-|------|--------|
-| SotS rules references | Done — full rulebook transcribed, encrypted, indexed |
-| Agent infrastructure | Cleaned — legacy skills/agents deleted, fal-flux-prompting kept |
-| Campaign concept | Sketched — hub town, mountain dungeon, three factions, elder dragon BBEG |
-| World building | Not started |
-| Conspyramid / faction graph | Not started |
-| NPC roster | Not started |
-| Session content | Not started (pre-campaign) |
-| Maps and visuals | Not started |
-| Card generator SotS templates | Not started |
 
 ## Current
 
