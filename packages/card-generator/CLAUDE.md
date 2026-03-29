@@ -4,19 +4,17 @@ Creates tarot-sized player-facing cards with texture backgrounds.
 
 ## Prerequisites
 
-- `FAL_KEY` env var must be set for AI image generation (`--api` mode). Loaded from repo root `.env` via shell profile. If missing, scripts fall back to placeholder images and print a warning.
+- `FAL_KEY` env var must be set for AI image generation. Loaded from repo root `.env` via shell profile. Scripts error out if `FAL_KEY` is missing when a prompt is given. Placeholder mode (no prompt) is only for layout testing.
 - **Never read `.env` directly** — it contains secrets. Just check `echo $FAL_KEY` to verify it's set.
 
 ## Pipeline
 
 ```bash
-# 1. Generate portrait (prompt → fal.ai Flux if FAL_KEY set, else placeholder)
+# 1. Generate portrait (prompt → fal.ai Flux; requires FAL_KEY)
 node scripts/generate-portrait.js portrait.png "gnome inventor, ink wash style"
-node scripts/generate-portrait.js portrait.png   # placeholder
 
-# 2. Generate texture background (same: prompt → API or placeholder)
+# 2. Generate texture background (prompt → fal.ai Flux; requires FAL_KEY)
 node scripts/generate-texture.js texture.png "brown leather surface, warm cognac tones, 8k detail"
-node scripts/generate-texture.js texture.png     # placeholder
 
 # 3. Render card from JSON + portrait + texture
 node scripts/render-card.js card.json card.png
@@ -52,7 +50,7 @@ Layout details and design rationale: `DESIGN-SPEC.md`
 ## Folder Structure
 
 ```
-campaigns/<campaign>/cards/
+assets/cards/
   <category>/<slug>/
     card.json       # Card definition
     portrait.png    # Character/location portrait

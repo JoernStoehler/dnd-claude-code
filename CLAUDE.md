@@ -18,7 +18,6 @@ lore/                  # World-building (factions, locations, history, dragons)
 characters/            # NPCs and PCs
 sessions/              # Session logs, prep notes
 encounters/            # Combat, puzzles, social challenges
-conspyramid/           # Faction conspiracy graph (nodes + edges)
 assets/                # Images, maps, handouts
 resources/sots/        # SotS rules references and design articles
 packages/card-generator/  # Print card generation tool

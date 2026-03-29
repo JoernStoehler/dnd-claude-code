@@ -6,7 +6,7 @@
  *   node generate-texture.js <output.png> "prompt describing the texture"
  *   node generate-texture.js texture.png                    # placeholder
  *
- * If FAL_KEY is set and a prompt is given, calls fal.ai Flux.
+ * With a prompt: calls fal.ai Flux (requires FAL_KEY).
  * Crops center 60% of generated image to avoid boundary artifacts,
  * then resizes to card dimensions (827x1417).
  */
@@ -32,9 +32,8 @@ async function generatePlaceholder(outputPath) {
 async function generateTexture(outputPath, prompt) {
   const apiKey = process.env.FAL_KEY;
   if (!apiKey) {
-    console.error('FAL_KEY not set. Generating placeholder instead.');
-    console.error('Get a key at: https://fal.ai/dashboard/keys');
-    return generatePlaceholder(outputPath);
+    console.error('FAL_KEY not set. Set it in .env or environment.');
+    process.exit(1);
   }
 
   const sharp = require('sharp');
@@ -81,7 +80,7 @@ generate-texture.js - Generate background texture for a card
 
 Usage:
   node generate-texture.js <output.png> "prompt describing the texture"
-  node generate-texture.js <output.png>   (placeholder if no prompt or no FAL_KEY)
+  node generate-texture.js <output.png>   (placeholder for layout testing)
 
 Examples:
   node generate-texture.js texture.png "brown leather surface, warm cognac tones, 8k detail"

@@ -10,7 +10,7 @@ Task list for campaign development.
 - **Completed tasks:** Move to the `## Done` section with a one-line summary.
 - **Escalation:** :red_circle: Jörn decides · :yellow_circle: Agent does, Jörn reviews · :green_circle: Agent autonomous
 
-**Last updated:** 2026-03-28
+**Last updated:** 2026-03-29
 
 ## Current
 
@@ -20,7 +20,6 @@ Task list for campaign development.
 - :red_circle: Design faction details (human kingdom, elf kingdom, hub town politics)
 - :red_circle: Design mountain dungeon layer concept
 - :red_circle: Design elder dragon BBEG
-- :yellow_circle: Build conspyramid data structure (graph schema)
 - :yellow_circle: Define SotS stat block templates (NPC, adversary, scene) as structured markdown
 - :yellow_circle: Specialize card generator with SotS template fields
 
@@ -44,3 +43,5 @@ Task list for campaign development.
 - :white_check_mark: Built auto-decrypt pipeline (session-start hook)
 - :white_check_mark: Reorganized resources/sots/ — flat structure, type-prefixed filenames, single INDEX.md
 - :white_check_mark: Deleted legacy meta-* skills, unused campaign skills/agents
+- :white_check_mark: Removed conspyramid (overkill for this campaign) (2026-03-29)
+- :white_check_mark: Repo audit: removed dead code (file-index.py, ccweb.md, docs/), fixed card-generator deps, fixed session-start.sh gh install path (2026-03-29)

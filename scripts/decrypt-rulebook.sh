@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Decrypt the SotS rulebook if encrypted version exists and plaintext doesn't.
-# Requires SOTS_KEY environment variable.
-# Usage: scripts/decrypt-rulebook.sh
+# Requires SOTS_KEY environment variable (stored in .env).
+# See resources/sots/INDEX.md for encrypt/decrypt commands.
 
 set -euo pipefail
 

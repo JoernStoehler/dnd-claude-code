@@ -6,8 +6,8 @@
  *   node generate-portrait.js <output.png> "prompt describing the subject"
  *   node generate-portrait.js portrait.png                  # placeholder
  *
- * If FAL_KEY is set and a prompt is given, calls fal.ai Flux.
- * Otherwise generates a placeholder for layout testing.
+ * With a prompt: calls fal.ai Flux (requires FAL_KEY).
+ * Without a prompt: generates a placeholder for layout testing.
  */
 
 const fs = require('fs');
@@ -31,9 +31,8 @@ async function generatePlaceholder(outputPath) {
 async function generatePortrait(outputPath, prompt) {
   const apiKey = process.env.FAL_KEY;
   if (!apiKey) {
-    console.error('FAL_KEY not set. Generating placeholder instead.');
-    console.error('Get a key at: https://fal.ai/dashboard/keys');
-    return generatePlaceholder(outputPath);
+    console.error('FAL_KEY not set. Set it in .env or environment.');
+    process.exit(1);
   }
 
   const { fal } = require('@fal-ai/client');
@@ -66,7 +65,7 @@ generate-portrait.js - Generate portrait image for a card
 
 Usage:
   node generate-portrait.js <output.png> "prompt describing the subject"
-  node generate-portrait.js <output.png>   (placeholder if no prompt or no FAL_KEY)
+  node generate-portrait.js <output.png>   (placeholder for layout testing)
 
 Examples:
   node generate-portrait.js portrait.png "gnome inventor, ink wash style, head and shoulders"

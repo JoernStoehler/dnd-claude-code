@@ -8,6 +8,14 @@ Everything in `resources/sots/`. Agents: read this file first to find what you n
 
 `swords-of-the-serpentine.pdf` — Source PDF (gitignored).
 
+```bash
+# Decrypt (runs automatically via session-start hook):
+openssl enc -aes-256-cbc -d -salt -pbkdf2 -in rulebook.md.enc -out rulebook.md -pass "pass:$SOTS_KEY"
+
+# Re-encrypt after editing:
+openssl enc -aes-256-cbc -salt -pbkdf2 -in rulebook.md -out rulebook.md.enc -pass "pass:$SOTS_KEY"
+```
+
 ### Book Structure
 
 | Chapter | Pages | Content |
@@ -119,6 +127,7 @@ All `article-*` files are blog posts by the game's authors, saved locally.
 - `article-conspyramid.md` — The Conspyramid campaign structure (Alexandrian)
 - `article-node-based-scenario-design.md` — Node-Based Scenario Design series index
 - `article-node-based-part-2.md` — Node-Based Scenario Design, part 2
+- `article-node-based-part-3.md` — Node-Based Scenario Design, part 3
 - `article-node-based-part-4.md` — Node-Based Scenario Design, part 4
 - `article-node-based-part-5.md` — Node-Based Scenario Design, part 5
 
