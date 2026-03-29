@@ -1,3 +1,8 @@
+---
+name: fal-flux-prompting
+description: Generate images using fal.ai Flux. Use when asked to create images, portraits, maps, or visual assets for the campaign.
+---
+
 # fal.ai Flux Image Generation
 
 How to generate high-quality images using fal.ai's Flux model.
