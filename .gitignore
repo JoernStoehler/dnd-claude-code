@@ -38,3 +38,5 @@ resources/sots/*.pdf
 
 # Claude Code worktrees (created by --worktree / EnterWorktree)
 .claude/worktrees/
+.Trash-1000/
+.Trash-1000/

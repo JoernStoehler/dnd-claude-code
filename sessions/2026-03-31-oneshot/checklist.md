@@ -17,6 +17,7 @@ All in `sessions/2026-03-31-oneshot/`. PDFs committed to git.
 - [ ] player-reference.pdf — **5 copies** (one per player, keep 1-2 spare)
 - [ ] gm-reference.pdf — **1 copy** (your rules lookup; players can see it)
 - [ ] gm-adventure.pdf — **1 copy** (SECRET — keep face down between uses)
+- [ ] portrait-cards.pdf — **TBD** (once portraits are generated)
 
 Access: `git pull` on laptop → files are in the repo. Print A4, black & white.
 

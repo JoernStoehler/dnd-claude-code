@@ -29,13 +29,14 @@ All materials in `sessions/2026-03-31-oneshot/`.
 
 **Still TODO before Tuesday:**
 - :green_circle: Jörn reads through all materials, flags anything that feels off
-- :yellow_circle: Format for print — currently markdown; need A4-friendly layout (BW, possible color accents). Options: pandoc to PDF, manual formatting, or just print the markdown. Discuss approach.
-- :yellow_circle: Scenario document currently has no citations — only the player-facing docs do. Add citations to stat blocks if Jörn wants the same verification standard on GM materials.
-- :green_circle: Bring supplies: d6 dice (many — players won't have their own), pencils, scrap paper, tokens/coins for Refresh bowl
-- :red_circle: Decide: read the sample adventure "Corpse Astray" (Ch. 11, p. 391-405) before Tuesday? It's the only published full adventure — might give you a feel for pacing and clue delivery that reading rules alone doesn't. ~15 pages.
-- :red_circle: Decide: skim the Eversink setting chapters (Ch. 9, key sections) for flavor you can improvise at the table? The scenario uses Eversink names and locations. You don't need deep knowledge, but having a mental image of "canal city, sinking, bells, statues everywhere, goddess of commerce" helps narration.
-- :red_circle: Decide: practice run? Walk through Scene 0 + START + one node mentally, playing both sides. Test whether the clue tables are usable at the table or need to be reformatted as a quicker-reference format (e.g. index cards per scene).
-- :yellow_circle: Possible: generate NPC portraits or a simple map of Harbor Approach using card-generator / fal.ai. Nice to have, not needed.
+- [x] Print-ready PDFs via build-pdfs.sh (weasyprint pipeline)
+- [x] Portrait card layout pipeline: `portraits.json` → `build-portrait-cards.py` → PDF (2x4 side-by-side cards)
+- [x] Style test iteration loop: `generate-style-test.py` (configurable model/styles/params)
+- :red_circle: Portrait cards: choose fal.ai model (flux/dev was never explicitly approved; flux-2-pro, flux-2-flex also available — check pricing/quality)
+- :red_circle: Portrait cards: determine layer 0 (API params, quality settings) and layer 1 (style/medium/artist) via test iterations
+- :red_circle: Portrait cards: generate final 24 portraits (8 NPC + 16 spare) once style is locked
+- :green_circle: Bring supplies: d6 dice (many), pencils, scrap paper, tokens/coins for Refresh bowl
+- :green_circle: GM prep: mental practice run (Scene 0 → START → one node)
 
 ### Campaign setup
 
