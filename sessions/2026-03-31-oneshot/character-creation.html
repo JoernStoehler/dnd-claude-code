@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Character Creation</title>
+<style>
+  @page { size: A4; margin: 8mm 10mm; }
+  body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-size: 8pt; line-height: 1.3; color: #1a1a1a; }
+  h1 { font-size: 14pt; margin: 0 0 4px 0; text-align: center; border-bottom: 2px solid #333; padding-bottom: 2px; }
+  .sub { text-align: center; font-size: 7.5pt; color: #555; margin-bottom: 6px; }
+  .cols { column-count: 2; column-gap: 16px; column-rule: 1px solid #ccc; }
+  h2 { font-size: 10pt; margin: 7px 0 2px 0; border-bottom: 1px solid #999; padding-bottom: 1px; break-after: avoid; }
+  p { margin: 1px 0 3px 0; }
+  ul { margin: 1px 0 3px 0; padding-left: 14px; }
+  li { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 7.5pt; margin: 2px 0; break-inside: avoid; }
+  th { background: #e0e0e0; text-align: left; padding: 1px 4px; border: 1px solid #bbb; }
+  td { padding: 1px 4px; border: 1px solid #ccc; vertical-align: top; }
+  .rh { font-weight: bold; white-space: nowrap; }
+  .step { border: 1px solid #888; padding: 4px 6px; margin: 4px 0; break-inside: avoid; }
+  .step-num { font-weight: bold; font-size: 10pt; display: inline; margin-right: 4px; color: #555; }
+  .tip { font-size: 7pt; color: #444; padding: 2px 4px; background: #f4f4f0; border-left: 2px solid #cc9; margin: 2px 0; }
+  strong { font-weight: 700; }
+  .sm { font-size: 7pt; color: #555; }
+  .clear { clear: both; }
+</style>
+</head>
+<body>
+
+<h1>Character Creation — Step by Step</h1>
+<div class="sub">Fill in the official character sheet as you go. Takes ~10 minutes. You can leave points unspent and assign during play.</div>
+
+<div class="cols">
+
+<div class="step">
+<div class="step-num">1</div>
+<strong>Profession</strong> — pick one (or mix). This is a label, not a cage.<br>
+<strong>Sentinel</strong> (investigator, inquisitor) · <strong>Sorcerer</strong> (magic user) · <strong>Thief</strong> (rogue, spy) · <strong>Warrior</strong> (fighter, barbarian) · or mix freely.<br>
+<div class="sm">Write it in the Profession field.</div>
+</div>
+
+<div class="step">
+<div class="step-num">2</div>
+<strong>Adjectives</strong> — 3–5 words describing your personality. Quick reference for how you act under pressure.<br>
+<div class="sm">Write in the Adjectives field.</div>
+</div>
+
+<div class="step">
+<div class="step-num">3</div>
+<strong>Drives</strong> — "What is Best in Life?" Answer three things. These are your motivations. When a Drive is relevant, <strong>+1 to any roll</strong>.<br>
+<div class="sm">Write in the three "What is Best in Life?" lines.</div>
+</div>
+
+<div class="step">
+<div class="step-num">4</div>
+<strong>Investigative Abilities</strong> — fill bubbles on the sheet. Points by player count:
+<table>
+  <tr><th>Players</th><th>Ability points</th></tr>
+  <tr><td>3</td><td>12</td></tr>
+  <tr><td>4</td><td>11</td></tr>
+  <tr><td>5+</td><td>10</td></tr>
+</table>
+<!-- source: rulebook.md:1660-1661 — "new characters also receive 3 additional Investigative Build Points which must be spent on Allegiances" -->
+Spend on any Investigative ability from any profession. You also get 3 additional points for Allegiances (Step 5).<br>
+<strong>Bonus:</strong> If ALL your profession picks (not Social, not Allegiances) come from one profession, <strong>+1 free point</strong>.<br>
+<div class="sm">See the Ability Lookup sheet for what each ability does.</div>
+</div>
+
+<div class="step">
+<div class="step-num">5</div>
+<strong>Allegiances</strong> — using your 3 additional Allegiance points, assign:<br>
+<strong>2 points to Allies</strong> (one faction or split between two) — people who help you<br>
+<strong>1 point to an Enemy</strong> — a faction that opposes you<br>
+Write faction names + fill bubbles in the Allegiances section.
+<table>
+  <tr><td class="rh">Ancient Nobility</td><td>Proud, crumbling old families</td></tr>
+  <tr><td class="rh">Church of Denari</td><td>Commerce goddess, moneylenders, inquisitors</td></tr>
+  <tr><td class="rh">City Watch</td><td>Underfunded law enforcement</td></tr>
+  <tr><td class="rh">Commoners</td><td>Working people — many, organized, resentful</td></tr>
+  <tr><td class="rh">Mercanti</td><td>New-money merchant guilds</td></tr>
+  <tr><td class="rh">Mercenaries</td><td>Professional soldiers, loyal while paid</td></tr>
+  <tr><td class="rh">Monstrosities</td><td>Non-humans living under/in the city</td></tr>
+  <tr><td class="rh">Outlanders</td><td>Foreigners, barbarians, travelers</td></tr>
+  <tr><td class="rh">Sorcerous Cabals</td><td>Illegal magic users, secretive</td></tr>
+  <tr><td class="rh">Thieves' Guilds</td><td>Smugglers, criminals, shadow power</td></tr>
+  <tr><td class="rh">Triskadane</td><td>13 anonymous rulers + secret police</td></tr>
+</table>
+<div class="tip">Allegiances are roleplay flavor AND mechanical — use Ally ranks to call in favors, get information, or summon help.</div>
+</div>
+
+<div class="step">
+<div class="step-num">6</div>
+<strong>General Abilities</strong> — split <strong>30 points</strong> among these. Fill bubbles on the sheet.
+<table>
+  <tr><th>Ability</th><th>What it does</th><th>Talent at 8+</th></tr>
+  <tr><td class="rh">Athletics</td><td>Run, jump, climb, swim</td><td>Dodge attacks</td></tr>
+  <tr><td class="rh">Bind Wounds</td><td>Heal Health (1 pt → 2 HP to others)</td><td>Heal self equally</td></tr>
+  <tr><td class="rh">Burglary</td><td>Pick locks, steal, sleight of hand</td><td>Pickpocket as free action</td></tr>
+  <tr><td class="rh">Preparedness</td><td>Roll to have what you need</td><td>Flashback — retroactively planned for this</td></tr>
+  <tr><td class="rh">Stealth</td><td>Move unseen</td><td>Vanish and reappear anywhere</td></tr>
+  <tr><td class="rh">Sorcery</td><td>Magic attacks (needs Corruption 1+)</td><td>Blast — hit multiple foes</td></tr>
+  <tr><td class="rh">Sway</td><td>Fear/persuade → damages Morale</td><td>Play to the Crowd — hit multiple foes' Morale</td></tr>
+  <tr><td class="rh">Warfare</td><td>Weapon attacks → damages Health</td><td>Cleave — hit multiple foes</td></tr>
+</table>
+<strong>Max rule:</strong> no ability can exceed 2× your next-highest ability.<br>
+<div class="tip">Have at least one combat ability (Warfare, Sway, or Sorcery) at 5+. At 8+ you get a Talent — worth it.</div>
+</div>
+
+<div class="step">
+<div class="step-num">7</div>
+<strong>Health &amp; Morale</strong> — split <strong>18 points</strong> between them (min 3 each). Circle your rank on the track.<br>
+<strong>10+ in either → Threshold becomes 4</strong> (instead of 3). Write your Threshold in the box.<br>
+With 18 points, you can reach 10+ in one stat (e.g. 10/8) but not both.<br>
+</div>
+
+<div class="step">
+<div class="step-num">8</div>
+<strong>Gear</strong> — write 5+ items that define who you are. One is your weapon (sets Damage Modifier: small +0, medium +1, large +2). One can be armor (leather = Armor 1, chain = Armor 2).<br>
+<strong>5+ items of gear → Grit 1.</strong> Write Grit 1 in the Grit box.<br>
+</div>
+
+<div class="step">
+<div class="step-num">9</div>
+<strong>Sorcery</strong> — only if you have Corruption 1+. Check whether your Sorcery attacks Health or Morale (permanent choice). Pick 1 Sphere per Corruption rank. Write Spheres on the sheet. Pick your source (Serpentine writings or Demon/Spirit).<br>
+<div class="sm">See the Sorcery Cheat Sheet for details.</div>
+</div>
+
+<div class="step">
+<div class="step-num">10</div>
+<strong>Name</strong> — anything you like. Fantasy Italian-ish fits the setting, but not required. Skip True Name (not relevant for one-shot). Ignore Wealth/Lifestyle fields.<br>
+</div>
+
+<div class="tip" style="margin-top:6px;">
+<strong>Stuck?</strong> Leave points unspent and assign during play when you realize you need something. You can also redistribute freely after your first session.
+</div>
+
+</div><!-- cols -->
+
+</body>
+</html>

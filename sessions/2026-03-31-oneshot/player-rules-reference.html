@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Player Reference</title>
+<style>
+  @page { size: A4; margin: 8mm 10mm; }
+  body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-size: 7.5pt; line-height: 1.25; color: #1a1a1a; }
+  h1 { font-size: 13pt; margin: 0 0 3px 0; text-align: center; border-bottom: 2px solid #333; padding-bottom: 2px; }
+  .sub { text-align: center; font-size: 6.5pt; color: #555; margin-bottom: 5px; }
+  table { width: 100%; border-collapse: collapse; font-size: 7pt; margin: 0 0 4px 0; }
+  th { background: #e0e0e0; text-align: left; padding: 2px 4px; border: 1px solid #bbb; }
+  td { padding: 2px 4px; border: 1px solid #ccc; vertical-align: top; }
+  col.want { width: 22%; }
+  col.how { width: 78%; }
+  .want { font-weight: bold; }
+  .section { background: #d8d8d8; font-weight: bold; font-size: 7.5pt; padding: 2px 4px; }
+  .ex { font-style: italic; color: #444; }
+  .note { font-size: 6.5pt; color: #555; }
+  strong { font-weight: 700; }
+  h2 { font-size: 9pt; margin: 6px 0 2px 0; border-bottom: 1px solid #999; padding-bottom: 1px; }
+  .cols { column-count: 2; column-gap: 14px; column-rule: 1px solid #ccc; }
+  .minitbl { width: 100%; border-collapse: collapse; font-size: 6.5pt; margin: 1px 0; }
+  .minitbl td { padding: 1px 3px; border: 1px solid #ccc; }
+  .minitbl .rh { font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>Player Reference</h1>
+<div class="sub">Your abilities: <strong>Investigative</strong> (auto-succeed, for clues) and <strong>General</strong> (roll d6, for risky actions). Both have points you spend from. Points go down as you spend; your ability level doesn't. <strong>Spend freely — you get points back during play.</strong></div>
+
+<table>
+<colgroup><col class="want"><col class="how"></colgroup>
+
+<tr><td colspan="2" class="section">Finding Things Out</td></tr>
+
+<tr>
+  <td class="want">Get a clue or information</td>
+  <td>Have 1+ in a relevant Investigative ability → <strong>you get the info automatically. No roll.</strong> Tell the GM which ability and how you use it.<br>
+  <span class="ex">"I have Leechcraft — I examine the body." → GM tells you cause of death.</span></td>
+</tr>
+
+<tr>
+  <td class="want">Get a bonus from an Investigative ability</td>
+  <td>Spend 1 point. Describe how the ability applies. Pick one:
+    <strong>+3</strong> on any roll (incl. attacks) · <strong>+1d6 damage</strong> on a hit · <strong>Block 4 damage</strong> for 1 round · <strong>+3 to your defense</strong> vs 1 incoming attack · <strong>Special effect</strong> (ask GM).<br>
+    <span class="note">Spending points doesn't reduce your expertise — you still get clues. These are examples; propose your own ideas.</span></td>
+</tr>
+
+<tr><td colspan="2" class="section">Doing Risky Things (General Abilities)</td></tr>
+
+<tr>
+  <td class="want">Attempt something that might fail</td>
+  <td>Spend points from that ability (optional) → roll <strong>1d6 + points spent</strong> → meet or beat the <strong>target number</strong> (usually <strong>4</strong>). Spend 3 = guaranteed success. Out of points = still roll, just the bare d6.</td>
+</tr>
+
+<tr>
+  <td class="want">Get pool points back</td>
+  <td>Take a <strong>Refresh token</strong> from the shared bowl. Each restores 1 spent point in any ability (not Health/Morale). Tokens vanish at end of scene — use them.<br>
+    <span class="note">Mook dropped → 1 token. Named foe → 3. Big bad → 5. Non-combat challenge → 2-3 per player (GM call).</span></td>
+</tr>
+
+<tr><td colspan="2" class="section">Combat</td></tr>
+
+<tr>
+  <td class="want">Know the turn order</td>
+  <td>GM picks who acts first. After your turn, <strong>you pick who goes next</strong> (anyone — ally or enemy). Last person in the round picks who opens the next round.</td>
+</tr>
+
+<tr>
+  <td class="want">Attack someone</td>
+  <td>Choose: <strong>Warfare</strong> → damages Health (body), <strong>Sway</strong> → damages Morale (will), <strong>Sorcery</strong> → either (see your sheet).<br>
+    Spend combat ability points (before rolling) → roll <strong>d6 + spent</strong> ≥ the number on the enemy's stat (usually 3–4).<br>
+    Hit → roll <strong>1d6 + damage modifier</strong> (on your sheet, from your weapon). Your d6 can't go below the points you spent (capped at 6).<br>
+    <span class="ex">Spend 4 Warfare, roll 2 = total 6. Enemy needs 4 to be hit, so you hit. Damage: d6 + damage modifier (+1). You roll 2, but spent 4, so it counts as 4. Damage = 5, minus their Armor.</span></td>
+</tr>
+
+<tr>
+  <td class="want">Deal extra damage</td>
+  <td>After a hit, spend 1 <strong>Investigative point</strong> → <strong>+1d6 damage</strong>. Describe how that ability helps.<br>
+    <span class="ex">"I spend Tactics of Death — I see the gap in his guard." → extra d6.</span></td>
+</tr>
+
+<tr>
+  <td class="want">Hit multiple enemies</td>
+  <td>Need <strong>8+ points</strong> in your combat ability. If your attack roll exceeds what you needed by <strong>3+</strong>, you hit one extra nearby foe (1d6+1 damage). Every further +3 = another.</td>
+</tr>
+
+<tr>
+  <td class="want">Score a critical hit</td>
+  <td>If your attack roll exceeds what you needed by <strong>5+</strong>, you deal an extra 1d6 damage. Can't combine with multi-target.</td>
+</tr>
+
+<tr>
+  <td class="want">Force someone to do something (or take damage)</td>
+  <td><strong>Maneuver:</strong> roll a successful attack. Your total sets how hard it is to resist. The target either <strong>does what you say</strong> (disarm, trip, flee, obey) or <strong>takes your total − 2 as damage</strong>.<br>
+    <span class="ex">Spend 3 Sway, roll 5 = total 8. "Leave this room." Guard leaves, or takes 6 Morale damage.</span></td>
+</tr>
+
+<tr>
+  <td class="want">Help an ally's attack</td>
+  <td><strong>Teamwork:</strong> on your turn, skip attacking. Add your damage to an ally's hit, using <em>your</em> damage type. Lets Sway damage contribute to a Warfare hit.</td>
+</tr>
+
+<tr>
+  <td class="want">Dodge a physical attack</td>
+  <td>Need <strong>8+ in Athletics</strong>. After being hit but before damage: spend Athletics points + roll. Must <strong>beat</strong> the attacker's roll (with a shield: just match). Success = attack cancelled.</td>
+</tr>
+
+<tr><td colspan="2" class="section">Taking Damage &amp; Healing</td></tr>
+
+<tr>
+  <td class="want">Know what happens when I'm hit</td>
+  <td>Enemies roll vs <strong>the number on your sheet</strong> to hit you. <strong>Armor</strong> reduces physical damage; <strong>Grit</strong> reduces social/mental damage. Enemies drop at 0. Heroes go negative:</td>
+</tr>
+</table>
+
+<div class="cols">
+<table class="minitbl">
+  <tr><th>Pool</th><th>Health (Body)</th></tr>
+  <tr><td class="rh">0+</td><td>Healthy</td></tr>
+  <tr><td class="rh">−1 to −5</td><td>Hurt — roll d6, need 4+ or fall unconscious. Everything you try needs 1 higher to succeed.</td></tr>
+  <tr><td class="rh">−6 to −10</td><td>Seriously Wounded — roll again. Everything needs 2 higher. Healing half as effective.</td></tr>
+  <tr><td class="rh">Below −10</td><td>Defeated — out of fight.</td></tr>
+</table>
+
+<table class="minitbl">
+  <tr><th>Pool</th><th>Morale (Will)</th></tr>
+  <tr><td class="rh">0+</td><td>Resilient</td></tr>
+  <tr><td class="rh">−1 to −5</td><td>Unstable — roll d6, need 4+ or you can't act. Everything needs 1 higher.</td></tr>
+  <tr><td class="rh">−6 to −10</td><td>Panicked — roll again. Everything needs 2 higher.</td></tr>
+  <tr><td class="rh">Below −10</td><td>Broken — surrender, flee, collapse.</td></tr>
+</table>
+</div>
+
+<table>
+<colgroup><col class="want"><col class="how"></colgroup>
+
+<tr>
+  <td class="want">Heal an ally's Morale</td>
+  <td>As an action: spend 1 Sway → <strong>restore 2 Morale</strong> to an ally (or split among allies), or 1 to yourself. <strong>Trustworthy</strong> spend: 1 point → 6 Morale to ally (need at least 1 in Sway), or 3 to self.</td>
+</tr>
+
+<tr>
+  <td class="want">Heal an ally's Health</td>
+  <td><strong>Bind Wounds:</strong> spend 1 point → <strong>heal 2 Health</strong> to someone else. Heal yourself: only 1 Health (2 if you have 8+ in Bind Wounds).</td>
+</tr>
+
+<tr><td colspan="2" class="section">Other</td></tr>
+
+<tr>
+  <td class="want">Get a small bonus on any roll</td>
+  <td><strong>Drives:</strong> when one of your three Drives is relevant, <strong>+1</strong> to any die result.</td>
+</tr>
+
+<tr>
+  <td class="want">Have the right gear</td>
+  <td><strong>Preparedness:</strong> roll to establish you have the right item. With 8+ in Preparedness (<strong>Flashback</strong>): retroactively declare past actions — "I already bribed that guard."</td>
+</tr>
+
+<tr>
+  <td class="want">Sneak past someone</td>
+  <td><strong>Stealth:</strong> roll to move unseen. With 8+ in Stealth (<strong>Vanish</strong>): disappear and reappear anywhere in the scene.</td>
+</tr>
+
+<tr>
+  <td class="want">Pick a lock / steal something</td>
+  <td><strong>Burglary:</strong> roll to pick locks, steal, sleight of hand.</td>
+</tr>
+
+</table>
+
+</body>
+</html>

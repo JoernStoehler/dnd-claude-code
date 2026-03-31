@@ -10,9 +10,32 @@ Task list for campaign development.
 - **Completed tasks:** Move to the `## Done` section with a one-line summary.
 - **Escalation:** :red_circle: Jörn decides · :yellow_circle: Agent does, Jörn reviews · :green_circle: Agent autonomous
 
-**Last updated:** 2026-03-29
+**Last updated:** 2026-03-30
 
 ## Current
+
+### Tuesday one-shot (2026-03-31, 19:00-22:00)
+
+All materials in `sessions/2026-03-31-oneshot/`.
+
+**Done:**
+- [x] GM scenario document — node map, toolkits, stat blocks, clues, timeline
+- [x] 5 character templates (Warrior, Thief, Sentinel, Sorcerer, Sellsword)
+- [x] Player rules reference (front+back A4)
+- [x] Sorcery cheat sheet
+- [x] 4 pregen fallback characters (Warrior, Thief, Sellsword, Sorcerer)
+- [x] Source citations on rules-facing documents
+- [x] Verification: rules accuracy (3 agents), adventure design, player clarity, completeness vs Ch.3 TOC
+
+**Still TODO before Tuesday:**
+- :green_circle: Jörn reads through all materials, flags anything that feels off
+- :yellow_circle: Format for print — currently markdown; need A4-friendly layout (BW, possible color accents). Options: pandoc to PDF, manual formatting, or just print the markdown. Discuss approach.
+- :yellow_circle: Scenario document currently has no citations — only the player-facing docs do. Add citations to stat blocks if Jörn wants the same verification standard on GM materials.
+- :green_circle: Bring supplies: d6 dice (many — players won't have their own), pencils, scrap paper, tokens/coins for Refresh bowl
+- :red_circle: Decide: read the sample adventure "Corpse Astray" (Ch. 11, p. 391-405) before Tuesday? It's the only published full adventure — might give you a feel for pacing and clue delivery that reading rules alone doesn't. ~15 pages.
+- :red_circle: Decide: skim the Eversink setting chapters (Ch. 9, key sections) for flavor you can improvise at the table? The scenario uses Eversink names and locations. You don't need deep knowledge, but having a mental image of "canal city, sinking, bells, statues everywhere, goddess of commerce" helps narration.
+- :red_circle: Decide: practice run? Walk through Scene 0 + START + one node mentally, playing both sides. Test whether the clue tables are usable at the table or need to be reformatted as a quicker-reference format (e.g. index cards per scene).
+- :yellow_circle: Possible: generate NPC portraits or a simple map of Harbor Approach using card-generator / fal.ai. Nice to have, not needed.
 
 ### Campaign setup
 
@@ -45,3 +68,4 @@ Task list for campaign development.
 - :white_check_mark: Deleted legacy meta-* skills, unused campaign skills/agents
 - :white_check_mark: Removed conspyramid (overkill for this campaign) (2026-03-29)
 - :white_check_mark: Repo audit: removed dead code (file-index.py, ccweb.md, docs/), fixed card-generator deps, fixed session-start.sh gh install path (2026-03-29)
+- :white_check_mark: One-shot materials: scenario, templates, rules refs, pregens, citations, verification (2026-03-30)

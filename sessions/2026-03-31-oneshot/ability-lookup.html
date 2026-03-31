@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ability Lookup</title>
+<style>
+  @page { size: A4; margin: 7mm 9mm; }
+  body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-size: 6.8pt; line-height: 1.2; color: #1a1a1a; }
+  h1 { font-size: 13pt; margin: 0 0 3px 0; text-align: center; border-bottom: 2px solid #333; padding-bottom: 2px; }
+  .sub { text-align: center; font-size: 6.5pt; color: #555; margin-bottom: 4px; }
+  h2 { font-size: 8pt; margin: 4px 0 1px 0; border-bottom: 1px solid #999; padding-bottom: 1px; }
+  table { width: 100%; border-collapse: collapse; font-size: 6.5pt; margin: 1px 0; table-layout: fixed; }
+  th { background: #e0e0e0; text-align: left; padding: 1px 3px; border: 1px solid #bbb; }
+  td { padding: 1px 3px; border: 1px solid #ccc; vertical-align: top; overflow-wrap: break-word; }
+  .rh { font-weight: bold; }
+  col.name { width: 18%; }
+  col.desc { width: 41%; }
+  col.spend { width: 41%; }
+  .spend { font-style: italic; color: #444; }
+  strong { font-weight: 700; }
+  col.gname { width: 18%; }
+  col.gdesc { width: 37%; }
+  col.gtalent { width: 45%; }
+</style>
+</head>
+<body>
+
+<h1>Ability Lookup</h1>
+<div class="sub">Investigative: auto-succeed at rank 1+ (no roll). Spend 1 pool point for a bonus — examples below, but you can propose others. General: roll d6 + spend vs Difficulty 4.</div>
+
+<h2>Investigative — Social (any profession)</h2>
+<table>
+  <colgroup><col class="name"><col class="desc"><col class="spend"></colgroup>
+  <tr><th>Ability</th><th>You know / can do</th><th>Spend example</th></tr>
+  <tr><td class="rh">Charm</td><td>People like you. They reveal secrets to keep your attention.</td><td class="spend">Make someone trust, like, or fall for you.</td></tr>
+  <tr><td class="rh">Command</td><td>Give orders. Walk into a room like you belong.</td><td class="spend">Get crowds to follow orders. Command strangers.</td></tr>
+  <tr><td class="rh">Intimidation</td><td>People find you terrifying. They talk to make you stop.</td><td class="spend">Bully someone into obeying even after you leave.</td></tr>
+  <tr><td class="rh">Liar's Tell</td><td>You know when someone is deliberately lying.</td><td class="spend">Insight into WHY they're lying. Or: make your own lie undetectable.</td></tr>
+  <tr><td class="rh">Nobility</td><td>Fit in with the powerful. Access to high society.</td><td class="spend">Social pressure — they'll be humiliated if they refuse you.</td></tr>
+  <tr><td class="rh">Servility</td><td>Fade into the background. People forget you're there.</td><td class="spend">Redirect an attacker to someone else. Spare your life if defeated.</td></tr>
+  <tr><td class="rh">Taunt</td><td>Make people furious. They drop their guard and monologue.</td><td class="spend">Goad enemies into attacking you instead of allies. Incite a mob.</td></tr>
+  <tr><td class="rh">Trustworthy</td><td>People trust you. They tell you secrets.</td><td class="spend">Restore 6 Morale to ally (needs Sway 1+), or 3 to self. OR Grit 4 for 1 round / Grit 2 for scene. OR get a foe to pause and talk.</td></tr>
+</table>
+
+<h2>Investigative — Sentinel</h2>
+<table>
+  <colgroup><col class="name"><col class="desc"><col class="spend"></colgroup>
+  <tr><th>Ability</th><th>You know / can do</th><th>Spend example</th></tr>
+  <tr><td class="rh">Felonious Intent</td><td>Spot criminal behavior, ambushes, security gaps.</td><td class="spend">Generate a helpful contact. OR bodyguard an ally — take a hit meant for them.</td></tr>
+  <tr><td class="rh">Laws &amp; Traditions</td><td>Know obscure laws and bureaucracy. Notice when laws are broken.</td><td class="spend">Declare an obscure law or tradition as canon. Pull government strings.</td></tr>
+  <tr><td class="rh">Spirit Sight</td><td>See ghosts, curses, corruption. Tell if someone is cursed/possessed.</td><td class="spend">Armor + Grit (= rank) vs sorcery for a scene. OR remove Insubstantial from a ghost. OR enter the spirit world.</td></tr>
+  <tr><td class="rh">Vigilance</td><td>+1 Alertness per rank. Notice tiny details. Hard to ambush.</td><td class="spend">Completely avoid being Surprised. OR gain a clue about hidden danger.</td></tr>
+</table>
+
+<h2>Investigative — Sorcerer</h2>
+<table>
+  <colgroup><col class="name"><col class="desc"><col class="spend"></colgroup>
+  <tr><th>Ability</th><th>You know / can do</th><th>Spend example</th></tr>
+  <tr><td class="rh">Corruption</td><td>Sorcerous power. Sense magical effects.</td><td class="spend">Big magic — area effects, unique spells, curses. See Sorcery Cheat Sheet. EVERY spend has a side effect.</td></tr>
+  <tr><td class="rh">Forgotten Lore</td><td>Ancient secrets, lost history, legends, wards. Fluent in 2 extra languages per rank.</td><td class="spend">+1 damage die per point on a Sorcery attack. OR create a Protective Ward (halves damage). OR declare a historical fact as true.</td></tr>
+  <tr><td class="rh">Leechcraft</td><td>Diagnose/treat poison, disease, wounds. Examine bodies.</td><td class="spend">Create or cure a poison. +3 to an ally's Health test to resist disease.</td></tr>
+  <tr><td class="rh">Prophecy</td><td>Glimpse future or past. +1 Alertness per rank.</td><td class="spend">A vision of something relevant. OR temporarily gain Flashback (Preparedness 8+ talent).</td></tr>
+</table>
+
+<h2>Investigative — Thief</h2>
+<table>
+  <colgroup><col class="name"><col class="desc"><col class="spend"></colgroup>
+  <tr><th>Ability</th><th>You know / can do</th><th>Spend example</th></tr>
+  <tr><td class="rh">City's Secrets</td><td>Know back streets, hidden passages, local truths, architecture.</td><td class="spend">Know a secret way in or out. Establish a contact in this neighborhood.</td></tr>
+  <tr><td class="rh">Ridiculous Luck</td><td>Absurdly lucky. Stumble onto clues others miss.</td><td class="spend">Escape an otherwise lethal situation. "Lucky" coincidence in your favor.</td></tr>
+  <tr><td class="rh">Scurrilous Rumors</td><td>Gossip, bribery, whispered secrets. Who did what and when.</td><td class="spend">Know a damaging secret about a person. Spread a rumor that takes hold.</td></tr>
+  <tr><td class="rh">Skulduggery</td><td>Blackmail, spying, shadowing. Spot rackets, criminal activity.</td><td class="spend">+3 Stealth for an ambush. OR establish you've been shadowing someone.</td></tr>
+</table>
+
+<h2>Investigative — Warrior</h2>
+<table>
+  <colgroup><col class="name"><col class="desc"><col class="spend"></colgroup>
+  <tr><th>Ability</th><th>You know / can do</th><th>Spend example</th></tr>
+  <tr><td class="rh">Know Monstrosities</td><td>Legends about non-human creatures — tactics, weaknesses, habits.</td><td class="spend">+1 damage die per point vs monsters (or anyone, if you explain how past fights help). Goad a monster into position.</td></tr>
+  <tr><td class="rh">Spot Frailty</td><td><strong>Passive: ignore 1 Armor per rank</strong> (always on). Rank 1: choose Armor or Grit. Rank 2+: both.</td><td class="spend">Give this benefit to an ally vs one foe for a scene.</td></tr>
+  <tr><td class="rh">Tactics of Death</td><td>Read fight scenes, understand military tactics, reconstruct what happened.</td><td class="spend">+1d6 Warfare damage (main combat boost for warriors).</td></tr>
+  <tr><td class="rh">Wilderness Mastery</td><td>Track, navigate, survive outdoors. Train/bond with animals.</td><td class="spend">Move 2× speed for a round. Stampede animals. Choose the weather for a scene.</td></tr>
+</table>
+
+<h2>General Abilities (roll d6 + spend vs Difficulty)</h2>
+<table>
+  <colgroup><col class="gname"><col class="gdesc"><col class="gtalent"></colgroup>
+  <tr><th>Ability</th><th>What it does</th><th>Talent (rank 8+)</th></tr>
+  <tr><td class="rh">Health</td><td>How hard you are to physically defeat. Takes damage from Warfare/Sorcery. Spend to boost Health tests (e.g. stay conscious).</td><td>10+ → Threshold 4. No talent. Not restored by Refresh tokens.</td></tr>
+  <tr><td class="rh">Morale</td><td>Willpower. Takes damage from Sway/Sorcery. Spend to boost Morale tests (e.g. resist fear). Restored by Sway (1 pt → 2 Morale to ally).</td><td>10+ → Threshold 4. No talent. Not restored by Refresh tokens.</td></tr>
+  <tr><td class="rh">Athletics</td><td>Run, jump, climb, swim, ride</td><td><strong>Dodge</strong> — after hit, before damage: spend Athletics + roll, must beat attacker's roll. With shield: match.</td></tr>
+  <tr><td class="rh">Bind Wounds</td><td>Spend 1 → heal 2 Health (others). 1 to self without Talent.</td><td><strong>Plenty of Leeches</strong> — heal self at full rate.</td></tr>
+  <tr><td class="rh">Burglary</td><td>Pick locks, pickpocket, sleight of hand, disable traps</td><td><strong>Fast Hands</strong> — pickpocket as free action.</td></tr>
+  <tr><td class="rh">Preparedness</td><td>Roll to have the right item or preparation</td><td><strong>Flashback</strong> — retroactively planned for this. "I bribed that guard." "I'm wearing armor."</td></tr>
+  <tr><td class="rh">Stealth</td><td>Move unseen, hide, sneak</td><td><strong>Where'd She Go?</strong> — vanish and reappear anywhere in scene.</td></tr>
+  <tr><td class="rh">Sorcery</td><td>Magic attacks → Health or Morale (your choice at creation). Needs Corruption 1+.</td><td><strong>Blast</strong> — beat Threshold by 3+ → hit extra foes at base damage.</td></tr>
+  <tr><td class="rh">Sway</td><td>Fear/persuasion → Morale damage. Also: 1 Sway spent = 2 Morale to ally, 1 to self.</td><td><strong>Play to the Crowd</strong> — beat Threshold by 3+ → hit multiple foes' Morale.</td></tr>
+  <tr><td class="rh">Warfare</td><td>Weapon attacks → Health damage. Damage Modifier: small +0, medium +1, large +2.</td><td><strong>Cleave</strong> — beat Threshold by 3+ → hit extra foes at base damage.</td></tr>
+</table>
+
+</body>
+</html>

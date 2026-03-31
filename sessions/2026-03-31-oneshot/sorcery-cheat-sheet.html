@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sorcerer Quick Reference</title>
+<style>
+  @page { size: A4; margin: 10mm 12mm; }
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 8pt; line-height: 1.3; color: #1a1a1a;
+    column-count: 2; column-gap: 16px; column-rule: 1px solid #ccc;
+  }
+  h1 { column-span: all; font-size: 14pt; margin: 0 0 4px 0; text-align: center; border-bottom: 2px solid #333; padding-bottom: 3px; }
+  .topbox { column-span: all; background: #eee; border: 1px solid #999; padding: 4px 8px; margin: 0 0 6px 0; font-size: 8pt; }
+  h2 { font-size: 10pt; margin: 8px 0 2px 0; padding-bottom: 1px; border-bottom: 1px solid #999; break-after: avoid; }
+  h3 { font-size: 8.5pt; margin: 5px 0 1px 0; break-after: avoid; }
+  p { margin: 1px 0 3px 0; }
+  ul, ol { margin: 1px 0 3px 0; padding-left: 14px; }
+  li { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 7.5pt; margin: 3px 0; break-inside: avoid; }
+  th { background: #e0e0e0; text-align: left; padding: 1px 4px; border: 1px solid #bbb; }
+  td { padding: 1px 4px; border: 1px solid #ccc; vertical-align: top; }
+  .rh { font-weight: bold; white-space: nowrap; }
+  .box { border: 1px solid #888; padding: 3px 5px; margin: 3px 0; break-inside: avoid; }
+  .ex { background: #f4f4f4; padding: 2px 5px; margin: 2px 0; font-size: 7.5pt; font-style: italic; break-inside: avoid; }
+  .warning { border: 2px solid #555; background: #f0f0f0; padding: 4px 6px; margin: 4px 0; break-inside: avoid; }
+  dl { margin: 2px 0; }
+  dt { font-weight: bold; margin-top: 2px; }
+  dd { margin: 0 0 2px 12px; }
+  strong { font-weight: 700; }
+  .sm { font-size: 7pt; color: #555; }
+</style>
+</head>
+<body>
+
+<h1>Sorcerer Quick Reference</h1>
+<div class="topbox">
+  <strong>1.</strong> Your magic looks like your <strong>Spheres</strong> (check your sheet — e.g. Fire, Shadow, Decay). Describe effects using them.<br>
+  <strong>2.</strong> Small magic: spend <strong>Sorcery</strong> points, roll d6 + spent vs target's Threshold.<br>
+  <strong>3.</strong> Big magic: spend <strong>Corruption</strong> points (you have as many as your Corruption rank — they don't refresh), then choose a side effect — your body changes, or allies take Morale damage.
+</div>
+
+<h2>Your Spheres</h2>
+<p>You have <strong>1 Sphere per Corruption rank</strong> (check your sheet). They define <strong>what your magic looks like</strong> — not how powerful it is. All effects must fit at least one Sphere.</p>
+<ul>
+  <li>Fire + Decay = corrosive flames. Shadow + Fear = living nightmares. Combine creatively.</li>
+  <li>If you can't justify it through a Sphere, you can't do it.</li>
+</ul>
+<p>Check your sheet: your Sorcery damages either <strong>Health</strong> (body) or <strong>Morale</strong> (mind) — you chose at creation.</p>
+
+<h2>Attacking with Sorcery</h2>
+<dl>
+  <dt>Normal attack</dt>
+  <dd>Up to Medium range (~30m). Spend Sorcery points → roll d6 + spent vs target's <strong>Threshold</strong> (the number to hit, usually 3–4). Damage: <strong>1d6 + 1</strong>.</dd>
+
+  <dt>Minimum damage</dt>
+  <dd>Your d6 damage roll can't be lower than the points you spent (capped at 6). Spend 3 → d6 is at least 3.</dd>
+
+  <dt>Blast (Sorcery 8+)</dt>
+  <dd>If your roll exceeds the Threshold by 3+ → hit one additional nearby foe. Extra foe takes base damage (1d6+1).</dd>
+
+  <dt>Out of Sorcery points</dt>
+  <dd>You still attack — roll bare d6 vs Threshold, no minimum damage floor.</dd>
+
+  <dt>Maneuvers</dt>
+  <dd>Instead of damage: force a choice. Your roll total becomes a Difficulty — target accepts your effect (blind, restrain, terrify) or takes total − 2 as damage.</dd>
+</dl>
+
+<div class="ex">Attack example: "Shadow-fire bolt." Spend 3 Sorcery, roll 4 = total 7 vs Threshold 3. Hit, exceeded by 4 → Blast hits a second thug. Primary target: d6+1, min die is 3 (you spent 3). Roll 5 → 5+1 = 6 damage minus their Armor. Second thug: base damage = 1d6+1.</div>
+
+<h2>Big Magic (Corruption Spends)</h2>
+<p>Your Corruption pool = your Corruption rank. <strong>These don't refresh until adventure's end.</strong></p>
+
+<dl>
+  <dt>What you can do</dt>
+  <dd>
+    <ul>
+      <li>Affect <strong>multiple targets</strong> beyond Blast</li>
+      <li><strong>Area effects</strong> — fill a room with shadow, ignite a building</li>
+      <li><strong>Unique effects</strong> — fly, invisibility, melt a wall, stop a heart</li>
+      <li><strong>Powerful Maneuvers</strong> you couldn't otherwise justify</li>
+      <li><strong>Curses</strong> — persistent, hard to remove</li>
+    </ul>
+  </dd>
+
+  <dt>Cost</dt>
+  <dd>
+    <table>
+      <tr><td class="rh">1 point</td><td>Significant — fly for a scene, sense blood in a building</td></tr>
+      <tr><td class="rh">2 points</td><td>Powerful — animate a corpse, wall of fire</td></tr>
+      <tr><td class="rh">3 points</td><td>Spectacular — collapse a building, curse for life</td></tr>
+    </table>
+    Describe the effect; GM sets the cost. Big magic doesn't need a Sorcery roll — just the Corruption spend and a side effect.
+  </dd>
+</dl>
+
+<div class="ex">Big magic example: "I collapse the warehouse wall onto the guards." GM says 2 Corruption. Describe: decay spreads through the supports as shadow-fire eats the mortar. Wall falls. Then choose a side effect (see below).</div>
+
+<h2>Side Effects — Every Corruption Spend</h2>
+
+<div class="warning">
+Every time you spend Corruption → <strong>choose one</strong>. Internalize always changes your body (the roll determines if others notice). Externalize hurts allies' Morale instead.
+</div>
+
+<h3>Internalize (your body changes)</h3>
+<p>Roll <strong>d6 vs Difficulty 3 + points spent</strong>. You can spend Health to boost the roll.</p>
+<table>
+  <tr><td class="rh">Pass</td><td>Subtle change — wart, toenail falls off. Others won't notice. No game effect.</td></tr>
+  <tr><td class="rh">Fail</td><td>Visible change — slit pupils, forked tongue, cracked skin. No damage, but others see it and react.</td></tr>
+</table>
+
+<h3>Externalize (allies take Morale damage)</h3>
+<p>All allies within ~30m roll <strong>d6 vs Difficulty 3 + points spent</strong>.</p>
+<table>
+  <tr><td class="rh">Pass</td><td>Uneasy. No damage.</td></tr>
+  <tr><td class="rh">Fail</td><td>Lose <strong>4 Morale</strong> each.</td></tr>
+</table>
+<p>Warn your allies before choosing this.</p>
+
+<div class="ex">Side effect example (from above): You spent 2 Corruption. Internalize: Health test Diff 5 (3+2). Spend 2 Health, roll 4 = total 6. Pass. Write "fingernails turned black" on your sheet.</div>
+
+</body>
+</html>
