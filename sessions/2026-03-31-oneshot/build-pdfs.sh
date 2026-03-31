@@ -18,21 +18,25 @@ done
 
 echo "Merging into bundles..."
 
+# Player reference (not secret): rules + abilities + sorcery + pregens
 pdfunite player-rules.pdf player-abilities.pdf player-sorcery.pdf player-pregens.pdf \
   player-reference.pdf
 echo "  player-reference.pdf  (rules + abilities + sorcery + pregens)"
 
+# Character sheet (not secret): official blank + creation guide
 pdfunite sots-character-sheet-bw.pdf player-chargen.pdf \
   character-sheet.pdf
 echo "  character-sheet.pdf   (official blank sheet + creation guide)"
 
+# GM reference (not secret): rules + balance + NPC gen
 pdfunite gm-rules.pdf gm-balance.pdf gm-npcs.pdf \
   gm-reference.pdf
 echo "  gm-reference.pdf      (rules + balance + NPC gen)"
 
+# GM adventure (SECRET): clue tracker + world/cast/nodes/stat blocks
 pdfunite gm-clues.pdf gm-world.pdf \
   gm-adventure.pdf
-echo "  gm-adventure.pdf      (clue tracker + world cheatsheet)"
+echo "  gm-adventure.pdf      (clues + world + nodes + stat blocks — SECRET)"
 
 echo "Cleaning intermediate PDFs..."
 rm -f player-rules.pdf player-abilities.pdf player-sorcery.pdf player-pregens.pdf player-chargen.pdf \
@@ -40,7 +44,7 @@ rm -f player-rules.pdf player-abilities.pdf player-sorcery.pdf player-pregens.pd
 
 echo ""
 echo "Print:"
-echo "  character-sheet.pdf    — 10 copies"
-echo "  player-reference.pdf   — 5 copies"
-echo "  gm-reference.pdf       — 1 copy"
-echo "  gm-adventure.pdf       — 1 copy (write on during play)"
+echo "  character-sheet.pdf    — 10 copies (players can see)"
+echo "  player-reference.pdf   — 5 copies  (players can see)"
+echo "  gm-reference.pdf       — 1 copy    (players can see)"
+echo "  gm-adventure.pdf       — 1 copy    (SECRET — keep face down)"
