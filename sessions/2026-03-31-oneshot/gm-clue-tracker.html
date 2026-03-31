@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Clue Tracker</title>
+<style>
+  @page { size: A4; margin: 7mm 9mm; }
+  body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-size: 7.5pt; line-height: 1.25; color: #1a1a1a; }
+  h1 { font-size: 13pt; margin: 0 0 3px 0; text-align: center; border-bottom: 2px solid #333; padding-bottom: 2px; }
+  h2 { font-size: 9pt; margin: 6px 0 2px 0; border-bottom: 1px solid #999; padding-bottom: 1px; }
+  p { margin: 1px 0 3px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 7pt; margin: 2px 0; }
+  th { background: #e0e0e0; text-align: left; padding: 2px 4px; border: 1px solid #bbb; }
+  td { padding: 2px 4px; border: 1px solid #ccc; vertical-align: top; }
+  .rh { font-weight: bold; }
+  .check { width: 14px; text-align: center; }
+  .notes { width: 30%; background: #fafafa; }
+  .trigger { font-style: italic; color: #444; }
+  strong { font-weight: 700; }
+  .sm { font-size: 6.5pt; color: #555; }
+  .spacer { height: 28px; }
+</style>
+</head>
+<body>
+
+<h1>Clue Tracker — Write On This During Play</h1>
+<p>Check off clues as they're revealed. If a conclusion has 0 checks after the second node, steer a passive clue. The "Notes" column is for you — jot what happened, what players said, what they suspect.</p>
+
+<h2>Conclusion: Teldi Is Corrupt</h2>
+<table>
+  <tr><th class="check">☐</th><th>Clue</th><th>Where</th><th>Triggered by</th><th class="notes">Notes</th></tr>
+  <tr><td class="check">☐</td><td>Meeting is off the books — no paperwork, no witnesses</td><td>START</td><td class="trigger">Laws & Traditions, Vigilance</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Teldi flinches at victims' names — knows them personally</td><td>START</td><td class="trigger">Liar's Tell, Charm</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Zarra is an enforcer, Belto deals poison — not civilians</td><td>START</td><td class="trigger">Skulduggery, Scurrilous Rumors</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Harbor Approach has a protection racket</td><td>START</td><td class="trigger">City's Secrets</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Ledger in Zarra's chest — Teldi's initials, payment records</td><td>A</td><td class="trigger">Vigilance, Skulduggery</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Piet: "Whole street pays protection to the Watch"</td><td>A</td><td class="trigger">Charm, Servility</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Dock workers confirm: "Everyone knows about the racket"</td><td>B</td><td class="trigger">Scurrilous Rumors</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Shopkeeper: "Whoever's doing this, some folk think they're a hero"</td><td>B</td><td class="trigger">Charm, Trustworthy</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Belto's customer ledger — poison sales to Teldi</td><td>C</td><td class="trigger">Skulduggery, Felonious Intent</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Grazza confirms everything (if found)</td><td>B</td><td class="trigger">Sway Maneuver or evidence</td><td></td></tr>
+</table>
+
+<h2>Conclusion: The Creature Is a Penanggalan</h2>
+<table>
+  <tr><th class="check">☐</th><th>Clue</th><th>Where</th><th>Triggered by</th><th class="notes">Notes</th></tr>
+  <tr><td class="check">☐</td><td>Blood draining + puncture wounds + vinegar = penanggalan legend</td><td>A</td><td class="trigger">Know Monstrosities</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Flying lantern with trailing things seen over rooftops</td><td>B</td><td class="trigger">Intimidation, Command (informant)</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Lantern + blood draining = penanggalan (soldiers' tales)</td><td>B</td><td class="trigger">Know Monstrosities, Tactics of Death</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Prehensile tracks on ceiling and floor = flying head with organs</td><td>C</td><td class="trigger">Know Monstrosities</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Cursed creature, not born — feeds on guilt and wickedness</td><td>C</td><td class="trigger">Forgotten Lore</td><td></td></tr>
+</table>
+
+<h2>Conclusion: Murano's Pickles Is the Place</h2>
+<table>
+  <tr><th class="check">☐</th><th>Clue</th><th>Where</th><th>Triggered by</th><th class="notes">Notes</th></tr>
+  <tr><td class="check">☐</td><td>Piet: "The pickle woman asked about Zarra" — red hair, Cutter's Lane</td><td>A</td><td class="trigger">City's Secrets, Scurrilous Rumors</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Distinct vinegar-and-brine smell from a shop on Cutter's Lane</td><td>B</td><td class="trigger">Passive (anyone walking the streets)</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Curse is strongest near Cutter's Lane</td><td>B</td><td class="trigger">Spirit Sight, Corruption</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Vinegar-salt-herb scent under chemical reek matches pickles</td><td>C</td><td class="trigger">Vigilance</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Vess: "The pickle woman asked about Belto last week"</td><td>C</td><td class="trigger">Social (talking to Vess)</td><td></td></tr>
+</table>
+
+<h2>Conclusion: How to Kill the Penanggalan</h2>
+<table>
+  <tr><th class="check">☐</th><th>Clue</th><th>Where</th><th>Triggered by</th><th class="notes">Notes</th></tr>
+  <tr><td class="check">☐</td><td>Destroy the empty body while the head is separated</td><td>A</td><td class="trigger">Know Monstrosities</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Curse unravels if the host body is destroyed while separated</td><td>B</td><td class="trigger">Spirit Sight</td><td></td></tr>
+  <tr><td class="check">☐</td><td>Same — from old legends</td><td>C</td><td class="trigger">Forgotten Lore</td><td></td></tr>
+  <tr><td class="check">☐</td><td><strong>Safety valve:</strong> Lara reveals it if heroes fight Sialia and can't win</td><td>D</td><td class="trigger">Automatic after 2 futile combat rounds</td><td></td></tr>
+</table>
+
+<h2>Freeform Notes</h2>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+
+</body>
+</html>
