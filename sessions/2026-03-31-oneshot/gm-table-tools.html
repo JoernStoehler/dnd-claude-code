@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>GM Table Tools</title>
+<style>
+  @page { size: A4; margin: 7mm 9mm; }
+  body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-size: 7pt; line-height: 1.2; color: #1a1a1a; }
+  h1 { font-size: 13pt; margin: 0 0 3px 0; text-align: center; border-bottom: 2px solid #333; padding-bottom: 2px; }
+  h2 { font-size: 9pt; margin: 6px 0 2px 0; border-bottom: 1px solid #999; padding-bottom: 1px; }
+  h3 { font-size: 8pt; margin: 4px 0 1px 0; }
+  p { margin: 1px 0 3px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 6.8pt; margin: 2px 0; }
+  th { background: #e0e0e0; text-align: left; padding: 1px 3px; border: 1px solid #bbb; }
+  td { padding: 1px 3px; border: 1px solid #ccc; vertical-align: top; }
+  .rh { font-weight: bold; }
+  .cols { column-count: 2; column-gap: 12px; column-rule: 1px solid #ccc; }
+  .cols3 { column-count: 3; column-gap: 10px; column-rule: 1px solid #ccc; }
+  .box { border: 1px solid #888; padding: 3px 5px; margin: 3px 0; break-inside: avoid; }
+  .check { font-family: monospace; }
+  strong { font-weight: 700; }
+  .sm { font-size: 6pt; color: #555; }
+  .pagebreak { break-before: page; }
+</style>
+</head>
+<body>
+
+<h1>GM Table Tools</h1>
+
+<h2>Clue Tracker — Check Off As Revealed</h2>
+<p>Organized by what players need to figure out. They don't need all clues — just enough per conclusion. If a conclusion has 0 checks after the second node, steer a passive clue their way.</p>
+
+<table>
+  <tr><th>Conclusion</th><th>☐ Clue (check when revealed)</th><th>Where</th></tr>
+
+  <tr><td class="rh" rowspan="5">Teldi is corrupt</td>
+      <td>☐ Meeting is off the books, no paperwork</td><td>START</td></tr>
+  <tr><td>☐ Teldi flinches at victims' names — knows them personally</td><td>START</td></tr>
+  <tr><td>☐ Victims are criminals (Zarra = enforcer, Belto = poison dealer)</td><td>START</td></tr>
+  <tr><td>☐ Ledger in Zarra's chest with Teldi's initials</td><td>A</td></tr>
+  <tr><td>☐ Dock workers / shopkeepers confirm the protection racket</td><td>B</td></tr>
+
+  <tr><td class="rh" rowspan="4">Creature is a penanggalan</td>
+      <td>☐ Blood draining + puncture wounds + vinegar = penanggalan</td><td>A</td></tr>
+  <tr><td>☐ Flying lantern sighting + soldiers' tales = penanggalan</td><td>B</td></tr>
+  <tr><td>☐ Ceiling tracks = flying head with organs</td><td>C</td></tr>
+  <tr><td>☐ Forgotten Lore: cursed, feeds on the wicked</td><td>C</td></tr>
+
+  <tr><td class="rh" rowspan="4">Find Murano's Pickles</td>
+      <td>☐ "Pickle woman" asked Piet about Zarra — red hair, Cutter's Lane</td><td>A</td></tr>
+  <tr><td>☐ Vinegar smell from a shop on Cutter's Lane (passive)</td><td>B</td></tr>
+  <tr><td>☐ Vinegar-salt-herb scent under chemical reek = pickles</td><td>C</td></tr>
+  <tr><td>☐ Vess: "pickle woman asked about Belto"</td><td>C</td></tr>
+
+  <tr><td class="rh" rowspan="4">How to kill it</td>
+      <td>☐ Destroy the empty body while head is separated</td><td>A</td></tr>
+  <tr><td>☐ Spirit Sight: curse unravels if body destroyed</td><td>B</td></tr>
+  <tr><td>☐ Forgotten Lore: same</td><td>C</td></tr>
+  <tr><td>☐ <strong>Safety valve: Lara reveals it if heroes are stuck at Node D</strong></td><td>D</td></tr>
+</table>
+
+<h2>Names — Just Pick One</h2>
+<div class="cols3">
+<h3>Women</h3>
+Alessia · Betta · Calla · Daria · Elma · Fiora · Giada · Ilaria · Lessa · Mira · Nera · Orla · Pella · Reva · Senna · Talia · Vanna · Zara
+
+<h3>Men</h3>
+Aldo · Brin · Ciro · Desso · Emro · Farro · Gero · Haldo · Ivo · Kael · Ludo · Marco · Nevo · Orso · Piero · Renzo · Sarto · Teo · Vico · Zarco
+
+<h3>Surnames / Nicknames</h3>
+Blackwater · Coppersalt · the Lean · Mudbridge · Oilskin · Pillar · Rat-catcher · Sixfinger · Tallowwick · the Eel · Underbridge · Waxmelt · "Old" [name] · "Little" [name] · [Trade]-hand (Ironhand, Salthand)
+</div>
+
+<h2>Instant NPC Color — Roll or Pick</h2>
+<div class="cols">
+<table>
+  <tr><th>#</th><th>Appearance</th><th>Quirk</th></tr>
+  <tr><td>1</td><td>Missing two fingers</td><td>Counts coins obsessively</td></tr>
+  <tr><td>2</td><td>Paint-stained apron</td><td>Won't make eye contact</td></tr>
+  <tr><td>3</td><td>Enormous hat</td><td>Whispers everything</td></tr>
+  <tr><td>4</td><td>One cloudy eye</td><td>Laughs at wrong moments</td></tr>
+  <tr><td>5</td><td>Thick rope belt</td><td>Speaks in third person</td></tr>
+  <tr><td>6</td><td>Fresh black eye</td><td>Offers unsolicited advice</td></tr>
+  <tr><td>7</td><td>Too many rings</td><td>Constantly eating something</td></tr>
+  <tr><td>8</td><td>Tattooed forearms</td><td>Overly formal with strangers</td></tr>
+  <tr><td>9</td><td>Unnervingly tall</td><td>Clearly lying about something minor</td></tr>
+  <tr><td>10</td><td>Child on one hip</td><td>Trying to sell you something</td></tr>
+  <tr><td>11</td><td>Limps slightly</td><td>Knows your name (how?)</td></tr>
+  <tr><td>12</td><td>Shaved head, sun-dark</td><td>Humming a funeral hymn</td></tr>
+</table>
+</div>
+<p class="sm">Combine one appearance + one quirk for an instant background NPC. They have a life — but the players don't need to know what it is unless they ask.</p>
+
+<h2>Balance Levers — Adjust Mid-Scene</h2>
+
+<div class="box">
+<h3>Combat too easy?</h3>
+<ul>
+  <li>Spend more Malus on attacks (each point of Malus = +1 to hit, min damage floor rises)</li>
+  <li>Add a wave of mooks (2-3 more arrive)</li>
+  <li>Named foe uses a Special Ability you haven't triggered yet</li>
+  <li>Environment changes: fire, collapsing floor, rising water</li>
+</ul>
+
+<h3>Combat too hard?</h3>
+<ul>
+  <li>Stop spending Malus — enemies just use their static attack bonus</li>
+  <li>Mooks flee or surrender when half are dropped</li>
+  <li>Named foe tries to escape instead of fighting to the death</li>
+  <li>Drop extra Refresh tokens: "you find a moment to catch your breath"</li>
+  <li>Reduce enemy Health/Morale on the fly — nobody knows the numbers but you</li>
+</ul>
+
+<h3>Investigation stalled?</h3>
+<ul>
+  <li>Make the next clue passive — just tell them when they enter the scene</li>
+  <li>An NPC volunteers information unprompted ("You look like you're investigating those murders...")</li>
+  <li>The timeline advances — Sialia kills someone new, creating a fresh crime scene with new clues</li>
+  <li>A player's Allegiance pays off — an ally sends a message with a lead</li>
+</ul>
+
+<h3>Scene dragging?</h3>
+<ul>
+  <li>Something interrupts: a noise, a newcomer, a complication</li>
+  <li>"You've learned what you can here. Where to next?"</li>
+  <li>Cut to a montage: "You spend an hour asking around. Here's what you find..."</li>
+</ul>
+</div>
+
+<h2>What's On That Belt? — Ad-Hoc Items</h2>
+<p>When an NPC has "something interesting" and you haven't decided what:</p>
+<div class="cols">
+<table>
+  <tr><th>#</th><th>Item</th><th>Why it matters (or doesn't)</th></tr>
+  <tr><td>1</td><td>A key to somewhere</td><td>You decide where later</td></tr>
+  <tr><td>2</td><td>A sealed letter</td><td>From someone relevant, or not</td></tr>
+  <tr><td>3</td><td>A vial of something</td><td>Poison? Medicine? Perfume?</td></tr>
+  <tr><td>4</td><td>A religious token</td><td>Denari, or a small god?</td></tr>
+  <tr><td>5</td><td>A coin purse (Wealth 1)</td><td>Someone paid them recently</td></tr>
+  <tr><td>6</td><td>A crude weapon</td><td>They expected trouble</td></tr>
+  <tr><td>7</td><td>A scrap of paper with an address</td><td>Points to a node the players haven't visited</td></tr>
+  <tr><td>8</td><td>Nothing — false alarm</td><td>Just a weird buckle</td></tr>
+</table>
+</div>
+<p class="sm">You don't have to decide what it is until the players examine it. Even then, you can stall: "It's sealed. You'd need Skulduggery or Burglary to open it without damaging the contents."</p>
+
+</body>
+</html>
