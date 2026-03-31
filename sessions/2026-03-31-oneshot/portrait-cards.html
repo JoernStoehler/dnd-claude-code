@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html><head><meta charset='utf-8'><title>Portrait Cards</title>
+<style>
+  @page { size: A4 portrait; margin: 5mm; }
+  body { margin: 0; padding: 0; font-size: 0; }
+  table { width: 200mm; border-collapse: collapse; page-break-after: always; }
+  table:last-child { page-break-after: auto; }
+  td.card { width: 100mm; height: 71mm; border: 0.3mm dashed #aaa; vertical-align: top; padding: 0; overflow: hidden; }
+  td.card .inner { display: flex; height: 100%; }
+  td.card .portrait { width: 48mm; height: 71mm; flex-shrink: 0; }
+  td.card img { display: block; width: 48mm; height: 71mm; object-fit: contain; object-position: top center; }
+  td.card .text { flex: 1; border-left: 0.2mm solid #ccc; padding: 1mm 2mm; }
+  td.card .name { height: 7mm; border-bottom: 0.2mm solid #ccc; }
+  td.blank { width: 100mm; height: 71mm; border: 0.3mm dashed #aaa; vertical-align: top; padding: 0; }
+</style></head><body>
+<table>
+  <tr>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/01-teldi.png"></div><div class="text"><div class="name"></div></div></div></td>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/02-sialia.png"></div><div class="text"><div class="name"></div></div></div></td>
+  </tr>
+  <tr>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/03-lara.png"></div><div class="text"><div class="name"></div></div></div></td>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/04-vess.png"></div><div class="text"><div class="name"></div></div></div></td>
+  </tr>
+  <tr>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/05-grazza.png"></div><div class="text"><div class="name"></div></div></div></td>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/06-piet.png"></div><div class="text"><div class="name"></div></div></div></td>
+  </tr>
+  <tr>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/07-zarra.png"></div><div class="text"><div class="name"></div></div></div></td>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/08-belto.png"></div><div class="text"><div class="name"></div></div></div></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/09-spare-young-woman-adventurer.png"></div><div class="text"><div class="name"></div></div></div></td>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/10-spare-grizzled-sailor.png"></div><div class="text"><div class="name"></div></div></div></td>
+  </tr>
+  <tr>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/11-spare-young-scholar.png"></div><div class="text"><div class="name"></div></div></div></td>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/12-spare-scarred-warrior-woman.png"></div><div class="text"><div class="name"></div></div></div></td>
+  </tr>
+  <tr>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/13-spare-elegant-noble.png"></div><div class="text"><div class="name"></div></div></div></td>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/14-spare-jovial-tavernkeeper.png"></div><div class="text"><div class="name"></div></div></div></td>
+  </tr>
+  <tr>
+    <td class="card"><div class="inner"><div class="portrait"><img src="portraits-grey/15-spare-hooded-figure.png"></div><div class="text"><div class="name"></div></div></div></td>
+    <td class="blank"></td>
+  </tr>
+</table>
+</body></html>
