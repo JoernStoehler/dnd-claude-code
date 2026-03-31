@@ -18,15 +18,14 @@ done
 
 echo "Merging into bundles..."
 
-# Player reference (not secret): rules + abilities + sorcery + pregens
-pdfunite player-rules.pdf player-abilities.pdf player-sorcery.pdf player-pregens.pdf \
+# Player reference (not secret): rules + abilities + sorcery + chargen + pregens
+pdfunite player-rules.pdf player-abilities.pdf player-chargen.pdf player-sorcery.pdf player-pregens.pdf \
   player-reference.pdf
-echo "  player-reference.pdf  (rules + abilities + sorcery + pregens)"
+echo "  player-reference.pdf  (rules + abilities + chargen + sorcery + pregens)"
 
-# Character sheet (not secret): official blank + creation guide
-pdfunite sots-character-sheet-bw.pdf player-chargen.pdf \
-  character-sheet.pdf
-echo "  character-sheet.pdf   (official blank sheet + creation guide)"
+# Character sheet (not secret): official blank sheet only
+cp sots-character-sheet-bw.pdf character-sheet.pdf
+echo "  character-sheet.pdf   (official blank sheet)"
 
 # GM reference (not secret): rules + balance + NPC gen
 pdfunite gm-rules.pdf gm-balance.pdf gm-npcs.pdf \
