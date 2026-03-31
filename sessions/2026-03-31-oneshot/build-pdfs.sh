@@ -3,6 +3,12 @@
 set -e
 cd "$(dirname "$0")"
 
+if [ ! -f sots-character-sheet-bw.pdf ]; then
+  echo "Downloading official character sheet..."
+  curl -sL -o sots-character-sheet-bw.pdf \
+    "https://pelgranepress.com/srv/htdocs/wp-content/uploads/2022/12/Swords_of_the_Serpentine_character_sheet_BW.pdf"
+fi
+
 echo "Generating individual PDFs..."
 for f in player-rules player-abilities player-sorcery player-pregens player-chargen \
          gm-rules gm-balance gm-npcs gm-clues gm-world; do

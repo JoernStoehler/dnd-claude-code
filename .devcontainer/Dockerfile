@@ -32,6 +32,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     inotify-tools \
     && rm -rf /var/lib/apt/lists/*
 
+# PDF generation (pandoc + weasyprint for session handouts)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    pandoc \
+    poppler-utils \
+    && pip3 install --break-system-packages weasyprint \
+    && rm -rf /var/lib/apt/lists/*
+
 # VS Code tunnel CLI (bake into image to avoid slow postCreate download)
 RUN set -eux; \
     tmpdir="$(mktemp -d)"; \
