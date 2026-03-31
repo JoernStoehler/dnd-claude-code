@@ -28,6 +28,10 @@ pdfunite gm-clues.pdf gm-world.pdf \
   gm-adventure.pdf
 echo "  gm-adventure.pdf      (clue tracker + world cheatsheet)"
 
+echo "Cleaning intermediate PDFs..."
+rm -f player-rules.pdf player-abilities.pdf player-sorcery.pdf player-pregens.pdf player-chargen.pdf \
+     gm-rules.pdf gm-balance.pdf gm-npcs.pdf gm-clues.pdf gm-world.pdf
+
 echo ""
 echo "Print:"
 echo "  character-sheet.pdf    — 10 copies"
