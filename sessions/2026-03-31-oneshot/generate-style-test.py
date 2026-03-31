@@ -18,25 +18,27 @@ FAL_KEY = os.environ["FAL_KEY"]
 
 # --- EDIT THESE ---
 
-MODEL = "fal-ai/flux/dev"  # or fal-ai/flux-2-pro, fal-ai/flux-2-flex, etc.
+MODEL = "fal-ai/flux/schnell"
 API_PARAMS = {
     "image_size": "portrait_4_3",
     "num_images": 1,
-    # "guidance_scale": 3.5,
-    # "num_inference_steps": 28,
+    "num_inference_steps": 4,
+    "guidance_scale": 3.5,
 }
 IMAGES_PER_STYLE = 1  # set to 2+ to assess within-style variation
 
-LAYER3 = "a stout middle-aged woman with a scarred face, braided grey hair, leather armor, holding a lantern"
-LAYER2 = "full body standing pose, ground visible, white background, centered composition"
+LAYER3 = "a stout middle-aged woman with a scarred face, braided grey hair, leather armor, holding a lantern, accurate human proportions"
+LAYER2 = "full body head to feet, standing on ground, white background, centered in frame with margin around figure"
 
 STYLES = [
     ("moebius-hc", "in the style of Moebius, clean ink linework, minimal shading, precise detail, high contrast"),
-    ("moebius-noshade", "in the style of Moebius, fine ink linework, no shading, white background, sharp lines"),
-    ("otomo", "in the style of Katsuhiro Otomo, precise ink linework, minimal shading, high contrast"),
-    ("giraud-lc", "in the style of Jean Giraud, ligne claire, clean outlines, flat minimal shading"),
-    ("moebius-xhatch", "in the style of Moebius, detailed ink drawing, light crosshatching, crisp lines"),
-    ("ligneclaire", "ligne claire ink drawing, clean precise outlines, minimal shading, high contrast, white background"),
+    ("ligneclaire", "ligne claire ink drawing, clean precise outlines, minimal shading, high contrast"),
+    ("inkwash", "ink wash drawing, bold brushstrokes, dramatic contrast, fluid black ink on white"),
+    ("woodcut", "black and white woodcut print, bold lines, high contrast, medieval illustration"),
+    ("penink", "pen and ink illustration, fine hatching, detailed linework, sword and sorcery fantasy art"),
+    ("charcoal", "charcoal drawing, dramatic shading, bold strokes, high contrast, expressive"),
+    ("comic", "black and white comic book art, strong outlines, dynamic pose, professional illustration"),
+    ("etching", "detailed etching, fine crosshatching, classical illustration, high contrast black and white"),
 ]
 
 # --- END EDIT ---
@@ -76,7 +78,7 @@ def main():
             name = futures[future]
             try:
                 path = future.result()
-                results.append({"file": path})
+                results.append({"file": path, "name": name})
             except Exception as e:
                 print(f"  FAILED {name}: {e}", file=sys.stderr)
 

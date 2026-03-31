@@ -44,7 +44,7 @@ def build_html(cards: list[dict], grey_dir: Path) -> str:
         f"  td.card .portrait {{ width: {IMG_W}mm; height: {CARD_H}mm; flex-shrink: 0; }}",
         f"  td.card img {{ display: block; width: {IMG_W}mm; height: {CARD_H}mm; object-fit: contain; object-position: top center; }}",
         f"  td.card .text {{ flex: 1; border-left: 0.2mm solid #ccc; padding: 1mm 2mm; }}",
-        f"  td.card .name {{ height: 7mm; border-bottom: 0.2mm solid #ccc; }}",
+        f"  td.card .name {{ height: 7mm; border-bottom: 0.2mm solid #ccc; font-size: 10pt; font-family: sans-serif; font-weight: bold; padding: 1mm; }}",
         f"  td.blank {{ width: {CARD_W}mm; height: {CARD_H}mm; border: 0.3mm dashed #aaa; vertical-align: top; padding: 0; }}",
         "</style></head><body>",
     ]
@@ -63,10 +63,11 @@ def build_html(cards: list[dict], grey_dir: Path) -> str:
             for col in range(COLS):
                 if idx < total:
                     img_path = grey_dir / Path(cards[idx]["file"]).name
+                    label = cards[idx].get("name", "")
                     lines.append(
                         f'    <td class="card"><div class="inner">'
                         f'<div class="portrait"><img src="{img_path}"></div>'
-                        f'<div class="text"><div class="name"></div></div>'
+                        f'<div class="text"><div class="name">{label}</div></div>'
                         f'</div></td>'
                     )
                 else:

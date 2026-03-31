@@ -1,0 +1,34 @@
+[
+  {
+    "file": "style-test/charcoal.png",
+    "name": "charcoal"
+  },
+  {
+    "file": "style-test/comic.png",
+    "name": "comic"
+  },
+  {
+    "file": "style-test/etching.png",
+    "name": "etching"
+  },
+  {
+    "file": "style-test/inkwash.png",
+    "name": "inkwash"
+  },
+  {
+    "file": "style-test/ligneclaire.png",
+    "name": "ligneclaire"
+  },
+  {
+    "file": "style-test/moebius-hc.png",
+    "name": "moebius-hc"
+  },
+  {
+    "file": "style-test/penink.png",
+    "name": "penink"
+  },
+  {
+    "file": "style-test/woodcut.png",
+    "name": "woodcut"
+  }
+]
