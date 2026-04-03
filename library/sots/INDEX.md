@@ -1,6 +1,6 @@
 # SotS Resources Index
 
-Everything in `resources/sots/`. Agents: read this file first to find what you need.
+Everything in `library/sots/`. Agents: read this file first to find what you need.
 
 ## Rulebook
 

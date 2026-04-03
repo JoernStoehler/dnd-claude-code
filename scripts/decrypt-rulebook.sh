@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Decrypt the SotS rulebook if encrypted version exists and plaintext doesn't.
 # Requires SOTS_KEY environment variable (stored in .env).
-# See resources/sots/INDEX.md for encrypt/decrypt commands.
+# See library/sots/INDEX.md for encrypt/decrypt commands.
 
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-ENC_FILE="$REPO_ROOT/resources/sots/rulebook.md.enc"
-PLAIN_FILE="$REPO_ROOT/resources/sots/rulebook.md"
+ENC_FILE="$REPO_ROOT/library/sots/rulebook.md.enc"
+PLAIN_FILE="$REPO_ROOT/library/sots/rulebook.md"
 DOTENV="$REPO_ROOT/.env"
 
 # Source .env if SOTS_KEY not already in environment

@@ -21,7 +21,7 @@ CLAUDE.md              # You are here
 TASKS.md               # Task tracking with escalation markers
 
 sessions/              # Session logs, prep notes
-resources/sots/        # SotS rules references and design articles
+library/sots/        # SotS rules references and design articles
 packages/card-generator/  # Print card generation tool
 scripts/               # Reusable scripts
 ```
@@ -36,7 +36,7 @@ SotS is a GUMSHOE game. Key differences from D&D:
 - **Allegiances and Enemies** are mechanical faction relationships.
 - **Corruption** is the cost of sorcery, constrained by Spheres.
 
-Rules reference: `resources/sots/` (see `INDEX.md`)
+Rules reference: `library/sots/` (see `INDEX.md`)
 
 ## Core Conventions
 

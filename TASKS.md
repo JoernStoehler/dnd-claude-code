@@ -66,7 +66,7 @@ Standalone session to learn SotS rules. Materials in `sessions/2026-04-21-onesho
 - :white_check_mark: Restructured repo as single-campaign layout
 - :white_check_mark: Transcribed SotS PDF → encrypted rulebook.md (18,526 lines, 406 pages)
 - :white_check_mark: Built auto-decrypt pipeline (session-start hook)
-- :white_check_mark: Reorganized resources/sots/ — flat structure, type-prefixed filenames, single INDEX.md
+- :white_check_mark: Reorganized library/sots/ — flat structure, type-prefixed filenames, single INDEX.md
 - :white_check_mark: Deleted legacy meta-* skills, unused campaign skills/agents
 - :white_check_mark: Removed conspyramid (overkill for this campaign) (2026-03-29)
 - :white_check_mark: Repo audit: removed dead code (file-index.py, ccweb.md, docs/), fixed card-generator deps, fixed session-start.sh gh install path (2026-03-29)
