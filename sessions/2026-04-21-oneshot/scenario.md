@@ -1,4 +1,4 @@
-# The Sin-Drinker: One-Shot for Tuesday 2026-03-31
+# The Sin-Drinker: One-Shot for Monday 2026-04-21
 
 Adapted from Kevin Kulp's adventure seed. Designed for 3-5 players new to SotS, 19:00-22:00.
 

@@ -1,0 +1,34 @@
+[
+  {
+    "file": "style-test/comic-g3.0.png",
+    "name": "comic-g3.0"
+  },
+  {
+    "file": "style-test/comic-g5.0.png",
+    "name": "comic-g5.0"
+  },
+  {
+    "file": "style-test/inkwash-g3.0.png",
+    "name": "inkwash-g3.0"
+  },
+  {
+    "file": "style-test/inkwash-g5.0.png",
+    "name": "inkwash-g5.0"
+  },
+  {
+    "file": "style-test/ligneclaire-g3.0.png",
+    "name": "ligneclaire-g3.0"
+  },
+  {
+    "file": "style-test/ligneclaire-g5.0.png",
+    "name": "ligneclaire-g5.0"
+  },
+  {
+    "file": "style-test/penink-g3.0.png",
+    "name": "penink-g3.0"
+  },
+  {
+    "file": "style-test/penink-g5.0.png",
+    "name": "penink-g5.0"
+  }
+]

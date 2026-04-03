@@ -19,34 +19,35 @@ FAL_KEY = os.environ["FAL_KEY"]
 # --- EDIT THESE ---
 
 MODEL = "fal-ai/flux/schnell"
-API_PARAMS = {
+BASE_API_PARAMS = {
     "image_size": "portrait_4_3",
     "num_images": 1,
     "num_inference_steps": 4,
-    "guidance_scale": 3.5,
 }
-IMAGES_PER_STYLE = 1  # set to 2+ to assess within-style variation
 
-LAYER3 = "a stout middle-aged woman with a scarred face, braided grey hair, leather armor, holding a lantern, accurate human proportions"
-LAYER2 = "full body head to feet, standing on ground, white background, centered in frame with margin around figure"
+# Layer 0: quality prompt (goes first, anchors every generation)
+LAYER0 = "Professional quality detailed illustration with crisp sharp lines, publication ready artwork, high resolution."
 
+# Layer 2: composition + subject (natural language, under 50 words for schnell 256-token limit)
+SUBJECT = "A stout middle-aged woman with a scarred face and braided grey hair wearing leather armor, holding a lantern. Full body visible from head to boots, standing on rocky ground, plain white background."
+
+# Layer 1: style variations
+# Testing 4 styles × 2 guidance values = 8 images
 STYLES = [
-    ("moebius-hc", "in the style of Moebius, clean ink linework, minimal shading, precise detail, high contrast"),
-    ("ligneclaire", "ligne claire ink drawing, clean precise outlines, minimal shading, high contrast"),
-    ("inkwash", "ink wash drawing, bold brushstrokes, dramatic contrast, fluid black ink on white"),
-    ("woodcut", "black and white woodcut print, bold lines, high contrast, medieval illustration"),
-    ("penink", "pen and ink illustration, fine hatching, detailed linework, sword and sorcery fantasy art"),
-    ("charcoal", "charcoal drawing, dramatic shading, bold strokes, high contrast, expressive"),
-    ("comic", "black and white comic book art, strong outlines, dynamic pose, professional illustration"),
-    ("etching", "detailed etching, fine crosshatching, classical illustration, high contrast black and white"),
+    ("penink", "Pen and ink illustration with fine hatching and detailed linework, sword and sorcery fantasy art."),
+    ("ligneclaire", "Ligne claire style with clean precise outlines and minimal flat shading, high contrast black on white."),
+    ("inkwash", "Ink wash drawing with bold confident brushstrokes, dramatic contrast, black ink on white."),
+    ("comic", "Black and white comic book art with strong outlines and dynamic shading, professional sequential art."),
 ]
+
+GUIDANCE_VALUES = [3.0, 5.0]
 
 # --- END EDIT ---
 
 API_URL = f"https://fal.run/{MODEL}"
 
-def generate(name, prompt):
-    payload = {**API_PARAMS, "prompt": prompt}
+def generate(name, prompt, guidance_scale):
+    payload = {**BASE_API_PARAMS, "prompt": prompt, "guidance_scale": guidance_scale}
     req = Request(API_URL, data=json.dumps(payload).encode(), headers={
         "Authorization": f"Key {FAL_KEY}",
         "Content-Type": "application/json",
@@ -63,17 +64,15 @@ def main():
     Path("style-test").mkdir(exist_ok=True)
     tasks = []
     for style_name, style_prompt in STYLES:
-        full_prompt = f"{LAYER3}, {LAYER2}, {style_prompt}"
-        if IMAGES_PER_STYLE == 1:
-            tasks.append((style_name, full_prompt))
-        else:
-            for i in range(1, IMAGES_PER_STYLE + 1):
-                tasks.append((f"{style_name}-{i}", full_prompt))
+        for g in GUIDANCE_VALUES:
+            name = f"{style_name}-g{g}"
+            full_prompt = f"{LAYER0} {SUBJECT} {style_prompt}"
+            tasks.append((name, full_prompt, g))
 
     print(f"Generating {len(tasks)} images on {MODEL}...")
     results = []
     with ThreadPoolExecutor(max_workers=6) as pool:
-        futures = {pool.submit(generate, name, prompt): name for name, prompt in tasks}
+        futures = {pool.submit(generate, name, prompt, g): name for name, prompt, g in tasks}
         for future in as_completed(futures):
             name = futures[future]
             try:

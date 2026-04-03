@@ -1,8 +1,8 @@
-# One-Shot Checklist — 2026-03-31, 19:00-22:00
+# One-Shot Checklist — 2026-04-21, 19:00-22:00
 
 ## Materials (digital — DONE)
 
-All in `sessions/2026-03-31-oneshot/`. PDFs committed to git.
+All in `sessions/2026-04-21-oneshot/`. PDFs committed to git.
 
 - [x] player-reference.pdf — rules + abilities + sorcery + pregens
 - [x] character-sheet.pdf — official blank sheet + creation guide

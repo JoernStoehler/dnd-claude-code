@@ -16,7 +16,7 @@ Task list for campaign development.
 
 ### One-shot (2026-04-21, 19:00, Augsburg Staatstheater, ≤3h)
 
-Standalone session to learn SotS rules. Materials in `sessions/2026-03-31-oneshot/`.
+Standalone session to learn SotS rules. Materials in `sessions/2026-04-21-oneshot/`.
 
 **Done:**
 - [x] GM scenario document — node map, toolkits, stat blocks, clues, timeline
