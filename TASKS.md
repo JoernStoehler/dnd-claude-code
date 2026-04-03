@@ -48,6 +48,10 @@ Standalone session to learn SotS rules. Materials in `sessions/2026-04-21-onesho
 
 See `handoffs/card-generator.md` for full context.
 
+### Sync agent infrastructure from msc-math (standing)
+
+Run `/sync-claude` when touching CLAUDE.md or `.claude/` files, or periodically. See `.claude/skills/sync-claude/SKILL.md`.
+
 ### Campaign setup
 
 - :yellow_circle: Update repo to reflect new campaign direction (S&S in Eversink, base SotS rules) (2026-04-02)
