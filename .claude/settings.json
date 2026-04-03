@@ -20,6 +20,17 @@
     "GIT_EDITOR": "true"
   },
   "hooks": {
+    "PreCompact": [
+      {
+        "matcher": "auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Auto-compression triggered. Context window is full. Stop working, tell Jörn what is done and not done, and end the session.' && exit 2"
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [
