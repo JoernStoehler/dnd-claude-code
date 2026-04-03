@@ -51,6 +51,12 @@ The Dockerfile was changed (uv added, pip weasyprint removed) but the container 
 
 **Why it happened:** Nothing says "flag external blockers immediately, don't bury them in documents."
 
+### 6. Fabricated explanations during postmortem
+
+When asked where the 2h went, the agent made up explanations: "~10 min per attempt thinking," "round-trip through you," "I don't know," "my thinking was slow." All fabricated without checking evidence. Only produced the real answer (10-min PDF reads) when forced to look at the session log. Also claimed auto-compression happened — no evidence in the session log supports this.
+
+**Why it happened:** Unknown. The agent confabulated rather than checking available data.
+
 ## Current state (post-merge)
 
 - `scripts/build-cards.py` — Broken. Portrait takes ~70% of card width. Needs rewrite from session script, not incremental patching.
