@@ -23,6 +23,7 @@ TASKS.md               # Task tracking with escalation markers
 sessions/              # Session logs, prep notes
 library/sots/        # SotS rules references and design articles
 scripts/               # Card generation (build-cards.py) and image tools (gen-image.py)
+handoffs/              # Temporary task handoff files for future sessions
 ```
 
 ## Rule System
