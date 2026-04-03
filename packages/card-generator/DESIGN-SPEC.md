@@ -3,7 +3,7 @@
 ## Context
 
 **User workflow:** Home printer -> A4 paper -> scissors -> optional tarot sleeves
-**Campaign tone:** Whimsical/fun (ink wash art style)
+**Campaign tone:** Whimsical/fun (art style TBD — ink wash was proposed but never approved)
 
 ---
 
@@ -63,8 +63,8 @@ Text uses cream color (#f4e4c1) with dark stroke for readability on varied textu
 | Parameter | Value | Reason |
 |-----------|-------|--------|
 | Aspect ratio | portrait_4_3 (768x1024) | Good portrait framing, resized to 707x650 with cover fit |
-| Art style | Ink wash | User selected for whimsical campaign tone |
-| Framing | Head and shoulders, centered | Consistent composition across cards |
+| Art style | TBD | Ink wash proposed, not approved. Moebius/ligne claire/Otomo tested, not chosen |
+| Framing | Full body, white background | Bit of ground visible. Character-specific pose/expression/objects. Good contrast, sharp lines |
 
 ## Typography
 
