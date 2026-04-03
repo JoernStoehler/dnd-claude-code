@@ -88,7 +88,7 @@ openssl enc -aes-256-cbc -salt -pbkdf2 -in rulebook.md -out rulebook.md.enc -pas
 - Wealth and Lifestyle — p161
 - Assigning Treasure — p166
 
-**Eversink Setting** (mostly not relevant for Dragons! Dragons! campaign)
+**Eversink Setting** (the campaign setting)
 - City overview — p271
 - Districts — p281–p320
 - Government — p325
@@ -103,7 +103,7 @@ openssl enc -aes-256-cbc -salt -pbkdf2 -in rulebook.md -out rulebook.md.enc -pas
 
 ## Rules Documents
 
-- `rules-high-fantasy-guide.md` — High fantasy variant rules (**the variant we use**)
+- `rules-high-fantasy-guide.md` — High fantasy variant rules (not currently in use; kept as reference)
 - `rules-how-to-read-the-rules.md` — Reading order guide for the SotS book
 - `rules-gumshoe-srd.txt` — GUMSHOE SRD (OGL)
 - `rules-gumshoe-101.txt` — Player/GM onboarding doc

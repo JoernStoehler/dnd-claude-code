@@ -1,10 +1,10 @@
-# Dragons! Dragons!
+# Swords of the Serpentine Campaign
 
-A fantasy TTRPG campaign using [Swords of the Serpentine](https://pelgranepress.com/product/swords-of-the-serpentine/) (GUMSHOE system) with high fantasy variant rules. Prepared collaboratively with Claude Code agents as AI co-GMs.
+A sword & sorcery TTRPG campaign set in Eversink using [Swords of the Serpentine](https://pelgranepress.com/product/swords-of-the-serpentine/) (GUMSHOE system) with base rules. Prepared collaboratively with Claude Code agents as AI co-GMs.
 
 ## What This Is
 
-Campaign bible for a long-running investigation-and-politics fantasy campaign featuring dragons, a contested hub town, ancient dwarven ruins, and an imprisoned elder dragon. AI agents help with session prep, NPC generation, clue placement, faction tracking, and card printing.
+Campaign bible for an investigation-driven urban fantasy campaign. AI agents help with session prep, NPC generation, clue placement, faction tracking, and card printing.
 
 ## Setup
 
@@ -18,7 +18,6 @@ Key files:
 - `CLAUDE.md` - Full onboarding documentation (written for AI agents but readable by humans)
 - `TASKS.md` - Current priorities and status
 - `lore/` - World-building, factions, locations
-- `conspyramid/` - Faction conspiracy graph
 - `resources/sots/` - Rules references
 
 ## License

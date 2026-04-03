@@ -1,12 +1,18 @@
 # CLAUDE.md
 
-Campaign bible for **Dragons! Dragons!**, a fantasy TTRPG campaign using **Swords of the Serpentine** (SotS, GUMSHOE system) with the **high fantasy variant** rules. Agents act as co-GMs for planning, writing, and organization outside of game sessions.
+Campaign bible for a sword & sorcery TTRPG campaign using **Swords of the Serpentine** (SotS, GUMSHOE system) with **base rules** (not the high fantasy variant). Agents act as co-GMs for planning, writing, and organization outside of game sessions.
 
 ## Campaign Premise
 
-A mountain hub town struggles to maintain independence between a human/multicultural kingdom and a forest elf kingdom of magical fairy/monster races. Deep inside the mountain, an elder dragon lies imprisoned, indirectly affecting events above. The mountain also hides the ruins of a legendary dwarven kingdom. Dragons — fake, real, and legendary — are everywhere.
+**Setting:** Eversink (the default SotS city) as-is. Urban-focused — excursions outside the city are deliberate, only when both the travel and the destination matter. The undercity serves when "somewhere outside normal civilization" is needed.
 
-**System:** Swords of the Serpentine (SotS) with high fantasy variant rules
+**Genre:** Sword & sorcery. The plot escalates slowly. Most intrigue is human and Eversink in origin; deeper layers reveal how the wider world, the supernatural, and ideas move the human layer and are moved by humans. The heroes are unusually competent, in an unusually unique situation, and nobody else will do their work. There is no external compass for what's important, helpful, or morally good — the heroes figure that out themselves. Corruption is a cost worth paying sometimes.
+
+**Tone:** The Church and the secret council focus on their own ventures and the struggle for bottlenecked resources (money, military power, blackmail material, reputation). Wide cracks exist between where the elite has built their structures, and many collect in those cracks what falls through.
+
+**Play style:** Players combine clues, work through cleanup to reach other clues, and chain plans. Everything is connected. No plan survives contact with reality, but having no plan is worse.
+
+**System:** Swords of the Serpentine (SotS) with base rules (four core professions, corruption-based sorcery). High fantasy variant elements are not currently in use.
 
 ## Repository Layout
 
@@ -14,7 +20,7 @@ A mountain hub town struggles to maintain independence between a human/multicult
 CLAUDE.md              # You are here
 TASKS.md               # Task tracking with escalation markers
 
-lore/                  # World-building (factions, locations, history, dragons)
+lore/                  # World-building (Eversink details, factions, locations)
 characters/            # NPCs and PCs
 sessions/              # Session logs, prep notes
 encounters/            # Combat, puzzles, social challenges
@@ -32,7 +38,7 @@ SotS is a GUMSHOE game. Key differences from D&D:
 - **General abilities use d6 + pool spend.** Target 4. Players choose how many points to spend.
 - **Health and Morale are parallel tracks.** Physical (Warfare) and social (Sway) combat.
 - **Allegiances and Enemies** are mechanical faction relationships.
-- **Corruption/Arcana/Divinity** replace spell slots, constrained by Spheres.
+- **Corruption** is the cost of sorcery, constrained by Spheres.
 
 Rules reference: `resources/sots/` (see `INDEX.md`)
 
