@@ -17,8 +17,8 @@ export FAL_KEY="..."       # fal.ai API key for AI portraits: https://fal.ai/das
 Key files:
 - `CLAUDE.md` - Full onboarding documentation (written for AI agents but readable by humans)
 - `TASKS.md` - Current priorities and status
-- `lore/` - World-building, factions, locations
 - `resources/sots/` - Rules references
+- `sessions/` - Session prep and logs
 
 ## License
 

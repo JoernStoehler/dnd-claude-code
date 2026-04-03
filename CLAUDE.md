@@ -20,11 +20,7 @@ Campaign bible for a sword & sorcery TTRPG campaign using **Swords of the Serpen
 CLAUDE.md              # You are here
 TASKS.md               # Task tracking with escalation markers
 
-lore/                  # World-building (Eversink details, factions, locations)
-characters/            # NPCs and PCs
 sessions/              # Session logs, prep notes
-encounters/            # Combat, puzzles, social challenges
-assets/                # Images, maps, handouts
 resources/sots/        # SotS rules references and design articles
 packages/card-generator/  # Print card generation tool
 scripts/               # Reusable scripts
