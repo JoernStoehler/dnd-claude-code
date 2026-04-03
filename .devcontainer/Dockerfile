@@ -32,11 +32,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     inotify-tools \
     && rm -rf /var/lib/apt/lists/*
 
-# PDF generation (pandoc + weasyprint for session handouts)
+# PDF generation (pandoc + weasyprint C dependencies for session handouts)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     pandoc \
     poppler-utils \
-    && pip3 install --break-system-packages weasyprint \
+    libglib2.0-0 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libgdk-pixbuf-2.0-0 \
+    libcairo2 \
+    libffi-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # VS Code tunnel CLI (bake into image to avoid slow postCreate download)
@@ -58,5 +63,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
 USER vscode
 ENV HOME=/home/vscode
 ENV PATH="$HOME/.local/bin:$PATH"
+
+# uv (Python package/script runner with inline dependency support)
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 WORKDIR /workspaces/dnd-claude-code

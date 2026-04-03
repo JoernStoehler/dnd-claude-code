@@ -22,8 +22,7 @@ TASKS.md               # Task tracking with escalation markers
 
 sessions/              # Session logs, prep notes
 library/sots/        # SotS rules references and design articles
-packages/card-generator/  # Print card generation tool
-scripts/               # Reusable scripts
+scripts/               # Card generation (build-cards.py) and image tools (gen-image.py)
 ```
 
 ## Rule System

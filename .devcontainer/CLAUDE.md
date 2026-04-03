@@ -21,3 +21,7 @@ Worktree management via Claude Code hooks (`.claude/hooks/worktree-{create,remov
 
 For system dependencies: `Dockerfile` and `post-create.sh`.
 Each package manages its own npm dependencies via `package.json`.
+
+## Python scripts
+
+`uv` is installed in the image. Scripts in `scripts/` use inline dependency metadata (`# /// script` headers) so `uv run scripts/build-cards.py` auto-installs what's needed. For plain `python3`, the Dockerfile pre-installs the C libraries that weasyprint requires; Python packages must be available on the system or installed via `uv`.
