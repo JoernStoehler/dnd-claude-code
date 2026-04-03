@@ -58,7 +58,7 @@ Never without Jörn: changes to `.claude/` procedural files, destructive operati
 
 ### Escalation Triggers
 
-Stop and ask when: canon conflict, player agency affected, tone uncertainty, SotS rules edge cases, scope creep, blocked without information. A brief interruption beats a dead end.
+Stop and ask when: canon conflict, player agency affected, tone uncertainty, SotS rules edge cases, scope creep, blocked without information, implementation approach has failed twice. A brief interruption beats a dead end.
 
 ### Writing Conventions
 

@@ -95,7 +95,10 @@ def make_card_image(src: Path, greyscale: bool, card_w_px: int, card_h_px: int,
     portrait = Image.open(src)
     if greyscale:
         portrait = portrait.convert("L").convert("RGB")
-    portrait = portrait.resize((portrait_w_px, card_h_px), Image.LANCZOS)
+    # Resize to fit portrait width, preserving aspect ratio
+    pw, ph = portrait.size
+    scaled_h = int(portrait_w_px * (ph / pw))
+    portrait = portrait.resize((portrait_w_px, scaled_h), Image.LANCZOS)
     card.paste(portrait, (0, 0))
 
     # Draw ruled lines in writing area
