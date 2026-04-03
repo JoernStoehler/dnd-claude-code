@@ -10,7 +10,7 @@ Task list for campaign development.
 - **Completed tasks:** Move to the `## Done` section with a one-line summary.
 - **Escalation:** :red_circle: Jörn decides · :yellow_circle: Agent does, Jörn reviews · :green_circle: Agent autonomous
 
-**Last updated:** 2026-04-02
+**Last updated:** 2026-04-03
 
 ## Current
 
@@ -39,11 +39,19 @@ Standalone session to learn SotS rules. Materials in `sessions/2026-04-21-onesho
 - :green_circle: Bring supplies: d6 dice (many), pencils, scrap paper, tokens/coins for Refresh bowl
 - :green_circle: GM prep: mental practice run (Scene 0 → START → one node)
 
+### Card generator simplification
+
+- :red_circle: Jörn reviews PDF output — layout may need adjustments (2026-04-03)
+- :yellow_circle: Fresh agent reviews `scripts/build-cards.py` code quality (2026-04-03)
+- :yellow_circle: Test with 1:1 aspect images (only 3:4 tested so far) (2026-04-03)
+- :red_circle: Container rebuild needed — `.devcontainer/host-devcontainer-rebuild.sh` (2026-04-03)
+
+See `handoffs/card-generator.md` for full context.
+
 ### Campaign setup
 
 - :yellow_circle: Update repo to reflect new campaign direction (S&S in Eversink, base SotS rules) (2026-04-02)
 - :yellow_circle: Define SotS stat block templates (NPC, adversary, scene) as structured markdown
-- :yellow_circle: Specialize card generator with SotS template fields
 - :yellow_circle: Design on-the-fly Eversink workflow: quality generation + consistency tracking
 
 ## Deferred
@@ -70,5 +78,11 @@ Standalone session to learn SotS rules. Materials in `sessions/2026-04-21-onesho
 - :white_check_mark: Deleted legacy meta-* skills, unused campaign skills/agents
 - :white_check_mark: Removed conspyramid (overkill for this campaign) (2026-03-29)
 - :white_check_mark: Repo audit: removed dead code (file-index.py, ccweb.md, docs/), fixed card-generator deps, fixed session-start.sh gh install path (2026-03-29)
+- :white_check_mark: Replaced Node.js card generator with Python scripts: `scripts/gen-image.py` (works), `scripts/build-cards.py` (runs, needs review). Deleted `packages/card-generator/`. (2026-04-03)
+- :white_check_mark: CLAUDE.md rewritten with msc-math conventions: Core Rule, Chat with Jörn, Text that agents read, vague-word ban, handoff/session workflow (2026-04-03)
+- :white_check_mark: Added handoff skill, post-mortem skill, feedback/ directory (2026-04-03)
+- :white_check_mark: Fixed worktree-create hook (removed `/dev/stdin` redirect) (2026-04-03)
+- :white_check_mark: Added PreCompact hook to block auto-compression (2026-04-03)
+- :white_check_mark: Installed uv in current container (2026-04-03)
 - :white_check_mark: One-shot materials: scenario, templates, rules refs, pregens, citations, verification (2026-03-30)
 - :white_check_mark: Campaign direction reset: S&S in Eversink, base SotS rules, dropped mountain/dragon/high-fantasy premise (2026-04-02)

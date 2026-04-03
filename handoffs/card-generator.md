@@ -7,7 +7,7 @@
 
 Two Python scripts replacing the deleted `packages/card-generator/` (Node.js):
 
-**`scripts/build-cards.py`** (168 lines): Takes PNG file paths, composites each into a card image (portrait left + ruled writing lines right) via Pillow, then arranges cards in an HTML table and renders to A4 PDF via weasyprint. Greyscale by default, `--color` flag for color. Card height adapts to first image's aspect ratio.
+**`scripts/build-cards.py`** (190 lines): Takes PNG file paths, composites each into a card image (portrait left + ruled writing lines right) via Pillow, then arranges cards in an HTML table and renders to A4 PDF via weasyprint. Greyscale by default, `--color` flag for color. Card height adapts to first image's aspect ratio.
 
 Run: `uv run scripts/build-cards.py sessions/2026-04-21-oneshot/style-test/charcoal.png sessions/2026-04-21-oneshot/style-test/comic-g3.0.png -o /tmp/test.pdf`
 
@@ -46,6 +46,14 @@ From the 2026-04-03 discussion between Jörn and the agent. Jörn's words are qu
 | uv run with inline deps | Jörn pushed for this, rejected deferral |
 | --help is the docs | Jörn: "explicit, fail early and loud, useful --help that provides uptodate info" |
 | Real fal.ai model IDs | Jörn self-corrected from `flux[schnell]`: "KISS says to not map model ids" |
+
+## CLAUDE.md has errors
+
+Repo layout section has inaccuracies (verified by sub-agent):
+- `.claude/rules/` listed but does not exist
+- `resources/` exists on disk but not listed (empty, likely vestigial — delete or list)
+- `scripts/` description omits `decrypt-rulebook.sh`
+- `.claude/worktrees/` exists but not listed
 
 ## Technical notes
 
