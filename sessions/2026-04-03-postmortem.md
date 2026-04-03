@@ -38,14 +38,21 @@ Weasyprint's flex implementation doesn't constrain child element heights — add
 
 ## Structural fixes needed
 
-1. **CLAUDE.md escalation triggers:** Add "implementation approach has failed twice"
+1. **CLAUDE.md escalation triggers:** Add "implementation approach has failed twice" — DONE
 2. **CLAUDE.md repo layout:** Note that `sessions/` contains reusable weasyprint patterns
 3. **CLAUDE.md conventions:** "PDF/image outputs must be visually verified. Test with minimal data (2-3 images, not 22)."
-4. **`scripts/build-cards.py` header:** Reference `sessions/2026-04-21-oneshot/build-portrait-cards.py` as the proven pattern
-5. **`build-cards.py` portrait width:** Currently slightly too wide — Pillow resize uses card height instead of portrait height
+4. **CLAUDE.md conventions:** "Flag external blockers (container rebuilds, env var setup, host commands) immediately to Jörn. Don't bury in documents."
+5. **`scripts/build-cards.py`:** Rewrite from `sessions/2026-04-21-oneshot/build-portrait-cards.py`. Don't patch current broken code.
+6. **Container rebuild:** Jörn must run `.devcontainer/host-devcontainer-rebuild.sh` for uv and Dockerfile changes to take effect.
+
+### 5. Never flagged container rebuild as a blocker
+
+The Dockerfile was changed (uv added, pip weasyprint removed) but the container was never rebuilt. This was buried in the plan as "Jörn must rebuild the devcontainer after this change" and never raised again. uv is not available. If weasyprint was removed from pip and the C libs aren't sufficient, scripts may break on next container restart.
+
+**Why it happened:** Nothing says "flag external blockers immediately, don't bury them in documents."
 
 ## Current state (post-merge)
 
-- `scripts/build-cards.py` — Works (Pillow compositing + `table-layout: fixed`). Portrait width slightly off. Needs one fix.
+- `scripts/build-cards.py` — Broken. Portrait takes ~70% of card width. Needs rewrite from session script, not incremental patching.
 - `scripts/gen-image.py` — Works. Tested.
-- `.devcontainer/Dockerfile` — uv added, weasyprint C libs explicit. Needs container rebuild.
+- `.devcontainer/Dockerfile` — Changed but container NOT rebuilt. uv unavailable. Flag to Jörn at start of next session.
