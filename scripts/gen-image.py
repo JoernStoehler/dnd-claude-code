@@ -2,7 +2,7 @@
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
-#     "fal-client>=1.8.0",
+#     "fal-client>=0.13.0",
 #     "Pillow>=12.0",
 # ]
 # ///
