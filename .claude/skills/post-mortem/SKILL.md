@@ -67,3 +67,4 @@ Additional follow-up actions:
 - Add TODO comments in relevant files for localized issues
 - Add to TASKS.md for issues that need more context than a TODO comment provides
 - Update the plan file if session changed what's next
+- Flag any unverified mathematical claims introduced this session with GAP markers

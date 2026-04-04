@@ -53,4 +53,5 @@ Present: what changed, why, and how you'll verify the fix in live sessions. Get 
 ## Reference sources
 
 **Claude Code specs:** `curl -sL https://code.claude.com/docs/llms.txt`
-**Expert model background:** `.claude/skills/create-workflow/references/agent-expert-model.md`
+**System prompt:** `references/system-prompt/`
+**Expert model background:** `references/agent-expert-model.md`

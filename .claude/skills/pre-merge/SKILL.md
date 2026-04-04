@@ -69,7 +69,7 @@ The Phase 8 report contains only verified findings, not the review/cross-check p
 
 ## Phase 5: Sanity check
 
-- **Goal alignment:** Re-read the original task prompt. Does the work produced actually serve that goal? Does it make sense for the project roadmap? A misunderstood goal that produces technically correct but wrong-direction work is expensive to discover late.
+- **Goal alignment:** Re-read the original task prompt. Does the work produced actually serve that goal? Does it make sense for the thesis project roadmap? A misunderstood goal that produces technically correct but wrong-direction work is expensive to discover late.
 - **Process compliance:** Work is on a worktree branch, not `main`. Explicit instructions from the task prompt were followed (branch naming, scope restrictions, etc.).
 - **Project context:** Check TASKS.md — does this work correspond to a tracked task? Is the experiment still active (not superseded by another experiment)?
 
@@ -93,6 +93,6 @@ Structure:
 1. **What changed** — files, scope, one-paragraph summary
 2. **Build/test results** — which commands passed, any issues fixed during Phase 1
 3. **Review findings** — verified findings from Phase 4 subagents (after cross-check)
-4. **Needs Jörn** — decisions, unresolved items, things only Jörn can verify
+4. **Needs Jörn** — decisions, unresolved `% [TODO: JÖRN` items, things only Jörn can verify
 5. **TASKS.md changes** — what was updated, or "no changes needed"
 6. If work is incomplete: write a handoff to `handoffs/<name>.md`

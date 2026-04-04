@@ -80,5 +80,6 @@ Do NOT write feedback into SKILL.md files. Raw observations only — analysis ha
 ## Reference sources
 
 **Claude Code specs:** `curl -sL https://code.claude.com/docs/llms.txt`
+**System prompt:** `references/system-prompt/`
 **Skills guide:** `references/skills-guide.md`
 **Expert model background:** `references/agent-expert-model.md`

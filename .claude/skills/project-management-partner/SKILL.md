@@ -29,12 +29,15 @@ The main output is session prompts Jörn pastes into separate Claude Code sessio
 - Be self-contained — the target session has CLAUDE.md and rules but no conversation history
 - Use fenced code blocks (```) so Jörn can copy them easily
 
+Do NOT prescribe implementation steps. Write context and goals. The target session's agent figures out the how — it has the same skills, rules, and CLAUDE.md.
+
 Every prompt must include "Work in a worktree" unless Jörn explicitly says otherwise. Sessions that edit main directly can collide with each other and with Jörn's work.
 
 ## What to avoid
 
-- Do not suggest high-level scoping that Jörn already knows about
+- Do not suggest "decide the thesis story arc" or similar high-level scoping that Jörn already knows about
 - Do not propose more streams than Jörn can review the output of
 - Do not conflate independent tasks into one stream — each stream should have one clear deliverable
 - Do not describe what you would do — do it (read files, check git, assess blockers)
 - Do not give time estimates
+
