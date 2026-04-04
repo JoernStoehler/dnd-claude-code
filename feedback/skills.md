@@ -21,3 +21,19 @@ What happened: Jörn said "just copy" (meaning don't overthink the sync). Agent 
 What should have happened: Copy files, fix the 3 path references (`-workspaces-msc-math` → `-workspaces-dnd-claude-code`), done. The ambiguity between "copy" (don't rewrite prose) and "adapt" (fix project references) should have been resolved by asking one clarifying question upfront.
 
 **Pattern:** Overcorrection loop. Agent misinterprets correction as "do the opposite" instead of "do the nuanced middle." Each Jörn message triggered a full swing rather than a targeted adjustment. Same root cause as feedback_stop_thrashing — but here the thrashing is between interpretations of instructions rather than between technical approaches.
+
+### 2026-04-04 — Saved sync-specific lessons to global memory
+
+What happened: After the sync incidents above, agent saved two memory entries (`feedback_use_cp_not_write.md`, `feedback_no_overcorrection.md`) with lessons about using `cp` and not overcorrecting. These are specific to `/sync-claude` runs. Every agent in every session would pay the attention cost for something only sync sessions need. Jörn flagged this as net-negative.
+
+What should have happened: The feedback/ entry is the right place — it's where `/update-workflow` and `/sync-claude` will find it. Memory should only contain things that genuinely help most sessions.
+
+**Pattern:** Memory pollution. Agent defaults to "save it in memory" as the response to learning a lesson, without evaluating whether the lesson's benefit across all sessions outweighs the attention cost. The `/incident` skill's step 3 ("check for memory entry") may encourage this — it asks "should this be in memory?" without a counter-question like "does every session benefit?"
+
+### 2026-04-04 — /incident asked unnecessary clarifying question
+
+What happened: Jörn invoked `/incident` with empty arguments right after saying "it is literally net-negative" about the memory misuse. The incident was obvious from context — the immediately preceding conversation. Agent asked "What's the incident — the memory misuse?" instead of just recording it.
+
+What should have happened: Record the incident directly. The conversation context made the referent unambiguous. The skill says "don't guess — the cost of recording the wrong incident is higher than one question" but this wasn't a guess — it was the only plausible reading.
+
+**Pattern:** Over-literal skill compliance. The skill's "ask if unsure" instruction overrode obvious conversational context. Agent treated "arguments are empty" as "I don't know what the incident is" when the conversation made it clear.
