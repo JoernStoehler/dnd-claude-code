@@ -37,3 +37,11 @@ What happened: Jörn invoked `/incident` with empty arguments right after saying
 What should have happened: Record the incident directly. The conversation context made the referent unambiguous. The skill says "don't guess — the cost of recording the wrong incident is higher than one question" but this wasn't a guess — it was the only plausible reading.
 
 **Pattern:** Over-literal skill compliance. The skill's "ask if unsure" instruction overrode obvious conversational context. Agent treated "arguments are empty" as "I don't know what the incident is" when the conversation made it clear.
+
+### 2026-04-04 — Flooded chat with sequential diff commands
+
+What happened: Jörn asked for the diff of synced files vs upstream. Agent ran 5 separate `diff` Bash calls across 3 messages (one file per call, then batches), flooding the chat. Each call produced output Jörn had to scroll through.
+
+What should have happened: One Bash call with a loop over all files, or a short script, producing a single consolidated output.
+
+**Pattern:** Piecemeal tool calls. Agent broke a single operation into many small calls instead of composing one efficient command. Costs Jörn attention for each call's output block. Same class as the Write-from-memory issue — using the most obvious tool invocation instead of the most efficient one.
