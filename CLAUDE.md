@@ -153,7 +153,7 @@ Session notes, skill files, TASKS.md, handoffs, feedback entries — text that f
 Optimize for these qualities (descending effort priority):
 
 1. **Correct, corrigible.** Verify claims against code or data. When text will inevitably be wrong, make errors findable and fixable by future agents — cite sources, state assumptions explicitly, include enough context to tell correct from incorrect.
-2. **Verifiable, observable, measurable.** State things the reader can check. Write "the script takes PNG paths and outputs a PDF via weasyprint" not "the script works correctly." Write "deals 2d6 Morale damage" not "deals appropriate damage."
+2. **Verifiable, observable, measurable.** State things the reader can check.
 3. **Unambiguous, clear, specific.** Each sentence should have one reading. Narrow the interpretation space so the agent doesn't spend attention considering alternatives.
 4. **Complete.** Include what the reader needs to understand and act. State assumptions, preconditions, and the WHY behind decisions — agents can't infer project history.
 5. **Actionable, low-overhead.** The reader should know what to do after reading. Provide concrete next steps, not just observations.
