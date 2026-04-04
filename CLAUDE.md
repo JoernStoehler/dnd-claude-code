@@ -148,7 +148,7 @@ Wide tables (>6 columns) are unreadable in chat — write to a file.
 
 ## Text that agents read
 
-Session notes, skill files, TASKS.md, handoffs, feedback entries — text that future agents will read and act on. Write precisely — vague text gets misinterpreted.
+Session prep, skill files, TASKS.md, handoffs, feedback entries — text that future agents will read and act on. Write precisely — vague text gets misinterpreted.
 
 Optimize for these qualities (descending effort priority):
 
