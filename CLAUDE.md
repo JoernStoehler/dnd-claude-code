@@ -64,7 +64,7 @@ Track "nailed down" (revealed to players) vs "mutable" (can still change). Once 
 
 ### Source of Truth
 
-When content conflicts: session logs > character sheets > lore documents > unrevealed plans.
+When content conflicts: session logs > character sheets > lore documents > unrevealed GM prep.
 
 ### Escalation Triggers
 
