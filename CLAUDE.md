@@ -173,17 +173,6 @@ Optimize for these qualities (descending effort priority):
 
 **Subagents:** Delegate aggressively — N files → N parallel subagents. Subagents self-serve skills and rules (shared system prompt), no special prompting needed. Use review agents proactively before presenting work.
 
-**Handoffs:** When work is incomplete, write a handoff at `handoffs/<name>.md`. Verify claims in the handoff — re-read key files, check paths exist, check stated facts match current code. Handoffs with stale claims waste the next agent's time.
-
-| Action | Default |
-|--------|---------|
-| Content that affects canon | Discuss first |
-| Formatting, cleanup, file organization | Act, mention after |
-| New files, encounters, NPCs | Discuss scope, then act |
-| Editing existing content | Act if minor, discuss if substantive |
-| CLAUDE.md or .claude/ changes | Discuss first |
-| TASKS.md updates | Act |
-
 ## Git
 
 - Always use local `main`, never `origin/main`.
