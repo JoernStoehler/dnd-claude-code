@@ -68,7 +68,7 @@ When content conflicts: session logs > character sheets > lore documents > unrev
 
 ### Escalation Triggers
 
-Stop and ask when: canon conflict, player agency affected, tone uncertainty, SotS rules edge cases, scope creep, blocked without information, implementation approach has failed twice. A brief interruption beats a dead end.
+Stop and ask when: canon conflict, content that constrains player choices, tone uncertainty, SotS rules edge cases, scope creep, blocked without information, implementation approach has failed twice. A brief interruption beats a dead end.
 
 Flag external blockers (container rebuilds, env setup) to Jörn immediately. Don't bury them in documents.
 
