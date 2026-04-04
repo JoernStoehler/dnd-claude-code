@@ -3,13 +3,14 @@ set -euo pipefail
 
 # Claude Code WorktreeRemove hook.
 # Replaces the built-in worktree removal with safety checks:
-# - Kills stale processes left running in the worktree
+# - Kills stale processes (cargo test, qhull) left running in the worktree
 # - Warns if the branch has unmerged commits relative to local main
 #
 # Input: JSON on stdin with field "worktree_path".
 # Output: none expected. All output goes to stderr.
+# Failures are logged in debug mode only (Claude Code convention).
 
-WORKTREE_PATH=$(jq -r '.worktree_path' < /dev/stdin)
+WORKTREE_PATH=$(jq -r '.worktree_path')
 
 if [[ -z "$WORKTREE_PATH" || "$WORKTREE_PATH" == "null" ]]; then
   echo "[worktree-remove] error: no worktree_path in stdin JSON" >&2
@@ -19,6 +20,8 @@ fi
 REPO_ROOT="$CLAUDE_PROJECT_DIR"
 
 # --- Kill stale processes ---
+# Processes whose command line contains the worktree path (e.g. cargo test binaries
+# in <worktree>/crates/target/). Prevents zombie processes consuming CPU for hours.
 ABS_PATH="$(cd "$WORKTREE_PATH" 2>/dev/null && pwd || echo "$WORKTREE_PATH")"
 STALE_PIDS="$(ps aux | grep -F "$ABS_PATH" | grep -v grep | awk -v me=$$ '$2 != me {print $2}' || true)"
 if [[ -n "$STALE_PIDS" ]]; then

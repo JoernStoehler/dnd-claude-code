@@ -28,7 +28,8 @@ feedback/              # Agent-written feedback about infrastructure and workflo
 
 .claude/
   rules/               # Path-scoped rules (auto-loaded by file pattern)
-  skills/              # Skill workflows
+  agents/              # Subagent definitions
+  skills/              # Skill workflows (each a directory with SKILL.md)
   hooks/               # Shell hooks for session/worktree events
   settings.json        # Claude Code settings
 ```
@@ -49,6 +50,8 @@ Rules reference: `library/sots/` (see `INDEX.md`)
 
 Never write a factual claim without verifying it against evidence in the same session. "The script does X" requires running it. "The file contains Y" requires reading it. When verification is impossible, mark explicitly as unverified.
 
+**Substantial outputs** (reports, analyses, audits, investigation findings): Write to a scratch file (`/tmp/`) or delegate to a subagent first. Re-read and iterate before presenting to Jörn. Direct-to-chat drafts can't be corrected after sending — file-based drafts can be revised, cross-checked, and improved. This applies to any output longer than a few paragraphs where factual accuracy matters.
+
 ## Core Conventions
 
 ### Information States
@@ -58,15 +61,6 @@ Track "nailed down" (revealed to players) vs "mutable" (can still change). Once 
 ### Source of Truth
 
 When content conflicts: session logs > character sheets > lore documents > unrevealed plans.
-
-### Decision Authority
-
-|  | Cheap to verify | Expensive to verify |
-|---|---|---|
-| **Easy rollback** | Act freely | Act, then Jörn verifies |
-| **Hard rollback** | Discuss first | Discuss first |
-
-Never without Jörn: changes to `.claude/` procedural files, destructive operations.
 
 ### Escalation Triggers
 
@@ -87,6 +81,28 @@ Flag external blockers (container rebuilds, env setup) to Jörn immediately. Don
 - Dates: `YYYY-MM-DD`, slugs: `lowercase-with-dashes`
 - Be descriptive: `the-crimson-merchant.md` not `npc-042.md`
 
+## Making Decisions
+
+Never without Jörn's instruction: destructive operations, merging to `main`, modifying `.claude/` procedural files. For hard-to-reverse decisions (architecture, multi-session scope), discuss with Jörn before starting.
+
+Agent time is free. Jörn's time is expensive. When choosing between spending more agent time (exploring alternatives, reading code, running experiments, rolling back failed attempts) and spending Jörn's time (asking questions, presenting incomplete work, leaving problems for him to catch) — spend agent time. 
+
+The main risk factors that can consume Jörn's time are
+- badly written texts that require repeated questions from Jörn for him to understand
+- wasted interactions with Jörn for tasks that aren't productively progressing the project, e.g. due to bad prioritization, errors and wrong assumptions, drifted goals/tasks that just aren't optimal, or conversations that aren't goal-directed at all
+- active waiting time without a parallel task for Jörn (e.g. another agent session)
+- high-frequency context switching
+
+The total amount of time spent on ten-second questions and clarification requests is not an issue.
+
+To avoid wasted effort that is later overwritten, explore alternative approaches and discuss scope and task usefulness early and compare the approaches/scopes/goal-operationalizations with consultations from Jörn.
+
+When multiple viable approaches exist, compare them explicitly: state criteria, evaluate each approach against those criteria, then choose or present the comparison to Jörn if the tradeoff is material. Don't pick one approach and mention alternatives as afterthoughts.
+
+Investigate, or follow up on delegated investigations, instead of going in blind.
+
+Answer questions you can answer yourself (by reading, web search, bash commands, subagents, scripting, ...) before including them in a batch to Jörn. Agent-answerable questions dilute the ones only Jörn can answer. Each question batch costs Jörn a context switch, so fewer higher-signal batches beat frequent low-signal ones.
+
 ## Chat with Jörn
 
 Jörn runs multiple agent sessions in parallel and context-switches between them with 2–20 minute delays. He may not remember earlier messages or tool call output from this session. Every message should stand alone well enough that Jörn can act on it without re-reading the conversation.
@@ -95,7 +111,7 @@ Two interaction modes:
 - **Tight loop:** rapid back-and-forth (seconds between messages), collaborating on reasoning or exchanging a burst of information.
 - **Async:** Jörn returns after working in other sessions. Past messages and tool calls are likely forgotten or unread.
 
-The project's main bottleneck is Jörn's time. Agent time is effectively $0/h (flat-rate subscription). Use Jörn's time efficiently.
+**Example:** Plan a complex task. Start with a tight loop to gather context. Asynchronously investigate and plan your approach and write it up. Request a long single-message review. Discuss feedback in a tight loop until approval. Implement asynchronously. Pause half-way through and escalate when the plan doesn't work. Discuss solutions in a tight loop. Implement the solution asynchronously. Present a final report and request single-message review.
 
 ### Message Style
 
@@ -103,15 +119,17 @@ Optimize for these qualities (descending effort priority):
 
 1. **Correct, verifiable.** Verify claims before making them. Cite sources. Mark uncertainty.
 2. **Unambiguous, self-contained.** Precise common language. Repeat context Jörn may have forgotten. Disambiguate when the best guess is not near-certain.
-3. **Complete.** Include everything Jörn needs to act. Spell out implications rather than leaving them to infer. Quote tool output — Jörn doesn't see it.
+3. **Complete.** Include everything Jörn needs to act. Spell out implications rather than leaving them to infer. Quote tool output, system prompt and skill template text — Jörn sees only your messages.
 4. **Actionable, low-overhead.** Copy-paste-ready commands, absolute file paths, questions with answer options, labels/numbers for referencing.
 5. **Skimmable.** Bold **keywords**, structured lists, (brackets), prioritization of content, repeated context so Jörn can skim after a context switch, breadcrumbs for the current topic.
 
 Don't optimize for, i.e. don't waste effort on: short vs long, boring vs exciting, visual balance.
 
+Wide tables (>6 columns) are unreadable in chat — write to a file.
+
 ### Reading Jörn's messages
 
-- Jörn writes rather literally. If he asks "what does X say?", answer with what X says.
+- Jörn writes literally — don't attribute hidden intent. If he asks "is there a better X?", he doesn't know and wants the answer. If he asks "what does X say?", answer with what X says.
 - Push back when you can improve on what Jörn said — a better approach, a more precise formulation, a concern he may not have considered. "Wrong" doesn't just mean "contradicts the repo" — it includes suboptimal, imprecise, or not serving the project goal as well as it could.
 - Keep the project goal in view. If a subtask has drifted or become counterproductive, say so.
 - Ask for clarification, ideally with the top interpretations you have in mind.
@@ -124,19 +142,22 @@ Don't optimize for, i.e. don't waste effort on: short vs long, boring vs excitin
 - No narrating plans ("I'll now read the file and check...") — do the work and show results.
 - No trailing summaries of what you just did — Jörn can read the diff.
 - No ownership language for findings ("my analysis suggests", "I recommend") — the findings are from the code/data. No "Should I proceed?" — either proceed or state what decision you need.
+- No narrating self-corrections ("the subagent found X, so I fixed it"). Apply corrections silently. Only surface decisions Jörn needs to make.
 
 ## Text that agents read
 
-Handoffs, session notes, skill files, TASKS.md — text that future agents will read and act on. Agents interpret sloppily: they fill gaps with training-data defaults and confidently pick an interpretation of vague text that may not match intent. The writer cannot predict well which reading an agent picks.
+Handoffs, session notes, skill files, TASKS.md, feedback entries — text that future agents will read and act on. Write precisely — vague text gets misinterpreted.
 
 Optimize for these qualities (descending effort priority):
 
-1. **Correct, corrigible.** Verify claims against code or data. When text will inevitably be wrong, make errors findable — cite sources, state assumptions, include enough context to tell correct from incorrect.
+1. **Correct, corrigible.** Verify claims against code or data. When text will inevitably be wrong, make errors findable and fixable by future agents — cite sources, state assumptions explicitly, include enough context to tell correct from incorrect.
 2. **Verifiable, observable, measurable.** State things the reader can check. Write "the script takes PNG paths and outputs a PDF via weasyprint" not "the script works correctly."
 3. **Unambiguous, clear, specific.** Each sentence should have one reading. Narrow the interpretation space so the agent doesn't spend attention considering alternatives.
 4. **Complete.** Include what the reader needs to understand and act. State assumptions, preconditions, and the WHY behind decisions — agents can't infer project history.
 5. **Actionable, low-overhead.** The reader should know what to do after reading. Provide concrete next steps, not just observations.
-6. **Simple, concrete, standard.** Familiar patterns, concrete examples, no unnecessary abstractions. Don't introduce abstractions unless they earn their keep across multiple uses.
+6. **Simple, concrete, standard.** Familiar patterns, concrete examples, no unnecessary terminology. Don't introduce abstractions unless they earn their keep across multiple uses.
+
+**Vague-word ban:** Do not use "appropriate", "properly", "ensure", "good", "consider", "reasonable", "necessary", "efficient", "robust" without specifying *what* makes it so.
 
 ## Session Workflow
 
@@ -144,9 +165,11 @@ Optimize for these qualities (descending effort priority):
 
 **Plan → implement → review** (agent autonomous): No Jörn involvement unless specifically requested. Agents may return to earlier phases.
 
+**Merge** (Jörn + agent): Agent reports what changed, what's verified, what needs Jörn. Jörn gates merges to `main`.
+
 **Long sessions:** Update the plan file as you work — it survives compaction, working memory does not. Write design decisions and their WHY into the plan. After compaction, read the plan file to recover context.
 
-**Subagents:** Delegate aggressively — N files → N parallel subagents. Use review agents proactively before presenting work.
+**Subagents:** Delegate aggressively — N files → N parallel subagents. Subagents self-serve skills and rules (shared system prompt), no special prompting needed. Use review agents proactively before presenting work.
 
 **Handoffs:** When work is incomplete, write a handoff at `handoffs/<name>.md`. Verify claims in the handoff — re-read key files, check paths exist, check stated facts match current code. Handoffs with stale claims waste the next agent's time.
 

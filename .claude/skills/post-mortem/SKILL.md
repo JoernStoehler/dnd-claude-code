@@ -1,6 +1,6 @@
 ---
 name: post-mortem
-description: End-of-session reflection workflow. Run at Jörn's request or after a session with significant friction, mistakes, or wasted time. Produces actionable findings — not just observations.
+description: End-of-session reflection workflow. Run at Jörn's request or after a session with significant friction, mistakes, or wasted time. Produces actionable findings (feedback/ entries, convention changes, decision records) — not just observations.
 user-invocable: true
 ---
 
@@ -14,13 +14,19 @@ Be concrete and specific. Vague feedback is not useful.
 What slowed you down?
 
 Bad: "The codebase was confusing"
-Good: "Couldn't find which session has the working weasyprint patterns — sessions/ is described as 'session logs' not 'reusable code'"
+Good: "Couldn't find which module owns the KKT solver — there are copies in 3 crates with no comment explaining which is canonical"
 
 ### 2. Unclear Instructions
 What was confusing in CLAUDE.md, skills, or agent prompts?
 
+Bad: "The prompt was unclear"
+Good: "rust-conventions skill doesn't specify whether to use thiserror or anyhow for library crates vs binaries"
+
 ### 3. Missing Context
 What information wasn't provided but was needed?
+
+Bad: "Didn't have enough context"
+Good: "Needed to know whether the Adem-Wu proof in Chapter 3 has been reviewed by the advisor or is still draft"
 
 ### 4. Jörn's Time
 Where did Jörn spend time this session? What work did Jörn do, and was it used afterward? Purpose: detect work Jörn does that agents could also do, or that needn't be done at all.
@@ -32,27 +38,32 @@ What should be preserved or expanded?
 Specific, actionable improvements.
 
 Bad: "Make things clearer"
-Good: "Add a note in the repo layout that sessions/ contains reusable weasyprint patterns"
+Good: "Add a 'verified by advisor' field to theorem environments"
 
 ## Process checks — report only items that apply
 
-1. **Fabrications slipped through?** — Did fabricated claims or unverified facts reach Jörn?
-2. **Iterated in front of user?** — Did I run multiple fix/review cycles in conversation instead of delegating to subagents or fixing silently?
-3. **Assumed Jörn read something?** — Did I act as if Jörn saw a question or information that he may not have read?
-4. **Delegated with context loss?** — Did I delegate implementation to a subagent that lacked design context from the conversation?
-5. **Repeated failed approach?** — Did I try the same category of fix more than twice without changing strategy?
-6. **Buried a blocker?** — Did I note an external dependency (container rebuild, env var, host command) in a document instead of flagging it to Jörn immediately?
+1. **Agent splitting needed?** — Did any multi-responsibility agent fail to cover all its checks? Recommend splitting if so.
+2. **Fabrications slipped through?** — Did fabricated claims, wrong theorem names, or incorrect citations reach Jörn that subagent review should have caught?
+3. **Iterated in front of user?** — Did I run multiple fix/review cycles in conversation instead of delegating to subagents?
+4. **False attribution?** — Did I attribute a mathematical result to a source that didn't actually state it?
+5. **Assumed Jörn read something?** — Did I act as if Jörn saw a question or information that he may not have read?
+6. **Regression test candidate?** — Did this session contain a concrete input→output pair worth preserving as a regression test? Both failures (agent did the wrong thing — test should catch it) and successes (agent handled a tricky situation well — test should ensure it keeps working). Look for moments where conventions or workflows made a visible difference. Record the incident in `feedback/`.
 
-## Where to check for timing data
+## Generalize from issues
 
-The session log at `~/.claude/projects/-workspaces-dnd-claude-code/<session-id>.jsonl` has timestamps for every tool call. Use it to verify where time went — don't guess.
+For each friction point or mistake identified above: abstract the error class and check whether the same class of error exists elsewhere in the repo. Do this step as part of the postmortem, not later — if deferred, the generalization rarely happens.
 
 ## Output
 
-Persist actionable findings:
+Persist actionable findings so future agents benefit. For each finding, decide where it belongs:
 
-- **Behavioral lesson or friction** → append to matching file in `feedback/` (create if needed)
-- **New convention or workflow change** → discuss with Jörn, then update CLAUDE.md or relevant skill
-- **Nothing actionable** → don't persist
+- **Behavioral lesson or friction with rules/skills/agents/output style** → append raw observations to the matching file in `feedback/` (rules.md, skills.md, agents.md, output-style.md). Don't fix procedural files directly — a future `/update-workflow` session will analyze and act on these with Jörn.
+- **New convention or workflow change** → discuss with Jörn, then Jörn updates CLAUDE.md or relevant skill
+- **Nothing actionable** → don't persist, it's just a fact about the session
 
-Write the postmortem to `sessions/<date>-postmortem.md`. Commit it.
+Don't persist everything — only findings that would change future agent behavior. A postmortem that produces zero repo changes is fine if nothing actionable emerged.
+
+Additional follow-up actions:
+- Add TODO comments in relevant files for localized issues
+- Add to TASKS.md for issues that need more context than a TODO comment provides
+- Update the plan file if session changed what's next
