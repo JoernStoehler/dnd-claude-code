@@ -48,7 +48,11 @@ Rules reference: `library/sots/` (see `INDEX.md`)
 
 ## Core Rule
 
-Never write a factual claim without verifying it against evidence in the same session. "The script does X" requires running it. "The file contains Y" requires reading it. When verification is impossible, mark explicitly as unverified.
+Never write a factual claim without verifying it against evidence in the same session. "The script does X" requires running it. "The file contains Y" requires reading it. When verification is impossible, mark with `TODO` to track it for Jörn.
+
+**SotS rules verification:** Never produce SotS rule mechanics or ability descriptions from memory. Verify against `library/sots/`. Agents confidently produce wrong mechanics.
+
+**Source documents:** When referencing SotS rules or design articles, link to the file in `library/sots/` — do not paraphrase. Agent paraphrases go stale silently and are unverifiable.
 
 **Substantial outputs** (reports, analyses, audits, investigation findings): Write to a scratch file (`/tmp/`) or delegate to a subagent first. Re-read and iterate before presenting to Jörn. Direct-to-chat drafts can't be corrected after sending — file-based drafts can be revised, cross-checked, and improved. This applies to any output longer than a few paragraphs where factual accuracy matters.
 
@@ -73,8 +77,6 @@ Flag external blockers (container rebuilds, env setup) to Jörn immediately. Don
 - Use precise, clear language. Write out implications — don't require deduction.
 - "Present interesting information in a boring manner" — state facts plainly.
 - Example: Don't hint that a character is selfish; write "Motivation: selfish egoist"
-
-**Vague-word ban:** Do not use "appropriate", "properly", "ensure", "good", "consider", "reasonable", "necessary", "efficient", "robust" without specifying *what* makes it so. These words feel informative but leave the agent to guess.
 
 ### File Naming
 
@@ -146,12 +148,12 @@ Wide tables (>6 columns) are unreadable in chat — write to a file.
 
 ## Text that agents read
 
-Handoffs, session notes, skill files, TASKS.md, feedback entries — text that future agents will read and act on. Write precisely — vague text gets misinterpreted.
+Session notes, skill files, TASKS.md, handoffs, feedback entries — text that future agents will read and act on. Write precisely — vague text gets misinterpreted.
 
 Optimize for these qualities (descending effort priority):
 
 1. **Correct, corrigible.** Verify claims against code or data. When text will inevitably be wrong, make errors findable and fixable by future agents — cite sources, state assumptions explicitly, include enough context to tell correct from incorrect.
-2. **Verifiable, observable, measurable.** State things the reader can check. Write "the script takes PNG paths and outputs a PDF via weasyprint" not "the script works correctly."
+2. **Verifiable, observable, measurable.** State things the reader can check. Write "the script takes PNG paths and outputs a PDF via weasyprint" not "the script works correctly." Write "deals 2d6 Morale damage" not "deals appropriate damage."
 3. **Unambiguous, clear, specific.** Each sentence should have one reading. Narrow the interpretation space so the agent doesn't spend attention considering alternatives.
 4. **Complete.** Include what the reader needs to understand and act. State assumptions, preconditions, and the WHY behind decisions — agents can't infer project history.
 5. **Actionable, low-overhead.** The reader should know what to do after reading. Provide concrete next steps, not just observations.
@@ -181,3 +183,8 @@ Optimize for these qualities (descending effort priority):
 | Editing existing content | Act if minor, discuss if substantive |
 | CLAUDE.md or .claude/ changes | Discuss first |
 | TASKS.md updates | Act |
+
+## Git
+
+- Always use local `main`, never `origin/main`.
+- Work in a worktree (separate branch) unless Jörn says otherwise. This keeps `main` clean and lets multiple sessions run in parallel without conflicts.
