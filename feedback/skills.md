@@ -45,3 +45,11 @@ What happened: Jörn asked for the diff of synced files vs upstream. Agent ran 5
 What should have happened: One Bash call with a loop over all files, or a short script, producing a single consolidated output.
 
 **Pattern:** Piecemeal tool calls. Agent broke a single operation into many small calls instead of composing one efficient command. Costs Jörn attention for each call's output block. Same class as the Write-from-memory issue — using the most obvious tool invocation instead of the most efficient one.
+
+### 2026-04-04 — Decided hook naming convention but didn't apply it
+
+What happened: Early in the session, Jörn chose PascalCase for hook naming. Agent created the two new hooks with correct names but never renamed the three existing hooks (`session-start.sh`, `worktree-create.sh`, `worktree-remove.sh`). Only fixed when Jörn noticed the inconsistency much later.
+
+What should have happened: When a naming convention is decided, apply it to all files in scope immediately — not just new ones.
+
+**Pattern:** Incomplete application of a decision. Agent applied the decision to the work in front of it (new files) but didn't check whether existing files needed updating to match. Same class as the Core Conventions issue — carrying forward old state without evaluating it against current decisions.
