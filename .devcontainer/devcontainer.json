@@ -3,7 +3,7 @@
   // PRIMARY ENVIRONMENT.
   //
   // Features:
-  // - Bind mounts for cache persistence (npm)
+  // - Bind mounts for cache persistence (uv, npm)
   // - Bind mounts for OAuth/runtime persistence (gh, codex, vscode tunnel)
   //
   // Prerequisites on host:
@@ -23,6 +23,8 @@
   "runArgs": ["--memory=10g", "--memory-swap=12g", "--cap-add=SYS_ADMIN"],
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "containerEnv": {
+    "TERM": "xterm-256color",
+    "LANG": "en_US.UTF-8",
     "DEVCONTAINER_ENV": "local",
     "HISTFILE": "/home/vscode/.bash_history_dir/.bash_history",
     // Store VS Code tunnel auth in files instead of system keychain (persisted via ~/.vscode bind mount)
@@ -32,6 +34,7 @@
   "mounts": [
     "source=/srv/devhome/.codex,target=/home/vscode/.codex,type=bind,consistency=cached",
     "source=/srv/devhome/.config/gh,target=/home/vscode/.config/gh,type=bind,consistency=cached",
+    "source=/srv/devhome/.cache/uv,target=/home/vscode/.cache/uv,type=bind,consistency=cached",
     "source=/srv/devhome/.cache/npm,target=/home/vscode/.cache/npm,type=bind,consistency=cached",
     "source=/srv/devhome/.bash_history_dir,target=/home/vscode/.bash_history_dir,type=bind,consistency=cached",
     "source=dnd-claude-code-vscode,target=/home/vscode/.vscode,type=volume"

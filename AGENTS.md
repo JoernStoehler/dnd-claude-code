@@ -105,17 +105,12 @@ Useful commands:
 uv run scripts/build-cards.py --help
 uv run scripts/gen-image.py --help
 bash sessions/2026-04-21-oneshot/build-pdfs.sh
+bash scripts/decrypt-rulebook.sh
 python3 -m py_compile scripts/*.py sessions/2026-04-21-oneshot/*.py
 ```
 
-Rulebook decryption:
-
-```bash
-bash scripts/decrypt-rulebook.sh
-```
-
-The plaintext `library/sots/rulebook.md` is gitignored. The encrypted
-`library/sots/rulebook.md.enc` is tracked.
+The plaintext `library/sots/rulebook.md` is gitignored; run the decrypt command
+when full-rulebook lookup needs it and the plaintext is absent.
 
 ## TASKS.md
 

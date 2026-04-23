@@ -3,7 +3,7 @@
 
 set -euo pipefail
 
-echo "Local devcontainer post-create..."
+echo "[post-create] Local devcontainer post-create..."
 
 # Ensure user directories exist and are owned by the dev user.
 # Use chown without -R: bind-mounted caches can be
@@ -48,9 +48,6 @@ echo "codex: $(codex --version 2>/dev/null || echo 'not found')"
 echo "node: $(node -v 2>/dev/null || echo 'not found')"
 echo "npm: $(npm -v 2>/dev/null || echo 'not found')"
 
-# Run warmup cache in background
-nohup .devcontainer/warmup-cache.sh >> "${HOME}/.cache/warmup.log" 2>&1 &
-
 # Source .env into shell profile (secrets like FAL_KEY)
 DOTENV_SOURCE='
 # Load project .env if present
@@ -61,7 +58,15 @@ if ! grep -q 'source /workspaces/dnd-claude-code/.env' "${HOME}/.bashrc" 2>/dev/
   echo "$DOTENV_SOURCE" >> "${HOME}/.bashrc"
 fi
 
-# Decrypt SotS rulebook if SOTS_KEY is available in the environment or .env.
-bash /workspaces/dnd-claude-code/scripts/decrypt-rulebook.sh || true
+# Safe delete wrapper: redirect interactive `rm` to trash-put.
+# Use /bin/rm for real deletes.
+if ! grep -q 'trash-put' "${HOME}/.bashrc" 2>/dev/null; then
+  cat >> "${HOME}/.bashrc" << 'BASHRC'
 
-echo "Local post-create complete."
+# Safe delete: redirect rm to trash-put (use /bin/rm for real deletes)
+rm() { trash-put "$@"; }
+export -f rm
+BASHRC
+fi
+
+echo "[post-create] Local post-create complete."

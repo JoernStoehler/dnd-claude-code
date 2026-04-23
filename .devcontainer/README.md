@@ -13,6 +13,7 @@ The container provides:
 - Node.js/npm
 - image and PDF tools used by session handout scripts
 - VS Code tunnel CLI
+- tmux and a shell `rm` wrapper that sends deletes to trash
 
 Runtime state that must survive rebuilds lives outside the git checkout:
 
@@ -20,6 +21,7 @@ Runtime state that must survive rebuilds lives outside the git checkout:
 |-----------|----------------|---------|
 | `/srv/devhome/.codex` | `~/.codex` | Codex config, sessions, credentials |
 | `/srv/devhome/.config/gh` | `~/.config/gh` | GitHub CLI auth |
+| `/srv/devhome/.cache/uv` | `~/.cache/uv` | Python dependency cache |
 | `/srv/devhome/.cache/npm` | `~/.cache/npm` | npm cache |
 | `/srv/devhome/.bash_history_dir` | `~/.bash_history_dir` | shell history |
 | Docker volume `dnd-claude-code-vscode` | `~/.vscode` | VS Code tunnel auth |
@@ -48,8 +50,8 @@ That lets Codex load repo-tracked `.codex/config.toml`, `.codex/agents/`, and
 
 ## Rulebook Decryption
 
-The plaintext SotS rulebook is gitignored. Rebuilds and fresh shells can decrypt
-it when `SOTS_KEY` is available:
+The plaintext SotS rulebook is gitignored. Agents can decrypt it explicitly when
+full-rulebook lookup needs it and the plaintext is absent:
 
 ```bash
 bash scripts/decrypt-rulebook.sh
