@@ -4,8 +4,7 @@
   //
   // Features:
   // - Bind mounts for cache persistence (npm)
-  // - Bind mounts for OAuth persistence (gh, claude)
-  // - Git worktrees via Claude Code hooks (.claude/hooks/worktree-{create,remove}.sh)
+  // - Bind mounts for OAuth/runtime persistence (gh, codex, vscode tunnel)
   //
   // Prerequisites on host:
   // - /srv/devhome/ directories exist (shared with other devcontainers)
@@ -26,18 +25,15 @@
   "containerEnv": {
     "DEVCONTAINER_ENV": "local",
     "HISTFILE": "/home/vscode/.bash_history_dir/.bash_history",
-    // Claude Code stores .claude.json at $CLAUDE_CONFIG_DIR (default: $HOME).
-    // Must point inside ~/.claude/ so it's included in the bind mount.
-    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude",
-    // Store VS Code tunnel auth in ~/.vscode-cli instead of system keychain
+    // Store VS Code tunnel auth in files instead of system keychain (persisted via ~/.vscode bind mount)
     "VSCODE_CLI_USE_FILE_KEYCHAIN": "1"
   },
   // Bind mounts: Jörn's specific host paths for cache persistence.
   "mounts": [
-    "source=/srv/devhome/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
+    "source=/srv/devhome/.codex,target=/home/vscode/.codex,type=bind,consistency=cached",
     "source=/srv/devhome/.config/gh,target=/home/vscode/.config/gh,type=bind,consistency=cached",
     "source=/srv/devhome/.cache/npm,target=/home/vscode/.cache/npm,type=bind,consistency=cached",
     "source=/srv/devhome/.bash_history_dir,target=/home/vscode/.bash_history_dir,type=bind,consistency=cached",
-    "source=/srv/devhome/.vscode-cli,target=/home/vscode/.vscode-cli,type=bind,consistency=cached"
+    "source=dnd-claude-code-vscode,target=/home/vscode/.vscode,type=volume"
   ]
 }

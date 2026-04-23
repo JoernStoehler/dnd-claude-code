@@ -48,9 +48,9 @@ Standalone session to learn SotS rules. Materials in `sessions/2026-04-21-onesho
 
 See `handoffs/card-generator.md` for full context.
 
-### Sync agent infrastructure from msc-math (standing)
+### Codex harness maintenance (standing)
 
-Run `/sync-claude` when touching CLAUDE.md or `.claude/` files, or periodically. See `.claude/skills/sync-claude/SKILL.md`.
+Use `$harness-engineering` when touching `AGENTS.md`, `.agents/`, `.codex/`, or `.devcontainer/` agent-runtime files.
 
 ### Campaign setup
 
@@ -83,10 +83,11 @@ Run `/sync-claude` when touching CLAUDE.md or `.claude/` files, or periodically.
 - :white_check_mark: Removed conspyramid (overkill for this campaign) (2026-03-29)
 - :white_check_mark: Repo audit: removed dead code (file-index.py, ccweb.md, docs/), fixed card-generator deps, fixed session-start.sh gh install path (2026-03-29)
 - :white_check_mark: Replaced Node.js card generator with Python scripts: `scripts/gen-image.py` (works), `scripts/build-cards.py` (runs, needs review). Deleted `packages/card-generator/`. (2026-04-03)
-- :white_check_mark: CLAUDE.md rewritten with msc-math conventions: Core Rule, Chat with Jörn, Text that agents read, vague-word ban, handoff/session workflow (2026-04-03)
+- :white_check_mark: Claude-era root instructions rewritten with upstream agent conventions: Core Rule, Chat with Jörn, Text that agents read, vague-word ban, handoff/session workflow (2026-04-03)
 - :white_check_mark: Added handoff skill, post-mortem skill, feedback/ directory (2026-04-03)
 - :white_check_mark: Fixed worktree-create hook (removed `/dev/stdin` redirect) (2026-04-03)
 - :white_check_mark: Added PreCompact hook to block auto-compression (2026-04-03)
 - :white_check_mark: Installed uv in current container (2026-04-03)
 - :white_check_mark: One-shot materials: scenario, templates, rules refs, pregens, citations, verification (2026-03-30)
 - :white_check_mark: Campaign direction reset: S&S in Eversink, base SotS rules, dropped mountain/dragon/high-fantasy premise (2026-04-02)
+- :white_check_mark: Migrated agent harness from Claude Code files to Codex `AGENTS.md`, `.agents/`, and `.codex/` surfaces (2026-04-23)

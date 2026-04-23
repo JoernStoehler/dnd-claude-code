@@ -47,13 +47,10 @@ From the 2026-04-03 discussion between Jörn and the agent. Jörn's words are qu
 | --help is the docs | Jörn: "explicit, fail early and loud, useful --help that provides uptodate info" |
 | Real fal.ai model IDs | Jörn self-corrected from `flux[schnell]`: "KISS says to not map model ids" |
 
-## CLAUDE.md has errors
+## Agent harness note
 
-Repo layout section has inaccuracies (verified by sub-agent):
-- `.claude/rules/` listed but does not exist
-- `resources/` exists on disk but not listed (empty, likely vestigial — delete or list)
-- `scripts/` description omits `decrypt-rulebook.sh`
-- `.claude/worktrees/` exists but not listed
+The repo now uses Codex harness files: `AGENTS.md`, `.agents/`, and `.codex/`.
+Do not follow older Claude-era notes about `CLAUDE.md` or `.claude/`.
 
 ## Technical notes
 

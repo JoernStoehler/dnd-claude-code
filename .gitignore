@@ -36,7 +36,8 @@ library/sots/rulebook.md
 # Copyrighted PDF source
 library/sots/*.pdf
 
-# Claude Code worktrees (created by --worktree / EnterWorktree)
-.claude/worktrees/
-.Trash-1000/
+# Codex worktrees
+.codex/worktrees/
+
+# Container trash-cli wrapper
 .Trash-1000/
