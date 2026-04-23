@@ -28,7 +28,7 @@ rules lookup, card/handout generation, and workflow maintenance.
 - `sessions/`: session prep, logs, generated handouts, PDFs, and local scripts.
 - `library/sots/`: SotS rules references and design articles.
 - `scripts/`: reusable repo scripts, including card and image generation.
-- `handoffs/`: task handoffs for future sessions.
+- `handoffs/`: temporary resume notes for future sessions when explicitly kept.
 - `feedback/`: raw observations about agent workflow failures.
 - `.agents/skills/`: Codex skills for repeatable project workflows.
 - `.codex/agents/`: Codex subagent role definitions.
@@ -52,6 +52,13 @@ SotS rules are a high-error surface. Do not produce SotS mechanics, ability
 descriptions, or rules-facing player material from memory. Verify against
 `library/sots/` and link to the source file. Prefer direct references over
 paraphrase because paraphrases drift.
+
+Handoffs are a high-drift surface. Treat files under `handoffs/` as temporary
+resume aids, not as authoritative current state. Do not use a handoff as the
+source for factual claims about what the repo currently does, what Jörn
+currently wants, or what is canon when stronger current evidence exists in
+`TASKS.md`, `sessions/`, tracked scripts, generated artifacts, or session logs.
+If a handoff conflicts with current repo state, prefer current repo state.
 
 ## Campaign Conventions
 
