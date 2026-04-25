@@ -1,0 +1,4 @@
+interface:
+  display_name: "Character Portrait Generation"
+  short_description: "Generate campaign portraits in the locked style"
+  default_prompt: "Use $character-portrait-generation to create a new Eversink NPC portrait in the established campaign style."

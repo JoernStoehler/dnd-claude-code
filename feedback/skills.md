@@ -53,3 +53,11 @@ What happened: Early in the session, Jörn chose PascalCase for hook naming. Age
 What should have happened: When a naming convention is decided, apply it to all files in scope immediately — not just new ones.
 
 **Pattern:** Incomplete application of a decision. Agent applied the decision to the work in front of it (new files) but didn't check whether existing files needed updating to match. Same class as the Core Conventions issue — carrying forward old state without evaluating it against current decisions.
+
+### 2026-04-25 — Portrait skill encoded untested causal style claims
+
+What happened: While drafting a character portrait generation skill, the agent described observed traits from successful images as if those traits were enough to define the workflow that produces the style. It made reference-image inspection conditional ("when style matching matters") and did not separate observed visual traits from tested causal steps.
+
+What should have happened: Treat reading the reference image as a required step for this workflow. Mark visual traits as observed descriptors, not causal attribution. If a workflow step looks removable, ask Jörn before changing it and have a fresh agent test variants with a bisection-style plan.
+
+**Pattern:** Untested workflow simplification. Agent converts observations from successful outputs into causal rules without an experiment.

@@ -1,0 +1,14 @@
+{
+  "tool": "codex_builtin_image_gen",
+  "created_at": "2026-04-23T18:30:46Z",
+  "source_generated_path": "/home/vscode/.codex/generated_images/019dbb82-c8ee-7e91-8441-a7921bb04b44/ig_02d8fd21702b639a0169ea65212a1c8191b343e29d5eba6fdd.png",
+  "saved_image_path": "output/imagegen/2026-04-23-openai-guard-reference.png",
+  "reference_images": [],
+  "submitted_prompt": null,
+  "revised_prompt": null,
+  "api_request_id": null,
+  "visible_review": {
+    "accepted": true,
+    "notes": "Reference image for the locked OpenAI character portrait style. Original submitted prompt was not available in the session."
+  }
+}

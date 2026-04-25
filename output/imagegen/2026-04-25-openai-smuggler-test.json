@@ -1,0 +1,16 @@
+{
+  "tool": "codex_builtin_image_gen",
+  "created_at": "2026-04-25T09:09:15Z",
+  "source_generated_path": "/home/vscode/.codex/generated_images/019dc3df-c0db-7a30-9d7a-e8c8cf091edf/ig_08a386783c3320180169ec847406088191a3ec4b54360831bc.png",
+  "saved_image_path": "output/imagegen/2026-04-25-openai-smuggler-test.png",
+  "reference_images": [
+    "output/imagegen/2026-04-23-openai-guard-reference.png"
+  ],
+  "submitted_prompt": "Use case: stylized-concept\nAsset type: Swords of the Serpentine campaign character portrait, full-body NPC art for a portrait card\nPrimary request: Create a second character portrait in the same style as the provided existing built-in generated portrait: realistic painterly sword-and-sorcery character art on a clean white background.\nSubject: A sharp-eyed Eversink canal smuggler woman in her late thirties, lean and wary, wearing a dark weathered oilskin coat over practical layered clothing, brass buttons, leather belt with pouches, short curved knife at her hip, damp boots, one hand resting near the knife, the other holding a folded shipping writ.\nStyle/medium: highly detailed realistic digital painting, gritty urban sword-and-sorcery, natural skin texture, worn fabric and leather, painterly but anatomically grounded, matching the reference image's isolated full-body RPG character concept style.\nComposition/framing: full-body standing figure centered, generous white margin, no crop, small patch of wet Eversink cobblestones under the boots, no background scene.\nLighting/mood: soft neutral studio lighting, grounded and tense, human intrigue rather than high fantasy.\nColor palette: dark navy, soot black, worn brown leather, tarnished brass, muted linen.\nConstraints: clean white background, no text, no watermark, no logo, no extra characters, no fantasy armor, no glowing magic effects.",
+  "revised_prompt": null,
+  "api_request_id": null,
+  "visible_review": {
+    "accepted": true,
+    "notes": "Reference image for the locked OpenAI character portrait style. Built-in PNG metadata did not expose a revised prompt or request id."
+  }
+}
