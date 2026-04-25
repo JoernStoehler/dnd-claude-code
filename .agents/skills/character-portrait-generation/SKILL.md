@@ -13,6 +13,8 @@ This skill is not standalone. The first action after loading `$character-portrai
 
 - Treat the reference PNGs as required visual inputs, not illustrative examples.
 - Treat written style notes as observations from accepted examples, not proven causes.
+- Treat the written style notes and prompt template as the main control surface for routine portraits.
+- Treat reference-image inspection as calibration for the locked style, not as a magic step. Keep it in the default workflow because the 2026-04-25 bisection produced the best role control with the full workflow, but do not claim it is causally required unless a future test isolates that.
 - Preserve provenance outside the PNG because built-in OpenAI image files do not expose submitted prompt, revised prompt, usage, or request id. If the local Codex session log exposes an `image_generation_call` id or `revised_prompt`, use `$codex-session-log` to read it without dumping base64 and record the fields in the sidecar.
 - Change the workflow only after Jörn approves a test plan.
 
@@ -93,3 +95,14 @@ Ask Jörn before:
 - Adding generated art to a session artifact that players will see.
 
 For workflow simplification, propose a bisection test: group the suspected removable steps, have a fresh agent test the largest independent group first, then split only if the output fails. Keep the original step until Jörn accepts the tested change.
+
+## Workflow Test Evidence
+
+Fresh `codex exec` bisection on 2026-04-25:
+
+- Full workflow baseline: accepted; best role control and provenance capture.
+- Written style notes without visual reference inspection: accepted and in-family; main drift was a larger cobblestone floor patch.
+- Visual reference inspection without written style notes: accepted but overfit the guard reference; the new portrait read more like an armed city officer than the requested intrigue role.
+- Minimal compact prompt without notes or references: accepted at broad style level; weaker card discipline, larger floor patch, and more weapon-forward than requested.
+
+Current workflow decision: keep `$imagegen`, written notes, prompt template, reference inspection, output review, sidecar, and session-log recovery in the default skill. If Jörn wants a faster routine path, the first candidate to remove is mandatory reference-image inspection, not the written notes or prompt template. Record any omitted workflow step in the sidecar.

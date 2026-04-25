@@ -1,0 +1,20 @@
+{
+  "tool": "codex_builtin_image_gen",
+  "created_at": "2026-04-25T10:30:37Z",
+  "source_generated_path": "/home/vscode/.codex/generated_images/019dc42e-e601-7d02-8c6b-9087bb94cdd6/ig_0b18f8922a9084f10169ec9748d93c81918cb6e7812191a819.png",
+  "saved_image_path": "output/imagegen/2026-04-25-bisect-minimal.png",
+  "reference_images": [],
+  "image_generation_call_id": null,
+  "submitted_prompt": "Use case: stylized-concept\nAsset type: Eversink NPC portrait for campaign use\nPrimary request: Full-body realistic painterly urban sword-and-sorcery NPC portrait.\nSubject: A single grounded human Eversink intrigue NPC, centered standing figure, tense posture, alert expression, dark practical city clothing, worn leather straps and boots, tarnished brass buckles and small fittings, no ostentatious armor, no magic.\nScene/backdrop: Clean white background only, with a small wet cobblestone patch directly under the boots.\nStyle/medium: Highly detailed realistic painterly digital character art, gritty urban sword-and-sorcery tone, anatomically grounded, natural fabric and leather texture.\nComposition/framing: Full body visible head to boots, standing centered, generous white margin, no crop.\nLighting/mood: Soft neutral studio lighting, tense grounded human intrigue.\nColor palette: Soot black, dark navy, worn brown leather, tarnished brass, muted linen.\nConstraints: no magic, no glowing effects, no extra characters, no text, no watermark, no logo, no background scene beyond white backdrop and small cobblestone patch.",
+  "revised_prompt": null,
+  "api_request_id": null,
+  "omitted_steps": [
+    "did_not_inspect_reference_pngs",
+    "did_not_read_written_style_notes",
+    "did_not_load_character_portrait_skill"
+  ],
+  "visible_review": {
+    "accepted": true,
+    "notes": "Full-body single human figure on clean white/off-white background, centered standing pose, dark practical Eversink clothing, worn leather, tarnished brass, wet cobblestone patch under boots, no text, no extra characters, no visible magic. Visible defects: background has subtle gray/off-white falloff rather than perfectly flat white; left-hand finger detail is slightly soft; sword/scabbard introduces a more explicit weapon than the compact prompt required, though still within sword-and-sorcery framing."
+  }
+}

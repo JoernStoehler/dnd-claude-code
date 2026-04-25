@@ -1,0 +1,22 @@
+{
+  "tool": "codex_builtin_image_gen",
+  "created_at": "2026-04-25T10:27:09Z",
+  "source_generated_path": "/home/vscode/.codex/generated_images/019dc42c-29a7-7a92-8045-8d399ae32af9/ig_0abba3f699129c700169ec96a2c6b08191bba7ef6a951aaacf.png",
+  "saved_image_path": "output/imagegen/2026-04-25-bisect-no-style-notes.png",
+  "reference_images": [
+    "output/imagegen/2026-04-23-openai-guard-reference.png",
+    "output/imagegen/2026-04-25-openai-smuggler-test.png"
+  ],
+  "omitted_steps": [
+    "did_not_read_written_style_notes",
+    "did_not_load_character_portrait_skill"
+  ],
+  "image_generation_call_id": null,
+  "submitted_prompt": "Use case: stylized-concept\nAsset type: Eversink sword-and-sorcery campaign NPC portrait, full-body art for a portrait card\nInput images: the two visible reference portraits are style and composition references only; create a new character, not a copy.\nPrimary request: Create one new Eversink NPC portrait in the same visual style as the two visible references: realistic painterly full-body character art on a clean white background.\nSubject: a middle-aged Eversink canal magistrate and bribe-broker, lean build, sharp tired face, damp dark hair streaked with gray, wary sideward gaze. They wear a battered charcoal-blue long coat with tarnished brass buttons and mud-darkened hem, layered linen shirt, fitted waistcoat, worn leather belt with ledger pouch, small seal case, and a plain sheathed short sword. One hand holds a folded packet of legal papers tied with cord; the other rests near the belt as if guarding a secret.\nStyle/medium: highly detailed realistic digital painting, gritty urban sword-and-sorcery character concept art, natural skin texture, worn fabric and leather, painterly but anatomically grounded, matching the isolated full-body RPG character portrait style of the visible references.\nComposition/framing: full-body standing figure centered, generous white margin, no crop, boots planted on a small patch of wet Eversink cobblestones, no background scene.\nLighting/mood: soft neutral studio lighting, tense and practical, human intrigue rather than high fantasy.\nColor palette: dark navy, charcoal black, worn brown leather, tarnished brass, muted linen, subtle ink-stained gray.\nConstraints: clean white background, no text, no watermark, no logo, no extra characters, no fantasy armor, no glowing magic effects, no ornate high-fantasy costume, no cropped feet or head.",
+  "revised_prompt": null,
+  "api_request_id": null,
+  "visible_review": {
+    "accepted": true,
+    "notes": "Full-body figure is centered with clean white background, visible boots, and wet cobblestone base. Style, coat texture, leather, brass buttons, face rendering, and painterly realism are close to the two visual references. Visible defects: the character reads more like an armed city officer than a canal magistrate or bribe-broker; the chest badge is more prominent than requested and resembles the guard reference; the seal case is not clearly identifiable; the belt gear is busy; the right hand looks slightly stiff and large."
+  }
+}

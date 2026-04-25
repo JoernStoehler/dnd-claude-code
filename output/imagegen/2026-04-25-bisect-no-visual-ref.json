@@ -1,0 +1,20 @@
+{
+  "tool": "codex_builtin_image_gen",
+  "created_at": "2026-04-25T10:24:35Z",
+  "source_generated_path": "/home/vscode/.codex/generated_images/019dc42a-1d0f-7532-b80e-c481dd516ae5/ig_0efa393caa61d86d0169ec9623ba808191b114e919a3419df1.png",
+  "saved_image_path": "output/imagegen/2026-04-25-bisect-no-visual-ref.png",
+  "written_style_notes": ".agents/skills/character-portrait-generation/references/openai-character-style.md",
+  "reference_images": [],
+  "omitted_steps": [
+    "did_not_inspect_reference_pngs",
+    "did_not_load_character_portrait_skill"
+  ],
+  "image_generation_call_id": null,
+  "submitted_prompt": "Use case: stylized-concept\nAsset type: Swords of the Serpentine campaign character portrait, full-body NPC art for a portrait card\nPrimary request: Create a new Eversink NPC portrait in the established OpenAI campaign portrait style: realistic painterly sword-and-sorcery character art on a clean white background.\nSubject: Mara Vell, a middle-aged Eversink bridge-toll clerk and quiet blackmail broker, narrow build, olive skin, tired sharp face, dark eyes, wary calculating expression. She wears a rain-dark navy wool coat over muted linen layers, a soot-black scarf, worn brown leather gloves, damp boots, a tarnished brass tally counter on her belt, small ledger and folded writ in one hand, short practical knife sheathed at the hip. One clear standing pose, shoulders slightly hunched as if listening for trouble.\nStyle/medium: highly detailed realistic digital painting, gritty urban sword-and-sorcery, natural skin texture, worn fabric and leather, painterly but anatomically grounded, isolated full-body RPG character concept art.\nComposition/framing: full-body standing figure centered, generous white margin, no crop, boots visible, small patch of wet Eversink cobblestones under the boots, no background scene.\nLighting/mood: soft neutral studio lighting, grounded and tense, human intrigue rather than high fantasy.\nColor palette: dark navy, soot black, worn brown leather, tarnished brass, muted linen, with a small dull red wax seal accent on the folded writ.\nConstraints: clean white or nearly white background, no text, no watermark, no logo, no extra characters, no fantasy armor, no glowing magic effects, no banners, no architecture, no canal, no crowd, no monster, no modern items.",
+  "revised_prompt": null,
+  "api_request_id": null,
+  "visible_review": {
+    "accepted": true,
+    "notes": "Full body is visible with boots and a usable wary expression. Clothing reads as grounded Eversink sword-and-sorcery rather than high fantasy, with ledger, writ, tally counter, and sheathed knife visible. Background is white or nearly white, and there is no text, logo, watermark, extra character, or modern item. Visible defects: the wet cobblestone patch is larger than requested and reads close to a small floor scene; the hand holding the sealed writ is slightly stiff at full resolution, though acceptable at portrait-card size."
+  }
+}
