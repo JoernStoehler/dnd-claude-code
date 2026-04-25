@@ -1,0 +1,18 @@
+{
+  "tool": "codex_builtin_image_gen",
+  "created_at": "2026-04-25T09:53:51Z",
+  "source_generated_path": "/home/vscode/.codex/generated_images/019dc409-ca03-7d01-b213-9fd458e1f5c0/ig_090a0325fbc30bf80169ec8eaab8688191bc864bac7b9e581c.png",
+  "saved_image_path": "output/imagegen/2026-04-25-tithe-court-clerk.png",
+  "reference_images": [
+    "output/imagegen/2026-04-23-openai-guard-reference.png",
+    "output/imagegen/2026-04-25-openai-smuggler-test.png"
+  ],
+  "image_generation_call_id": "ig_090a0325fbc30bf80169ec8eaab8688191bc864bac7b9e581c",
+  "submitted_prompt": null,
+  "revised_prompt": "Use case: stylized-concept\nAsset type: Swords of the Serpentine campaign character portrait, full-body NPC art for a portrait card\nPrimary request: Create a character portrait in the same style as the established OpenAI campaign portraits: realistic painterly sword-and-sorcery character art on a clean white background.\nInput images: Reference image 1 is the accepted Eversink guard portrait style; Reference image 2 is the accepted Eversink smuggler portrait style. Match their isolated full-body RPG character concept format, gritty materials, damp clothing, white background, and small wet cobblestone base.\nSubject: Middle-aged Eversink tithe-court clerk and quiet blackmail broker, slight build, narrow tired face, sharp nose, thinning dark hair tied back, calculating sideward glance. He wears a rain-darkened long charcoal clerk's coat over a muted linen shirt, soot-black waistcoat, worn brown leather belt with small pouches, tarnished brass buttons, ink-stained cuffs, and damp practical boots. He holds a folded wax-sealed ledger packet in one hand and a small brass stylus in the other; no weapon visible. Pose is still and guarded, one shoulder slightly hunched as if protecting the documents.\nStyle/medium: highly detailed realistic digital painting, gritty urban sword-and-sorcery, natural skin texture, worn fabric and leather, painterly but anatomically grounded, matching the isolated full-body RPG character concept style of the reference images.\nComposition/framing: full-body standing figure centered, generous white margin, no crop, whole body visible including boots, small patch of wet Eversink cobblestones under the boots, no background scene.\nLighting/mood: soft neutral studio lighting, grounded and tense, human intrigue rather than high fantasy.\nColor palette: dark navy, soot black, worn brown leather, tarnished brass, muted linen, with a restrained dull burgundy wax-seal accent.\nConstraints: clean white background, no text, no watermark, no logo, no extra characters, no fantasy armor, no glowing magic effects, no background architecture, no canals, no crowds, no monsters, no banners, no modern items.",
+  "api_request_id": null,
+  "visible_review": {
+    "accepted": true,
+    "notes": "Fresh codex exec run using the committed character portrait workflow. The image matches the current reference style: full body, white background, wet cobblestone base, grounded Eversink clothing, and role props. Minor caveat: submitted prompt was not recovered separately from the session log; the session log exposed revised_prompt and image_generation_call_id."
+  }
+}

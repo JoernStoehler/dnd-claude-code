@@ -13,7 +13,7 @@ This skill is not standalone. The first action after loading `$character-portrai
 
 - Treat the reference PNGs as required visual inputs, not illustrative examples.
 - Treat written style notes as observations from accepted examples, not proven causes.
-- Preserve provenance outside the PNG because built-in OpenAI image files do not expose submitted prompt, revised prompt, usage, or request id.
+- Preserve provenance outside the PNG because built-in OpenAI image files do not expose submitted prompt, revised prompt, usage, or request id. If the local Codex session log exposes an `image_generation_call` id or `revised_prompt`, record those in the sidecar.
 - Change the workflow only after Jörn approves a test plan.
 
 ## Procedure
@@ -28,7 +28,8 @@ This skill is not standalone. The first action after loading `$character-portrai
 8. Copy the accepted PNG into `output/imagegen/` or the requested session folder. Leave the original generated file in place.
 9. Inspect the copied PNG. Check crop, face, hands, props, background, and style match.
 10. Write a JSON sidecar next to the copied PNG with the same basename and `.json`.
-11. Report the copied image path, sidecar path, submitted prompt, and visible defects.
+11. If the Codex session log contains an `image_generation_call`, copy its `id` and `revised_prompt` into the sidecar.
+12. Report the copied image path, sidecar path, submitted prompt or recovered revised prompt, and visible defects.
 
 ## Prompt Template
 
@@ -58,6 +59,7 @@ Fill unknown built-in-tool fields with `null`, not guesses.
     "output/imagegen/2026-04-23-openai-guard-reference.png",
     "output/imagegen/2026-04-25-openai-smuggler-test.png"
   ],
+  "image_generation_call_id": null,
   "submitted_prompt": "...",
   "revised_prompt": null,
   "api_request_id": null,
@@ -78,6 +80,8 @@ strings -a -n 4 output/imagegen/example.png | rg -n 'c2pa|jumb|created|softwareA
 ```
 
 Expected result for built-in OpenAI PNGs: C2PA/JUMBF provenance such as `OpenAI Media Service API` and `gpt-image`. Do not expect the submitted prompt, revised prompt, usage, or request id to be embedded.
+
+If generation happened in a persisted Codex session, the session JSONL may include an `image_generation_call` item with an `id`, `status`, `revised_prompt`, and base64 `result`. Use that session item for the sidecar when available; do not paste the base64 result into the sidecar.
 
 ## Jörn Gates
 
