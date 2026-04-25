@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Session Log"
+  short_description: "Read Codex JSONL logs without false metadata claims"
+  default_prompt: "Use $codex-session-log to inspect the current Codex session log and quote file:line evidence."
