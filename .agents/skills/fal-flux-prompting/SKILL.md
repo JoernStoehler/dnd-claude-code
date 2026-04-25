@@ -17,18 +17,22 @@ curl -X POST "https://fal.run/{MODEL}" \
 ## Models & Pricing
 
 Pricing changes. Verify current prices on fal.ai before cost-sensitive runs.
-All per-megapixel prices round up to nearest MP. 1024×768 = 1 MP.
+Current snapshot verified against official fal model pages on **2026-04-23**.
+All per-megapixel prices round up to nearest MP unless the model page states a flat per-image price.
+1024×768 = 1 MP.
 
 | Model | Endpoint | Price | Notes |
 |-------|----------|-------|-------|
 | FLUX.1 [schnell] | `fal-ai/flux/schnell` | $0.003/MP | Designed for 1-4 inference steps |
 | FLUX.1 [dev] | `fal-ai/flux/dev` | $0.025/MP | 12B parameter flow transformer |
 | FLUX.1 LoRA | `fal-ai/flux-lora` | $0.035/MP | Dev + custom LoRA weights |
-| FLUX 1.1 [pro] | `fal-ai/flux-pro/v1.1` | $0.055/MP | Has prompt enhancement option |
-| FLUX.2 [pro] | `fal-ai/flux-2-pro` | $0.03 first MP + $0.015/extra MP | Text-to-image only |
+| FLUX 1.1 [pro] | `fal-ai/flux-pro/v1.1` | $0.04/MP | Has prompt enhancement option |
+| FLUX.2 [pro] | `fal-ai/flux-2-pro` | $0.03 first MP + $0.015/extra MP | fal page says extra MP of input and output, rounded up |
 | FLUX.2 [flex] | `fal-ai/flux-2-flex` | $0.05/MP (input + output) | Text-to-image + image editing |
 | Kontext [pro] | `fal-ai/flux-pro/kontext` | $0.04/image (flat) | Reference-image editing |
 | Kontext LoRA | `fal-ai/flux-kontext-lora` | $0.035/MP | Kontext + custom LoRA weights |
+| FLUX.2 [max] | `fal-ai/flux-2-max` | $0.07 first MP + $0.03/extra MP | Text-to-image |
+| FLUX.2 [max] Edit | `fal-ai/flux-2-max/edit` | $0.07 first MP + $0.03/extra MP | Image editing |
 
 ## API Schemas by Model
 
